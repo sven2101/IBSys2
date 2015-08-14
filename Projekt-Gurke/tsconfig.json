@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "declaration": false,
+        "module": "AMD",
+        "target": "es5",
+        "out":"target"
+    },
+    "files": [
+        "src/*.ts"
+
+    ]
+}
