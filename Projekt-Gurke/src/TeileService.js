@@ -21,8 +21,8 @@ define(["require", "exports", 'angular2/angular2'], function (require, exports, 
             this.teileSetzen();
             this.teileberechnen(this.getTeil(1), 0, this.gesamtListe, 0);
             this.ergebnisListe = this.getKaufteile(this.gesamtListe);
-            this.listeKaufteile = this.getKaufteile(this.gesamtListe);
         }
+        //Berechent zu einem Bauteil alle dazugeh�rigen Bauteile mittels Strukturst�cklisten und speichert si in einer Liste
         TeileService.prototype.teileberechnen = function (teil, anzahl, liste, periode) {
             var _this = this;
             if (teil.bauteile.length === 0) {
@@ -37,13 +37,7 @@ define(["require", "exports", 'angular2/angular2'], function (require, exports, 
                 teil.bauteile.forEach(function (pos) { _this.teileberechnen(pos, teil.anzahl * anzahl, liste, periode); });
             }
         };
-        TeileService.prototype.aendern = function ($event, inputP1) {
-            if ($event === null || $event.which === 13) {
-                this.gesamtListe = [];
-                this.p1.anzahl = inputP1;
-                this.teileberechnen(this.p1, 1, this.gesamtListe, 1);
-            }
-        };
+        //Baut die Strukturst�cklisten auf und speichert jedes Teil im Katalog, muss nur einmal initial gemacht werden
         TeileService.prototype.teileSetzen = function () {
             this.listeTeile = [
                 //Kaufteile
@@ -91,6 +85,7 @@ define(["require", "exports", 'angular2/angular2'], function (require, exports, 
             this.listeTeile.push(new Teil("e51", 51, 0, 0, 0, [this.getTeil(24), this.getTeil(27), this.getTeil(16), this.getTeil(17), this.getTeil(50)], 0, 0));
             this.listeTeile.push(new Teil("p1", 1, 0, 0, 0, [this.getTeil(21), this.getTeil(24), this.getTeil(27), this.getTeil(26), this.getTeil(51)], 0, 0));
         };
+        //liefert eine tiefe Kopie eines Bauteiles aus dem Katalog zur�ck und setzt optional dessen Anzahl
         TeileService.prototype.getTeil = function (id, anzahl) {
             if (anzahl === void 0) { anzahl = 1; }
             for (var i = 0; i < this.listeTeile.length; i++) {
@@ -100,12 +95,14 @@ define(["require", "exports", 'angular2/angular2'], function (require, exports, 
             }
             return null;
         };
+        //liefert eine tiefe Kopie eines beliebigen Bauteiles zur�ck und setzt dessen Anzahl
         TeileService.prototype.tiefeCopy = function (teil, anzahl) {
             var nteil = teil.getCopy();
             nteil.anzahl = anzahl;
             nteil.bedarfPeriode = [teil.bedarfPeriode[0], teil.bedarfPeriode[1], teil.bedarfPeriode[2], teil.bedarfPeriode[3]];
             return nteil;
         };
+        //f�gt ein Bauteil einer Liste hinzu, ist dieses schon in dieser vorhanden wird desssen Anzahl hochgez�hlt
         TeileService.prototype.add = function (teil, liste, periode) {
             for (var i = 0; i < liste.length; i++) {
                 if (liste[i].id === teil.id) {
@@ -116,6 +113,7 @@ define(["require", "exports", 'angular2/angular2'], function (require, exports, 
             }
             liste.push(teil);
         };
+        //filtert aus einer Liste alle Kaufteile heraus
         TeileService.prototype.getKaufteile = function (liste) {
             var nliste = new Array();
             liste.forEach(function (pos) {
@@ -125,7 +123,8 @@ define(["require", "exports", 'angular2/angular2'], function (require, exports, 
             });
             return nliste;
         };
-        TeileService.prototype.aendern2 = function () {
+        //wird durch das event "keyup" aus dem Template gerufen und f�hrt die einzelnen Schritte der eigentlichen Berechnung aus
+        TeileService.prototype.aendern = function () {
             this.gesamtListe = [];
             this.teileberechnen(this.getTeil(1), 0, this.gesamtListe, 0);
             var inputs = ["11", "12", "13", "14"]; //,"21","22","23","24","31","32","33","34"];
@@ -148,6 +147,7 @@ define(["require", "exports", 'angular2/angular2'], function (require, exports, 
             this.ergebnisListe = this.getKaufteile(this.gesamtListe);
             this.ergebnisListe.sort(function (a, b) { return a.id - b.id; });
         };
+        //berechnet die Reichweite des jeweiligen Bauteiles
         TeileService.prototype.reichweiteBerechnen = function (liste) {
             for (var i = 0; i < liste.length; i++) {
                 var teil = liste[i];
@@ -189,6 +189,7 @@ define(["require", "exports", 'angular2/angular2'], function (require, exports, 
                 teil.reichweite = 1 * teil.reichweite.toString().substring(0, 6);
             }
         };
+        //berechnet die n�tige Bestellmenge, im Moment wird bestellt, sobald die Reichweite unter der Lieferzeit+Abweichung liegt
         TeileService.prototype.bestellmengeBerechnen = function (liste) {
             for (var i = 0; i < liste.length; i++) {
                 var teil = liste[i];
@@ -206,12 +207,13 @@ define(["require", "exports", 'angular2/angular2'], function (require, exports, 
                 selector: 'TeileService'
             }),
             angular2_1.View({
-                template: "\n            <h1 align=\"center\">Teileverwaltung</h1>\n            <table align=\"center\">\n                <tr>\n                    <th>Produkt</th>\n                    <th>Periode 1</th>\n                    <th>Periode 2</th>\n                    <th>Periode 3</th>\n                    <th>Periode 4 </th>\n                </tr>\n                <tbody>\n                    <tr>\n                        <th>P1</th>\n                        <th><input id=\"i11\" class=\"form-control\" type=\"text\" placeholder=\"Anzahl P1\" (keyup)=\"aendern2()\"></th>\n                        <th><input id=\"i12\" class=\"form-control\" type=\"text\" placeholder=\"Anzahl P1\" (keyup)=\"aendern2()\"></th>\n                        <th><input id=\"i13\" class=\"form-control\" type=\"text\" placeholder=\"Anzahl P1\" (keyup)=\"aendern2()\"></th>\n                        <th><input id=\"i14\" class=\"form-control\" type=\"text\" placeholder=\"Anzahl P1\" (keyup)=\"aendern2()\"></th>\n                    </tr>\n                    <tr>\n                        <th>P2</th>\n                        <th><input id=\"i21\" class=\"form-control\" type=\"text\" placeholder=\"Anzahl P2\" (keyup)=\"aendern2()\"></th>\n                        <th><input id=\"i22\" class=\"form-control\" type=\"text\" placeholder=\"Anzahl P2\" (keyup)=\"aendern2()\"></th>\n                        <th><input id=\"i23\" class=\"form-control\" type=\"text\" placeholder=\"Anzahl P2\" (keyup)=\"aendern2()\"></th>\n                        <th><input id=\"i24\" class=\"form-control\" type=\"text\" placeholder=\"Anzahl P2\" (keyup)=\"aendern2()\"></th>\n                    </tr>\n                    <tr>\n                        <th>P3</th>\n                        <th><input id=\"i31\" class=\"form-control\" type=\"text\" placeholder=\"Anzahl P3\" (keyup)=\"aendern2()\"></th>\n                        <th><input id=\"i32\" class=\"form-control\" type=\"text\" placeholder=\"Anzahl P3\" (keyup)=\"aendern2()\"></th>\n                        <th><input id=\"i33\" class=\"form-control\" type=\"text\" placeholder=\"Anzahl P3\" (keyup)=\"aendern2()\"></th>\n                        <th><input id=\"i34\" class=\"form-control\" type=\"text\" placeholder=\"Anzahl P3\" (keyup)=\"aendern2()\"></th>\n                    </tr>\n                </tbody>\n            </table>\n            <h3 align=\"center\">Teilebedarf <button class=\"btn btn-success\">Bestellen</button></h3>\n\n            <table class=\"table table-striped table-hover \">\n                <tr>\n                    <th>Id</th>\n                    <th>LZ-N</th>\n                    <th>Reichweite in Perioden</th>\n                    <th>Lagerstand</th>\n                    <th>Bedarf Periode 1</th>\n                    <th>Bedarf Periode 2</th>\n                    <th>Bedarf Periode 3</th>\n                    <th>Bedarf Periode 4</th>\n                    <th>Bestellmenge</th>\n                    <th>Eilbestellung</th>\n\n                </tr>\n                <tbody>\n                    <tr id=\"{{teil.id}}\" *for=\"#teil of ergebnisListe;\">\n                        <td>{{\"K\"+teil.id}}</td>\n                        <td>{{teil.lieferzeitNormal}}</td>\n                        <td>{{teil.reichweite}}</td>\n                        <td>{{teil.lagerstand}}</td>\n                        <td>{{teil.bedarfPeriode[0]}}</td>\n                        <td>{{teil.bedarfPeriode[1]}}</td>\n                        <td>{{teil.bedarfPeriode[2]}}</td>\n                        <td>{{teil.bedarfPeriode[3]}}</td>\n                        <td><input class=\"form-control\" type=\"text\" value={{teil.bestellmenge}}></td>\n                        <td><input type=\"checkbox\"></td>\n                    </tr>\n                </tbody>\n            </table>\n    ", directives: [angular2_1.For, angular2_1.If]
+                template: "\n            <h1 align=\"center\">Teileverwaltung</h1>\n            <table align=\"center\">\n                <tr>\n                    <th>Produkt</th>\n                    <th>Periode 1</th>\n                    <th>Periode 2</th>\n                    <th>Periode 3</th>\n                    <th>Periode 4 </th>\n                </tr>\n                <tbody>\n                    <tr>\n                        <th>P1</th>\n                        <th><input id=\"i11\" class=\"form-control\" type=\"text\" placeholder=\"Anzahl P1\" (keyup)=\"aendern()\"></th>\n                        <th><input id=\"i12\" class=\"form-control\" type=\"text\" placeholder=\"Anzahl P1\" (keyup)=\"aendern()\"></th>\n                        <th><input id=\"i13\" class=\"form-control\" type=\"text\" placeholder=\"Anzahl P1\" (keyup)=\"aendern()\"></th>\n                        <th><input id=\"i14\" class=\"form-control\" type=\"text\" placeholder=\"Anzahl P1\" (keyup)=\"aendern()\"></th>\n                    </tr>\n                    <tr>\n                        <th>P2</th>\n                        <th><input id=\"i21\" class=\"form-control\" type=\"text\" placeholder=\"Anzahl P2\" (keyup)=\"aendern()\"></th>\n                        <th><input id=\"i22\" class=\"form-control\" type=\"text\" placeholder=\"Anzahl P2\" (keyup)=\"aendern()\"></th>\n                        <th><input id=\"i23\" class=\"form-control\" type=\"text\" placeholder=\"Anzahl P2\" (keyup)=\"aendern()\"></th>\n                        <th><input id=\"i24\" class=\"form-control\" type=\"text\" placeholder=\"Anzahl P2\" (keyup)=\"aendern()\"></th>\n                    </tr>\n                    <tr>\n                        <th>P3</th>\n                        <th><input id=\"i31\" class=\"form-control\" type=\"text\" placeholder=\"Anzahl P3\" (keyup)=\"aendern()\"></th>\n                        <th><input id=\"i32\" class=\"form-control\" type=\"text\" placeholder=\"Anzahl P3\" (keyup)=\"aendern()\"></th>\n                        <th><input id=\"i33\" class=\"form-control\" type=\"text\" placeholder=\"Anzahl P3\" (keyup)=\"aendern()\"></th>\n                        <th><input id=\"i34\" class=\"form-control\" type=\"text\" placeholder=\"Anzahl P3\" (keyup)=\"aendern()\"></th>\n                    </tr>\n                </tbody>\n            </table>\n            <h3 align=\"center\">Teilebedarf <button class=\"btn btn-success\">Bestellen</button></h3>\n            <table aligh=\"center\" class=\"table table-striped table-hover \">\n                <tr>\n                    <th>Id</th>\n                    <th>Lieferzeit in Perioden</th>\n                    <th>Abweichung in Perioden</th>\n                    <th>Reichweite in Perioden</th>\n                    <th>Lagerstand</th>\n                    <th>Bedarf Periode 1</th>\n                    <th>Bedarf Periode 2</th>\n                    <th>Bedarf Periode 3</th>\n                    <th>Bedarf Periode 4</th>\n                    <th>Rabattmenge</th>\n                    <th>Bestellmenge</th>\n                    <th>Eilbestellung</th>\n\n                </tr>\n                <tbody>\n                    <tr id=\"{{teil.id}}\" *for=\"#teil of ergebnisListe;\">\n                        <td>{{\"K\"+teil.id}}</td>\n                        <td>{{teil.lieferzeitNormal}}</td>\n                        <td>{{teil.lieferAbweichung}}</td>\n                        <td>{{teil.reichweite}}</td>\n                        <td>{{teil.lagerstand}}</td>\n                        <td>{{teil.bedarfPeriode[0]}}</td>\n                        <td>{{teil.bedarfPeriode[1]}}</td>\n                        <td>{{teil.bedarfPeriode[2]}}</td>\n                        <td>{{teil.bedarfPeriode[3]}}</td>\n                        <td>{{teil.rabattmenge}}</td>\n                        <td><input class=\"form-control\" type=\"text\" value={{teil.bestellmenge}}></td>\n                        <td><input type=\"checkbox\"></td>\n                    </tr>\n                </tbody>\n            </table>\n    ", directives: [angular2_1.For, angular2_1.If]
             })
         ], TeileService);
         return TeileService;
     })();
     angular2_1.bootstrap(TeileService);
+    //beschreibt ein Bauteil
     var Teil = (function () {
         function Teil(nname, nid, nwert, nlieferzeitNormal, nlieferAbweichung, nbauteile, nrabattmenge, nbestellkosten, nanzahl) {
             if (nanzahl === void 0) { nanzahl = 1; }
@@ -236,6 +238,7 @@ define(["require", "exports", 'angular2/angular2'], function (require, exports, 
                 this.bauteile = [];
             }
         }
+        //erstellt eine tiefe Kopie eines Bauteils, einschlie�lich aller Unterbauteile
         Teil.prototype.getCopy = function () {
             if (this.bauteile.length === 0) {
                 var teil = new Teil(this.name, this.id, this.wert, this.lieferzeitNormal, this.lieferAbweichung, [], this.rabattmenge, this.bestellkosten, this.anzahl);

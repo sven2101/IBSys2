@@ -24,39 +24,40 @@ import {Component, View, bootstrap,For,If} from 'angular2/angular2'
                 <tbody>
                     <tr>
                         <th>P1</th>
-                        <th><input id="i11" class="form-control" type="text" placeholder="Anzahl P1" (keyup)="aendern2()"></th>
-                        <th><input id="i12" class="form-control" type="text" placeholder="Anzahl P1" (keyup)="aendern2()"></th>
-                        <th><input id="i13" class="form-control" type="text" placeholder="Anzahl P1" (keyup)="aendern2()"></th>
-                        <th><input id="i14" class="form-control" type="text" placeholder="Anzahl P1" (keyup)="aendern2()"></th>
+                        <th><input id="i11" class="form-control" type="text" placeholder="Anzahl P1" (keyup)="aendern()"></th>
+                        <th><input id="i12" class="form-control" type="text" placeholder="Anzahl P1" (keyup)="aendern()"></th>
+                        <th><input id="i13" class="form-control" type="text" placeholder="Anzahl P1" (keyup)="aendern()"></th>
+                        <th><input id="i14" class="form-control" type="text" placeholder="Anzahl P1" (keyup)="aendern()"></th>
                     </tr>
                     <tr>
                         <th>P2</th>
-                        <th><input id="i21" class="form-control" type="text" placeholder="Anzahl P2" (keyup)="aendern2()"></th>
-                        <th><input id="i22" class="form-control" type="text" placeholder="Anzahl P2" (keyup)="aendern2()"></th>
-                        <th><input id="i23" class="form-control" type="text" placeholder="Anzahl P2" (keyup)="aendern2()"></th>
-                        <th><input id="i24" class="form-control" type="text" placeholder="Anzahl P2" (keyup)="aendern2()"></th>
+                        <th><input id="i21" class="form-control" type="text" placeholder="Anzahl P2" (keyup)="aendern()"></th>
+                        <th><input id="i22" class="form-control" type="text" placeholder="Anzahl P2" (keyup)="aendern()"></th>
+                        <th><input id="i23" class="form-control" type="text" placeholder="Anzahl P2" (keyup)="aendern()"></th>
+                        <th><input id="i24" class="form-control" type="text" placeholder="Anzahl P2" (keyup)="aendern()"></th>
                     </tr>
                     <tr>
                         <th>P3</th>
-                        <th><input id="i31" class="form-control" type="text" placeholder="Anzahl P3" (keyup)="aendern2()"></th>
-                        <th><input id="i32" class="form-control" type="text" placeholder="Anzahl P3" (keyup)="aendern2()"></th>
-                        <th><input id="i33" class="form-control" type="text" placeholder="Anzahl P3" (keyup)="aendern2()"></th>
-                        <th><input id="i34" class="form-control" type="text" placeholder="Anzahl P3" (keyup)="aendern2()"></th>
+                        <th><input id="i31" class="form-control" type="text" placeholder="Anzahl P3" (keyup)="aendern()"></th>
+                        <th><input id="i32" class="form-control" type="text" placeholder="Anzahl P3" (keyup)="aendern()"></th>
+                        <th><input id="i33" class="form-control" type="text" placeholder="Anzahl P3" (keyup)="aendern()"></th>
+                        <th><input id="i34" class="form-control" type="text" placeholder="Anzahl P3" (keyup)="aendern()"></th>
                     </tr>
                 </tbody>
             </table>
             <h3 align="center">Teilebedarf <button class="btn btn-success">Bestellen</button></h3>
-
-            <table class="table table-striped table-hover ">
+            <table aligh="center" class="table table-striped table-hover ">
                 <tr>
                     <th>Id</th>
-                    <th>LZ-N</th>
+                    <th>Lieferzeit in Perioden</th>
+                    <th>Abweichung in Perioden</th>
                     <th>Reichweite in Perioden</th>
                     <th>Lagerstand</th>
                     <th>Bedarf Periode 1</th>
                     <th>Bedarf Periode 2</th>
                     <th>Bedarf Periode 3</th>
                     <th>Bedarf Periode 4</th>
+                    <th>Rabattmenge</th>
                     <th>Bestellmenge</th>
                     <th>Eilbestellung</th>
 
@@ -65,12 +66,14 @@ import {Component, View, bootstrap,For,If} from 'angular2/angular2'
                     <tr id="{{teil.id}}" *for="#teil of ergebnisListe;">
                         <td>{{"K"+teil.id}}</td>
                         <td>{{teil.lieferzeitNormal}}</td>
+                        <td>{{teil.lieferAbweichung}}</td>
                         <td>{{teil.reichweite}}</td>
                         <td>{{teil.lagerstand}}</td>
                         <td>{{teil.bedarfPeriode[0]}}</td>
                         <td>{{teil.bedarfPeriode[1]}}</td>
                         <td>{{teil.bedarfPeriode[2]}}</td>
                         <td>{{teil.bedarfPeriode[3]}}</td>
+                        <td>{{teil.rabattmenge}}</td>
                         <td><input class="form-control" type="text" value={{teil.bestellmenge}}></td>
                         <td><input type="checkbox"></td>
                     </tr>
@@ -79,11 +82,13 @@ import {Component, View, bootstrap,For,If} from 'angular2/angular2'
     `,directives:[For,If]
 })
 class TeileService{
-    p1:Teil;
+
+    //Liste aller Bauteile
     gesamtListe:Array<Teil>;
+    //Liste die im Template verwendet wird, enthält nur Kaufteile
     ergebnisListe:Array<Teil>;
+    //Liste aller vorhandenen Teil, fungiert als Katalog aus dem tiefe Kopien entnommen werden
     listeTeile:Array<Teil>;
-    listeKaufteile:Array<Teil>;
 
     constructor(){
         this.gesamtListe=new Array<Teil>();
@@ -93,32 +98,23 @@ class TeileService{
         this.teileSetzen();
         this.teileberechnen(this.getTeil(1),0,this.gesamtListe,0);
         this.ergebnisListe=this.getKaufteile(this.gesamtListe);
-        this.listeKaufteile=this.getKaufteile(this.gesamtListe);
     }
-    teileberechnen(teil:Teil,anzahl:number,liste:Array<Teil>,periode:number){
 
+    //Berechent zu einem Bauteil alle dazugehörigen Bauteile mittels Strukturstücklisten und speichert si in einer Liste
+    teileberechnen(teil:Teil,anzahl:number,liste:Array<Teil>,periode:number){
         if(teil.bauteile.length===0) {
             let nteil=this.tiefeCopy(teil,teil.anzahl*anzahl);
             nteil.bedarfPeriode[periode]=teil.anzahl*anzahl;
             this.add(nteil,liste,periode);
-
         }
-        else
-        {
+        else{
             let nteil=this.tiefeCopy(teil,teil.anzahl*anzahl);
             nteil.bedarfPeriode[periode]=teil.anzahl*anzahl;
             this.add(nteil,liste,periode);
-
             teil.bauteile.forEach(pos=>{this.teileberechnen(pos,teil.anzahl*anzahl,liste,periode)});
         }
     }
-    aendern($event,inputP1){
-        if($event===null||$event.which===13){
-            this.gesamtListe=[];
-            this.p1.anzahl=inputP1;
-            this.teileberechnen(this.p1,1,this.gesamtListe,1);
-        }
-    }
+    //Baut die Strukturstücklisten auf und speichert jedes Teil im Katalog, muss nur einmal initial gemacht werden
     teileSetzen(){
         this.listeTeile=[
         //Kaufteile
@@ -152,7 +148,6 @@ class TeileService{
         new Teil("Speiche",58,0.1,1.6,0.5,[],22000,50),
         new Teil("Schweißdraht",59,0.15,0.7,0.2,[],1800,50),
         ];
-
         //Nicht-Kaufteile
         this.listeTeile.push(new Teil("e26",26,0,0,0,[this.getTeil(44,2),this.getTeil(47),this.getTeil(48,2)],0,0));
         this.listeTeile.push(new Teil("e16",16,0,0,0,[this.getTeil(24),this.getTeil(28),this.getTeil(40),this.getTeil(41),this.getTeil(42,2)],0,0));
@@ -166,8 +161,8 @@ class TeileService{
         this.listeTeile.push(new Teil("e50",50,0,0,0,[this.getTeil(24,2),this.getTeil(25,2),this.getTeil(4),this.getTeil(10),this.getTeil(49)],0,0));
         this.listeTeile.push(new Teil("e51",51,0,0,0,[this.getTeil(24),this.getTeil(27),this.getTeil(16),this.getTeil(17),this.getTeil(50)],0,0));
         this.listeTeile.push(new Teil("p1",1,0,0,0,[this.getTeil(21),this.getTeil(24),this.getTeil(27),this.getTeil(26),this.getTeil(51)],0,0));
-
     }
+    //liefert eine tiefe Kopie eines Bauteiles aus dem Katalog zurück und setzt optional dessen Anzahl
     getTeil(id:number,anzahl:number=1):Teil{
         for(let i=0;i<this.listeTeile.length;i++){
             if(this.listeTeile[i].id===id){
@@ -176,27 +171,25 @@ class TeileService{
         }
         return null;
     }
+    //liefert eine tiefe Kopie eines beliebigen Bauteiles zurück und setzt dessen Anzahl
     tiefeCopy(teil:Teil,anzahl:number):Teil{
-
         let nteil=teil.getCopy();
         nteil.anzahl=anzahl;
         nteil.bedarfPeriode=[teil.bedarfPeriode[0],teil.bedarfPeriode[1],teil.bedarfPeriode[2],teil.bedarfPeriode[3]];
         return nteil;
     }
+    //fügt ein Bauteil einer Liste hinzu, ist dieses schon in dieser vorhanden wird desssen Anzahl hochgezählt
     add(teil:Teil,liste:Array<Teil>,periode:number){
         for(let i=0;i<liste.length;i++){
             if(liste[i].id===teil.id){
                 liste[i].anzahl+=teil.anzahl;
                 liste[i].bedarfPeriode[periode]+=teil.bedarfPeriode[periode];
-
                 return;
             }
         }
         liste.push(teil);
-
-
-
     }
+    //filtert aus einer Liste alle Kaufteile heraus
     getKaufteile(liste:Array<Teil>):Array<Teil>{
         let nliste:Array<Teil>=new Array<Teil>();
         liste.forEach(pos=>{
@@ -206,20 +199,19 @@ class TeileService{
         })
         return nliste;
     }
-    aendern2(){
+    //wird durch das event "keyup" aus dem Template gerufen und führt die einzelnen Schritte der eigentlichen Berechnung aus
+    aendern(){
         this.gesamtListe=[];
         this.teileberechnen(this.getTeil(1),0,this.gesamtListe,0);
         let inputs=["11","12","13","14"];//,"21","22","23","24","31","32","33","34"];
         for(let i=0;i<inputs.length;i++){
-
             let input:string = (<HTMLInputElement>document.getElementById("i"+inputs[i])).value;
             let number:number = (<any>input) * 1;
             if (isNaN(number)) {
                 window.alert("keine zulässige Eingabe");
                 return;
             }
-            else
-            {
+            else{
                 let teil:Teil=this.getTeil((<any>inputs[i][0])*1);
                 let periode:number=(<any>inputs[i][1])*1;
                 let liste:Array<Teil>=new Array<Teil>();
@@ -230,8 +222,8 @@ class TeileService{
         this.bestellmengeBerechnen(this.gesamtListe);
         this.ergebnisListe=this.getKaufteile(this.gesamtListe);
         this.ergebnisListe.sort((a,b)=>{return a.id-b.id});
-
     }
+    //berechnet die Reichweite des jeweiligen Bauteiles
     reichweiteBerechnen(liste:Array<Teil>){
         for(let i=0;i<liste.length;i++){
             let teil:Teil=liste[i];
@@ -275,6 +267,7 @@ class TeileService{
 
 
     }
+    //berechnet die nötige Bestellmenge, im Moment wird bestellt, sobald die Reichweite unter der Lieferzeit+Abweichung liegt
     bestellmengeBerechnen(liste:Array<Teil>){
         for(let i=0;i<liste.length;i++){
             let teil:Teil=liste[i];
@@ -285,16 +278,15 @@ class TeileService{
                     teil.bestellmenge=teil.rabattmenge;
                 }
             }
-
-
         }
     }
-
 }
 
 bootstrap(TeileService);
 
+//beschreibt ein Bauteil
 class Teil{
+
     name:string;
     id:number;
     anzahl:number;
@@ -310,6 +302,7 @@ class Teil{
     bedarfPeriode:Array<number>;
     reichweite:number;
     bestellmenge:number;
+
     constructor(nname:string,nid:number,nwert,nlieferzeitNormal,nlieferAbweichung,nbauteile:Array<Teil>,nrabattmenge:number,nbestellkosten,nanzahl:number=1){
         this.name=nname;
         this.id=nid;
@@ -328,11 +321,11 @@ class Teil{
         if(nbauteile!=null) {
             this.bauteile=nbauteile;
         }
-        else
-        {
+        else{
             this.bauteile=[];
         }
     }
+    //erstellt eine tiefe Kopie eines Bauteils, einschließlich aller Unterbauteile
     getCopy():Teil{
         if(this.bauteile.length===0){
             let teil:Teil=new Teil(this.name,this.id,this.wert,this.lieferzeitNormal,this.lieferAbweichung,[],this.rabattmenge,this.bestellkosten,this.anzahl);
