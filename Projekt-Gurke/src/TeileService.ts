@@ -3,6 +3,7 @@
  */
 
 /// <reference path="../typings/angular2/2.2angular2.d.ts" />
+"use strict";
 import {Component, View, bootstrap,For,If} from 'angular2/angular2'
 
 // Annotation section
@@ -11,89 +12,115 @@ import {Component, View, bootstrap,For,If} from 'angular2/angular2'
 })
 @View({
     template:`
-            <h1>{{liste.length}}</h1>
-            <input #inputp1 placeholder="Anzahl Fahrrad 1" (keyup)="aendern($event,inputp1.value)">
-            <button (click)="aendern(null,inputp1.value)">OK</button>
-                <table class="table table-striped table-hover ">
+            <h1 align="center">Teileverwaltung</h1>
+            <table>
+                <tr>
+                    <th>Produkt</th>
+                    <th>Periode 1</th>
+                    <th>Periode 2</th>
+                    <th>Periode 3</th>
+                    <th>Periode 4 </th>
+                </tr>
+                <tbody>
                     <tr>
-                        <th>Name</th>
-                        <th>Id</th>
-                        <th>Anzahl</th>
-                        <th>Wert in Euro</th>
-                        <th>LZ-N</th>
-                        <th>LZ-E</th>
-                        <th>Rabattmenge</th>
-                        <th>Bestellmenge</th>
+                        <th>P1</th>
+                        <th><input id="11" class="form-control" type="text" placeholder="Anzahl P1" (keyup)="aendern2()"></th>
+                        <th><input id="12" class="form-control" type="text" placeholder="Anzahl P1" (keyup)="aendern2()"></th>
+                        <th><input id="13" class="form-control" type="text" placeholder="Anzahl P1" (keyup)="aendern2()"></th>
+                        <th><input id="14" class="form-control" type="text" placeholder="Anzahl P1" (keyup)="aendern2()"></th>
                     </tr>
-                    <tbody>
-                        <tr *for="#teil of liste">
-                            <td>{{teil.name}}</td>
-                            <td>{{teil.id}}</td>
-                            <td>{{teil.anzahl}}</td>
-                            <td>{{teil.wert}}</td>
-                            <td>{{teil.lieferzeitNormal}}</td>
-                            <td>{{teil.lieferzeitEil}}</td>
-                            <td>{{teil.rabattmenge}}</td>
-                            <td><input></td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <tr>
+                        <th>P2</th>
+                        <th><input id="21" class="form-control" type="text" placeholder="Anzahl P2" (keyup)="aendern2()"></th>
+                        <th><input id="22" class="form-control" type="text" placeholder="Anzahl P2" (keyup)="aendern2()"></th>
+                        <th><input id="23" class="form-control" type="text" placeholder="Anzahl P2" (keyup)="aendern2()"></th>
+                        <th><input id="24" class="form-control" type="text" placeholder="Anzahl P2" (keyup)="aendern2()"></th>
+                    </tr>
+                    <tr>
+                        <th>P3</th>
+                        <th><input id="31" class="form-control" type="text" placeholder="Anzahl P3" (keyup)="aendern2()"></th>
+                        <th><input id="32" class="form-control" type="text" placeholder="Anzahl P3" (keyup)="aendern2()"></th>
+                        <th><input id="33" class="form-control" type="text" placeholder="Anzahl P3" (keyup)="aendern2()"></th>
+                        <th><input id="34" class="form-control" type="text" placeholder="Anzahl P3" (keyup)="aendern2()"></th>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>Teilebedarf</h3>
+            <table class="table table-striped table-hover ">
+                <tr>
+                    <th>Id</th>
+                    <th>LZ-N</th>
+                    <th>Reichweite in Perioden</th>
+                    <th>Lagerstand</th>
+                    <th>Bedarf Periode 1</th>
+                    <th>Bedarf Periode 2</th>
+                    <th>Bedarf Periode 3</th>
+                    <th>Bedarf Periode 4</th>
+                    <th>Bestellmenge</th>
+                    <th>Eilbestellung</th>
+
+                </tr>
+                <tbody>
+                    <tr *for="#teil of ergebnisListe;">
+                        <td>{{"K"+teil.id}}</td>
+                        <td>{{teil.lieferzeitNormal}}</td>
+                        <td>{{teil.reichweite}}</td>
+                        <td>{{teil.lagerstand}}</td>
+                        <td>{{teil.bedarfPeriode[0]}}</td>
+                        <td>{{teil.bedarfPeriode[1]}}</td>
+                        <td>{{teil.bedarfPeriode[2]}}</td>
+                        <td>{{teil.bedarfPeriode[3]}}</td>
+                        <td><input class="form-control" type="text" value={{teil.bestellmenge}}></td>
+                        <td><input type="checkbox"></td>
+                    </tr>
+                </tbody>
+            </table>
     `,directives:[For,If]
 })
 class TeileService{
     p1:Teil;
-    liste:Array<Teil>;
+    gesamtListe:Array<Teil>;
+    ergebnisListe:Array<Teil>;
+    listeTeile:Array<Teil>;
     listeKaufteile:Array<Teil>;
+
     constructor(){
-        /**
+        this.gesamtListe=new Array<Teil>();
+        this.listeTeile=new Array<Teil>();
+        this.ergebnisListe=new Array<Teil>();
 
-        this.p1=new Teil("Nagel",6,1,[]);
-        this.p2=new Teil("Mutter",5,1,[]);
-        this.p3=new Teil("Schraube",4,7,[]);
-        this.p4=new Teil("Lenker",3,1,[this.p2,this.p3]);
-        this.p5=new Teil("Rahmen",2,3,[this.p1]);
-        this.p6=new Teil("Fahrrad",1,7,[this.p5,this.p4]);
-        */
-        this.liste=new Array<Teil>();
-        this.listeKaufteile=new Array<Teil>();
-        this.kaufteileSetzten();
-
-        this.p1=new Teil("p1",1,156.13,1.0,0,[],0,0);
-        this.p1Setzten();
-        this.teileberechnen(this.p1,1,this.liste);
-
-
+        this.teileSetzen();
+        this.teileberechnen(this.getTeil(1),0,this.gesamtListe,0);
+        this.ergebnisListe=this.getKaufteile(this.gesamtListe);
+        this.listeKaufteile=this.getKaufteile(this.gesamtListe);
     }
-    teileberechnen(teil:Teil,anzahl:number,liste:Array<Teil>){
+    teileberechnen(teil:Teil,anzahl:number,liste:Array<Teil>,periode:number){
 
         if(teil.bauteile.length===0) {
             let nteil=this.tiefeCopy(teil,teil.anzahl*anzahl);
-            liste=this.add(nteil,liste);
+            nteil.bedarfPeriode[periode]=teil.anzahl*anzahl;
+            this.add(nteil,liste,periode);
 
         }
         else
         {
             let nteil=this.tiefeCopy(teil,teil.anzahl*anzahl);
-            liste.push(nteil);
-            teil.bauteile.forEach(pos=>{this.teileberechnen(pos,teil.anzahl*anzahl,liste)});
+            nteil.bedarfPeriode[periode]=teil.anzahl*anzahl;
+            this.add(nteil,liste,periode);
+
+            teil.bauteile.forEach(pos=>{this.teileberechnen(pos,teil.anzahl*anzahl,liste,periode)});
         }
     }
     aendern($event,inputP1){
         if($event===null||$event.which===13){
-            this.liste=[];
+            this.gesamtListe=[];
             this.p1.anzahl=inputP1;
-            this.teileberechnen(this.p1,1,this.liste);
+            this.teileberechnen(this.p1,1,this.gesamtListe,1);
         }
-
-
     }
-    p1Setzten(){
-
-            let e26=new Teil("e26",26,10.50,1.0,0,[this.getKT(44,2),this.getKT(47,1),this.getKT(48,2)],0,0);
-        this.p1.bauteile=[this.getKT(21,1),this.getKT(24,1),this.getKT(27,1),e26];
-    }
-    kaufteileSetzten(){
-        this.listeKaufteile=[
+    teileSetzen(){
+        this.listeTeile=[
+        //Kaufteile
         new Teil("Kette",21,5,1.8,0.4,[],300,50),
         new Teil("Kette",22,6.5,1.7,0.4,[],300,50),
         new Teil("Kette",23,6.5,1.2,0.2,[],300,50),
@@ -124,29 +151,146 @@ class TeileService{
         new Teil("Speiche",58,0.1,1.6,0.5,[],22000,50),
         new Teil("Schweiﬂdraht",59,0.15,0.7,0.2,[],1800,50),
         ];
+
+        //Nicht-Kaufteile
+        this.listeTeile.push(new Teil("e26",26,0,0,0,[this.getTeil(44,2),this.getTeil(47),this.getTeil(48,2)],0,0));
+        this.listeTeile.push(new Teil("e16",16,0,0,0,[this.getTeil(24),this.getTeil(28),this.getTeil(40),this.getTeil(41),this.getTeil(42,2)],0,0));
+        this.listeTeile.push(new Teil("e17",17,0,0,0,[this.getTeil(43),this.getTeil(44),this.getTeil(45),this.getTeil(46)],0,0));
+        this.listeTeile.push(new Teil("e4",4,0,0,0,[this.getTeil(35,2),this.getTeil(36),this.getTeil(52),this.getTeil(53,36)],0,0));
+        this.listeTeile.push(new Teil("e10",10,0,0,0,[this.getTeil(32),this.getTeil(39)],0,0));
+        this.listeTeile.push(new Teil("e7",7,0,0,0,[this.getTeil(35,2),this.getTeil(37),this.getTeil(38),this.getTeil(52),this.getTeil(53,36)],0,0));
+        this.listeTeile.push(new Teil("e13",13,0,0,0,[this.getTeil(32),this.getTeil(39)],0,0));
+        this.listeTeile.push(new Teil("e18",18,0,0,0,[this.getTeil(28,3),this.getTeil(32),this.getTeil(59,2)],0,0));
+        this.listeTeile.push(new Teil("e49",49,0,0,0,[this.getTeil(24,2),this.getTeil(25,2),this.getTeil(7),this.getTeil(13),this.getTeil(18)],0,0));
+        this.listeTeile.push(new Teil("e50",50,0,0,0,[this.getTeil(24,2),this.getTeil(25,2),this.getTeil(4),this.getTeil(10),this.getTeil(49)],0,0));
+        this.listeTeile.push(new Teil("e51",51,0,0,0,[this.getTeil(24),this.getTeil(27),this.getTeil(16),this.getTeil(17),this.getTeil(50)],0,0));
+        this.listeTeile.push(new Teil("p1",1,0,0,0,[this.getTeil(21),this.getTeil(24),this.getTeil(27),this.getTeil(26),this.getTeil(51)],0,0));
+
     }
-    getKT(id:number,anzahl:number):Teil{
-        for(let i=0;i<this.listeKaufteile.length;i++){
-            if(this.listeKaufteile[i].id===id){
-                return this.tiefeCopy(this.listeKaufteile[i],anzahl);
+    getTeil(id:number,anzahl:number=1):Teil{
+        for(let i=0;i<this.listeTeile.length;i++){
+            if(this.listeTeile[i].id===id){
+                return this.tiefeCopy(this.listeTeile[i],anzahl);
             }
         }
         return null;
     }
     tiefeCopy(teil:Teil,anzahl:number):Teil{
-        return new Teil(teil.name,teil.id,teil.wert,teil.lieferzeitNormal,teil.lieferAbweichung,[],teil.rabattmenge,teil.bestellkosten,anzahl);
+
+        let nteil=teil.getCopy();
+        nteil.anzahl=anzahl;
+        nteil.bedarfPeriode=[teil.bedarfPeriode[0],teil.bedarfPeriode[1],teil.bedarfPeriode[2],teil.bedarfPeriode[3]];
+        return nteil;
     }
-    add(teil:Teil,liste:Array<Teil>):Array<Teil>{
-        liste.forEach(pos=>{
-            if(pos.id===teil.id){
-                pos.anzahl+=teil.id;
-                return liste;
+    add(teil:Teil,liste:Array<Teil>,periode:number){
+        for(let i=0;i<liste.length;i++){
+            if(liste[i].id===teil.id){
+                liste[i].anzahl+=teil.anzahl;
+                liste[i].bedarfPeriode[periode]+=teil.bedarfPeriode[periode];
+
+                return;
             }
-        });
+        }
         liste.push(teil);
-        return liste;
+
+
+
     }
+    getKaufteile(liste:Array<Teil>):Array<Teil>{
+        let nliste:Array<Teil>=new Array<Teil>();
+        liste.forEach(pos=>{
+            if(pos.bauteile.length===0){
+                nliste.push(pos);
+            }
+        })
+        return nliste;
+    }
+    aendern2(){
+        this.gesamtListe=[];
+        this.teileberechnen(this.getTeil(1),0,this.gesamtListe,0);
+        let inputs=["11","12","13","14"];//,"21","22","23","24","31","32","33","34"];
+        for(let i=0;i<inputs.length;i++){
+
+            let input:string = (<HTMLInputElement>document.getElementById(inputs[i])).value;
+            let number:number = (<any>input) * 1;
+            if (isNaN(number)) {
+                window.alert("keine zul‰ssige Eingabe");
+                return;
+            }
+            else
+            {
+                let teil:Teil=this.getTeil((<any>inputs[i][0])*1);
+                let periode:number=(<any>inputs[i][1])*1;
+                let liste:Array<Teil>=new Array<Teil>();
+                this.teileberechnen(teil,number,this.gesamtListe,periode-1);
+            }
+        }
+        this.reichweiteBerechnen(this.gesamtListe);
+        this.bestellmengeBerechnen(this.gesamtListe);
+        this.ergebnisListe=this.getKaufteile(this.gesamtListe);
+        this.ergebnisListe.sort((a,b)=>{return a.id-b.id});
+
+    }
+    reichweiteBerechnen(liste:Array<Teil>){
+        for(let i=0;i<liste.length;i++){
+            let teil:Teil=liste[i];
+            if(teil.lagerstand-teil.bedarfPeriode[0]<=0){
+                if(teil.lagerstand===0){
+                    teil.reichweite=0;
+                }
+                else {
+                    teil.reichweite = 0 + teil.lagerstand / teil.bedarfPeriode[0];
+                }
+            }
+            else if(teil.lagerstand-teil.bedarfPeriode[0]-teil.bedarfPeriode[1]<=0){
+                if((teil.lagerstand-teil.bedarfPeriode[0])===0){
+                    teil.reichweite=1;
+                }
+                else {
+                    teil.reichweite = 1 + (teil.lagerstand - teil.bedarfPeriode[0]) / teil.bedarfPeriode[1];
+                }
+            }
+            else if(teil.lagerstand-teil.bedarfPeriode[0]-teil.bedarfPeriode[1]-teil.bedarfPeriode[2]<=0){
+                if((teil.lagerstand-teil.bedarfPeriode[0]-teil.bedarfPeriode[1])===0){
+                    teil.reichweite=2;
+                }
+                else {
+                    teil.reichweite = 2 + (teil.lagerstand - teil.bedarfPeriode[0] - teil.bedarfPeriode[1]) / teil.bedarfPeriode[2];
+                }
+            }
+            else if(teil.lagerstand-teil.bedarfPeriode[0]-teil.bedarfPeriode[1]-teil.bedarfPeriode[2]-teil.bedarfPeriode[3]<=0){
+                if((teil.lagerstand-teil.bedarfPeriode[0]-teil.bedarfPeriode[1]-teil.bedarfPeriode[2])===0){
+                    teil.reichweite=3;
+                }
+                else {
+                    teil.reichweite = 3 + (teil.lagerstand - teil.bedarfPeriode[0] - teil.bedarfPeriode[1] - teil.bedarfPeriode[2]) / teil.bedarfPeriode[3];
+                }
+            }
+            else{
+                teil.reichweite=4;
+            }
+            teil.reichweite=1*(<any>teil.reichweite.toString().substring(0,6));
+        }
+
+
+    }
+    bestellmengeBerechnen(liste:Array<Teil>){
+        for(let i=0;i<liste.length;i++){
+            let teil:Teil=liste[i];
+            let bedarf:number=teil.bedarfPeriode[0]+teil.bedarfPeriode[1]+teil.bedarfPeriode[2]+teil.bedarfPeriode[3]
+            if(teil.reichweite<teil.lieferzeitNormal+teil.lieferAbweichung){
+                teil.bestellmenge=(-1)*(teil.lagerstand-bedarf);
+                if(teil.bestellmenge<teil.rabattmenge){
+                    teil.bestellmenge=teil.rabattmenge;
+                }
+            }
+
+
+        }
+    }
+
 }
+
 bootstrap(TeileService);
 
 class Teil{
@@ -162,6 +306,9 @@ class Teil{
     rabattmenge:number;
     bestellkosten:number;
     lieferAbweichung:number;
+    bedarfPeriode:Array<number>;
+    reichweite:number;
+    bestellmenge:number;
     constructor(nname:string,nid:number,nwert,nlieferzeitNormal,nlieferAbweichung,nbauteile:Array<Teil>,nrabattmenge:number,nbestellkosten,nanzahl:number=1){
         this.name=nname;
         this.id=nid;
@@ -169,11 +316,14 @@ class Teil{
         this.wert=nwert;
         this.lieferzeitNormal=nlieferzeitNormal;
         this.lieferzeitEil=0;
-        this.lagerstand=0;
+        this.lagerstand=300;
         this.inWarteschlange=0;
         this.rabattmenge=nrabattmenge;
         this.bestellkosten=nbestellkosten;
         this.lieferAbweichung=nlieferAbweichung;
+        this.bedarfPeriode=[0,0,0,0];
+        this.reichweite=4;
+        this.bestellmenge=0;
         if(nbauteile!=null) {
             this.bauteile=nbauteile;
         }
@@ -182,4 +332,22 @@ class Teil{
             this.bauteile=[];
         }
     }
+    getCopy():Teil{
+        if(this.bauteile.length===0){
+            let teil:Teil=new Teil(this.name,this.id,this.wert,this.lieferzeitNormal,this.lieferAbweichung,[],this.rabattmenge,this.bestellkosten,this.anzahl);
+            teil.bedarfPeriode=[this.bedarfPeriode[0],this.bedarfPeriode[1],this.bedarfPeriode[2],this.bedarfPeriode[3]];
+            return teil;
+        }
+        else
+        {
+            let liste:Array<Teil>=new Array<Teil>();
+            for(let i=0;i<this.bauteile.length;i++){
+                liste.push(this.bauteile[i]);
+            }
+            let teil:Teil=new Teil(this.name,this.id,this.wert,this.lieferzeitNormal,this.lieferAbweichung,liste,this.rabattmenge,this.bestellkosten,this.anzahl);
+            teil.bedarfPeriode=[this.bedarfPeriode[0],this.bedarfPeriode[1],this.bedarfPeriode[2],this.bedarfPeriode[3]];
+            return teil;
+        }
+    }
+
 }

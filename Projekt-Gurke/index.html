@@ -2,17 +2,21 @@
 <html>
 <head>
     <title>Angular 2 Quickstart</title>
+    <!--
     <script src="https://github.jspm.io/jmcriffey/bower-traceur-runtime@0.0.87/traceur-runtime.js"></script>
     <script src="https://jspm.io/system@0.16.js"></script>
-    <script src="typings/angular2/angular2-bundle.js"></script>
     <link rel="stylesheet" href="https://bootswatch.com/simplex/bootstrap.min.css">
+    -->
+    <script src="typings/traceur-runtime/traceur-runtime.js"></script>
+    <script src="typings/system/system@0.16.js"></script>
+    <script src="typings/angular2/angular2-bundle.js"></script>
+    <link rel="stylesheet" href="typings/bootstrap/bootswatch-simplex_bootstrap.min.css.js">
+
 
 </head>
 <body>
-<!-- The app component created in app.ts -->
-<my-app></my-app>
-<TeileService></TeileService>
-<script>System.import('src/test');</script>
-<script>System.import('src/TeileService');</script>
+    <TeileService></TeileService>
+    <script>System.import('src/test');</script>
+    <script>System.import('src/TeileService');</script>
 </body>
 </html>

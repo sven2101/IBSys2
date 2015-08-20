@@ -8,9 +8,9 @@ app.get('/', function(req, res) {
   console.log('Datei wurde ausgeliefert');
   res.sendfile(__dirname + 'index.html');
 });
-
-app.listen(3000);
-console.log("Server läuft");
+var port=3000;
+app.listen(port);
+console.log("Server läuft auf Port: "+port);
 
 
 
