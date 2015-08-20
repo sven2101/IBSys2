@@ -13,7 +13,7 @@ import {Component, View, bootstrap,For,If} from 'angular2/angular2'
 @View({
     template:`
             <h1 align="center">Teileverwaltung</h1>
-            <table>
+            <table align="center">
                 <tr>
                     <th>Produkt</th>
                     <th>Periode 1</th>
@@ -24,28 +24,29 @@ import {Component, View, bootstrap,For,If} from 'angular2/angular2'
                 <tbody>
                     <tr>
                         <th>P1</th>
-                        <th><input id="11" class="form-control" type="text" placeholder="Anzahl P1" (keyup)="aendern2()"></th>
-                        <th><input id="12" class="form-control" type="text" placeholder="Anzahl P1" (keyup)="aendern2()"></th>
-                        <th><input id="13" class="form-control" type="text" placeholder="Anzahl P1" (keyup)="aendern2()"></th>
-                        <th><input id="14" class="form-control" type="text" placeholder="Anzahl P1" (keyup)="aendern2()"></th>
+                        <th><input id="i11" class="form-control" type="text" placeholder="Anzahl P1" (keyup)="aendern2()"></th>
+                        <th><input id="i12" class="form-control" type="text" placeholder="Anzahl P1" (keyup)="aendern2()"></th>
+                        <th><input id="i13" class="form-control" type="text" placeholder="Anzahl P1" (keyup)="aendern2()"></th>
+                        <th><input id="i14" class="form-control" type="text" placeholder="Anzahl P1" (keyup)="aendern2()"></th>
                     </tr>
                     <tr>
                         <th>P2</th>
-                        <th><input id="21" class="form-control" type="text" placeholder="Anzahl P2" (keyup)="aendern2()"></th>
-                        <th><input id="22" class="form-control" type="text" placeholder="Anzahl P2" (keyup)="aendern2()"></th>
-                        <th><input id="23" class="form-control" type="text" placeholder="Anzahl P2" (keyup)="aendern2()"></th>
-                        <th><input id="24" class="form-control" type="text" placeholder="Anzahl P2" (keyup)="aendern2()"></th>
+                        <th><input id="i21" class="form-control" type="text" placeholder="Anzahl P2" (keyup)="aendern2()"></th>
+                        <th><input id="i22" class="form-control" type="text" placeholder="Anzahl P2" (keyup)="aendern2()"></th>
+                        <th><input id="i23" class="form-control" type="text" placeholder="Anzahl P2" (keyup)="aendern2()"></th>
+                        <th><input id="i24" class="form-control" type="text" placeholder="Anzahl P2" (keyup)="aendern2()"></th>
                     </tr>
                     <tr>
                         <th>P3</th>
-                        <th><input id="31" class="form-control" type="text" placeholder="Anzahl P3" (keyup)="aendern2()"></th>
-                        <th><input id="32" class="form-control" type="text" placeholder="Anzahl P3" (keyup)="aendern2()"></th>
-                        <th><input id="33" class="form-control" type="text" placeholder="Anzahl P3" (keyup)="aendern2()"></th>
-                        <th><input id="34" class="form-control" type="text" placeholder="Anzahl P3" (keyup)="aendern2()"></th>
+                        <th><input id="i31" class="form-control" type="text" placeholder="Anzahl P3" (keyup)="aendern2()"></th>
+                        <th><input id="i32" class="form-control" type="text" placeholder="Anzahl P3" (keyup)="aendern2()"></th>
+                        <th><input id="i33" class="form-control" type="text" placeholder="Anzahl P3" (keyup)="aendern2()"></th>
+                        <th><input id="i34" class="form-control" type="text" placeholder="Anzahl P3" (keyup)="aendern2()"></th>
                     </tr>
                 </tbody>
             </table>
-            <h3>Teilebedarf</h3>
+            <h3 align="center">Teilebedarf <button class="btn btn-success">Bestellen</button></h3>
+
             <table class="table table-striped table-hover ">
                 <tr>
                     <th>Id</th>
@@ -61,7 +62,7 @@ import {Component, View, bootstrap,For,If} from 'angular2/angular2'
 
                 </tr>
                 <tbody>
-                    <tr *for="#teil of ergebnisListe;">
+                    <tr id="{{teil.id}}" *for="#teil of ergebnisListe;">
                         <td>{{"K"+teil.id}}</td>
                         <td>{{teil.lieferzeitNormal}}</td>
                         <td>{{teil.reichweite}}</td>
@@ -211,7 +212,7 @@ class TeileService{
         let inputs=["11","12","13","14"];//,"21","22","23","24","31","32","33","34"];
         for(let i=0;i<inputs.length;i++){
 
-            let input:string = (<HTMLInputElement>document.getElementById(inputs[i])).value;
+            let input:string = (<HTMLInputElement>document.getElementById("i"+inputs[i])).value;
             let number:number = (<any>input) * 1;
             if (isNaN(number)) {
                 window.alert("keine zulässige Eingabe");

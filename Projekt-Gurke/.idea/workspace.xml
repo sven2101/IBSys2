@@ -21,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.34442836">
-              <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
+            <state vertical-scroll-proportion="-12.423077">
+              <caret line="19" column="12" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -63,16 +63,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="angular2-bundle.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/typings/angular2/angular2-bundle.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="server.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -87,30 +77,42 @@
         <entry file="file://$PROJECT_DIR$/src/test.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="26" />
+              <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TeileService.ts" pinned="false" current-in-tab="false">
+      <file leaf-file-name="test.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TeileService.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/TeileService.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.9411764">
-              <caret line="52" column="46" selection-start-line="52" selection-start-column="46" selection-end-line="52" selection-end-column="46" />
+            <state vertical-scroll-proportion="0.19912152">
+              <caret line="47" column="74" selection-start-line="47" selection-start-column="74" selection-end-line="47" selection-end-column="74" />
               <folding>
                 <element signature="e#0#40#0" expanded="false" />
                 <element signature="n#!!block;n#teileSetzen#0;n#TeileService#0" expanded="false" />
-                <marker date="1440075424254" expanded="false" signature="347:2439" placeholder="..." />
-                <marker date="1440075424254" expanded="true" signature="368:584" placeholder="..." />
-                <marker date="1440075424254" expanded="true" signature="608:2418" placeholder="..." />
-                <marker date="1440075424254" expanded="true" signature="633:1203" placeholder="..." />
-                <marker date="1440075424254" expanded="true" signature="1228:1798" placeholder="..." />
-                <marker date="1440075424254" expanded="true" signature="1823:2393" placeholder="..." />
-                <marker date="1440075424254" expanded="true" signature="2533:3765" placeholder="..." />
-                <marker date="1440075424254" expanded="true" signature="2554:3004" placeholder="..." />
-                <marker date="1440075424254" expanded="true" signature="3028:3744" placeholder="..." />
-                <marker date="1440075424254" expanded="true" signature="3084:3719" placeholder="..." />
+                <marker date="1440077253129" expanded="false" signature="362:2466" placeholder="..." />
+                <marker date="1440077253129" expanded="true" signature="383:599" placeholder="..." />
+                <marker date="1440077253129" expanded="true" signature="623:2445" placeholder="..." />
+                <marker date="1440077253129" expanded="true" signature="648:1222" placeholder="..." />
+                <marker date="1440077253129" expanded="true" signature="1247:1821" placeholder="..." />
+                <marker date="1440077253129" expanded="true" signature="1846:2420" placeholder="..." />
+                <marker date="1440077253129" expanded="true" signature="2627:3876" placeholder="..." />
+                <marker date="1440077253129" expanded="true" signature="2648:3098" placeholder="..." />
+                <marker date="1440077253129" expanded="true" signature="3122:3855" placeholder="..." />
+                <marker date="1440077253129" expanded="true" signature="3195:3830" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -120,7 +122,7 @@
         <entry file="file://$PROJECT_DIR$/src/TeileService.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="143" column="10" selection-start-line="143" selection-start-column="10" selection-end-line="143" selection-end-column="10" />
+              <caret line="147" column="10" selection-start-line="147" selection-start-column="10" selection-end-line="147" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -153,18 +155,18 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/tsconfig.json" />
-        <option value="$PROJECT_DIR$/src/test.ts" />
-        <option value="$PROJECT_DIR$/src/test.js" />
         <option value="$PROJECT_DIR$/typings/angular2/2.0angular2.d.ts" />
         <option value="$PROJECT_DIR$/src/2.1angular2.d.ts" />
         <option value="$PROJECT_DIR$/typings/angular2/2.1angular2.d.ts" />
         <option value="$PROJECT_DIR$/src/TeileService.js" />
         <option value="$PROJECT_DIR$/typings/system/system@0.16.js" />
         <option value="$PROJECT_DIR$/typings/traceur-runtime/traceur-runtime.js" />
-        <option value="$PROJECT_DIR$/src/TeileService.ts" />
         <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/typings/bootstrap/bootswatch-simplex_bootstrap.min.css.js" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/src/test.js" />
+        <option value="$PROJECT_DIR$/src/test.ts" />
+        <option value="$PROJECT_DIR$/src/TeileService.ts" />
       </list>
     </option>
   </component>
@@ -267,6 +269,10 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test.ts" />
+              <option name="myItemType" value="com.intellij.lang.typescript.compiler.ui.projectView.TypeScriptNestingTreeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -441,16 +447,16 @@
           <folding>
             <element signature="e#0#40#0" expanded="false" />
             <element signature="n#!!block;n#teileSetzen#0;n#TeileService#0" expanded="false" />
-            <marker date="1440075424254" expanded="false" signature="347:2439" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="368:584" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="608:2418" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="633:1203" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="1228:1798" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="1823:2393" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="2533:3765" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="2554:3004" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="3028:3744" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="3084:3719" placeholder="..." />
+            <marker date="1440077253129" expanded="false" signature="362:2466" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="383:599" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="623:2445" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="648:1222" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="1247:1821" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="1846:2420" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="2627:3876" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="2648:3098" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="3122:3855" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="3195:3830" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -529,16 +535,16 @@
           <folding>
             <element signature="e#0#40#0" expanded="false" />
             <element signature="n#!!block;n#teileSetzen#0;n#TeileService#0" expanded="false" />
-            <marker date="1440075424254" expanded="false" signature="347:2439" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="368:584" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="608:2418" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="633:1203" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="1228:1798" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="1823:2393" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="2533:3765" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="2554:3004" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="3028:3744" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="3084:3719" placeholder="..." />
+            <marker date="1440077253129" expanded="false" signature="362:2466" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="383:599" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="623:2445" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="648:1222" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="1247:1821" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="1846:2420" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="2627:3876" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="2648:3098" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="3122:3855" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="3195:3830" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -624,16 +630,16 @@
           <folding>
             <element signature="e#0#40#0" expanded="false" />
             <element signature="n#!!block;n#teileSetzen#0;n#TeileService#0" expanded="false" />
-            <marker date="1440075424254" expanded="false" signature="347:2439" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="368:584" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="608:2418" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="633:1203" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="1228:1798" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="1823:2393" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="2533:3765" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="2554:3004" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="3028:3744" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="3084:3719" placeholder="..." />
+            <marker date="1440077253129" expanded="false" signature="362:2466" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="383:599" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="623:2445" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="648:1222" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="1247:1821" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="1846:2420" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="2627:3876" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="2648:3098" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="3122:3855" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="3195:3830" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -716,16 +722,16 @@
           <folding>
             <element signature="e#0#40#0" expanded="false" />
             <element signature="n#!!block;n#teileSetzen#0;n#TeileService#0" expanded="false" />
-            <marker date="1440075424254" expanded="false" signature="347:2439" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="368:584" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="608:2418" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="633:1203" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="1228:1798" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="1823:2393" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="2533:3765" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="2554:3004" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="3028:3744" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="3084:3719" placeholder="..." />
+            <marker date="1440077253129" expanded="false" signature="362:2466" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="383:599" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="623:2445" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="648:1222" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="1247:1821" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="1846:2420" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="2627:3876" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="2648:3098" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="3122:3855" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="3195:3830" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -776,13 +782,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/typings/angular2/jquery.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -815,18 +814,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/TeileService.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="143" column="10" selection-start-line="143" selection-start-column="10" selection-end-line="143" selection-end-column="10" />
+          <caret line="147" column="10" selection-start-line="147" selection-start-column="10" selection-end-line="147" selection-end-column="10" />
           <folding />
         </state>
       </provider>
@@ -858,27 +849,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TeileService.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.9411764">
-          <caret line="52" column="46" selection-start-line="52" selection-start-column="46" selection-end-line="52" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#40#0" expanded="false" />
-            <element signature="n#!!block;n#teileSetzen#0;n#TeileService#0" expanded="false" />
-            <marker date="1440075424254" expanded="false" signature="347:2439" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="368:584" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="608:2418" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="633:1203" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="1228:1798" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="1823:2393" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="2533:3765" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="2554:3004" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="3028:3744" placeholder="..." />
-            <marker date="1440075424254" expanded="true" signature="3084:3719" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -899,9 +869,48 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34442836">
-          <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
+        <state vertical-scroll-proportion="-12.423077">
+          <caret line="19" column="12" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TeileService.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.19912152">
+          <caret line="47" column="74" selection-start-line="47" selection-start-column="74" selection-end-line="47" selection-end-column="74" />
+          <folding>
+            <element signature="e#0#40#0" expanded="false" />
+            <element signature="n#!!block;n#teileSetzen#0;n#TeileService#0" expanded="false" />
+            <marker date="1440077253129" expanded="false" signature="362:2466" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="383:599" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="623:2445" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="648:1222" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="1247:1821" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="1846:2420" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="2627:3876" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="2648:3098" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="3122:3855" placeholder="..." />
+            <marker date="1440077253129" expanded="true" signature="3195:3830" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
