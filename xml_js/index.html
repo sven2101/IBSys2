@@ -7,12 +7,32 @@
 <p id='output'></p>
 
 <script>
+  
+  var parseXml = function (xml) {
+    
+    var parsedXml;
+    
+    if (window.DOMParser){
+        parser=new DOMParser();
+        parsedXml=parser.parseFromString(xml,"text/xml");
+      }
+      else // Internet Explorer
+      {
+        parsedXml=new ActiveXObject("Microsoft.XMLDOM");
+        parsedXml.async=false;
+        parsedXml.loadXML(xml); 
+      }
+      
+      return parsedXml;
+  }
+  
   var handleFile = function(files) {
     
     var selectedFile = files[0];
     var size = selectedFile.size;
     var type = selectedFile.type;
     var result;
+    var xmlDoc;
     
     
     
@@ -23,6 +43,10 @@
       result = result;
       document.getElementById('output').innerHTML='Groesse: '+size+' Type: '+type+' Inhalt: '+result;
       alert(result);
+      
+      xmlDoc = parseXml(result);    
+      var rootElement = xmlDoc.getDocumentElement();
+      alert(rootElement);
     }
 
     reader.readAsText(selectedFile);

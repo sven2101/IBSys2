@@ -1,12 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<verzeichnis>
-     <titel>Wikipedia Staedteverzeichnis</titel>
-     <eintrag>
-          <stichwort>Genf</stichwort>
-          <eintragstext>Genf ist der Sitz von ...</eintragstext>
-     </eintrag>
-     <eintrag>
-          <stichwort>Koeln</stichwort>
-          <eintragstext>Koeln ist eine Stadt, die ...</eintragstext>
-     </eintrag>
-</verzeichnis>
+<html>
+<body>
+
+<h1 id="headline">My First Heading</h1>
+
+<p>My first paragraph.</p>
+
+</body>
+</html>
