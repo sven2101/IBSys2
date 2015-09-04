@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Datei einlesen</title>
+  </head>
+<input id="input" type='file' onchange='handleFile(this.files)'><br>
+<p id='output'></p>
+
+<script>
+  var handleFile = function(files) {
+    
+    var selectedFile = files[0];
+    var size = selectedFile.size;
+    var type = selectedFile.type;
+    var result;
+    
+    
+    
+    var reader = new FileReader();
+    
+    reader.onload = function(e) {
+      result = reader.result;
+      result = result;
+      document.getElementById('output').innerHTML='Groesse: '+size+' Type: '+type+' Inhalt: '+result;
+      alert(result);
+    }
+
+    reader.readAsText(selectedFile);
+  };
+</script>
+</html>
