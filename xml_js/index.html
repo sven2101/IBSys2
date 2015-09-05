@@ -4,7 +4,7 @@
     <title>Datei einlesen</title>
   </head>
 <input id="input" type='file' onchange='handleFile(this.files)'><br>
-<p id='output'></p>
+<div id='output'></div>
 
 <script>
   
@@ -74,12 +74,10 @@
     reader.onload = function(e) {
       result = reader.result;
       
-      //alert(result);
-      
       xmlDoc = parseXml(result);    
       json = convertDomToJson(xmlDoc.documentElement);
+      
       document.getElementById('output').innerHTML='Groesse: '+size+' Type: '+type+' Inhalt: '+JSON.stringify(json);
-      //alert('Ende');
     }
 
     reader.readAsText(selectedFile);
