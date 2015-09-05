@@ -1,4 +1,4 @@
-<input>
+<input att="Irgendwas">
 <qualitycontrol type="no" losequantity="0" delay="0"/>
 <sellwish>
 <item article="1" quantity="150"/>

@@ -26,6 +26,38 @@
       return parsedXml;
   }
   
+  function nodeConstructor (name,children,attributes) {
+    this.name = name;
+    this.attributes=attributes;
+    this.children=children;
+  }
+  
+  function convertDomToJson (rootElement) {
+    var jsonObj = {
+      name: rootElement.nodeName,
+      attributes: [],
+      children: []
+    };
+    
+    if (rootElement.nodeType === 1) { //ElementNode
+      if (rootElement.attributes.length > 0) {
+        for (var i = 0; i < rootElement.attributes.length; i++) {
+          jsonObj.attributes.push({name: rootElement.attributes[i].name, value: rootElement.attributes[i].value});
+        }
+      }
+    }
+    else if (rootElement.nodeType === 3) { //TextNode
+      jsonObj = rootElement.nodeValue;
+    }
+    
+    if (rootElement.hasChildNodes()) {
+      for (var j = 0; j < rootElement.childNodes.length; j++) {
+        jsonObj.children.push(convertDomToJson(rootElement.childNodes[j]));
+      }
+    }
+    return jsonObj;
+  }
+  
   var handleFile = function(files) {
     
     var selectedFile = files[0];
@@ -33,6 +65,7 @@
     var type = selectedFile.type;
     var result;
     var xmlDoc;
+    var json;
     
     
     
@@ -40,13 +73,13 @@
     
     reader.onload = function(e) {
       result = reader.result;
-      result = result;
-      document.getElementById('output').innerHTML='Groesse: '+size+' Type: '+type+' Inhalt: '+result;
-      alert(result);
+      
+      //alert(result);
       
       xmlDoc = parseXml(result);    
-      var rootElement = xmlDoc.getDocumentElement();
-      alert(rootElement);
+      json = convertDomToJson(xmlDoc.documentElement);
+      document.getElementById('output').innerHTML='Groesse: '+size+' Type: '+type+' Inhalt: '+JSON.stringify(json);
+      //alert('Ende');
     }
 
     reader.readAsText(selectedFile);
