@@ -4,7 +4,8 @@
 	</head>
 	<body>
 		<input id="input" type='file' onchange='handleFile(this.files)'><br>
-		<div id='output'></div>
+		<div id="output"></div>
+		<div id="output2"></div>
 	</body>
 	<script language="javascript" type="text/javascript" src="./x2js/xml2json.min.js"></script>
 	<script>
@@ -24,10 +25,10 @@
 			var json = x2js.xml_str2json(result);
 			
 			document.getElementById('output').innerHTML='Groesse: '+size+' Type: '+type+' Inhalt: '+JSON.stringify(json);
+			document.getElementById('output2').innerHTML='';
 			}
 			
 			reader.readAsText(selectedFile);
-		}
-		
+		}		
 	</script>
 </html>
