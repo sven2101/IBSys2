@@ -1,0 +1,7 @@
+<h1>Überschrift Länder</h1>
+<p>{{laender.name}}</p>
+<ul>
+    <li ng-repeat="x in laender.get()">
+        {{ x.Name + ', ' + x.Country }}
+    </li>
+</ul>

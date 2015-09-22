@@ -19,7 +19,7 @@ import {Component, View, bootstrap,For,If} from 'angular2/angular2'
                     <th>Periode 1</th>
                     <th>Periode 2</th>
                     <th>Periode 3</th>
-                    <th>Periode 4 </th>
+                    <th>Periode 4</th>
                 </tr>
                 <tbody>
                     <tr>
@@ -148,7 +148,8 @@ class TeileService{
         new Teil("Speiche",58,0.1,1.6,0.5,[],22000,50),
         new Teil("Schweißdraht",59,0.15,0.7,0.2,[],1800,50),
         ];
-        //Nicht-Kaufteile
+
+        //Nicht-Kaufteile P1
         this.listeTeile.push(new Teil("e26",26,0,0,0,[this.getTeil(44,2),this.getTeil(47),this.getTeil(48,2)],0,0));
         this.listeTeile.push(new Teil("e16",16,0,0,0,[this.getTeil(24),this.getTeil(28),this.getTeil(40),this.getTeil(41),this.getTeil(42,2)],0,0));
         this.listeTeile.push(new Teil("e17",17,0,0,0,[this.getTeil(43),this.getTeil(44),this.getTeil(45),this.getTeil(46)],0,0));
@@ -161,6 +162,27 @@ class TeileService{
         this.listeTeile.push(new Teil("e50",50,0,0,0,[this.getTeil(24,2),this.getTeil(25,2),this.getTeil(4),this.getTeil(10),this.getTeil(49)],0,0));
         this.listeTeile.push(new Teil("e51",51,0,0,0,[this.getTeil(24),this.getTeil(27),this.getTeil(16),this.getTeil(17),this.getTeil(50)],0,0));
         this.listeTeile.push(new Teil("p1",1,0,0,0,[this.getTeil(21),this.getTeil(24),this.getTeil(27),this.getTeil(26),this.getTeil(51)],0,0));
+        //Nicht-Kaufteile P2
+        this.listeTeile.push(new Teil("e19",19,0,0,0,[this.getTeil(28,4),this.getTeil(32),this.getTeil(59,2)],0,0));
+        this.listeTeile.push(new Teil("e14",14,0,0,0,[this.getTeil(32),this.getTeil(39)],0,0));
+        this.listeTeile.push(new Teil("e8",8,0,0,0,[this.getTeil(35,2),this.getTeil(37),this.getTeil(38),this.getTeil(57),this.getTeil(58,36)],0,0));
+        this.listeTeile.push(new Teil("e54",54,0,0,0,[this.getTeil(24,2),this.getTeil(25,2),this.getTeil(8),this.getTeil(14),this.getTeil(19)],0,0));
+        this.listeTeile.push(new Teil("e11",11,0,0,0,[this.getTeil(32),this.getTeil(39)],0,0));
+        this.listeTeile.push(new Teil("e5",5,0,0,0,[this.getTeil(35,2),this.getTeil(36),this.getTeil(57),this.getTeil(58,36)],0,0));
+        this.listeTeile.push(new Teil("e55",55,0,0,0,[this.getTeil(24,2),this.getTeil(25,2),this.getTeil(5),this.getTeil(11),this.getTeil(54)],0,0));
+        this.listeTeile.push(new Teil("e56",56,0,0,0,[this.getTeil(24),this.getTeil(27),this.getTeil(16),this.getTeil(17),this.getTeil(55)],0,0));
+        this.listeTeile.push(new Teil("p2",2,0,0,0,[this.getTeil(22),this.getTeil(24),this.getTeil(27),this.getTeil(26),this.getTeil(56)],0,0));
+        //Nicht-Kaufteile P3
+        this.listeTeile.push(new Teil("e20",20,0,0,0,[this.getTeil(28,5),this.getTeil(32),this.getTeil(59,2)],0,0));
+        this.listeTeile.push(new Teil("e15",15,0,0,0,[this.getTeil(32),this.getTeil(39)],0,0));
+        this.listeTeile.push(new Teil("e9",9,0,0,0,[this.getTeil(33),this.getTeil(34,36),this.getTeil(35),this.getTeil(37),this.getTeil(38)],0,0));
+        this.listeTeile.push(new Teil("e29",29,0,0,0,[this.getTeil(24,2),this.getTeil(25,2),this.getTeil(9),this.getTeil(15),this.getTeil(20)],0,0));
+        this.listeTeile.push(new Teil("e12",12,0,0,0,[this.getTeil(32),this.getTeil(39)],0,0));
+        this.listeTeile.push(new Teil("e6",6,0,0,0,[this.getTeil(33),this.getTeil(34,36),this.getTeil(35),this.getTeil(36)],0,0));
+        this.listeTeile.push(new Teil("e30",30,0,0,0,[this.getTeil(24,2),this.getTeil(25,2),this.getTeil(6),this.getTeil(12),this.getTeil(29)],0,0));
+        this.listeTeile.push(new Teil("e31",31,0,0,0,[this.getTeil(24),this.getTeil(27),this.getTeil(16),this.getTeil(17),this.getTeil(30)],0,0));
+        this.listeTeile.push(new Teil("p3",3,0,0,0,[this.getTeil(23),this.getTeil(24),this.getTeil(27),this.getTeil(26),this.getTeil(31)],0,0));
+
     }
     //liefert eine tiefe Kopie eines Bauteiles aus dem Katalog zurück und setzt optional dessen Anzahl
     getTeil(id:number,anzahl:number=1):Teil{
@@ -203,7 +225,9 @@ class TeileService{
     aendern(){
         this.gesamtListe=[];
         this.teileberechnen(this.getTeil(1),0,this.gesamtListe,0);
-        let inputs=["11","12","13","14"];//,"21","22","23","24","31","32","33","34"];
+        this.teileberechnen(this.getTeil(2),0,this.gesamtListe,0);
+        this.teileberechnen(this.getTeil(3),0,this.gesamtListe,0);
+        let inputs=["11","12","13","14","21","22","23","24","31","32","33","34"];
         for(let i=0;i<inputs.length;i++){
             let input:string = (<HTMLInputElement>document.getElementById("i"+inputs[i])).value;
             let number:number = (<any>input) * 1;
