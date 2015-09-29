@@ -86,8 +86,8 @@
       <file leaf-file-name="TeileService.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/TeileService.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.70054203">
-              <caret line="327" column="24" selection-start-line="327" selection-start-column="24" selection-end-line="327" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.33468834">
+              <caret line="347" column="13" selection-start-line="347" selection-start-column="13" selection-end-line="347" selection-end-column="13" />
               <folding>
                 <element signature="e#0#40#0" expanded="false" />
                 <element signature="n#!!block;n#constructor#0;n#TeileService#0" expanded="false" />
@@ -99,18 +99,16 @@
                 <element signature="n#!!block;n#aendern#0;n#TeileService#0" expanded="false" />
                 <element signature="n#!!block;n#reichweiteBerechnen#0;n#TeileService#0" expanded="false" />
                 <element signature="n#!!block;n#bestellmengeBerechnen#0;n#TeileService#0" expanded="false" />
-                <element signature="n#!!block;n#constructor#0;n#Teil#0" expanded="false" />
-                <element signature="n#!!block;n#getCopy#0;n#Teil#0" expanded="false" />
-                <marker date="1442943342656" expanded="true" signature="362:2453" placeholder="..." />
-                <marker date="1442943342656" expanded="true" signature="383:598" placeholder="..." />
-                <marker date="1442943342656" expanded="true" signature="622:2432" placeholder="..." />
-                <marker date="1442943342656" expanded="true" signature="647:1217" placeholder="..." />
-                <marker date="1442943342656" expanded="true" signature="1242:1812" placeholder="..." />
-                <marker date="1442943342656" expanded="true" signature="1837:2407" placeholder="..." />
-                <marker date="1442943342656" expanded="false" signature="2628:4101" placeholder="..." />
-                <marker date="1442943342656" expanded="true" signature="2649:3210" placeholder="..." />
-                <marker date="1442943342656" expanded="true" signature="3234:4080" placeholder="..." />
-                <marker date="1442943342656" expanded="true" signature="3307:4055" placeholder="..." />
+                <marker date="1443549758950" expanded="true" signature="362:2453" placeholder="..." />
+                <marker date="1443549758950" expanded="true" signature="383:598" placeholder="..." />
+                <marker date="1443549758950" expanded="true" signature="622:2432" placeholder="..." />
+                <marker date="1443549758950" expanded="true" signature="647:1217" placeholder="..." />
+                <marker date="1443549758950" expanded="true" signature="1242:1812" placeholder="..." />
+                <marker date="1443549758950" expanded="true" signature="1837:2407" placeholder="..." />
+                <marker date="1443549758950" expanded="true" signature="2628:4101" placeholder="..." />
+                <marker date="1443549758950" expanded="true" signature="2649:3210" placeholder="..." />
+                <marker date="1443549758950" expanded="true" signature="3234:4080" placeholder="..." />
+                <marker date="1443549758950" expanded="true" signature="3307:4055" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -205,7 +203,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -254,6 +251,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -348,18 +346,18 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="1.0" sideWeight="0.5038168" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24972737" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14333333" sideWeight="0.49618322" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -375,7 +373,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -389,13 +387,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/TeileService.js.map">
-      <provider editor-type-id="sourcemapFileViewerProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
+      </provider>
+      <provider editor-type-id="sourcemapFileViewerProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
@@ -444,18 +442,16 @@
             <element signature="n#!!block;n#aendern#0;n#TeileService#0" expanded="false" />
             <element signature="n#!!block;n#reichweiteBerechnen#0;n#TeileService#0" expanded="false" />
             <element signature="n#!!block;n#bestellmengeBerechnen#0;n#TeileService#0" expanded="false" />
-            <element signature="n#!!block;n#constructor#0;n#Teil#0" expanded="false" />
-            <element signature="n#!!block;n#getCopy#0;n#Teil#0" expanded="false" />
-            <marker date="1442943342656" expanded="true" signature="362:2453" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="383:598" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="622:2432" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="647:1217" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="1242:1812" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="1837:2407" placeholder="..." />
-            <marker date="1442943342656" expanded="false" signature="2628:4101" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="2649:3210" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="3234:4080" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="3307:4055" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="362:2453" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="383:598" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="622:2432" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="647:1217" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="1242:1812" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="1837:2407" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="2628:4101" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="2649:3210" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="3234:4080" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="3307:4055" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -482,13 +478,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/TeileService.js.map">
-      <provider editor-type-id="sourcemapFileViewerProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
+      </provider>
+      <provider editor-type-id="sourcemapFileViewerProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
@@ -544,18 +540,16 @@
             <element signature="n#!!block;n#aendern#0;n#TeileService#0" expanded="false" />
             <element signature="n#!!block;n#reichweiteBerechnen#0;n#TeileService#0" expanded="false" />
             <element signature="n#!!block;n#bestellmengeBerechnen#0;n#TeileService#0" expanded="false" />
-            <element signature="n#!!block;n#constructor#0;n#Teil#0" expanded="false" />
-            <element signature="n#!!block;n#getCopy#0;n#Teil#0" expanded="false" />
-            <marker date="1442943342656" expanded="true" signature="362:2453" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="383:598" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="622:2432" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="647:1217" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="1242:1812" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="1837:2407" placeholder="..." />
-            <marker date="1442943342656" expanded="false" signature="2628:4101" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="2649:3210" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="3234:4080" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="3307:4055" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="362:2453" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="383:598" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="622:2432" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="647:1217" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="1242:1812" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="1837:2407" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="2628:4101" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="2649:3210" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="3234:4080" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="3307:4055" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -641,18 +635,16 @@
             <element signature="n#!!block;n#aendern#0;n#TeileService#0" expanded="false" />
             <element signature="n#!!block;n#reichweiteBerechnen#0;n#TeileService#0" expanded="false" />
             <element signature="n#!!block;n#bestellmengeBerechnen#0;n#TeileService#0" expanded="false" />
-            <element signature="n#!!block;n#constructor#0;n#Teil#0" expanded="false" />
-            <element signature="n#!!block;n#getCopy#0;n#Teil#0" expanded="false" />
-            <marker date="1442943342656" expanded="true" signature="362:2453" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="383:598" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="622:2432" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="647:1217" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="1242:1812" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="1837:2407" placeholder="..." />
-            <marker date="1442943342656" expanded="false" signature="2628:4101" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="2649:3210" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="3234:4080" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="3307:4055" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="362:2453" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="383:598" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="622:2432" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="647:1217" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="1242:1812" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="1837:2407" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="2628:4101" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="2649:3210" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="3234:4080" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="3307:4055" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -749,13 +741,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/TeileService.js.map">
-      <provider editor-type-id="sourcemapFileViewerProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
+      </provider>
+      <provider editor-type-id="sourcemapFileViewerProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/typings/bootstrap/bootswatch-simplex_bootstrap.min.css.js">
@@ -833,8 +825,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/TeileService.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.70054203">
-          <caret line="327" column="24" selection-start-line="327" selection-start-column="24" selection-end-line="327" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.33468834">
+          <caret line="347" column="13" selection-start-line="347" selection-start-column="13" selection-end-line="347" selection-end-column="13" />
           <folding>
             <element signature="e#0#40#0" expanded="false" />
             <element signature="n#!!block;n#constructor#0;n#TeileService#0" expanded="false" />
@@ -846,18 +838,16 @@
             <element signature="n#!!block;n#aendern#0;n#TeileService#0" expanded="false" />
             <element signature="n#!!block;n#reichweiteBerechnen#0;n#TeileService#0" expanded="false" />
             <element signature="n#!!block;n#bestellmengeBerechnen#0;n#TeileService#0" expanded="false" />
-            <element signature="n#!!block;n#constructor#0;n#Teil#0" expanded="false" />
-            <element signature="n#!!block;n#getCopy#0;n#Teil#0" expanded="false" />
-            <marker date="1442943342656" expanded="true" signature="362:2453" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="383:598" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="622:2432" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="647:1217" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="1242:1812" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="1837:2407" placeholder="..." />
-            <marker date="1442943342656" expanded="false" signature="2628:4101" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="2649:3210" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="3234:4080" placeholder="..." />
-            <marker date="1442943342656" expanded="true" signature="3307:4055" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="362:2453" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="383:598" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="622:2432" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="647:1217" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="1242:1812" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="1837:2407" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="2628:4101" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="2649:3210" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="3234:4080" placeholder="..." />
+            <marker date="1443549758950" expanded="true" signature="3307:4055" placeholder="..." />
           </folding>
         </state>
       </provider>
