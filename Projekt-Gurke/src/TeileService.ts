@@ -66,8 +66,8 @@ import {Component, View, bootstrap,For,If} from 'angular2/angular2'
                     <tr id="{{teil.id}}" *for="#teil of ergebnisListe;">
                         <td>{{"K"+teil.id}}</td>
                         <td>{{teil.lieferzeitNormal}}</td>
-                        <td>{{teil.lieferAbweichung}}</td>
-                        <td>{{teil.reichweite}}</td>
+                        <td>{
+                        weite}}</td>
                         <td>{{teil.lagerstand}}</td>
                         <td>{{teil.bedarfPeriode[0]}}</td>
                         <td>{{teil.bedarfPeriode[1]}}</td>
