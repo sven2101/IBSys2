@@ -4,6 +4,7 @@ var gulp = require('gulp'),
 requireDir('./gulp');
 
 gulp.task('default', [
+	'assets',
 	'minify-index',
 	'start-server',
 	'browser-sync'], function () { });
