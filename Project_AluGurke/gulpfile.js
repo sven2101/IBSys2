@@ -6,5 +6,8 @@ requireDir('./gulp');
 gulp.task('default', [
 	'assets',
 	'minify-index',
+	'minify-components-view',
+	'angular',
+	'watch-angular',
 	'start-server',
 	'browser-sync'], function () { });

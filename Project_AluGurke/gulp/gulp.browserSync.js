@@ -11,4 +11,6 @@ gulp.task('browser-sync', function () {
         proxy: path.proxy
     });
 	watch(path.index.src, browserSync.reload);
+	watch(path.angular.src, browserSync.reload);
+	watch(path.componentViews.src, browserSync.reload);
 });

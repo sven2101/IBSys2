@@ -13,3 +13,10 @@ gulp.task('minify-index', function () {
         .pipe(minifyHTML(opts))
         .pipe(gulp.dest(path.index.dst));
 });
+
+gulp.task('minify-components-view', function () {
+    gulp.src(path.componentViews.src)
+		.pipe(watch(path.componentViews.src))
+		.pipe(minifyHTML(opts))
+        .pipe(gulp.dest(path.componentViews.dst));
+});
