@@ -2,7 +2,7 @@
 
 	angular.module('uploadFileModule')
 
-		.controller('ufCtrl', [function () {
+		.controller('fileCtrl', [function () {
 			
 			var vm = this;
 			vm.test="blabla";
