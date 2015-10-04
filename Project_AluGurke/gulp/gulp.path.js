@@ -1,7 +1,9 @@
 module.exports = {
     path: {
-        indexSrc: 'src/index.html',
-        indexDst: 'build',
+        index : {
+          src: 'src/index.html',
+          dst:  'build'
+        },
         proxy: 'http://localhost:8080'
     }
 };

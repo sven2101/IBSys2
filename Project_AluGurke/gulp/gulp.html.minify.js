@@ -8,8 +8,8 @@ var opts = {
 };
 
 gulp.task('minify-index', function () {
-    gulp.src(path.indexSrc)
-        .pipe(watch(path.indexSrc))
+    gulp.src(path.index.src)
+        .pipe(watch(path.index.src))
         .pipe(minifyHTML(opts))
-        .pipe(gulp.dest(path.indexDst));
+        .pipe(gulp.dest(path.index.dst));
 });
