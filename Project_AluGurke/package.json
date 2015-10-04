@@ -1,0 +1,26 @@
+{
+  "name": "project_alugurke",
+  "version": "1.0.0",
+  "description": "Tool for PPS",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Max-Hermann/IBSys2.git"
+  },
+  "keywords": [
+    "MEAN"
+  ],
+  "author": "Marius",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Max-Hermann/IBSys2/issues"
+  },
+  "homepage": "https://github.com/Max-Hermann/IBSys2#readme",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
