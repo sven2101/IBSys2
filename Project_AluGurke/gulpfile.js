@@ -10,7 +10,5 @@ gulp.task('default', [
 	'angular',
 	'watch-angular',
 	'start-server',
-	'browser-sync',
-	'compile'], function () { });
-
-gulp.watch('src/**/*.ts',['compile']);
+	'browser-sync'
+	], function () { });

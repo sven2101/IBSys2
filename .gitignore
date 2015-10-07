@@ -1,3 +1,5 @@
 Project_AluGurke/node_modules/**
 Project_AluGurke/build/**
 Projekt-Gurke/node_modules/**
+.idead
+.gulp*
