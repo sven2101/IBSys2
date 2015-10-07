@@ -16,16 +16,25 @@ module.exports = {
         },
         angular: {
             src: [
-                'src/app/app.module.js',
-                'src/app/app.routes.js',
-                'src/app/components/**/*.module.js',
-                'src/app/components/app-services/*.js',
-                'src/app/components/**/*.controller.js',
-                'src/app/components/**/*.directive.js'
+                'src/app/js/app.module.js',
+                'src/app/js/app.routes.js',
+                'src/app/js/components/**/*.module.js',
+                'src/app/js/components/**/*.controller.js',
+                'src/app/js/components/**/*.directive.js'
             ],
             dst: 'build/javaScript'
         },
-
+        typescript: {
+            src:[
+                'src/app/app.module.ts',
+                'src/app/app.routes.ts',
+                'src/app/components/**/*.module.ts',
+                'src/app/components/app-services/*.ts',
+                'src/app/components/**/*.controller.ts',
+                'src/app/components/**/*.directive.ts'
+            ],
+            dst: 'src/app/js'
+        },
         proxy: 'http://localhost:8080'
     }
 };

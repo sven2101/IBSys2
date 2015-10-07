@@ -1,3 +1,5 @@
+/// <reference path="angular.d.ts" />
+
 angular.module('app')
 
 .config(['$routeProvider',
@@ -8,6 +10,6 @@ angular.module('app')
     }).
       when('/file', {
       templateUrl: '/components/file/file.html',
-      controller: 'fileCtrl as uf'
+      controller: 'FileController as uf'
     })
   }]);
