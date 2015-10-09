@@ -1,14 +1,12 @@
-<html>
-	<head>
-		<title>x2js</title>
-	</head>
-	<body>
+<section>
+		<a href="download">Click here to download gulpfile.js</a>
 		<input id="input" type='file' onchange='handleFile(this.files)'><br>
-		<div id="output"></div>
+		<div id="output">
+			{{uf.test}}
+		</div>
 		<div id="output2"></div>
-	</body>
-	<script language="javascript" type="text/javascript" src="./x2js/xml2json.min.js"></script>
-	<script>
+</section>
+<script>
 		var handleFile = function(files) {
     
 			var selectedFile = files[0];
@@ -31,4 +29,3 @@
 			reader.readAsText(selectedFile);
 		}		
 	</script>
-</html>
