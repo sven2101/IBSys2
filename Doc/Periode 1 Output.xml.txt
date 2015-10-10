@@ -1,4 +1,3 @@
-This XML file does not appear to have any style information associated with it. The document tree is shown below.
 <results game="173" group="6" period="1">
 <warehousestock>
 <article id="1" amount="100" startamount="100" pct="100.00" price="156.31" stockvalue="15631.20"/>
