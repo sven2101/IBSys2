@@ -2,5 +2,6 @@
 
 angular.module('app', [
 	'ngRoute',
-	'FileModule'
+	'FileModule',
+	'BestellverwaltungModule'
 ]);

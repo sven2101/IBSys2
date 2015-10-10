@@ -1,0 +1,1 @@
+{"version":3,"file":"file.controller.js","sourceRoot":"","sources":["file.controller.ts"],"names":["FileController","FileController.constructor"],"mappings":"AAAA,2CAA2C;AAE3C,IAAM,cAAc;IAInBA,SAJKA,cAAcA;QAEnBC,SAAIA,GAAWA,MAAMA,CAACA;IAGtBA,CAACA;IACFD,qBAACA;AAADA,CAACA,AAND,IAMC;AAGD,OAAO,CAAC,MAAM,CAAC,YAAY,CAAC,CAAC,UAAU,CAAC,gBAAgB,EAAC,CAAC,cAAc,CAAC,CAAC,CAAC"}

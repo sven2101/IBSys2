@@ -4,3 +4,4 @@ angular.module('app', [
     'FileModule',
     'BestellverwaltungModule'
 ]);
+//# sourceMappingURL=app.module.js.map
