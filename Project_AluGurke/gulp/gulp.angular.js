@@ -5,7 +5,7 @@ var gulp = require('gulp'),
     path = require('./gulp.path.js').path,
     typescript = require('gulp-tsc');
 	
-gulp.task('angular',['typescript'], function () {
+gulp.task('angular', function () {
     gulp.src(path.angular.src)
         .pipe(concat('angular.js'))
         //.pipe(uglify())
@@ -19,7 +19,12 @@ gulp.task('typescript', function () {
 });
 
 gulp.task('watch-angular', function () {
-    watch(path.typescript.src, function (events, done) {
+    watch(path.angular.src, function (events, done) {
         gulp.start('angular');
+    });
+});
+gulp.task('watch-typescript', function () {
+    watch(path.typescript.src, function (events, done) {
+        gulp.start('typescript');
     });
 });

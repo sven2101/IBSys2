@@ -1,4 +1,4 @@
-/// <reference path="angular.d.ts" />
+/// <reference path="typeDefinitions/angular.d.ts" />
 
 angular.module('app')
 
@@ -10,6 +10,9 @@ angular.module('app')
     }).
       when('/file', {
       templateUrl: '/components/file/file.html',
-      controller: 'FileController as uf'
-    })
+      controller: 'FileController as fc'
+    }).when('/bestellverwaltung', {
+          templateUrl: '/components/bestellverwaltung/bestellverwaltung.html',
+          controller: 'BestellverwaltungController as bvc'
+        })
   }]);

@@ -7,6 +7,8 @@ gulp.task('default', [
 	'assets',
 	'minify-index',
 	'minify-components-view',
+	'typescript',
+	'watch-typescript',
 	'angular',
 	'watch-angular',
 	'start-server',
