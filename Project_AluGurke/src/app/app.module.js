@@ -2,6 +2,8 @@
 angular.module('app', [
     'ngRoute',
     'FileModule',
-    'BestellverwaltungModule'
+    'BestellverwaltungModule',
+    'pascalprecht.translate',
+    'TranslationModule'
 ]);
 //# sourceMappingURL=app.module.js.map

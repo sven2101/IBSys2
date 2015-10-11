@@ -1,11 +1,11 @@
-<h1 align="center">Bestellverwaltung</h1>
+<h1 align="center">{{'orderManagment_headline'|translate}}</h1>
 <table align="center">
 	<tr>
-		<th>Produkt</th>
-		<th>Periode 1</th>
-		<th>Periode 2</th>
-		<th>Periode 3</th>
-		<th>Periode 4</th>
+		<th>{{'orderManagment_product'|translate}}</th>
+		<th>{{'orderManagment_period'|translate}} 1</th>
+		<th>{{'orderManagment_period'|translate}} 2</th>
+		<th>{{'orderManagment_period'|translate}} 3</th>
+		<th>{{'orderManagment_period'|translate}} 4</th>
 	</tr>
 	<tbody>
 	<tr>
@@ -34,18 +34,18 @@
 <div>
 	<table align="center" class="table table-striped table-hover ">
 		<tr>
-			<th>Id</th>
-			<th>Lieferzeit in Perioden</th>
-			<th>Abweichung in Perioden</th>
-			<th>Reichweite in Perioden</th>
-			<th>Lagerstand</th>
-			<th>Bedarf Periode 1</th>
-			<th>Bedarf Periode 2</th>
-			<th>Bedarf Periode 3</th>
-			<th>Bedarf Periode 4</th>
-			<th>Rabattmenge</th>
-			<th>Bestellmenge</th>
-			<th>Eilbestellung</th>
+			<th>{{'orderManagment_id'|translate}}</th>
+			<th>{{'orderManagment_deliveryTime'|translate}}</th>
+			<th>{{'orderManagment_deliveryTimeDeviance'|translate}}</th>
+			<th>{{'orderManagment_inventoryDays'|translate}}</th>
+			<th>{{'orderManagment_warehouseStocks'|translate}}</th>
+			<th>{{'orderManagment_demand'|translate}}1</th>
+			<th>{{'orderManagment_demand'|translate}}2</th>
+			<th>{{'orderManagment_demand'|translate}}3</th>
+			<th>{{'orderManagment_demand'|translate}}4</th>
+			<th>{{'orderManagment_discount'|translate}}</th>
+			<th>{{'orderManagment_orderQuantity'|translate}}</th>
+			<th>{{'orderManagment_instantOrder'|translate}}1</th>
 		</tr>
 		<tr ng-repeat="teil in bvc.ergebnisListe">
 			<td>K{{teil.id}}</td>

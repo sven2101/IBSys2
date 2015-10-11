@@ -6,4 +6,3 @@ var FileController = (function () {
     return FileController;
 })();
 angular.module("FileModule").controller("FileController", [FileController]);
-//# sourceMappingURL=translation.controller.js.map.js.map

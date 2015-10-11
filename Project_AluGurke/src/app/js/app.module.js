@@ -2,5 +2,7 @@
 angular.module('app', [
     'ngRoute',
     'FileModule',
-    'BestellverwaltungModule'
+    'BestellverwaltungModule',
+    'pascalprecht.translate',
+    'TranslationModule'
 ]);
