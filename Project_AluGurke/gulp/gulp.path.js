@@ -20,6 +20,7 @@ module.exports = {
                 'src/app/js/app.routes.js',
                 'src/app/js/model/*.js',
                 'src/app/js/components/**/*.module.js',
+                'src/app/js/components/appServices/*.js',
                 'src/app/js/components/**/*.controller.js',
                 'src/app/js/components/**/*.directive.js'
             ],
@@ -30,6 +31,7 @@ module.exports = {
                 'src/app/app.module.ts',
                 'src/app/app.routes.ts',
                 'src/app/model/*.ts',
+                'src/app/components/appServices/*.ts',
                 'src/app/components/**/*.module.ts',
                 'src/app/components/app-services/*.ts',
                 'src/app/components/**/*.controller.ts',

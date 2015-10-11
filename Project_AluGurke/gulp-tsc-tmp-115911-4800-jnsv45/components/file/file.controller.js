@@ -2,7 +2,6 @@
 var FileController = (function () {
     function FileController(service) {
         this.test = "testt";
-        this.teil = service.teil;
     }
     return FileController;
 })();

@@ -2,11 +2,13 @@
 
 class FileController {
 	
-	test: string = "test";
+	test: string = "testt";
+	teil;
 	
-	constructor () {
+	constructor (service) {
+		this.teil = service.teil;
 	}
 }
 
 
-angular.module("FileModule").controller("FileController",[FileController]);
+angular.module('FileModule').controller('FileController',['TeileService',FileController]);
