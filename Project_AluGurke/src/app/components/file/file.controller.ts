@@ -2,7 +2,7 @@
 
 class FileController {
 	
-	test: string = "testt";
+	test: string = "test";
 	teil;
 	
 	constructor (service) {
