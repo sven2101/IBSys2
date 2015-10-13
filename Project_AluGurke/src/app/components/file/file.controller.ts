@@ -1,12 +1,14 @@
-/// <reference path="../../angular.d.ts" />
+/// <reference path="../../typeDefinitions/angular.d.ts" />
 
 class FileController {
 	
 	test: string = "test";
+	teil;
 	
-	constructor () {
+	constructor (service) {
+		this.teil = service.teil;
 	}
 }
 
 
-angular.module("FileModule").controller("FileController",[FileController]);
+angular.module('FileModule').controller('FileController',['TeileService',FileController]);

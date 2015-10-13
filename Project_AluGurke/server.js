@@ -12,7 +12,7 @@ app.get('/download', function (req, res) {
 	res.download('gulpfile.js');
 });
 
-var server = app.listen(8080, function () {
+var server = app.listen(3789, function () {
 	var port = server.address().port;
 	console.log('Server listening on port ' + port);
 });

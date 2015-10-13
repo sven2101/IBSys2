@@ -1,7 +1,7 @@
 /**
  * Created by Max on 11.10.2015.
  */
-/// <reference path="../../angular.d.ts" />
+/// <reference path="../../typeDefinitions/angular.d.ts" />
 angular.module('TranslationModule', []);
 angular.module('app').config(function ($translateProvider) {
     // deutsche Sprache

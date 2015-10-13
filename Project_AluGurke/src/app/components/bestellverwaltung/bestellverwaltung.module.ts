@@ -1,3 +1,3 @@
-/// <reference path="../../angular.d.ts" />
+/// <reference path="../../typeDefinitions/angular.d.ts" />
 
 angular.module('BestellverwaltungModule', []);

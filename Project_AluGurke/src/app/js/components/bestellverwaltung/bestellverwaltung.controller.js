@@ -1,12 +1,12 @@
-/// <reference path="../../angular.d.ts" />
+/// <reference path="../../typeDefinitions/angular.d.ts" />
+/// <reference path="../../model/Teil.ts" />
 /**
  * Created by Max on 13.08.2015.
  */
 var BestellverwaltungController = (function () {
     function BestellverwaltungController() {
-        this.test = [1, 2, 3, 4];
         this.gesamtListe = new Array();
-        this.listeTeile = new Array();
+        this.teileListe = new Array();
         this.ergebnisListe = new Array();
         this.teileSetzen();
         this.teileberechnen(this.getTeil(1), 0, this.gesamtListe, 0);
@@ -29,7 +29,7 @@ var BestellverwaltungController = (function () {
     };
     //Baut die Strukturst�cklisten auf und speichert jedes Teil im Katalog, muss nur einmal initial gemacht werden
     BestellverwaltungController.prototype.teileSetzen = function () {
-        this.listeTeile = [
+        this.teileListe = [
             //Kaufteile
             new Teil("Kette", 21, 5, 1.8, 0.4, [], 300, 50, 450),
             new Teil("Kette", 22, 6.5, 1.7, 0.4, [], 300, 50, 200),
@@ -62,45 +62,45 @@ var BestellverwaltungController = (function () {
             new Teil("Schwei�draht", 59, 0.15, 0.7, 0.2, [], 1800, 50, 3300),
         ];
         //Nicht-Kaufteile P1
-        this.listeTeile.push(new Teil("e26", 26, 0, 0, 0, [this.getTeil(44, 2), this.getTeil(47), this.getTeil(48, 2)], 0, 0, 0));
-        this.listeTeile.push(new Teil("e16", 16, 0, 0, 0, [this.getTeil(24), this.getTeil(28), this.getTeil(40), this.getTeil(41), this.getTeil(42, 2)], 0, 0, 0));
-        this.listeTeile.push(new Teil("e17", 17, 0, 0, 0, [this.getTeil(43), this.getTeil(44), this.getTeil(45), this.getTeil(46)], 0, 0, 0));
-        this.listeTeile.push(new Teil("e4", 4, 0, 0, 0, [this.getTeil(35, 2), this.getTeil(36), this.getTeil(52), this.getTeil(53, 36)], 0, 0, 0));
-        this.listeTeile.push(new Teil("e10", 10, 0, 0, 0, [this.getTeil(32), this.getTeil(39)], 0, 0, 0));
-        this.listeTeile.push(new Teil("e7", 7, 0, 0, 0, [this.getTeil(35, 2), this.getTeil(37), this.getTeil(38), this.getTeil(52), this.getTeil(53, 36)], 0, 0, 0));
-        this.listeTeile.push(new Teil("e13", 13, 0, 0, 0, [this.getTeil(32), this.getTeil(39)], 0, 0, 0));
-        this.listeTeile.push(new Teil("e18", 18, 0, 0, 0, [this.getTeil(28, 3), this.getTeil(32), this.getTeil(59, 2)], 0, 0, 0));
-        this.listeTeile.push(new Teil("e49", 49, 0, 0, 0, [this.getTeil(24, 2), this.getTeil(25, 2), this.getTeil(7), this.getTeil(13), this.getTeil(18)], 0, 0, 0));
-        this.listeTeile.push(new Teil("e50", 50, 0, 0, 0, [this.getTeil(24, 2), this.getTeil(25, 2), this.getTeil(4), this.getTeil(10), this.getTeil(49)], 0, 0, 0));
-        this.listeTeile.push(new Teil("e51", 51, 0, 0, 0, [this.getTeil(24), this.getTeil(27), this.getTeil(16), this.getTeil(17), this.getTeil(50)], 0, 0, 0));
-        this.listeTeile.push(new Teil("p1", 1, 0, 0, 0, [this.getTeil(21), this.getTeil(24), this.getTeil(27), this.getTeil(26), this.getTeil(51)], 0, 0, 0));
+        this.teileListe.push(new Teil("e26", 26, 0, 0, 0, [this.getTeil(44, 2), this.getTeil(47), this.getTeil(48, 2)], 0, 0, 0));
+        this.teileListe.push(new Teil("e16", 16, 0, 0, 0, [this.getTeil(24), this.getTeil(28), this.getTeil(40), this.getTeil(41), this.getTeil(42, 2)], 0, 0, 0));
+        this.teileListe.push(new Teil("e17", 17, 0, 0, 0, [this.getTeil(43), this.getTeil(44), this.getTeil(45), this.getTeil(46)], 0, 0, 0));
+        this.teileListe.push(new Teil("e4", 4, 0, 0, 0, [this.getTeil(35, 2), this.getTeil(36), this.getTeil(52), this.getTeil(53, 36)], 0, 0, 0));
+        this.teileListe.push(new Teil("e10", 10, 0, 0, 0, [this.getTeil(32), this.getTeil(39)], 0, 0, 0));
+        this.teileListe.push(new Teil("e7", 7, 0, 0, 0, [this.getTeil(35, 2), this.getTeil(37), this.getTeil(38), this.getTeil(52), this.getTeil(53, 36)], 0, 0, 0));
+        this.teileListe.push(new Teil("e13", 13, 0, 0, 0, [this.getTeil(32), this.getTeil(39)], 0, 0, 0));
+        this.teileListe.push(new Teil("e18", 18, 0, 0, 0, [this.getTeil(28, 3), this.getTeil(32), this.getTeil(59, 2)], 0, 0, 0));
+        this.teileListe.push(new Teil("e49", 49, 0, 0, 0, [this.getTeil(24, 2), this.getTeil(25, 2), this.getTeil(7), this.getTeil(13), this.getTeil(18)], 0, 0, 0));
+        this.teileListe.push(new Teil("e50", 50, 0, 0, 0, [this.getTeil(24, 2), this.getTeil(25, 2), this.getTeil(4), this.getTeil(10), this.getTeil(49)], 0, 0, 0));
+        this.teileListe.push(new Teil("e51", 51, 0, 0, 0, [this.getTeil(24), this.getTeil(27), this.getTeil(16), this.getTeil(17), this.getTeil(50)], 0, 0, 0));
+        this.teileListe.push(new Teil("p1", 1, 0, 0, 0, [this.getTeil(21), this.getTeil(24), this.getTeil(27), this.getTeil(26), this.getTeil(51)], 0, 0, 0));
         //Nicht-Kaufteile P2
-        this.listeTeile.push(new Teil("e19", 19, 0, 0, 0, [this.getTeil(28, 4), this.getTeil(32), this.getTeil(59, 2)], 0, 0, 0));
-        this.listeTeile.push(new Teil("e14", 14, 0, 0, 0, [this.getTeil(32), this.getTeil(39)], 0, 0, 0));
-        this.listeTeile.push(new Teil("e8", 8, 0, 0, 0, [this.getTeil(35, 2), this.getTeil(37), this.getTeil(38), this.getTeil(57), this.getTeil(58, 36)], 0, 0, 0));
-        this.listeTeile.push(new Teil("e54", 54, 0, 0, 0, [this.getTeil(24, 2), this.getTeil(25, 2), this.getTeil(8), this.getTeil(14), this.getTeil(19)], 0, 0, 0));
-        this.listeTeile.push(new Teil("e11", 11, 0, 0, 0, [this.getTeil(32), this.getTeil(39)], 0, 0, 0));
-        this.listeTeile.push(new Teil("e5", 5, 0, 0, 0, [this.getTeil(35, 2), this.getTeil(36), this.getTeil(57), this.getTeil(58, 36)], 0, 0, 0));
-        this.listeTeile.push(new Teil("e55", 55, 0, 0, 0, [this.getTeil(24, 2), this.getTeil(25, 2), this.getTeil(5), this.getTeil(11), this.getTeil(54)], 0, 0, 0));
-        this.listeTeile.push(new Teil("e56", 56, 0, 0, 0, [this.getTeil(24), this.getTeil(27), this.getTeil(16), this.getTeil(17), this.getTeil(55)], 0, 0, 0));
-        this.listeTeile.push(new Teil("p2", 2, 0, 0, 0, [this.getTeil(22), this.getTeil(24), this.getTeil(27), this.getTeil(26), this.getTeil(56)], 0, 0, 0));
+        this.teileListe.push(new Teil("e19", 19, 0, 0, 0, [this.getTeil(28, 4), this.getTeil(32), this.getTeil(59, 2)], 0, 0, 0));
+        this.teileListe.push(new Teil("e14", 14, 0, 0, 0, [this.getTeil(32), this.getTeil(39)], 0, 0, 0));
+        this.teileListe.push(new Teil("e8", 8, 0, 0, 0, [this.getTeil(35, 2), this.getTeil(37), this.getTeil(38), this.getTeil(57), this.getTeil(58, 36)], 0, 0, 0));
+        this.teileListe.push(new Teil("e54", 54, 0, 0, 0, [this.getTeil(24, 2), this.getTeil(25, 2), this.getTeil(8), this.getTeil(14), this.getTeil(19)], 0, 0, 0));
+        this.teileListe.push(new Teil("e11", 11, 0, 0, 0, [this.getTeil(32), this.getTeil(39)], 0, 0, 0));
+        this.teileListe.push(new Teil("e5", 5, 0, 0, 0, [this.getTeil(35, 2), this.getTeil(36), this.getTeil(57), this.getTeil(58, 36)], 0, 0, 0));
+        this.teileListe.push(new Teil("e55", 55, 0, 0, 0, [this.getTeil(24, 2), this.getTeil(25, 2), this.getTeil(5), this.getTeil(11), this.getTeil(54)], 0, 0, 0));
+        this.teileListe.push(new Teil("e56", 56, 0, 0, 0, [this.getTeil(24), this.getTeil(27), this.getTeil(16), this.getTeil(17), this.getTeil(55)], 0, 0, 0));
+        this.teileListe.push(new Teil("p2", 2, 0, 0, 0, [this.getTeil(22), this.getTeil(24), this.getTeil(27), this.getTeil(26), this.getTeil(56)], 0, 0, 0));
         //Nicht-Kaufteile P3
-        this.listeTeile.push(new Teil("e20", 20, 0, 0, 0, [this.getTeil(28, 5), this.getTeil(32), this.getTeil(59, 2)], 0, 0, 0));
-        this.listeTeile.push(new Teil("e15", 15, 0, 0, 0, [this.getTeil(32), this.getTeil(39)], 0, 0, 0));
-        this.listeTeile.push(new Teil("e9", 9, 0, 0, 0, [this.getTeil(33), this.getTeil(34, 36), this.getTeil(35), this.getTeil(37), this.getTeil(38)], 0, 0, 0));
-        this.listeTeile.push(new Teil("e29", 29, 0, 0, 0, [this.getTeil(24, 2), this.getTeil(25, 2), this.getTeil(9), this.getTeil(15), this.getTeil(20)], 0, 0, 0));
-        this.listeTeile.push(new Teil("e12", 12, 0, 0, 0, [this.getTeil(32), this.getTeil(39)], 0, 0, 0));
-        this.listeTeile.push(new Teil("e6", 6, 0, 0, 0, [this.getTeil(33), this.getTeil(34, 36), this.getTeil(35), this.getTeil(36)], 0, 0, 0));
-        this.listeTeile.push(new Teil("e30", 30, 0, 0, 0, [this.getTeil(24, 2), this.getTeil(25, 2), this.getTeil(6), this.getTeil(12), this.getTeil(29)], 0, 0, 0));
-        this.listeTeile.push(new Teil("e31", 31, 0, 0, 0, [this.getTeil(24), this.getTeil(27), this.getTeil(16), this.getTeil(17), this.getTeil(30)], 0, 0, 0));
-        this.listeTeile.push(new Teil("p3", 3, 0, 0, 0, [this.getTeil(23), this.getTeil(24), this.getTeil(27), this.getTeil(26), this.getTeil(31)], 0, 0, 0));
+        this.teileListe.push(new Teil("e20", 20, 0, 0, 0, [this.getTeil(28, 5), this.getTeil(32), this.getTeil(59, 2)], 0, 0, 0));
+        this.teileListe.push(new Teil("e15", 15, 0, 0, 0, [this.getTeil(32), this.getTeil(39)], 0, 0, 0));
+        this.teileListe.push(new Teil("e9", 9, 0, 0, 0, [this.getTeil(33), this.getTeil(34, 36), this.getTeil(35), this.getTeil(37), this.getTeil(38)], 0, 0, 0));
+        this.teileListe.push(new Teil("e29", 29, 0, 0, 0, [this.getTeil(24, 2), this.getTeil(25, 2), this.getTeil(9), this.getTeil(15), this.getTeil(20)], 0, 0, 0));
+        this.teileListe.push(new Teil("e12", 12, 0, 0, 0, [this.getTeil(32), this.getTeil(39)], 0, 0, 0));
+        this.teileListe.push(new Teil("e6", 6, 0, 0, 0, [this.getTeil(33), this.getTeil(34, 36), this.getTeil(35), this.getTeil(36)], 0, 0, 0));
+        this.teileListe.push(new Teil("e30", 30, 0, 0, 0, [this.getTeil(24, 2), this.getTeil(25, 2), this.getTeil(6), this.getTeil(12), this.getTeil(29)], 0, 0, 0));
+        this.teileListe.push(new Teil("e31", 31, 0, 0, 0, [this.getTeil(24), this.getTeil(27), this.getTeil(16), this.getTeil(17), this.getTeil(30)], 0, 0, 0));
+        this.teileListe.push(new Teil("p3", 3, 0, 0, 0, [this.getTeil(23), this.getTeil(24), this.getTeil(27), this.getTeil(26), this.getTeil(31)], 0, 0, 0));
     };
     //liefert eine tiefe Kopie eines Bauteiles aus dem Katalog zur�ck und setzt optional dessen Anzahl
     BestellverwaltungController.prototype.getTeil = function (id, anzahl) {
         if (anzahl === void 0) { anzahl = 1; }
-        for (var i = 0; i < this.listeTeile.length; i++) {
-            if (this.listeTeile[i].id === id) {
-                return this.tiefeCopy(this.listeTeile[i], anzahl);
+        for (var i = 0; i < this.teileListe.length; i++) {
+            if (this.teileListe[i].id === id) {
+                return this.tiefeCopy(this.teileListe[i], anzahl);
             }
         }
         return null;
@@ -215,49 +215,5 @@ var BestellverwaltungController = (function () {
         }
     };
     return BestellverwaltungController;
-})();
-//beschreibt ein Bauteil
-var Teil = (function () {
-    function Teil(nname, nid, nwert, nlieferzeitNormal, nlieferAbweichung, nbauteile, nrabattmenge, nbestellkosten, nlagerstand, nanzahl) {
-        if (nanzahl === void 0) { nanzahl = 1; }
-        this.name = nname;
-        this.id = nid;
-        this.anzahl = nanzahl;
-        this.wert = nwert;
-        this.lieferzeitNormal = nlieferzeitNormal;
-        this.lieferzeitEil = 0;
-        this.lagerstand = nlagerstand;
-        this.inWarteschlange = 0;
-        this.rabattmenge = nrabattmenge;
-        this.bestellkosten = nbestellkosten;
-        this.lieferAbweichung = nlieferAbweichung;
-        this.bedarfPeriode = [0, 0, 0, 0];
-        this.reichweite = 4;
-        this.bestellmenge = 0;
-        if (nbauteile != null) {
-            this.bauteile = nbauteile;
-        }
-        else {
-            this.bauteile = [];
-        }
-    }
-    //erstellt eine tiefe Kopie eines Bauteils, einschlie�lich aller Unterbauteile
-    Teil.prototype.getCopy = function () {
-        if (this.bauteile.length === 0) {
-            var teil = new Teil(this.name, this.id, this.wert, this.lieferzeitNormal, this.lieferAbweichung, [], this.rabattmenge, this.bestellkosten, this.lagerstand, this.anzahl);
-            teil.bedarfPeriode = [this.bedarfPeriode[0], this.bedarfPeriode[1], this.bedarfPeriode[2], this.bedarfPeriode[3]];
-            return teil;
-        }
-        else {
-            var liste = new Array();
-            for (var i = 0; i < this.bauteile.length; i++) {
-                liste.push(this.bauteile[i]);
-            }
-            var teil = new Teil(this.name, this.id, this.wert, this.lieferzeitNormal, this.lieferAbweichung, liste, this.rabattmenge, this.bestellkosten, this.lagerstand, this.anzahl);
-            teil.bedarfPeriode = [this.bedarfPeriode[0], this.bedarfPeriode[1], this.bedarfPeriode[2], this.bedarfPeriode[3]];
-            return teil;
-        }
-    };
-    return Teil;
 })();
 angular.module("BestellverwaltungModule").controller("BestellverwaltungController", [BestellverwaltungController]);
