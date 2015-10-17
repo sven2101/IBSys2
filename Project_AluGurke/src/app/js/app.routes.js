@@ -12,5 +12,8 @@ angular.module('app')
         }).when('/bestellverwaltung', {
             templateUrl: '/components/bestellverwaltung/bestellverwaltung.html',
             controller: 'BestellverwaltungController as bvc'
+        }).when('/kapazitaetsplanung', {
+            templateUrl: '/components/kapazitaetsplanung/kapazitaetsplanung.html',
+            controller: 'KapazitaetsplanungController as kpc'
         });
     }]);

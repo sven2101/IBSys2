@@ -5,5 +5,6 @@ angular.module('app', [
 	'FileModule',
 	'BestellverwaltungModule',
 	'pascalprecht.translate',
-	'TranslationModule'
+	'TranslationModule',
+	'KapazitaetsplanungModule'
 ]);

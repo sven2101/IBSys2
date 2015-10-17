@@ -8,7 +8,6 @@ class Teil {
 	lieferzeitNormal: number;
 	lieferzeitEil: number;
 	lagerstand: number;
-	inWarteschlange: number;
 	rabattmenge: number;
 	bestellkosten: number;
 	lieferAbweichung: number;
@@ -22,9 +21,8 @@ class Teil {
 		this.anzahl = nanzahl;
 		this.wert = nwert;
 		this.lieferzeitNormal = nlieferzeitNormal;
-		this.lieferzeitEil = 0;
+		this.lieferzeitEil = nlieferzeitNormal/2;
 		this.lagerstand = nlagerstand;
-		this.inWarteschlange = 0;
 		this.rabattmenge = nrabattmenge;
 		this.bestellkosten = nbestellkosten;
 		this.lieferAbweichung = nlieferAbweichung;

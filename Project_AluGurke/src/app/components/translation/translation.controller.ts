@@ -1,5 +1,5 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
-/// <reference path="../../angular-translate.d.ts" />
+/// <reference path="../../typeDefinitions/angular-translate.d.ts" />
 
 angular.module('TranslationModule').controller('TranslationController', function ($scope, $translate) {
 

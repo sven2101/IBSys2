@@ -6,7 +6,7 @@
 // Definitions by: Michel Salib <https://github.com/michelsalib>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
 
-/// <reference path="typedefinitions/angular.d.ts" />
+/// <reference path="angular.d.ts" />
 
 declare module "angular-translate" {
     var _: string;

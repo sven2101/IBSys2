@@ -12,7 +12,10 @@ angular.module('app')
       templateUrl: '/components/file/file.html',
       controller: 'FileController as fc'
     }).when('/bestellverwaltung', {
-      templateUrl: '/components/bestellverwaltung/bestellverwaltung.html',
-      controller: 'BestellverwaltungController as bvc'
+          templateUrl: '/components/bestellverwaltung/bestellverwaltung.html',
+          controller: 'BestellverwaltungController as bvc'
+    }).when('/kapazitaetsplanung', {
+          templateUrl: '/components/kapazitaetsplanung/kapazitaetsplanung.html',
+          controller: 'KapazitaetsplanungController as kpc'
     })
   }]);

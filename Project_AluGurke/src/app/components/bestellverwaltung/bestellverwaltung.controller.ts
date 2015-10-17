@@ -7,23 +7,22 @@
 
 class BestellverwaltungController{
 
+	service:TeileService;
 	//Liste aller Bauteile
 	gesamtListe:Array<Teil>;
 	//Liste die im Template verwendet wird, enth�lt nur Kaufteile
 	ergebnisListe:Array<Teil>;
 	//Liste aller vorhandenen Teil, fungiert als Katalog aus dem tiefe Kopien entnommen werden
 	teileListe:Array<Teil>;
-
-	constructor(){
+	constructor(service){
 		this.gesamtListe=new Array<Teil>();
 		this.teileListe=new Array<Teil>();
 		this.ergebnisListe=new Array<Teil>();
-
+		this.service=service;
 		this.teileSetzen();
 		this.teileberechnen(this.getTeil(1),0,this.gesamtListe,0);
 		this.ergebnisListe=this.getKaufteile(this.gesamtListe);
 	}
-
 	//Berechent zu einem Bauteil alle dazugeh�rigen Bauteile mittels Strukturst�cklisten und speichert si in einer Liste
 	teileberechnen(teil:Teil,anzahl:number,liste:Array<Teil>,periode:number){
 		if(teil.bauteile.length===0) {
@@ -42,37 +41,36 @@ class BestellverwaltungController{
 	teileSetzen(){
 		this.teileListe=[
 			//Kaufteile
-			new Teil("Kette",21,5,1.8,0.4,[],300,50,450),
-			new Teil("Kette",22,6.5,1.7,0.4,[],300,50,200),
-			new Teil("Kette",23,6.5,1.2,0.2,[],300,50,200),
-			new Teil("Mutter 3/8�",24,0.06,3.2,0.3,[],6100,100,3650),
-			new Teil("Scheibe 3/8�",25,0.06,0.9,0.2,[],3600,50,2200),
-			new Teil("Schraube 3/8�",27,0.1,0.9,0.2,[],1800,75,1100),
-			new Teil("Rohr 3/4�",28,1.2,1.7,0.4,[],4500,50,2800),
-			new Teil("Farbe",32,0.75,2.1,0.5,[],2700,50,1850),
+			new Teil("Kette",21,5,1.8,0.4,[],300,50,300),
+			new Teil("Kette",22,6.5,1.7,0.4,[],300,50,175),
+			new Teil("Kette",23,6.5,1.2,0.2,[],300,50,230),
+			new Teil("Mutter 3/8�",24,0.06,3.2,0.3,[],6100,100,7880),
+			new Teil("Scheibe 3/8�",25,0.06,0.9,0.2,[],3600,50,8350),
+			new Teil("Schraube 3/8�",27,0.1,0.9,0.2,[],1800,75,4105),
+			new Teil("Rohr 3/4�",28,1.2,1.7,0.4,[],4500,50,1625),
+			new Teil("Farbe",32,0.75,2.1,0.5,[],2700,50,1165),
 			new Teil("Felge cpl.",33,22,1.9,0.5,[],900,75,700),
 			new Teil("Speiche",34,0.1,1.6,0.3,[],22000,50,14800),
-			new Teil("Konus",35,1,2.2,0.4,[],3600,75,2280),
-			new Teil("Freilauf",36,8,1.2,0.1,[],900,100,550),
-			new Teil("Gabel",37,1.5,1.5,0.3,[],900,50,590),
-			new Teil("Freilauf",38,1.5,1.7,0.4,[],300,50,890),
-			new Teil("Blech",39,1.5,1.5,0.3,[],1800,75,2000),
-			new Teil("Lenker",40,2.5,1.7,0.2,[],900,50,550),
-			new Teil("Mutter 3/4�",41,0.06,0.9,0.2,[],900,50,550),
-			new Teil("Griff",42,0.1,1.2,0.3,[],1800,50,1100),
-			new Teil("Sattel",43,5,2.0,0.5,[],2700,75,1550),
-			new Teil("Stange 1/2�",44,0.5,1.0,0.2,[],900,50,4610),
-			new Teil("Mutter 1/4�",45,0.06,1.7,0.3,[],900,50,550),
-			new Teil("Schraube 1/4�",46,0.1,0.9,0.3,[],900,50,550),
-			new Teil("Zahnkranz",47,3.5,1.41,0.1,[],900,50,710),
-			new Teil("Pedal",48,1.5,1.0,0.2,[],1800,75,1360),
-			new Teil("Felge cpl.",52,22.0,1.6,0.4,[],600,50,300),
-			new Teil("Speiche",53,0.1,1.6,0.2,[],22000,50,11200),
-			new Teil("Felge cpl.",57,22.0,1.7,0.3,[],600,50,400),
-			new Teil("Speiche",58,0.1,1.6,0.5,[],22000,50,14800),
-			new Teil("Schwei�draht",59,0.15,0.7,0.2,[],1800,50,3300),
+			new Teil("Konus",35,1,2.2,0.4,[],3600,75,1050),
+			new Teil("Freilauf",36,8,1.2,0.1,[],900,100,1150),
+			new Teil("Gabel",37,1.5,1.5,0.3,[],900,50,275),
+			new Teil("Freilauf",38,1.5,1.7,0.4,[],300,50,575),
+			new Teil("Blech",39,1.5,1.5,0.3,[],1800,75,1425),
+			new Teil("Lenker",40,2.5,1.7,0.2,[],900,50,1225),
+			new Teil("Mutter 3/4�",41,0.06,0.9,0.2,[],900,50,1225),
+			new Teil("Griff",42,0.1,1.2,0.3,[],1800,50,650),
+			new Teil("Sattel",43,5,2.0,0.5,[],2700,75,1325),
+			new Teil("Stange 1/2�",44,0.5,1.0,0.2,[],900,50,4085),
+			new Teil("Mutter 1/4�",45,0.06,1.7,0.3,[],900,50,1225),
+			new Teil("Schraube 1/4�",46,0.1,0.9,0.3,[],900,50,2125),
+			new Teil("Zahnkranz",47,3.5,1.41,0.1,[],900,50,1440),
+			new Teil("Pedal",48,1.5,1.0,0.2,[],1800,75,2860),
+			new Teil("Felge cpl.",52,22.0,1.6,0.4,[],600,50,0),
+			new Teil("Speiche",53,0.1,1.6,0.2,[],22000,50,27400),
+			new Teil("Felge cpl.",57,22.0,1.7,0.3,[],600,50,725),
+			new Teil("Speiche",58,0.1,1.6,0.5,[],22000,50,26900),
+			new Teil("Schwei�draht",59,0.15,0.7,0.2,[],1800,50,2450),
 		];
-
 		//Nicht-Kaufteile P1
 		this.teileListe.push(new Teil("e26",26,0,0,0,[this.getTeil(44,2),this.getTeil(47),this.getTeil(48,2)],0,0,0));
 		this.teileListe.push(new Teil("e16",16,0,0,0,[this.getTeil(24),this.getTeil(28),this.getTeil(40),this.getTeil(41),this.getTeil(42,2)],0,0,0));
@@ -106,7 +104,6 @@ class BestellverwaltungController{
 		this.teileListe.push(new Teil("e30",30,0,0,0,[this.getTeil(24,2),this.getTeil(25,2),this.getTeil(6),this.getTeil(12),this.getTeil(29)],0,0,0));
 		this.teileListe.push(new Teil("e31",31,0,0,0,[this.getTeil(24),this.getTeil(27),this.getTeil(16),this.getTeil(17),this.getTeil(30)],0,0,0));
 		this.teileListe.push(new Teil("p3",3,0,0,0,[this.getTeil(23),this.getTeil(24),this.getTeil(27),this.getTeil(26),this.getTeil(31)],0,0,0));
-
 	}
 	//liefert eine tiefe Kopie eines Bauteiles aus dem Katalog zur�ck und setzt optional dessen Anzahl
 	getTeil(id:number,anzahl:number=1):Teil{
@@ -170,6 +167,7 @@ class BestellverwaltungController{
 		this.bestellmengeBerechnen(this.gesamtListe);
 		this.ergebnisListe=this.getKaufteile(this.gesamtListe);
 		this.ergebnisListe.sort((a,b)=>{return a.id-b.id});
+		this.service.setListe(this.ergebnisListe);
 	}
 	//berechnet die Reichweite des jeweiligen Bauteiles
 	reichweiteBerechnen(liste:Array<Teil>){
@@ -230,4 +228,4 @@ class BestellverwaltungController{
 	}
 }
 
-angular.module("BestellverwaltungModule").controller("BestellverwaltungController",[BestellverwaltungController]);
+angular.module("BestellverwaltungModule").controller("BestellverwaltungController",['TeileService',BestellverwaltungController]);
