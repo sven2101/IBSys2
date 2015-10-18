@@ -84,29 +84,26 @@ class ArbeitsplatzService {
         this.map[31]=this.getAP(3,31);
         this.map[3]=this.getAP(4,3);
     }
-
     getAP(id:number,eTeil:number,nachfolger:ArbeitsplatzKnoten=null){
         for(let i:number=0;i<this.arbeitsplaetze.length;i++){
-            if(this.arbeitsplaetze[i].id==id&&this.arbeitsplaetze[i].eTeil==eTeil){
+            if(this.arbeitsplaetze[i].id==id&&this.arbeitsplaetze[i].erzeugnis_id==eTeil){
                 return new ArbeitsplatzKnoten(this.arbeitsplaetze[i].tiefeKopie(),nachfolger);
             }
         }
     }
-    auftragSetzten(auftrag:Auftrag){
-        let arbeitsplatzKnoten:ArbeitsplatzKnoten=this.map[auftrag.eTeil.id];
-        if(auftrag.arbeitsplatz==null){
+    auftragSetzen(auftrag:Auftrag){
+        let arbeitsplatzKnoten:ArbeitsplatzKnoten=this.map[auftrag.erzeugnis_id];
+        if(auftrag.arbeitsplatz_id==0){
             arbeitsplatzKnoten.arbeitsplatz.auftraege.push(auftrag);
         }
         else{
             let temp:ArbeitsplatzKnoten=arbeitsplatzKnoten;
-            while(temp.arbeitsplatz.id!==auftrag.arbeitsplatz.id){
+            while(temp.arbeitsplatz.id!==auftrag.arbeitsplatz_id){
                 temp=temp.nachfolger;
             }
             temp.arbeitsplatz.auftraege.push(auftrag);
         }
     }
-
-
 }
 
 angular.module('app').factory('ArbeitsplatzService', [() => new ArbeitsplatzService()]);

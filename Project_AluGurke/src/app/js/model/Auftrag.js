@@ -1,12 +1,12 @@
 /// <reference path="NewErzeugnis.ts" />
 /// <reference path="Arbeitsplatz.ts" />
 var Auftrag = (function () {
-    function Auftrag(eTeil, anzahl, periode, arbeitsplatz) {
-        if (arbeitsplatz === void 0) { arbeitsplatz = null; }
-        this.eTeil = eTeil;
+    function Auftrag(erzeugnis_id, anzahl, periode, arbeitsplatz_id) {
+        if (arbeitsplatz_id === void 0) { arbeitsplatz_id = 0; }
+        this.erzeugnis_id = erzeugnis_id;
         this.anzahl = anzahl;
         this.periode = periode;
-        this.arbeitsplatz = arbeitsplatz;
+        this.arbeitsplatz_id = arbeitsplatz_id;
     }
     return Auftrag;
 })();

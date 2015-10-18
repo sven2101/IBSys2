@@ -1,18 +1,25 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
 
 class KapazitaetsplanungController{
-    service:ArbeitsplatzService;
-    liste:Array<Teil>;
+    arbeitsplatzService:ArbeitsplatzService;
+    auftragsService:AuftragService;
     test:ArbeitsplatzKnoten;
 
     constructor(){
-        this.service=new ArbeitsplatzService();
-        this.test=this.service.map[1];
-        this.service.arbeitsplaetzeSetzen();
+        this.arbeitsplatzService=new ArbeitsplatzService();
+        this.auftragsService=new AuftragService();
+        for(let i:number;i<this.auftragsService.auftraege.length;i++){
+            this.arbeitsplatzService.auftragSetzen(this.auftragsService.auftraege[i]);
+        }
+
+
     }
+
+
     aendern(){
-        this.test=this.service.map[1];
-        //this.test=this.service.map[(<HTMLInputElement>document.getElementById("input1")).value];
+        this.test=this.arbeitsplatzService.map[(<HTMLInputElement>document.getElementById("input1")).value];
+
+
     }
 
 

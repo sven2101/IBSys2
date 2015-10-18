@@ -82,19 +82,19 @@ var ArbeitsplatzService = (function () {
     ArbeitsplatzService.prototype.getAP = function (id, eTeil, nachfolger) {
         if (nachfolger === void 0) { nachfolger = null; }
         for (var i = 0; i < this.arbeitsplaetze.length; i++) {
-            if (this.arbeitsplaetze[i].id == id && this.arbeitsplaetze[i].eTeil == eTeil) {
+            if (this.arbeitsplaetze[i].id == id && this.arbeitsplaetze[i].erzeugnis_id == eTeil) {
                 return new ArbeitsplatzKnoten(this.arbeitsplaetze[i].tiefeKopie(), nachfolger);
             }
         }
     };
-    ArbeitsplatzService.prototype.auftragSetzten = function (auftrag) {
-        var arbeitsplatzKnoten = this.map[auftrag.eTeil.id];
-        if (auftrag.arbeitsplatz == null) {
+    ArbeitsplatzService.prototype.auftragSetzen = function (auftrag) {
+        var arbeitsplatzKnoten = this.map[auftrag.erzeugnis_id];
+        if (auftrag.arbeitsplatz_id == 0) {
             arbeitsplatzKnoten.arbeitsplatz.auftraege.push(auftrag);
         }
         else {
             var temp = arbeitsplatzKnoten;
-            while (temp.arbeitsplatz.id !== auftrag.arbeitsplatz.id) {
+            while (temp.arbeitsplatz.id !== auftrag.arbeitsplatz_id) {
                 temp = temp.nachfolger;
             }
             temp.arbeitsplatz.auftraege.push(auftrag);

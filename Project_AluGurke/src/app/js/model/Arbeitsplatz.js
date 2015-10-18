@@ -7,11 +7,13 @@ var Arbeitsplatz = (function () {
         this.id = id;
         this.ruestzeit = ruestzeit;
         this.fertigungszeit = fertigungszeit;
-        this.eTeil = eTeil;
+        this.erzeugnis_id = eTeil;
         this.name = id + '_' + eTeil;
+        this.arbeitszeit = 0;
+        this.auftraege = new Array();
     }
     Arbeitsplatz.prototype.tiefeKopie = function () {
-        return new Arbeitsplatz(this.id, this.eTeil, this.fertigungszeit, this.ruestzeit);
+        return new Arbeitsplatz(this.id, this.erzeugnis_id, this.fertigungszeit, this.ruestzeit);
     };
     return Arbeitsplatz;
 })();
