@@ -6,9 +6,7 @@ class KapazitaetsplanungController{
     constructor(service){
         this.service=service;
     }
-    arbeitsplaetzeSetzten(){
-        this.liste=this.service.getListe();
-    }
+
 
 
 }
