@@ -1,13 +1,7 @@
-/**
- * Created by Max on 13.08.2015.
- */
+/// <reference path="../../typeDefinitions/angular.d.ts" />
 var KapazitaetsplanungController = (function () {
-    function KapazitaetsplanungController(service) {
-        this.service = service;
+    function KapazitaetsplanungController() {
     }
-    KapazitaetsplanungController.prototype.arbeitsplaetzeSetzten = function () {
-        this.liste = this.service.getListe();
-    };
     return KapazitaetsplanungController;
 })();
-angular.module("KapazitaetsplanungModule").controller("KapazitaetsplanungController", ['TeileService', KapazitaetsplanungController]);
+angular.module("KapazitaetsplanungModule").controller("KapazitaetsplanungController", [KapazitaetsplanungController]);

@@ -1,20 +1,11 @@
-/**
- * Created by Max on 13.08.2015.
- */
+/// <reference path="../../typeDefinitions/angular.d.ts" />
 
 class KapazitaetsplanungController{
 
-    service:TeileService;
-    liste:Array<Teil>;
-    constructor(service){
-        this.service=service;
+    constructor(){
 
-    }
-
-    arbeitsplaetzeSetzten(){
-        this.liste=this.service.getListe();
     }
 
 }
 
-angular.module("KapazitaetsplanungModule").controller("KapazitaetsplanungController",['TeileService',KapazitaetsplanungController]);
+angular.module("KapazitaetsplanungModule").controller("KapazitaetsplanungController",[KapazitaetsplanungController]);

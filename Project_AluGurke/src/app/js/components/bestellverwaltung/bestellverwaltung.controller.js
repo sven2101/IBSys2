@@ -4,11 +4,10 @@
  * Created by Max on 13.08.2015.
  */
 var BestellverwaltungController = (function () {
-    function BestellverwaltungController(service) {
+    function BestellverwaltungController() {
         this.gesamtListe = new Array();
         this.teileListe = new Array();
         this.ergebnisListe = new Array();
-        this.service = service;
         this.teileSetzen();
         this.teileberechnen(this.getTeil(1), 0, this.gesamtListe, 0);
         this.ergebnisListe = this.getKaufteile(this.gesamtListe);
@@ -159,7 +158,6 @@ var BestellverwaltungController = (function () {
         this.bestellmengeBerechnen(this.gesamtListe);
         this.ergebnisListe = this.getKaufteile(this.gesamtListe);
         this.ergebnisListe.sort(function (a, b) { return a.id - b.id; });
-        this.service.setListe(this.ergebnisListe);
     };
     //berechnet die Reichweite des jeweiligen Bauteiles
     BestellverwaltungController.prototype.reichweiteBerechnen = function (liste) {
@@ -218,4 +216,4 @@ var BestellverwaltungController = (function () {
     };
     return BestellverwaltungController;
 })();
-angular.module("BestellverwaltungModule").controller("BestellverwaltungController", ['TeileService', BestellverwaltungController]);
+angular.module("BestellverwaltungModule").controller("BestellverwaltungController", [BestellverwaltungController]);

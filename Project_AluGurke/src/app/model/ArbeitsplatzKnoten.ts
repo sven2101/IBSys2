@@ -1,6 +1,4 @@
-/**
- * Created by Max on 13.10.2015.
- */
+/// <reference path="Arbeitsplatz.ts" />
 class ArbeitsplatzKnoten{
 
     nachfolger:ArbeitsplatzKnoten;
