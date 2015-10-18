@@ -1,4 +1,5 @@
-/// <reference path="Teil.ts" />
+/// <reference path="NewErzeugnis.ts" />
+/// <reference path="Arbeitsplatz.ts" />
 var Auftrag = (function () {
     function Auftrag(eTeil, anzahl, periode, arbeitsplatz) {
         if (arbeitsplatz === void 0) { arbeitsplatz = null; }

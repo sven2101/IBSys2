@@ -3,12 +3,18 @@
 /// <reference path="../../typeDefinitions/xml2json.d.ts" />
 var FileController = (function () {
     function FileController($scope, service, NewTeileService) {
+        var _this = this;
         this.anzahl = 0;
         this.id = 24;
+        this.teileService = NewTeileService;
         this.$scope = $scope;
         this.baum = service.herrenBaum;
         this.kaufteile = NewTeileService.alleKaufteile;
+        this.$scope.$on('teileService.kaufTeile.updated', function (event) { return _this.setTeileArray(); });
     }
+    FileController.prototype.setTeileArray = function () {
+        this.$scope.$apply();
+    };
     FileController.prototype.startTest = function () {
         this.anzahl = 0;
         this.testBaum(this.baum, this.id);
@@ -28,7 +34,7 @@ var FileController = (function () {
         this.$scope.$apply(function () {
             vm.dateiInhalt = json;
         });
-        this.$scope.$emit('neueDatei', this.dateiInhalt);
+        this.$scope.$emit('fileController.neueDatei', this.dateiInhalt);
     };
     return FileController;
 })();
