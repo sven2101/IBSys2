@@ -2,35 +2,41 @@
 
 <input type="number" ng-model="fc.id">
 <button ng-click="fc.startTest()">Berechne</button>
+<button ng-click="fc.change()">dsfsdfds</button>
 {{fc.anzahl}}
-<hr>
-<section>
-		<a href="download">Click here to download gulpfile.js</a>
-		<input id="input" type='file' onchange='handleFile(this.files)'><br>
-		<div id="output">
-		</div>
-		<div id="output2"></div>
-</section>
+{{fc.kaufteile}}
+
+<br>
+
+<a href="download">Click here to download gulpfile.js</a><br>
+<input id="dateiInput" type='file' onchange="verarbeiteDatei(this.files)">
+
 <script>
-		var handleFile = function(files) {
-    
-			var selectedFile = files[0];
-			var size = selectedFile.size;
-			var type = selectedFile.type;
+		var verarbeiteDatei= function(dateien) {
+    		
+			var datei = dateien[0];
+			var size = datei.size;
+			var type = datei.type;
+			if (type !== 'text/plain') {
+				alert('Ungültiges Dateiformat.');
+				return;
+			}
 			var x2js = new X2JS();
 			var result;	
 			
 			var reader = new FileReader();
 			
 			reader.onload = function(e) {
-			result = reader.result;
+				result = reader.result;
 			
-			var json = x2js.xml_str2json(result);
+				var json = x2js.xml_str2json(result);
 			
-			document.getElementById('output').innerHTML='Groesse: '+size+' Type: '+type+' Inhalt: '+JSON.stringify(json);
-			document.getElementById('output2').innerHTML='';
+				var text = JSON.stringify(json);
+				var obj = JSON.parse(text);
+			
+				var dateiInput = document.getElementById('dateiInput');
+				angular.element(dateiInput).controller().change(obj);
 			}
-			
-			reader.readAsText(selectedFile);
+			reader.readAsText(datei);
 		}		
-	</script>
+</script>

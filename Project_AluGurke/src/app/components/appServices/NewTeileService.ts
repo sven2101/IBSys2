@@ -6,12 +6,42 @@ class NewTeileService {
 	alleKaufteile: Array<NewKaufTeil>;
 	alleErzeugnisse: Array<NewErzeugnis>;
 
-	constructor() {
-		this.erzeugeKaufteile();
+	constructor($rootScope) {
+		this.erzeugeKaufTeile();
 		this.erzeugeErzeignisse();
+		
+		$rootScope.$on('neueDatei',(event,dateiInhalt) =>{
+			this.onNeueDatei(dateiInhalt);
+		});
 	}
-
-	erzeugeKaufteile() {
+	
+	onNeueDatei(dateiInhalt){
+		this.updateLagerMengeKaufTeile(dateiInhalt.results.warehousestock.article);
+		this.updateLagerMengeErzeugnisse(dateiInhalt.results.warehousestock.article);
+		alert(this.alleErzeugnisse[0].lagerMenge);
+	}
+	
+	updateLagerMengeKaufTeile(artikel) {
+		for (var i = 0; i < this.alleKaufteile.length; i++) {	
+			for (var j = this.alleKaufteile[0].id; j < artikel.length; j++) {
+				if (this.alleKaufteile[i].id == artikel[j]._id) {
+					this.alleKaufteile[i].lagerMenge = artikel[j]._amount;
+				}
+			}
+		}
+	}
+	
+	updateLagerMengeErzeugnisse(artikel) {
+		for (var i = 0; i < this.alleErzeugnisse.length; i++) {	
+			for (var j = 0; j < artikel.length; j++) {
+				if (this.alleErzeugnisse[i].id == artikel[j]._id) {
+					this.alleErzeugnisse[i].lagerMenge = artikel[j]._amount;
+				}
+			}
+		}
+	}
+	
+	erzeugeKaufTeile() {
 		this.alleKaufteile = [new NewKaufTeil(21, 'Kette(K)', 5.00, 0, false, 300, 50, 1.8, 0.4),
 			new NewKaufTeil(22, 'Kette(D)', 6.50, 0, false, 300, 50, 1.7, 0.4),
 			new NewKaufTeil(23, 'Kette(H)', 6.50, 0, false, 300, 50, 1.2, 0.2),
@@ -79,4 +109,4 @@ class NewTeileService {
 	}
 }
 
-angular.module('app').factory('NewTeileService', [() => new NewTeileService()]);
+angular.module('app').factory('NewTeileService', ['$rootScope',($rootScope) => new NewTeileService($rootScope)]);

@@ -2,11 +2,38 @@
 /// <reference path="../../model/NewKaufTeil.ts" />
 /// <reference path="../../model/NewErzeugnis.ts" />
 var NewTeileService = (function () {
-    function NewTeileService() {
-        this.erzeugeKaufteile();
+    function NewTeileService($rootScope) {
+        var _this = this;
+        this.erzeugeKaufTeile();
         this.erzeugeErzeignisse();
+        $rootScope.$on('neueDatei', function (event, dateiInhalt) {
+            _this.onNeueDatei(dateiInhalt);
+        });
     }
-    NewTeileService.prototype.erzeugeKaufteile = function () {
+    NewTeileService.prototype.onNeueDatei = function (dateiInhalt) {
+        this.updateLagerMengeKaufTeile(dateiInhalt.results.warehousestock.article);
+        this.updateLagerMengeErzeugnisse(dateiInhalt.results.warehousestock.article);
+        alert(this.alleErzeugnisse[0].lagerMenge);
+    };
+    NewTeileService.prototype.updateLagerMengeKaufTeile = function (artikel) {
+        for (var i = 0; i < this.alleKaufteile.length; i++) {
+            for (var j = this.alleKaufteile[0].id; j < artikel.length; j++) {
+                if (this.alleKaufteile[i].id == artikel[j]._id) {
+                    this.alleKaufteile[i].lagerMenge = artikel[j]._amount;
+                }
+            }
+        }
+    };
+    NewTeileService.prototype.updateLagerMengeErzeugnisse = function (artikel) {
+        for (var i = 0; i < this.alleErzeugnisse.length; i++) {
+            for (var j = 0; j < artikel.length; j++) {
+                if (this.alleErzeugnisse[i].id == artikel[j]._id) {
+                    this.alleErzeugnisse[i].lagerMenge = artikel[j]._amount;
+                }
+            }
+        }
+    };
+    NewTeileService.prototype.erzeugeKaufTeile = function () {
         this.alleKaufteile = [new NewKaufTeil(21, 'Kette(K)', 5.00, 0, false, 300, 50, 1.8, 0.4),
             new NewKaufTeil(22, 'Kette(D)', 6.50, 0, false, 300, 50, 1.7, 0.4),
             new NewKaufTeil(23, 'Kette(H)', 6.50, 0, false, 300, 50, 1.2, 0.2),
@@ -71,4 +98,4 @@ var NewTeileService = (function () {
     };
     return NewTeileService;
 })();
-angular.module('app').factory('NewTeileService', [function () { return new NewTeileService(); }]);
+angular.module('app').factory('NewTeileService', ['$rootScope', function ($rootScope) { return new NewTeileService($rootScope); }]);
