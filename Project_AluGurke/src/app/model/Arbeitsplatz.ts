@@ -6,17 +6,16 @@ class Arbeitsplatz{
     id:number;
     ruestzeit:number;
     fertigungszeit:number;
-    nachfolger:Arbeitsplatz;
     auftraege:Array<Auftrag>;
     eTeil:number;
 
-    constructor(id:number,eTeil:number,fertigungszeit:number,ruestzeit:number,nachfolger:Arbeitsplatz=null) {
+    constructor(id:number,eTeil:number,fertigungszeit:number,ruestzeit:number) {
         this.name = name;
         this.id = id;
         this.ruestzeit = ruestzeit;
         this.fertigungszeit = fertigungszeit;
-        this.nachfolger=nachfolger;
         this.eTeil=eTeil;
+        this.name=id+'_'+eTeil;
     }
     tiefeKopie(){
         return new Arbeitsplatz(this.id,this.eTeil,this.fertigungszeit,this.ruestzeit);

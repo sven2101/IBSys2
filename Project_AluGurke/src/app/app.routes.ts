@@ -19,3 +19,4 @@ angular.module('app')
           controller: 'KapazitaetsplanungController as kpc'
     })
   }]);
+

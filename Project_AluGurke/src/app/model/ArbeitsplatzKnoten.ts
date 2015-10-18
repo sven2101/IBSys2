@@ -4,8 +4,9 @@ class ArbeitsplatzKnoten{
     nachfolger:ArbeitsplatzKnoten;
     arbeitsplatz:Arbeitsplatz;
 
-    constructor(nachfolger:ArbeitsplatzKnoten, arbeitsplatz:Arbeitsplatz) {
-        this.nachfolger = nachfolger;
+    constructor(arbeitsplatz:Arbeitsplatz,nachfolger:ArbeitsplatzKnoten=null) {
         this.arbeitsplatz = arbeitsplatz;
+        this.nachfolger = nachfolger;
+
     }
 }
