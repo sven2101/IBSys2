@@ -6,7 +6,8 @@
 
 class ArbeitsplatzService {
 
-    map:{[eTeil:number]:nArbeitsplatz;};
+    map:{[eTeil:number]:nArbeitsplatz;}={};
+
     arbeitsplaetze:Array<nArbeitsplatz>;
     constructor(){
         this.arbeitsplaetze=new  Array<nArbeitsplatz>();
@@ -25,11 +26,11 @@ class ArbeitsplatzService {
 
 
 
-        nArbeitsplatz[13]=this.getAP(13,13,this.getAP(12,13,this.getAP(8,13,this.getAP(7,13,this.getAP(9,13)))));
-        nArbeitsplatz[14]=this.getAP(13,14,this.getAP(12,14,this.getAP(8,14,this.getAP(7,14,this.getAP(9,14)))));
+        this.map[13]=this.getAP(13,13,this.getAP(12,13,this.getAP(8,13,this.getAP(7,13,this.getAP(9,13)))));
+        this.map[14]=this.getAP(13,14,this.getAP(12,14,this.getAP(8,14,this.getAP(7,14,this.getAP(9,14)))));
     }
     getAP(id:number,eTeil:number,nachfolger:nArbeitsplatz=null){
-        for(x in this.arbeitsplaetze){
+        for(let x in this.arbeitsplaetze){
             if(x=>x.id===id&&x.eTeil===eTeil){
                 let temp= x.tiefeKopie();
                 temp.nachfolger=nachfolger;
@@ -39,7 +40,7 @@ class ArbeitsplatzService {
 
     }
     auftragSetzten(auftrag:Auftrag){
-        let arbeitsplatz:nArbeitsplatz=this.map[auftrag.eTeil];
+        let arbeitsplatz:nArbeitsplatz=this.map[auftrag.eTeil.id];
         if(auftrag.arbeitsplatz==null){
             arbeitsplatz.auftraege.push(auftrag);
         }
