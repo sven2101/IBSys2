@@ -10,11 +10,18 @@ class FileController {
 	dateiInhalt: any;
 	$scope;
 	kaufteile;
+	teileService;
 
 	constructor($scope,service,NewTeileService) {
+		this.teileService=NewTeileService;
 		this.$scope = $scope;
 		this.baum = service.herrenBaum;
 		this.kaufteile = NewTeileService.alleKaufteile;
+		this.$scope.$on('teileService.kaufTeile.updated',(event) => this.setTeileArray());
+	}
+
+	setTeileArray() {
+		this.$scope.$apply();
 	}
 
 	startTest() {
@@ -38,7 +45,7 @@ class FileController {
 		this.$scope.$apply(function() {
 			vm.dateiInhalt = json;
 		});
-		this.$scope.$emit('neueDatei',this.dateiInhalt);
+		this.$scope.$emit('fileController.neueDatei',this.dateiInhalt);
 	}
 }
 

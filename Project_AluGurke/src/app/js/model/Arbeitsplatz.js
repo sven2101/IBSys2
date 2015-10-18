@@ -1,5 +1,6 @@
 /// <reference path="Teil.ts" />
 /// <reference path="WarteListe.ts" />
+/// <reference path="Auftrag.ts" />
 var Arbeitsplatz = (function () {
     function Arbeitsplatz(id, eTeil, fertigungszeit, ruestzeit, nachfolger) {
         if (nachfolger === void 0) { nachfolger = null; }

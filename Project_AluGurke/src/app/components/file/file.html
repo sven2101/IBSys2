@@ -4,7 +4,9 @@
 <button ng-click="fc.startTest()">Berechne</button>
 <button ng-click="fc.change()">dsfsdfds</button>
 {{fc.anzahl}}
-{{fc.kaufteile}}
+<div ng-repeat="teil in fc.kaufteile">
+<p>{{teil.id}} {{teil.lagerMenge}}</p>
+</div>
 
 <br>
 

@@ -5,25 +5,27 @@
 class NewTeileService {
 	alleKaufteile: Array<NewKaufTeil>;
 	alleErzeugnisse: Array<NewErzeugnis>;
+	$rootScope;
 
 	constructor($rootScope) {
 		this.erzeugeKaufTeile();
 		this.erzeugeErzeignisse();
-		
-		$rootScope.$on('neueDatei',(event,dateiInhalt) =>{
+		this.$rootScope = $rootScope;
+		this.$rootScope.$on('fileController.neueDatei',(event,dateiInhalt) =>{
 			this.onNeueDatei(dateiInhalt);
 		});
 	}
 	
 	onNeueDatei(dateiInhalt){
 		this.updateLagerMengeKaufTeile(dateiInhalt.results.warehousestock.article);
+		this.$rootScope.$broadcast('teileService.kaufTeile.updated');
 		this.updateLagerMengeErzeugnisse(dateiInhalt.results.warehousestock.article);
-		alert(this.alleErzeugnisse[0].lagerMenge);
+		this.$rootScope.$broadcast('teileService.erzeugnisse.updated');
 	}
 	
 	updateLagerMengeKaufTeile(artikel) {
 		for (var i = 0; i < this.alleKaufteile.length; i++) {	
-			for (var j = this.alleKaufteile[0].id; j < artikel.length; j++) {
+			for (var j = 0; j < artikel.length; j++) {
 				if (this.alleKaufteile[i].id == artikel[j]._id) {
 					this.alleKaufteile[i].lagerMenge = artikel[j]._amount;
 				}
@@ -37,6 +39,22 @@ class NewTeileService {
 				if (this.alleErzeugnisse[i].id == artikel[j]._id) {
 					this.alleErzeugnisse[i].lagerMenge = artikel[j]._amount;
 				}
+			}
+		}
+	}
+	
+	getErzeugnis (id: number) {
+		for (var i = 0; i < this.alleErzeugnisse.length; i++) {
+			if (this.alleErzeugnisse[i].id = id) {
+				return this.alleErzeugnisse[i]
+			}
+		}
+	}
+	
+	getKaufTeil(id:number) {
+		for (var i = 0; i < this.alleKaufteile.length; i++) {
+			if (this.alleKaufteile[i].id = id) {
+				return this.alleKaufteile[i];
 			}
 		}
 	}

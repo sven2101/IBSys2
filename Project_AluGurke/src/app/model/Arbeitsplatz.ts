@@ -1,5 +1,6 @@
 /// <reference path="Teil.ts" />
 /// <reference path="WarteListe.ts" />
+/// <reference path="Auftrag.ts" />
 class Arbeitsplatz{
 
     name:string;
