@@ -1,6 +1,4 @@
-/**
- * Created by Max on 17.10.2015.
- */
+/// <reference path="Teil.ts" />
 class Auftrag{
     eTeil:Teil;
     anzahl:number;

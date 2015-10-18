@@ -1,6 +1,5 @@
-/**
- * Created by Max on 18.10.2015.
- */
+/// <reference path="Teil.ts" />
+/// <reference path="WarteListe.ts" />
 class Arbeitsplatz{
 
     name:string;

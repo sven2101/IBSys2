@@ -7,18 +7,16 @@
 
 class BestellverwaltungController{
 
-	service:TeileService;
 	//Liste aller Bauteile
 	gesamtListe:Array<Teil>;
 	//Liste die im Template verwendet wird, enth�lt nur Kaufteile
 	ergebnisListe:Array<Teil>;
 	//Liste aller vorhandenen Teil, fungiert als Katalog aus dem tiefe Kopien entnommen werden
 	teileListe:Array<Teil>;
-	constructor(service){
+	constructor(){
 		this.gesamtListe=new Array<Teil>();
 		this.teileListe=new Array<Teil>();
 		this.ergebnisListe=new Array<Teil>();
-		this.service=service;
 		this.teileSetzen();
 		this.teileberechnen(this.getTeil(1),0,this.gesamtListe,0);
 		this.ergebnisListe=this.getKaufteile(this.gesamtListe);
@@ -167,7 +165,6 @@ class BestellverwaltungController{
 		this.bestellmengeBerechnen(this.gesamtListe);
 		this.ergebnisListe=this.getKaufteile(this.gesamtListe);
 		this.ergebnisListe.sort((a,b)=>{return a.id-b.id});
-		this.service.setListe(this.ergebnisListe);
 	}
 	//berechnet die Reichweite des jeweiligen Bauteiles
 	reichweiteBerechnen(liste:Array<Teil>){
@@ -228,4 +225,4 @@ class BestellverwaltungController{
 	}
 }
 
-angular.module("BestellverwaltungModule").controller("BestellverwaltungController",['TeileService',BestellverwaltungController]);
+angular.module("BestellverwaltungModule").controller("BestellverwaltungController",[BestellverwaltungController]);
