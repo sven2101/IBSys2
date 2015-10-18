@@ -8,9 +8,7 @@ class KapazitaetsplanungController{
     liste:Array<Teil>;
     constructor(service){
         this.service=service;
-
     }
-
     arbeitsplaetzeSetzten(){
         this.liste=this.service.getListe();
     }

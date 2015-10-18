@@ -5,9 +5,9 @@ class Auftrag{
     eTeil:Teil;
     anzahl:number;
     periode:number;
-    arbeitsplatz:nArbeitsplatz;
+    arbeitsplatz:Arbeitsplatz;
 
-    constructor(eTeil:Teil, anzahl:number, periode:number,arbeitsplatz:nArbeitsplatz=null) {
+    constructor(eTeil:Teil, anzahl:number, periode:number,arbeitsplatz:Arbeitsplatz=null) {
         this.eTeil = eTeil;
         this.anzahl = anzahl;
         this.periode = periode;

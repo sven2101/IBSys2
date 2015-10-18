@@ -1,15 +1,18 @@
 /**
- * Created by Max on 13.10.2015.
+ * Created by Max on 18.10.2015.
  */
 var Arbeitsplatz = (function () {
-    function Arbeitsplatz(name, id, ruestzeit, fertigungszeit, outPut, input, Warteliste) {
+    function Arbeitsplatz(id, eTeil, fertigungszeit, ruestzeit, nachfolger) {
+        if (nachfolger === void 0) { nachfolger = null; }
         this.name = name;
         this.id = id;
         this.ruestzeit = ruestzeit;
         this.fertigungszeit = fertigungszeit;
-        this.outPut = outPut;
-        this.input = input;
-        this.warteliste = Warteliste;
+        this.nachfolger = nachfolger;
+        this.eTeil = eTeil;
     }
+    Arbeitsplatz.prototype.tiefeKopie = function () {
+        return new Arbeitsplatz(this.id, this.eTeil, this.fertigungszeit, this.ruestzeit);
+    };
     return Arbeitsplatz;
 })();
