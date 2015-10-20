@@ -60,7 +60,8 @@ class NewTeileService {
 	}
 	
 	erzeugeKaufTeile() {
-		this.alleKaufteile = [new NewKaufTeil(21, 'Kette(K)', 5.00, 0, false, 300, 50, 1.8, 0.4),
+		this.alleKaufteile = [
+			new NewKaufTeil(21, 'Kette(K)', 5.00, 0, false, 300, 50, 1.8, 0.4),
 			new NewKaufTeil(22, 'Kette(D)', 6.50, 0, false, 300, 50, 1.7, 0.4),
 			new NewKaufTeil(23, 'Kette(H)', 6.50, 0, false, 300, 50, 1.2, 0.2),
 			new NewKaufTeil(24, 'Mutter 3/8', 0.06, 0, true, 6100, 100, 3.2, 0.3),
@@ -89,7 +90,6 @@ class NewTeileService {
 			new NewKaufTeil(57, 'Felge cpl.(D)', 22.00, 0, false, 600, 50, 1.7, 0.3),
 			new NewKaufTeil(58, 'Speiche(D)', 0.10, 0, false, 22000, 50, 1.6, 0.5),
 			new NewKaufTeil(59, 'Schweißdraht', 0.15, 0, true, 1800, 50, 1.7, 0.2)]
-
 	}
 
 	erzeugeErzeignisse() {
@@ -123,7 +123,6 @@ class NewTeileService {
 			new NewErzeugnis(54, 'Vorderrad cpl.', 68.09, 0, false),
 			new NewErzeugnis(55, 'Rahmen u. Räder', 125.33, 0, false),
 			new NewErzeugnis(56, 'Fahrrad o. Pedal', 119.67, 0, false)]
-
 	}
 }
 

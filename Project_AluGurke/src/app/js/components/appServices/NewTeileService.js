@@ -50,7 +50,8 @@ var NewTeileService = (function () {
         }
     };
     NewTeileService.prototype.erzeugeKaufTeile = function () {
-        this.alleKaufteile = [new NewKaufTeil(21, 'Kette(K)', 5.00, 0, false, 300, 50, 1.8, 0.4),
+        this.alleKaufteile = [
+            new NewKaufTeil(21, 'Kette(K)', 5.00, 0, false, 300, 50, 1.8, 0.4),
             new NewKaufTeil(22, 'Kette(D)', 6.50, 0, false, 300, 50, 1.7, 0.4),
             new NewKaufTeil(23, 'Kette(H)', 6.50, 0, false, 300, 50, 1.2, 0.2),
             new NewKaufTeil(24, 'Mutter 3/8', 0.06, 0, true, 6100, 100, 3.2, 0.3),

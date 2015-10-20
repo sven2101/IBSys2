@@ -2,24 +2,17 @@
 
 class KapazitaetsplanungController{
     arbeitsplatzService:ArbeitsplatzService;
-    auftragsService:AuftragService;
+
     test:ArbeitsplatzKnoten;
-
-    constructor(){
-        this.arbeitsplatzService=new ArbeitsplatzService();
-        this.auftragsService=new AuftragService();
-        for(let i:number;i<this.auftragsService.auftraege.length;i++){
-            this.arbeitsplatzService.auftragSetzen(this.auftragsService.auftraege[i]);
-        }
-
-
+    $scope;
+    constructor($scope,service){
+        this.$scope=$scope;
+        this.arbeitsplatzService=service;
     }
 
 
     aendern(){
         this.test=this.arbeitsplatzService.map[(<HTMLInputElement>document.getElementById("input1")).value];
-
-
     }
 
 
@@ -30,5 +23,5 @@ class KapazitaetsplanungController{
 
 }
 
-angular.module("KapazitaetsplanungModule").controller("KapazitaetsplanungController",[KapazitaetsplanungController]);
+angular.module("KapazitaetsplanungModule").controller("KapazitaetsplanungController",["$scope","ArbeitsplatzService",KapazitaetsplanungController]);
 
