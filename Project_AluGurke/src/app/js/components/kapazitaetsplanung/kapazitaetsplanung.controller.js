@@ -1,6 +1,7 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
 var KapazitaetsplanungController = (function () {
-    function KapazitaetsplanungController(service) {
+    function KapazitaetsplanungController($scope, service) {
+        this.$scope = $scope;
         this.arbeitsplatzService = service;
     }
     KapazitaetsplanungController.prototype.aendern = function () {
@@ -8,4 +9,4 @@ var KapazitaetsplanungController = (function () {
     };
     return KapazitaetsplanungController;
 })();
-angular.module("KapazitaetsplanungModule").controller("KapazitaetsplanungController", ["ArbeitsplatzService", KapazitaetsplanungController]);
+angular.module("KapazitaetsplanungModule").controller("KapazitaetsplanungController", ["$scope", "ArbeitsplatzService", KapazitaetsplanungController]);
