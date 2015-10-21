@@ -12,7 +12,7 @@ class FileController {
 	kaufteile;
 	teileService;
 
-	constructor($scope,service,NewTeileService) {
+	constructor($scope,service,NewTeileService,bestellService) {
 		this.teileService=NewTeileService;
 		this.$scope = $scope;
 		this.baum = service.herrenBaum;
@@ -50,4 +50,4 @@ class FileController {
 }
 
 
-angular.module('FileModule').controller('FileController', ['$scope', 'NewBaumService','NewTeileService', FileController]);
+angular.module('FileModule').controller('FileController', ['$scope', 'NewBaumService','NewTeileService','BestellService', FileController]);

@@ -3,13 +3,42 @@
 /// <reference path="../appServices/NewTeileService.ts" />
 /// <reference path="../appServices/NewBaumService.ts" />
 /// <reference path="../../model/NewTeilKnoten.ts" />
+var ViewModel = (function () {
+    function ViewModel(id, mfw, teileWert, wbz, wbzAbw, dm, bk, lm, v1, v2, v3, v4, rw) {
+        this.id = id;
+        this.mfw = mfw;
+        this.teileWert = teileWert;
+        this.wbz = wbz;
+        this.wbzAbw = wbzAbw;
+        this.discontMenge = dm;
+        this.bestellKosten = bk;
+        this.lagerMenge = lm;
+        this.verbrauch1 = v1;
+        this.verbrauch2 = v2;
+        this.verbrauch3 = v3;
+        this.verbrauch4 = v4;
+        this.reichweite = rw;
+    }
+    return ViewModel;
+})();
 var NewBestellverwaltungsController = (function () {
     function NewBestellverwaltungsController(teileService, baumService) {
         this.danger = true;
-        this.alleKaufTeile = teileService.alleKaufteile;
+        this.alleKaufTeile = new Array();
         this.baumService = baumService;
-        this.vertriebsWuensche = [{ kinder: 150, damen: 100, herren: 100 }, { kinder: 150, damen: 100, herren: 100 }, { kinder: 150, damen: 100, herren: 100 }, { kinder: 150, damen: 100, herren: 100 }];
+        this.vertriebsWuensche = [
+            { kinder: 150, damen: 100, herren: 100 },
+            { kinder: 150, damen: 100, herren: 100 },
+            { kinder: 150, damen: 100, herren: 100 },
+            { kinder: 150, damen: 100, herren: 100 }];
+        this.createViewModel(teileService.alleKaufteile);
     }
+    NewBestellverwaltungsController.prototype.createViewModel = function (kaufTeile) {
+        for (var i = 0; i < kaufTeile.length; i++) {
+            var t = kaufTeile[i];
+            this.alleKaufTeile.push(new ViewModel(t.id, t.mehrfachVerwendung, t.teileWert, t.wiederBeschaffungsZeit, t.wbzAbweichung, t.discontMenge, t.bestellKosten, t.lagerMenge, this.getVerbrauch(t.id, 1), this.getVerbrauch(t.id, 2), this.getVerbrauch(t.id, 3), this.getVerbrauch(t.id, 4), t.lagerMenge / this.getVerbrauch(t.id, 1)));
+        }
+    };
     NewBestellverwaltungsController.prototype.getVerbrauch = function (id, periode) {
         var anzahlKinderFahrrad = this.getAnzahlInBaum(this.baumService.kinderBaum, id) * this.vertriebsWuensche[periode - 1].kinder;
         var anzahlDamenFahrrad = this.getAnzahlInBaum(this.baumService.damenBaum, id) * this.vertriebsWuensche[periode - 1].damen;
@@ -29,7 +58,7 @@ var NewBestellverwaltungsController = (function () {
         return anzahl;
     };
     NewBestellverwaltungsController.prototype.mussBestellen = function (teil) {
-        if ((teil.wiederBeschaffungsZeit) < (teil.lagerMenge / this.getVerbrauch(teil.id, 1) - 1)) {
+        if (teil.wbz < (teil.reichweite - 1)) {
             return false;
         }
         return true;

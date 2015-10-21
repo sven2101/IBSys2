@@ -2,7 +2,7 @@
 /// <reference path="../../model/NewTeilKnoten.ts" />
 /// <reference path="../../typeDefinitions/xml2json.d.ts" />
 var FileController = (function () {
-    function FileController($scope, service, NewTeileService) {
+    function FileController($scope, service, NewTeileService, bestellService) {
         var _this = this;
         this.anzahl = 0;
         this.id = 24;
@@ -38,4 +38,4 @@ var FileController = (function () {
     };
     return FileController;
 })();
-angular.module('FileModule').controller('FileController', ['$scope', 'NewBaumService', 'NewTeileService', FileController]);
+angular.module('FileModule').controller('FileController', ['$scope', 'NewBaumService', 'NewTeileService', 'BestellService', FileController]);
