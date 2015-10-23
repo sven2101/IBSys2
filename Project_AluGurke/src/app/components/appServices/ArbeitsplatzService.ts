@@ -2,6 +2,7 @@
  * Created by Max on 18.10.2015.
  */
 /// <reference path="../../typeDefinitions/angular.d.ts" />
+/// <reference path="../../model/ArbeitsplatzKnoten.ts" />
 
 class ArbeitsplatzService {
 

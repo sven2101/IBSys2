@@ -4,6 +4,7 @@
 /// <reference path="../appServices/NewBaumService.ts" />
 /// <reference path="../appServices/BestellService.ts" />
 /// <reference path="../../model/NewTeilKnoten.ts" />
+/// <reference path="../../model/Bestellung.ts" />
 var ViewModel = (function () {
     function ViewModel(id, mfw, teileWert, wbz, wbzAbw, dm, bk, lm, v1, v2, v3, v4, rw) {
         this.id = id;
@@ -24,9 +25,9 @@ var ViewModel = (function () {
 })();
 var BestellverwaltungsController = (function () {
     function BestellverwaltungsController(teileService, baumService, bestellService) {
-        this.danger = true;
         this.alleKaufTeile = new Array();
         this.baumService = baumService;
+        this.bestellService = bestellService;
         this.vertriebsWuensche = [
             { kinder: 150, damen: 100, herren: 100 },
             { kinder: 150, damen: 100, herren: 100 },

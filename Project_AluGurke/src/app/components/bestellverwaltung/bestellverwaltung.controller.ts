@@ -4,6 +4,7 @@
 /// <reference path="../appServices/NewBaumService.ts" />
 /// <reference path="../appServices/BestellService.ts" />
 /// <reference path="../../model/NewTeilKnoten.ts" />
+/// <reference path="../../model/Bestellung.ts" />
 
 class ViewModel {
 	id: number;
@@ -42,13 +43,14 @@ class BestellverwaltungsController {
 
 	alleKaufTeile: Array<ViewModel>;
 	baumService: NewBaumService;
-	danger = true;
+	bestellService: BestellService;
 
 	vertriebsWuensche: Array<{ kinder: number, damen: number, herren: number }>;
 
 	constructor(teileService: NewTeileService, baumService: NewBaumService, bestellService:BestellService) {
 		this.alleKaufTeile = new Array();
 		this.baumService = baumService;
+		this.bestellService = bestellService;
 		this.vertriebsWuensche = [
 			{ kinder: 150, damen: 100, herren: 100 },
 			{ kinder: 150, damen: 100, herren: 100 },

@@ -1,22 +1,23 @@
 <section id="bestellverwaltung">
-	<span custom-popover></span>
 	<div id="test" class="container">
 		<table class="table table-bordered text-center table-hover table-condensed">
 			<tr>
 				<th class="text-center">Id</th>
 				<th class="text-center">MFW</th>
-				<th class="text-center">Teilewert</th>
+				<th class="text-center">Teile-<br>wert</th>
 				<th class="text-center" data-toggle="tooltip" data-placement="left" title="Tooltip on left">WBZ</th>
 				<th class="text-center">Discont-<br>menge</th>
 				<th class="text-center">Bestellkosten</th>
+				<th class="text-center">Reich-<br>weite</th>
 				<th class="text-center">Lager-<br>menge</th>
 				<th class="text-center">Verbrauch<br>aktuell</th>
-				<th class="text-center">Reich-<br>weite</th>
 				<th class="text-center">Verbrauch<br>n+1</th>
 				<th class="text-center">Verbrauch<br>n+2</th>
 				<th class="text-center">Verbrauch<br>n+3</th>
+				<th class="text-center">Bestell-<br>menge</th>
+				<th class="text-center">Eil</th>
 			</tr>
-			<tr ng-repeat="teil in bvc.alleKaufTeile"  ng-class="{danger: bvc.mussBestellen(teil)}">
+			<tr ng-repeat="teil in bvc.alleKaufTeile"  ng-class="{danger: bvc.mussBestellen(teil)}" ng-attr-id="{{teil.id}}">
 				<td>{{::teil.id}}</td>
 				<td>
 					<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="teil.mfw"></span>
@@ -26,12 +27,14 @@
 				<td>{{::teil.wbz}} &plusmn({{teil.wbzAbw}})</td>
 				<td>{{::teil.discontMenge}}</td>
 				<td>{{::teil.bestellKosten | currency:"€"}}</td>
+				<td>{{::teil.reichweite | number:2}}</td>
 				<td>{{::teil.lagerMenge}}</td>
 				<td>{{::teil.verbrauch1}}</td>
-				<td>{{::teil.reichweite | number:2}}</td>
 				<td>{{::teil.verbrauch2}}</td>
 				<td>{{::teil.verbrauch3}}</td>
 				<td>{{::teil.verbrauch4}}</td>
+				<td><input type="number" ng-model="bvc.bestellService.getNeubestellung(teil.id).menge"></td>
+				<td><input type="checkbox" ng-model="bvc.bestellService.getNeubestellung(teil.id).eil"></td>
 			</tr>
 		</table>
 	</div>
