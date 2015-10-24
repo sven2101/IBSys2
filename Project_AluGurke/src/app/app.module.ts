@@ -2,6 +2,7 @@
 "use strict";
 angular.module('app', [
 	'ngRoute',
+	'ngResource',
 	'FileModule',
 	'BestellverwaltungModule',
 	'pascalprecht.translate',

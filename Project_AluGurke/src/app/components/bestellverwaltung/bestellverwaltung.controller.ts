@@ -52,10 +52,10 @@ class BestellverwaltungsController {
 		this.baumService = baumService;
 		this.bestellService = bestellService;
 		this.vertriebsWuensche = [
-			{ kinder: 150, damen: 100, herren: 100 },
-			{ kinder: 150, damen: 100, herren: 100 },
-			{ kinder: 150, damen: 100, herren: 100 },
-			{ kinder: 150, damen: 100, herren: 100 }];
+			{ kinder: 200, damen: 100, herren: 50 },
+			{ kinder: 200, damen: 150, herren: 50 },
+			{ kinder: 250, damen: 150, herren: 100 },
+			{ kinder: 250, damen: 150, herren: 100 }];
 		this.createViewModel(teileService.alleKaufteile);
 	}
 
@@ -66,7 +66,7 @@ class BestellverwaltungsController {
 				t.wiederBeschaffungsZeit, t.wbzAbweichung,
 				t.discontMenge, t.bestellKosten, t.lagerMenge, this.getVerbrauch(t.id, 1),
 				this.getVerbrauch(t.id, 2), this.getVerbrauch(t.id, 3),
-				this.getVerbrauch(t.id, 4), t.lagerMenge / this.getVerbrauch(t.id, 1)));
+				this.getVerbrauch(t.id, 4), t.lagerMenge / ((this.getVerbrauch(t.id, 1)+this.getVerbrauch(t.id,2)+this.getVerbrauch(t.id,3)+this.getVerbrauch(t.id,4))/4)));
 		}
 	}
 

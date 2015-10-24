@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/Max-Hermann/IBSys2#readme",
   "dependencies": {
+    "body-parser": "^1.14.1",
     "browser-sync": "^2.9.8",
     "express": "^4.13.3",
     "gulp": "^3.9.0",
