@@ -2,6 +2,6 @@ Project_AluGurke/node_modules/**
 Project_AluGurke//src/app/js/**
 Project_AluGurke/build/**
 Projekt-Gurke/node_modules/**
-Projekt-Gurke/files/**
+Projekt-Gurke/files/*.txt
 .idea
 .gulp*

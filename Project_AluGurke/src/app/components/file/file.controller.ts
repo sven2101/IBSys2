@@ -1,6 +1,5 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
 /// <reference path="../../model/NewTeilKnoten.ts" />
-/// <reference path="../../typeDefinitions/xml2json.d.ts" />
 /// <reference path="../appServices/ResourceService.ts" />
 /// <reference path="../appServices/DateiService.ts" />
 
@@ -24,22 +23,17 @@ class FileController {
 		this.kaufteile = NewTeileService.alleKaufteile;
 		this.resource = resourceService.resource;
 		this.dateiService = dateiService;
-		this.$scope.$on('teileService.kaufTeile.updated', (event) => this.setTeileArray());
 	}
-
+	
 	sendPostRequest() {
 		var vm = this;
-		this.resource.createFile({ content: 'Der Inhalt der Datei.' }, function(result, headers) {
+		this.resource.createFile({ content: this.dateiService.getInhalt()}, function(result, headers) {
 			vm.result = result.dateiName;
 			vm.dateiService.dateiName = result.dateiName;
 			vm.dateiService.dateiErzeugt = true;
 		});
 	}
-
-	setTeileArray() {
-		this.$scope.$apply();
-	}
-
+	
 	startTest() {
 		this.anzahl = 0;
 		this.testBaum(this.baum, this.id);
