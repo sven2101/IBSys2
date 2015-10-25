@@ -6,6 +6,5 @@ angular.module('app', [
     'BestellverwaltungModule',
     'pascalprecht.translate',
     'TranslationModule',
-    'KapazitaetsplanungModule',
-    'DispositionModule'
+    'KapazitaetsplanungModule'
 ]);

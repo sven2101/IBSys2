@@ -6,13 +6,15 @@
 
 class ArbeitsplatzService {
 
-    map:{[key:number]:ArbeitsplatzKnoten;}
-
+    map:{[key:number]:Fertigungsreihe;}
+    fertigungsreihen:Array<Fertigungsreihe>;
     arbeitsplaetze:Array<Arbeitsplatz>;
     constructor(){
         this.arbeitsplaetze=new  Array<Arbeitsplatz>();
         this.map={};
+        this.fertigungsreihen=new Array<Fertigungsreihe>();
         this.arbeitsplaetzeSetzen();
+
     }
     arbeitsplaetzeSetzen(){
         this.arbeitsplaetze=[
@@ -51,38 +53,43 @@ class ArbeitsplatzService {
             new Arbeitsplatz(4,3,7,30)
         ];
         //P1
-        this.map[13]=this.getAP(13,13,this.getAP(12,13,this.getAP(8,13,this.getAP(7,13,this.getAP(9,13)))));
-        this.map[18]=this.getAP(6,18,this.getAP(8,18,this.getAP(7,18,this.getAP(9,18))));
-        this.map[7]=this.getAP(10,7,this.getAP(11,7));
-        this.map[4]=this.getAP(10,4,this.getAP(11,4));
-        this.map[10]=this.getAP(13,10,this.getAP(12,10,this.getAP(8,10,this.getAP(7,10,this.getAP(9,10)))));
-        this.map[49]=this.getAP(1,49);
-        this.map[17]=this.getAP(15,17);
-        this.map[16]=this.getAP(6,16,this.getAP(14,16));
-        this.map[50]=this.getAP(2,50);
-        this.map[51]=this.getAP(3,51);
-        this.map[26]=this.getAP(7,26,this.getAP(7,26));
-        this.map[1]=this.getAP(4,1);
+        this.map[13]=new Fertigungsreihe(this.getAP(13,13,this.getAP(12,13,this.getAP(8,13,this.getAP(7,13,this.getAP(9,13))))));
+        this.map[18]=new Fertigungsreihe(this.getAP(6,18,this.getAP(8,18,this.getAP(7,18,this.getAP(9,18)))));
+        this.map[7]=new Fertigungsreihe(this.getAP(10,7,this.getAP(11,7)));
+        this.map[4]=new Fertigungsreihe(this.getAP(10,4,this.getAP(11,4)));
+        this.map[10]=new Fertigungsreihe(this.getAP(13,10,this.getAP(12,10,this.getAP(8,10,this.getAP(7,10,this.getAP(9,10))))));
+        this.map[49]=new Fertigungsreihe(this.getAP(1,49));
+        this.map[17]=new Fertigungsreihe(this.getAP(15,17));
+        this.map[16]=new Fertigungsreihe(this.getAP(6,16,this.getAP(14,16)));
+        this.map[50]=new Fertigungsreihe(this.getAP(2,50));
+        this.map[51]=new Fertigungsreihe(this.getAP(3,51));
+        this.map[26]=new Fertigungsreihe(this.getAP(7,26,this.getAP(7,26)));
+        this.map[1]=new Fertigungsreihe(this.getAP(4,1));
         //P2
-        this.map[14]=this.getAP(13,14,this.getAP(12,14,this.getAP(8,14,this.getAP(7,14,this.getAP(9,14)))));
-        this.map[19]=this.getAP(6,19,this.getAP(8,19,this.getAP(7,19,this.getAP(9,19))));
-        this.map[8]=this.getAP(10,8,this.getAP(11,8));
-        this.map[5]=this.getAP(10,5,this.getAP(11,5));
-        this.map[11]=this.getAP(13,11,this.getAP(12,11,this.getAP(8,11,this.getAP(7,11,this.getAP(9,11)))));
-        this.map[54]=this.getAP(1,54);
-        this.map[55]=this.getAP(2,55);
-        this.map[56]=this.getAP(3,56);
-        this.map[2]=this.getAP(4,2);
+        this.map[14]=new Fertigungsreihe(this.getAP(13,14,this.getAP(12,14,this.getAP(8,14,this.getAP(7,14,this.getAP(9,14))))));
+        this.map[19]=new Fertigungsreihe(this.getAP(6,19,this.getAP(8,19,this.getAP(7,19,this.getAP(9,19)))));
+        this.map[8]=new Fertigungsreihe(this.getAP(10,8,this.getAP(11,8)));
+        this.map[5]=new Fertigungsreihe(this.getAP(10,5,this.getAP(11,5)));
+        this.map[11]=new Fertigungsreihe(this.getAP(13,11,this.getAP(12,11,this.getAP(8,11,this.getAP(7,11,this.getAP(9,11))))));
+        this.map[54]=new Fertigungsreihe(this.getAP(1,54));
+        this.map[55]=new Fertigungsreihe(this.getAP(2,55));
+        this.map[56]=new Fertigungsreihe(this.getAP(3,56));
+        this.map[2]=new Fertigungsreihe(this.getAP(4,2));
         //P3
-        this.map[15]=this.getAP(13,15,this.getAP(12,15,this.getAP(8,15,this.getAP(7,15,this.getAP(9,15)))));
-        this.map[20]=this.getAP(6,20,this.getAP(8,20,this.getAP(7,20,this.getAP(9,20))));
-        this.map[9]=this.getAP(10,9,this.getAP(11,9));
-        this.map[6]=this.getAP(10,6,this.getAP(11,6));
-        this.map[12]=this.getAP(13,12,this.getAP(12,12,this.getAP(8,12,this.getAP(7,12,this.getAP(9,12)))));
-        this.map[29]=this.getAP(1,29);
-        this.map[30]=this.getAP(2,30);
-        this.map[31]=this.getAP(3,31);
-        this.map[3]=this.getAP(4,3);
+        this.map[15]=new Fertigungsreihe(this.getAP(13,15,this.getAP(12,15,this.getAP(8,15,this.getAP(7,15,this.getAP(9,15))))));
+        this.map[20]=new Fertigungsreihe(this.getAP(6,20,this.getAP(8,20,this.getAP(7,20,this.getAP(9,20)))));
+        this.map[9]=new Fertigungsreihe(this.getAP(10,9,this.getAP(11,9)));
+        this.map[6]=new Fertigungsreihe(this.getAP(10,6,this.getAP(11,6)));
+        this.map[12]=new Fertigungsreihe(this.getAP(13,12,this.getAP(12,12,this.getAP(8,12,this.getAP(7,12,this.getAP(9,12))))));
+        this.map[29]=new Fertigungsreihe(this.getAP(1,29));
+        this.map[30]=new Fertigungsreihe(this.getAP(2,30));
+        this.map[31]=new Fertigungsreihe(this.getAP(3,31));
+        this.map[3]=new Fertigungsreihe(this.getAP(4,3));
+
+        this.fertigungsreihen=[this.map[13],this.map[18],this.map[7],this.map[4],this.map[10],this.map[49],this.map[17],this.map[16],this.map[50],this.map[51],this.map[26],this.map[1],
+        this.map[14],this.map[19],this.map[8],this.map[5],this.map[11],this.map[54],this.map[55],this.map[56],this.map[2],this.map[15],this.map[20],this.map[9],this.map[6],this.map[12],
+        this.map[29],this.map[30],this.map[31],this.map[3]
+        ];
     }
     getAP(id:number,eTeil:number,nachfolger:ArbeitsplatzKnoten=null){
         for(let i:number=0;i<this.arbeitsplaetze.length;i++){
@@ -91,19 +98,8 @@ class ArbeitsplatzService {
             }
         }
     }
-    auftragSetzen(auftrag:Auftrag){
-        let arbeitsplatzKnoten:ArbeitsplatzKnoten=this.map[auftrag.erzeugnis_id];
-        if(auftrag.arbeitsplatz_id==0){
-            arbeitsplatzKnoten.arbeitsplatz.auftraege.push(auftrag);
-        }
-        else{
-            let temp:ArbeitsplatzKnoten=arbeitsplatzKnoten;
-            while(temp.arbeitsplatz.id!==auftrag.arbeitsplatz_id){
-                temp=temp.nachfolger;
-            }
-            temp.arbeitsplatz.auftraege.push(auftrag);
-        }
-    }
+
+
 }
 
 angular.module('app').factory('ArbeitsplatzService', [() => new ArbeitsplatzService()]);

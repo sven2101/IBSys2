@@ -7,7 +7,6 @@ var ArbeitsplatzService = (function () {
     function ArbeitsplatzService() {
         this.arbeitsplaetze = new Array();
         this.map = {};
-        this.fertigungsreihen = new Array();
         this.arbeitsplaetzeSetzen();
     }
     ArbeitsplatzService.prototype.arbeitsplaetzeSetzen = function () {
@@ -79,10 +78,6 @@ var ArbeitsplatzService = (function () {
         this.map[30] = new Fertigungsreihe(this.getAP(2, 30));
         this.map[31] = new Fertigungsreihe(this.getAP(3, 31));
         this.map[3] = new Fertigungsreihe(this.getAP(4, 3));
-        this.fertigungsreihen = [this.map[13], this.map[18], this.map[7], this.map[4], this.map[10], this.map[49], this.map[17], this.map[16], this.map[50], this.map[51], this.map[26], this.map[1],
-            this.map[14], this.map[19], this.map[8], this.map[5], this.map[11], this.map[54], this.map[55], this.map[56], this.map[2], this.map[15], this.map[20], this.map[9], this.map[6], this.map[12],
-            this.map[29], this.map[30], this.map[31], this.map[3]
-        ];
     };
     ArbeitsplatzService.prototype.getAP = function (id, eTeil, nachfolger) {
         if (nachfolger === void 0) { nachfolger = null; }

@@ -6,5 +6,25 @@
 <div>
     <h1>{{kpc.service.arbeitsplaetze.length}}</h1>
     <input id="input1" ng-keyup="kpc.aendern()">
-    <h5>{{kpc.test}}</h5>
+    <h5>{{kpc.test.ersterArbeitsplatz}}</h5>
+
+
+    <table align="center" class="table table-striped table-hover ">
+        <tr>
+            <th>name</th>
+            <th>arbeitszeit</th>
+            <th>Anzahl Aufträge</th>
+            <th>Anzahl arbeitsplatzfremder Aufträge</th>
+        </tr>
+        <tbody>
+            <tr ng-repeat="arbeitsplatz in kpc.ergebnisListe">
+                <td>{{arbeitsplatz.name}}</td>
+                <td>{{arbeitsplatz.arbeitszeit}}</td>
+                <td>{{arbeitsplatz.auftraege.length}}</td>
+                <td>{{arbeitsplatz.arbeitsplatzFremdeAuftraege.length}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
 </div>

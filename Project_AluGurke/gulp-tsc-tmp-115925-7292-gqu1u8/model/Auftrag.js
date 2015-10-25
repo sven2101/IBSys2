@@ -7,7 +7,6 @@ var Auftrag = (function () {
         this.anzahl = anzahl;
         this.periode = periode;
         this.arbeitsplatz_id = arbeitsplatz_id;
-        this.aufArbeitsplatz = false;
     }
     return Auftrag;
 })();

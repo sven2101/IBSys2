@@ -13,10 +13,7 @@ angular.module('app')
             templateUrl: '/components/bestellverwaltung/bestellverwaltung.html',
             controller: 'BestellverwaltungController as bvc'
         }).when('/kapazitaetsplanung', {
-            templateUrl: '/components/kapazitaetsplanung/kapazitaetsplanung.html',
+            templateUrl: '/components/kapazitaetsplanung/disposition.html',
             controller: 'KapazitaetsplanungController as kpc'
-        }).when('/disposition', {
-            templateUrl: '/components/disposition/disposition.html',
-            controller: 'DispositionController as dc'
         });
     }]);
