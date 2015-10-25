@@ -39,7 +39,7 @@ class ViewModel {
 	}
 }
 
-class BestellverwaltungsController {
+class KaufteilDispositionController {
 
 	alleKaufTeile: Array<ViewModel>;
 	baumService: NewBaumService;
@@ -47,7 +47,7 @@ class BestellverwaltungsController {
 
 	vertriebsWuensche: Array<{ kinder: number, damen: number, herren: number }>;
 
-	constructor(teileService: NewTeileService, baumService: NewBaumService, bestellService:BestellService) {
+	constructor(teileService: NewTeileService, baumService: NewBaumService, bestellService: BestellService) {
 		this.alleKaufTeile = new Array();
 		this.baumService = baumService;
 		this.bestellService = bestellService;
@@ -66,7 +66,7 @@ class BestellverwaltungsController {
 				t.wiederBeschaffungsZeit, t.wbzAbweichung,
 				t.discontMenge, t.bestellKosten, t.lagerMenge, this.getVerbrauch(t.id, 1),
 				this.getVerbrauch(t.id, 2), this.getVerbrauch(t.id, 3),
-				this.getVerbrauch(t.id, 4), t.lagerMenge / ((this.getVerbrauch(t.id, 1)+this.getVerbrauch(t.id,2)+this.getVerbrauch(t.id,3)+this.getVerbrauch(t.id,4))/4)));
+				this.getVerbrauch(t.id, 4), t.lagerMenge / ((this.getVerbrauch(t.id, 1) + this.getVerbrauch(t.id, 2) + this.getVerbrauch(t.id, 3) + this.getVerbrauch(t.id, 4)) / 4)));
 		}
 	}
 
@@ -91,11 +91,18 @@ class BestellverwaltungsController {
 	}
 
 	mussBestellen(teil: ViewModel) {
-		if (teil.wbz < (teil.reichweite - 1)) {
-			return false;
+		if ((teil.reichweite - teil.wbz) < 1) {
+			return true;
 		}
-		return true;
+		return false;
+	}
+
+	sollteBestellen(teil: ViewModel) {
+		if (((teil.reichweite - teil.wbz) > 1) && ((teil.reichweite - teil.wbzAbw - teil.wbz) < 1)) {
+			return true;
+		}
+		return false;
 	}
 }
 
-angular.module('BestellverwaltungModule').controller('BestellverwaltungController', ['NewTeileService', 'NewBaumService','BestellService', BestellverwaltungsController]);
+angular.module('BestellverwaltungModule').controller('KaufteilDispositionController', ['NewTeileService', 'NewBaumService', 'BestellService', KaufteilDispositionController]);

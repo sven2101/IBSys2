@@ -1,0 +1,1 @@
+<input><qualitycontrol type='no' losequantity='0' delay='0'/><sellwish/><selldirect/><orderlist><order article='21' quantity='324' modus='5'></order><order article='22' quantity='423' modus='4'></order><order article='23' quantity='324' modus='4'></order><order article='24' quantity='24' modus='5'></order></orderlist><productionlist/><workingtimelist/></input>

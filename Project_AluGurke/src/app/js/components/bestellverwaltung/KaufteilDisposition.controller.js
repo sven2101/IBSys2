@@ -23,8 +23,8 @@ var ViewModel = (function () {
     }
     return ViewModel;
 })();
-var BestellverwaltungsController = (function () {
-    function BestellverwaltungsController(teileService, baumService, bestellService) {
+var KaufteilDispositionController = (function () {
+    function KaufteilDispositionController(teileService, baumService, bestellService) {
         this.alleKaufTeile = new Array();
         this.baumService = baumService;
         this.bestellService = bestellService;
@@ -35,19 +35,19 @@ var BestellverwaltungsController = (function () {
             { kinder: 250, damen: 150, herren: 100 }];
         this.createViewModel(teileService.alleKaufteile);
     }
-    BestellverwaltungsController.prototype.createViewModel = function (kaufTeile) {
+    KaufteilDispositionController.prototype.createViewModel = function (kaufTeile) {
         for (var i = 0; i < kaufTeile.length; i++) {
             var t = kaufTeile[i];
             this.alleKaufTeile.push(new ViewModel(t.id, t.mehrfachVerwendung, t.teileWert, t.wiederBeschaffungsZeit, t.wbzAbweichung, t.discontMenge, t.bestellKosten, t.lagerMenge, this.getVerbrauch(t.id, 1), this.getVerbrauch(t.id, 2), this.getVerbrauch(t.id, 3), this.getVerbrauch(t.id, 4), t.lagerMenge / ((this.getVerbrauch(t.id, 1) + this.getVerbrauch(t.id, 2) + this.getVerbrauch(t.id, 3) + this.getVerbrauch(t.id, 4)) / 4)));
         }
     };
-    BestellverwaltungsController.prototype.getVerbrauch = function (id, periode) {
+    KaufteilDispositionController.prototype.getVerbrauch = function (id, periode) {
         var anzahlKinderFahrrad = this.getAnzahlInBaum(this.baumService.kinderBaum, id) * this.vertriebsWuensche[periode - 1].kinder;
         var anzahlDamenFahrrad = this.getAnzahlInBaum(this.baumService.damenBaum, id) * this.vertriebsWuensche[periode - 1].damen;
         var anzahlHerrenFahrrad = this.getAnzahlInBaum(this.baumService.herrenBaum, id) * this.vertriebsWuensche[periode - 1].herren;
         return anzahlKinderFahrrad + anzahlDamenFahrrad + anzahlHerrenFahrrad;
     };
-    BestellverwaltungsController.prototype.getAnzahlInBaum = function (baum, id) {
+    KaufteilDispositionController.prototype.getAnzahlInBaum = function (baum, id) {
         var anzahl = 0;
         if (baum.teil_id === id) {
             anzahl += baum.anzahl;
@@ -59,18 +59,18 @@ var BestellverwaltungsController = (function () {
         }
         return anzahl;
     };
-    BestellverwaltungsController.prototype.mussBestellen = function (teil) {
+    KaufteilDispositionController.prototype.mussBestellen = function (teil) {
         if ((teil.reichweite - teil.wbz) < 1) {
             return true;
         }
         return false;
     };
-    BestellverwaltungsController.prototype.sollteBestellen = function (teil) {
+    KaufteilDispositionController.prototype.sollteBestellen = function (teil) {
         if (((teil.reichweite - teil.wbz) > 1) && ((teil.reichweite - teil.wbzAbw - teil.wbz) < 1)) {
             return true;
         }
         return false;
     };
-    return BestellverwaltungsController;
+    return KaufteilDispositionController;
 })();
-angular.module('BestellverwaltungModule').controller('BestellverwaltungController', ['NewTeileService', 'NewBaumService', 'BestellService', BestellverwaltungsController]);
+angular.module('BestellverwaltungModule').controller('KaufteilDispositionController', ['NewTeileService', 'NewBaumService', 'BestellService', KaufteilDispositionController]);

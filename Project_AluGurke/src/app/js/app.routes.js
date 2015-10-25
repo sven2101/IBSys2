@@ -9,9 +9,12 @@ angular.module('app')
             when('/file', {
             templateUrl: '/components/file/file.html',
             controller: 'FileController as fc'
-        }).when('/bestellverwaltung', {
-            templateUrl: '/components/bestellverwaltung/bestellverwaltung.html',
-            controller: 'BestellverwaltungController as bvc'
+        }).when('/bestellverwaltung/kaufteildisposition', {
+            templateUrl: '/components/bestellverwaltung/kaufteilDisposition.html',
+            controller: 'KaufteilDispositionController as ktdc'
+        }).when('/bestellverwaltung/erweitert', {
+            templateUrl: '/components/bestellverwaltung/erweitert.html',
+            controller: 'ErweitertController as ec'
         }).when('/kapazitaetsplanung', {
             templateUrl: '/components/kapazitaetsplanung/kapazitaetsplanung.html',
             controller: 'KapazitaetsplanungController as kpc'

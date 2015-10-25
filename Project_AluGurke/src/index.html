@@ -1,21 +1,29 @@
 <html ng-app="app">
-	<head>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-		<title>Project_AluGurke</title>
-	</head>
-	<body>
-		<nav class="navbar navbar-default">
-            <ul class="nav navbar-nav">
-                <li> <a href="#/">{{ 'NAV_Home' | translate }}</a></li>
-				<li> <a href="#/file">{{ 'NAV_File' | translate }}</a></li>
-				<li> <a href="#/bestellverwaltung">{{ 'NAV_OrderManagment' | translate }}</a></li>
-				<li> <a href="#/kapazitaetsplanung">Kapazitätsplanung</a></li>
-				<li> <a href="#/lager">Lager</a></li>
-            </ul>
-			<ul ng-controller="TranslationController" class="nav navbar-nav navbar-right">
-				<li><a href="" ng-click="changeLang('en_US')">Englisch</a></li>
-				<li><a href="" ng-click="changeLang('de_DE')">German</li>
+
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<title>Project_AluGurke</title>
+</head>
+
+<body>
+	<nav class="navbar navbar-default">
+		<ul class="nav navbar-nav">
+			<li> <a href="#/">{{ 'NAV_Home' | translate }}</a></li>
+			<li> <a href="#/file">{{ 'NAV_File' | translate }}</a></li>
+			<li class="dropdown">
+				<a href="_" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bestellverwaltung<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="#/bestellverwaltung/kaufteildisposition">Kaufteildisposition</a></li>
+					<li><a href="#/bestellverwaltung/erweitert">Erweitert</a></li>
+				</ul>
+			</li>
+			<li> <a href="#/kapazitaetsplanung">Kapazitätsplanung</a></li>
+			<li> <a href="#/lager">Lager</a></li>
+		</ul>
+		<ul ng-controller="TranslationController" class="nav navbar-nav navbar-right">
+			<li><a href="" ng-click="changeLang('en_US')">Englisch</a></li>
+			<li><a href="" ng-click="changeLang('de_DE')">German</li>
 			</ul>
         </nav>
 		<div ng-view></div>
