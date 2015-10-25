@@ -1,6 +1,7 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
 /// <reference path="../../model/NewTeilKnoten.ts" />
-/// <reference path="../../typeDefinitions/xml2json.d.ts" />
+/// <reference path="../appServices/ResourceService.ts" />
+/// <reference path="../appServices/DateiService.ts" />
 
 class FileController {
 
@@ -11,19 +12,28 @@ class FileController {
 	$scope;
 	kaufteile;
 	teileService;
+	resource;
+	result: string;
+	dateiService: DateiService;
 
-	constructor($scope,service,NewTeileService) {
-		this.teileService=NewTeileService;
+	constructor($scope, service, NewTeileService, bestellService, resourceService: ResourceService, dateiService:DateiService) {
+		this.teileService = NewTeileService;
 		this.$scope = $scope;
 		this.baum = service.herrenBaum;
 		this.kaufteile = NewTeileService.alleKaufteile;
-		this.$scope.$on('teileService.kaufTeile.updated',(event) => this.setTeileArray());
+		this.resource = resourceService.resource;
+		this.dateiService = dateiService;
 	}
-
-	setTeileArray() {
-		this.$scope.$apply();
+	
+	sendPostRequest() {
+		var vm = this;
+		this.resource.createFile({ content: this.dateiService.getInhalt()}, function(result, headers) {
+			vm.result = result.dateiName;
+			vm.dateiService.dateiName = result.dateiName;
+			vm.dateiService.dateiErzeugt = true;
+		});
 	}
-
+	
 	startTest() {
 		this.anzahl = 0;
 		this.testBaum(this.baum, this.id);
@@ -45,9 +55,9 @@ class FileController {
 		this.$scope.$apply(function() {
 			vm.dateiInhalt = json;
 		});
-		this.$scope.$emit('fileController.neueDatei',this.dateiInhalt);
+		this.$scope.$emit('fileController.neueDatei', this.dateiInhalt);
 	}
 }
 
 
-angular.module('FileModule').controller('FileController', ['$scope', 'NewBaumService','NewTeileService', FileController]);
+angular.module('FileModule').controller('FileController', ['$scope', 'NewBaumService', 'NewTeileService', 'BestellService', 'ResourceService', 'DateiService', FileController]);

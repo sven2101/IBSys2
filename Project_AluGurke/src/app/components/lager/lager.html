@@ -1,0 +1,54 @@
+<section>
+	<div class="container">
+		<div chart data="lc.data">
+		</div>
+		<div>
+			<input type ="checkbox" ng-model="lc.showErzeugnisse"> Erzeugnisse
+			<input type ="checkbox" ng-model="lc.showKaufTeile"> Kaufteile
+		</div>
+		<div ng-if="lc.showErzeugnisse">
+			<h2>Erzeugnisse</h2>
+			<table class="table table-bordered text-center table-striped table-condensed">
+				<tr>
+					<th class="text-center">Id</th>
+					<th class="text-center">MFW</th>
+					<th class="text-center">Teilewert</th>
+					<th class="text-center">Lagermenge</th>
+					<th class="text-center">Summe</th>
+				</tr>
+				<tr ng-repeat="teil in lc.alleErzeugnisse" >
+					<td>{{::teil.id}}</td>
+					<td>
+						<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="teil.mehrfachVerwendung"></span>
+						<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!teil.mehrfachVerwendung"></span>
+					</td>
+					<td>{{::teil.teileWert | currency:"€"}}</td>
+					<td>{{::teil.lagerMenge}}</td>
+					<td>{{teil.lagerMenge * teil.teileWert | currency:'€'}}</td>
+				</tr>
+			</table>
+		</div>
+		<div ng-if="lc.showKaufTeile">
+			<h2>Kaufteile</h2>
+			<table class="table table-bordered text-center table-striped table-condensed">
+				<tr>
+					<th class="text-center">Id</th>
+					<th class="text-center">MFW</th>
+					<th class="text-center">Teilewert</th>
+					<th class="text-center">Lagermenge</th>
+					<th class="text-center">Summe</th>
+				</tr>
+				<tr ng-repeat="teil in lc.alleKaufTeile" >
+					<td>{{::teil.id}}</td>
+					<td>
+						<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="teil.mehrfachVerwendung"></span>
+						<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!teil.mehrfachVerwendung"></span>
+					</td>
+					<td>{{::teil.teileWert | currency:"€"}}</td>
+					<td>{{::teil.lagerMenge}}</td>
+					<td>{{teil.lagerMenge * teil.teileWert | currency:'€'}}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</section>

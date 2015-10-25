@@ -2,10 +2,13 @@
 "use strict";
 angular.module('app', [
     'ngRoute',
+    'ngResource',
+    'ngAnimate',
     'FileModule',
     'BestellverwaltungModule',
     'pascalprecht.translate',
     'TranslationModule',
     'KapazitaetsplanungModule',
-    'DispositionModule'
+    'DispositionModule',
+    'LagerModule'
 ]);

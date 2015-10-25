@@ -1,65 +1,41 @@
-<h1 align="center">{{'orderManagment_headline'|translate}}</h1>
-<table align="center">
-	<tr>
-		<th>{{'orderManagment_product'|translate}}</th>
-		<th>{{'orderManagment_period'|translate}} 1</th>
-		<th>{{'orderManagment_period'|translate}} 2</th>
-		<th>{{'orderManagment_period'|translate}} 3</th>
-		<th>{{'orderManagment_period'|translate}} 4</th>
-	</tr>
-	<tbody>
-	<tr>
-		<th>P1</th>
-		<th><input id="i11" class="form-control" type="text" placeholder="Anzahl P1" ng-keyup="bvc.aendern()"></th>
-		<th><input id="i12" class="form-control" type="text" placeholder="Anzahl P1" ng-keyup="bvc.aendern()"></th>
-		<th><input id="i13" class="form-control" type="text" placeholder="Anzahl P1" ng-keyup="bvc.aendern()"></th>
-		<th><input id="i14" class="form-control" type="text" placeholder="Anzahl P1" ng-keyup="bvc.aendern()"></th>
-	</tr>
-	<tr>
-		<th>P2</th>
-		<th><input id="i21" class="form-control" type="text" placeholder="Anzahl P2" ng-keyup="bvc.aendern()"></th>
-		<th><input id="i22" class="form-control" type="text" placeholder="Anzahl P2" ng-keyup="bvc.aendern()"></th>
-		<th><input id="i23" class="form-control" type="text" placeholder="Anzahl P2" ng-keyup="bvc.aendern()"></th>
-		<th><input id="i24" class="form-control" type="text" placeholder="Anzahl P2" ng-keyup="bvc.aendern()"></th>
-	</tr>
-	<tr>
-		<th>P3</th>
-		<th><input id="i31" class="form-control" type="text" placeholder="Anzahl P3" ng-keyup="bvc.aendern()"></th>
-		<th><input id="i32" class="form-control" type="text" placeholder="Anzahl P3" ng-keyup="bvc.aendern()"></th>
-		<th><input id="i33" class="form-control" type="text" placeholder="Anzahl P3" ng-keyup="bvc.aendern()"></th>
-		<th><input id="i34" class="form-control" type="text" placeholder="Anzahl P3" ng-keyup="bvc.aendern()"></th>
-	</tr>
-	</tbody>
-</table>
-<div>
-	<table align="center" class="table table-striped table-hover ">
-		<tr>
-			<th>{{'orderManagment_id'|translate}}</th>
-			<th>{{'orderManagment_deliveryTime'|translate}}</th>
-			<th>{{'orderManagment_deliveryTimeDeviance'|translate}}</th>
-			<th>{{'orderManagment_inventoryDays'|translate}}</th>
-			<th>{{'orderManagment_warehouseStocks'|translate}}</th>
-			<th>{{'orderManagment_demand'|translate}}1</th>
-			<th>{{'orderManagment_demand'|translate}}2</th>
-			<th>{{'orderManagment_demand'|translate}}3</th>
-			<th>{{'orderManagment_demand'|translate}}4</th>
-			<th>{{'orderManagment_discount'|translate}}</th>
-			<th>{{'orderManagment_orderQuantity'|translate}}</th>
-			<th>{{'orderManagment_instantOrder'|translate}}1</th>
-		</tr>
-		<tr ng-repeat="teil in bvc.ergebnisListe">
-			<td>K{{teil.id}}</td>
-			<td>{{teil.lieferzeitNormal}}</td>
-			<td>{{teil.lieferAbweichung}}</td>
-			<td>{{teil.reichweite}}</td>
-			<td>{{teil.lagerstand}}</td>
-			<td>{{teil.bedarfPeriode[0]}}</td>
-			<td>{{teil.bedarfPeriode[1]}}</td>
-			<td>{{teil.bedarfPeriode[2]}}</td>
-			<td>{{teil.bedarfPeriode[3]}}</td>
-			<td>{{teil.rabattmenge}}</td>
-			<td><input class="form-control" type="text" value={{teil.bestellmenge}}></td>
-			<td><input type="checkbox"></td>
-		</tr>
-	</table>
-</div>
+<section id="bestellverwaltung">
+	<div id="test" class="container">
+		<table class="table table-bordered text-center table-hover table-condensed">
+			<tr>
+				<th class="text-center">Id</th>
+				<th class="text-center">MFW</th>
+				<th class="text-center">Teile-<br>wert</th>
+				<th class="text-center" data-toggle="tooltip" data-placement="left" title="Tooltip on left">WBZ</th>
+				<th class="text-center">Discont-<br>menge</th>
+				<th class="text-center">Bestellkosten</th>
+				<th class="text-center">Reich-<br>weite</th>
+				<th class="text-center">Lager-<br>menge</th>
+				<th class="text-center">Verbrauch<br>aktuell</th>
+				<th class="text-center">Verbrauch<br>n+1</th>
+				<th class="text-center">Verbrauch<br>n+2</th>
+				<th class="text-center">Verbrauch<br>n+3</th>
+				<th class="text-center">Bestell-<br>menge</th>
+				<th class="text-center">Eil</th>
+			</tr>
+			<tr ng-repeat="teil in bvc.alleKaufTeile"  ng-class="{danger: bvc.mussBestellen(teil)}" ng-attr-id="{{teil.id}}">
+				<td>{{::teil.id}}</td>
+				<td>
+					<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="teil.mfw"></span>
+					<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!teil.mfw"></span>
+				</td>
+				<td>{{::teil.teileWert | currency:"€"}}</td>
+				<td>{{::teil.wbz}} &plusmn({{teil.wbzAbw}})</td>
+				<td>{{::teil.discontMenge}}</td>
+				<td>{{::teil.bestellKosten | currency:"€"}}</td>
+				<td>{{::teil.reichweite | number:2}}</td>
+				<td>{{::teil.lagerMenge}}</td>
+				<td>{{::teil.verbrauch1}}</td>
+				<td>{{::teil.verbrauch2}}</td>
+				<td>{{::teil.verbrauch3}}</td>
+				<td>{{::teil.verbrauch4}}</td>
+				<td><input type="number" ng-model="bvc.bestellService.getNeubestellung(teil.id).menge"></td>
+				<td><input type="checkbox" ng-model="bvc.bestellService.getNeubestellung(teil.id).eil"></td>
+			</tr>
+		</table>
+	</div>
+</section>

@@ -2,9 +2,7 @@
 /// <reference path="../../model/NewKaufTeil.ts" />
 /// <reference path="../appServices/NewTeileService.ts" />
 /// <reference path="../appServices/NewBaumService.ts" />
-/// <reference path="../appServices/BestellService.ts" />
 /// <reference path="../../model/NewTeilKnoten.ts" />
-/// <reference path="../../model/Bestellung.ts" />
 var ViewModel = (function () {
     function ViewModel(id, mfw, teileWert, wbz, wbzAbw, dm, bk, lm, v1, v2, v3, v4, rw) {
         this.id = id;
@@ -23,31 +21,31 @@ var ViewModel = (function () {
     }
     return ViewModel;
 })();
-var BestellverwaltungsController = (function () {
-    function BestellverwaltungsController(teileService, baumService, bestellService) {
+var NewBestellverwaltungsController = (function () {
+    function NewBestellverwaltungsController(teileService, baumService) {
+        this.danger = true;
         this.alleKaufTeile = new Array();
         this.baumService = baumService;
-        this.bestellService = bestellService;
         this.vertriebsWuensche = [
-            { kinder: 200, damen: 100, herren: 50 },
-            { kinder: 200, damen: 150, herren: 50 },
-            { kinder: 250, damen: 150, herren: 100 },
-            { kinder: 250, damen: 150, herren: 100 }];
+            { kinder: 150, damen: 100, herren: 100 },
+            { kinder: 150, damen: 100, herren: 100 },
+            { kinder: 150, damen: 100, herren: 100 },
+            { kinder: 150, damen: 100, herren: 100 }];
         this.createViewModel(teileService.alleKaufteile);
     }
-    BestellverwaltungsController.prototype.createViewModel = function (kaufTeile) {
+    NewBestellverwaltungsController.prototype.createViewModel = function (kaufTeile) {
         for (var i = 0; i < kaufTeile.length; i++) {
             var t = kaufTeile[i];
-            this.alleKaufTeile.push(new ViewModel(t.id, t.mehrfachVerwendung, t.teileWert, t.wiederBeschaffungsZeit, t.wbzAbweichung, t.discontMenge, t.bestellKosten, t.lagerMenge, this.getVerbrauch(t.id, 1), this.getVerbrauch(t.id, 2), this.getVerbrauch(t.id, 3), this.getVerbrauch(t.id, 4), t.lagerMenge / ((this.getVerbrauch(t.id, 1) + this.getVerbrauch(t.id, 2) + this.getVerbrauch(t.id, 3) + this.getVerbrauch(t.id, 4)) / 4)));
+            this.alleKaufTeile.push(new ViewModel(t.id, t.mehrfachVerwendung, t.teileWert, t.wiederBeschaffungsZeit, t.wbzAbweichung, t.discontMenge, t.bestellKosten, t.lagerMenge, this.getVerbrauch(t.id, 1), this.getVerbrauch(t.id, 2), this.getVerbrauch(t.id, 3), this.getVerbrauch(t.id, 4), t.lagerMenge / this.getVerbrauch(t.id, 1)));
         }
     };
-    BestellverwaltungsController.prototype.getVerbrauch = function (id, periode) {
+    NewBestellverwaltungsController.prototype.getVerbrauch = function (id, periode) {
         var anzahlKinderFahrrad = this.getAnzahlInBaum(this.baumService.kinderBaum, id) * this.vertriebsWuensche[periode - 1].kinder;
         var anzahlDamenFahrrad = this.getAnzahlInBaum(this.baumService.damenBaum, id) * this.vertriebsWuensche[periode - 1].damen;
         var anzahlHerrenFahrrad = this.getAnzahlInBaum(this.baumService.herrenBaum, id) * this.vertriebsWuensche[periode - 1].herren;
         return anzahlKinderFahrrad + anzahlDamenFahrrad + anzahlHerrenFahrrad;
     };
-    BestellverwaltungsController.prototype.getAnzahlInBaum = function (baum, id) {
+    NewBestellverwaltungsController.prototype.getAnzahlInBaum = function (baum, id) {
         var anzahl = 0;
         if (baum.teil_id === id) {
             anzahl += baum.anzahl;
@@ -59,12 +57,12 @@ var BestellverwaltungsController = (function () {
         }
         return anzahl;
     };
-    BestellverwaltungsController.prototype.mussBestellen = function (teil) {
+    NewBestellverwaltungsController.prototype.mussBestellen = function (teil) {
         if (teil.wbz < (teil.reichweite - 1)) {
             return false;
         }
         return true;
     };
-    return BestellverwaltungsController;
+    return NewBestellverwaltungsController;
 })();
-angular.module('BestellverwaltungModule').controller('BestellverwaltungController', ['NewTeileService', 'NewBaumService', 'BestellService', BestellverwaltungsController]);
+angular.module('BestellverwaltungModule').controller('NewBestellverwaltungController', ['NewTeileService', 'NewBaumService', NewBestellverwaltungsController]);
