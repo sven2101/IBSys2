@@ -45,7 +45,7 @@ class BestellverwaltungsController {
 	baumService: NewBaumService;
 	bestellService: BestellService;
 
-	vertriebsWuensche: Array<{ kinder: number, damen: number, herren: number }>;
+	vertriebsWuensche: Array<{ kinder: number;damen: number; herren: number }>;
 
 	constructor(teileService: NewTeileService, baumService: NewBaumService, bestellService:BestellService) {
 		this.alleKaufTeile = new Array();
