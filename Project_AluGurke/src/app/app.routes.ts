@@ -20,9 +20,13 @@ angular.module('app')
     }).when('/kapazitaetsplanung', {
           templateUrl: '/components/kapazitaetsplanung/kapazitaetsplanung.html',
           controller: 'KapazitaetsplanungController as kpc'
-    }).when('/lager', {
-          templateUrl: '/components/lager/lager.html',
-          controller: 'LagerController as lc'
-    })
+
+    }).when('/disposition', {
+            templateUrl: '/components/disposition/disposition.html',
+            controller: 'DispositionController as dc'
+        }).when('/lager', {
+            templateUrl: '/components/lager/lager.html',
+            controller: 'LagerController as lc'
+        })
   }]);
 

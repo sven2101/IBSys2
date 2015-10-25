@@ -5,11 +5,14 @@ class Auftrag{
     anzahl:number;
     periode:number;
     arbeitsplatz_id:number;
+    aufArbeitsplatz:boolean;
 
     constructor(erzeugnis_id:number, anzahl:number, periode:number,arbeitsplatz_id:number=0) {
         this.erzeugnis_id = erzeugnis_id;
         this.anzahl = anzahl;
         this.periode = periode;
         this.arbeitsplatz_id=arbeitsplatz_id;
+        this.aufArbeitsplatz=false;
     }
+
 }

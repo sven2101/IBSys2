@@ -9,5 +9,6 @@ angular.module('app', [
 	'pascalprecht.translate',
 	'TranslationModule',
 	'KapazitaetsplanungModule',
+	'DispositionModule',
 	'LagerModule'
 ]);
