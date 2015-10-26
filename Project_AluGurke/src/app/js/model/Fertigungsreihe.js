@@ -22,18 +22,18 @@ var Fertigungsreihe = (function () {
             temp.arbeitsplatz.auftraege.push(x);
             if (x.aufArbeitsplatz === true) {
                 temp.arbeitsplatz.auftragAufArbeitsplatz = x;
+                temp.arbeitsplatz.arbeitszeit -= temp.arbeitsplatz.ruestzeit;
             }
             temp.arbeitsplatz.arbeitszeit = temp.arbeitsplatz.fertigungszeit * temp.arbeitsplatz.getAnzahl() + (temp.arbeitsplatz.auftraege.length + temp.arbeitsplatz.arbeitsplatzFremdeAuftraege.length) * temp.arbeitsplatz.ruestzeit;
-            temp.arbeitsplatz.arbeitszeit -= temp.arbeitsplatz.ruestzeit;
         }
         else {
             temp = this.ersterArbeitsplatz;
             temp.arbeitsplatz.auftraege.push(x);
             if (x.aufArbeitsplatz === true) {
                 temp.arbeitsplatz.auftragAufArbeitsplatz = x;
+                temp.arbeitsplatz.arbeitszeit -= temp.arbeitsplatz.ruestzeit;
             }
             temp.arbeitsplatz.arbeitszeit = temp.arbeitsplatz.fertigungszeit * temp.arbeitsplatz.getAnzahl() + (temp.arbeitsplatz.auftraege.length + temp.arbeitsplatz.arbeitsplatzFremdeAuftraege.length) * temp.arbeitsplatz.ruestzeit;
-            temp.arbeitsplatz.arbeitszeit -= temp.arbeitsplatz.ruestzeit;
         }
         while (temp.nachfolger != null) {
             temp.nachfolger.arbeitsplatz.arbeitsplatzFremdeAuftraege = temp.arbeitsplatz.arbeitsplatzFremdeAuftraege.concat(temp.arbeitsplatz.auftraege);
@@ -50,6 +50,16 @@ var Fertigungsreihe = (function () {
             temp = temp.nachfolger;
         }
         return liste;
+    };
+    Fertigungsreihe.prototype.reset = function () {
+        var temp = this.ersterArbeitsplatz;
+        temp.arbeitsplatz.arbeitszeit = 0;
+        temp.arbeitsplatz.auftraege = [];
+        while (temp.nachfolger != null) {
+            temp.nachfolger.arbeitsplatz.arbeitszeit = 0;
+            temp.nachfolger.arbeitsplatz.auftraege = [];
+            temp = temp.nachfolger;
+        }
     };
     return Fertigungsreihe;
 })();

@@ -5,6 +5,7 @@ var KapazitaetsplanungController = (function () {
         this.arbeitsplatzService = arpeitsplatzService;
         this.auftragService = auftragsService;
         this.ergebnisListe = new Array();
+        this.arbeitsplatzService.reset();
         this.auftraegeSetzen();
         this.ergebnisListe = this.mergeArbeitsplaetze();
     }
@@ -20,7 +21,6 @@ var KapazitaetsplanungController = (function () {
         var liste = this.arbeitsplatzService.fertigungsreihen;
         var ergebnisListe = new Array();
         for (var i = 0; i < liste.length; i++) {
-            //ergebnisListe=ergebnisListe.concat(liste[i].alleArbeitsplaetze());
             var listeliste = liste[i].alleArbeitsplaetze();
             for (var j = 0; j < listeliste.length; j++) {
                 var temp = this.search(ergebnisListe, listeliste[j]);

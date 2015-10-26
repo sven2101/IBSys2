@@ -98,6 +98,11 @@ class ArbeitsplatzService {
             }
         }
     }
+    reset(){
+        for(let i=0;i<this.fertigungsreihen.length;i++){
+            this.fertigungsreihen[i].reset();
+        }
+    }
 
 
 }

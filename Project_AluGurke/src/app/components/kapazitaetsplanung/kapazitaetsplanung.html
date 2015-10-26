@@ -15,6 +15,10 @@
             <th>arbeitszeit</th>
             <th>Anzahl Aufträge</th>
             <th>Anzahl arbeitsplatzfremder Aufträge</th>
+            <th>Anzahl Schichten</th>
+            <th>Ueber1</th>
+            <th>Ueber2</th>
+            <th>Ueber3</th>
         </tr>
         <tbody>
             <tr ng-repeat="arbeitsplatz in kpc.ergebnisListe">
@@ -22,6 +26,16 @@
                 <td>{{arbeitsplatz.arbeitszeit}}</td>
                 <td>{{arbeitsplatz.auftraege.length}}</td>
                 <td>{{arbeitsplatz.arbeitsplatzFremdeAuftraege.length}}</td>
+                <td>
+                    <select id="select21_arbeitsplatz.id">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </select>
+                </td>
+                <td><input id="input21_select2_arbeitsplatz.id" style="width:30px;"></td>
+                <td><input id="input22_select2_arbeitsplatz.id" style="width:30px;"></td>
+                <td><input id="input23_select2_arbeitsplatz.id" style="width:30px;"></td>
             </tr>
         </tbody>
     </table>

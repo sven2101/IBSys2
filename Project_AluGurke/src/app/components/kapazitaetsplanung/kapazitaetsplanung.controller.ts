@@ -12,7 +12,9 @@ class KapazitaetsplanungController{
         this.auftragService=auftragsService;
 
         this.ergebnisListe=new Array<Arbeitsplatz>();
+        this.arbeitsplatzService.reset();
         this.auftraegeSetzen();
+
         this.ergebnisListe=this.mergeArbeitsplaetze();
     }
 
@@ -20,6 +22,9 @@ class KapazitaetsplanungController{
     aendern(){
         this.test=this.arbeitsplatzService.map[(<HTMLInputElement>document.getElementById("input1")).value];
     }
+
+
+
 
     auftraegeSetzen(){
         for(let i=0;i<this.auftragService.auftraege.length;i++){
@@ -31,7 +36,7 @@ class KapazitaetsplanungController{
         let liste =this.arbeitsplatzService.fertigungsreihen;
         let ergebnisListe=new Array<Arbeitsplatz>();
         for(let i=0;i<liste.length;i++){
-            //ergebnisListe=ergebnisListe.concat(liste[i].alleArbeitsplaetze());
+
             let listeliste=liste[i].alleArbeitsplaetze();
             for(let j=0;j<listeliste.length;j++){
                 let temp=this.search(ergebnisListe,listeliste[j]);

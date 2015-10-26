@@ -3,7 +3,7 @@
 var AuftragService = (function () {
     function AuftragService() {
         this.auftraege = new Array();
-        this.auftraegeSetzen();
+        //this.auftraegeSetzen();
     }
     AuftragService.prototype.auftraegeSetzen = function () {
         this.auftraege = [

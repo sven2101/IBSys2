@@ -6,7 +6,7 @@ class AuftragService {
 
     constructor(){
         this.auftraege=new Array<Auftrag>();
-        this.auftraegeSetzen();
+        //this.auftraegeSetzen();
     }
 
     auftraegeSetzen(){

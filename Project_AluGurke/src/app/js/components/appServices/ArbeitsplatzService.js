@@ -92,6 +92,11 @@ var ArbeitsplatzService = (function () {
             }
         }
     };
+    ArbeitsplatzService.prototype.reset = function () {
+        for (var i = 0; i < this.fertigungsreihen.length; i++) {
+            this.fertigungsreihen[i].reset();
+        }
+    };
     return ArbeitsplatzService;
 })();
 angular.module('app').factory('ArbeitsplatzService', [function () { return new ArbeitsplatzService(); }]);
