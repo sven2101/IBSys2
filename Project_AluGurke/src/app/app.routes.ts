@@ -14,6 +14,9 @@ angular.module('app')
     }).when('/bestellverwaltung/kaufteildisposition', {
           templateUrl: '/components/bestellverwaltung/kaufteilDisposition.html',
           controller: 'KaufteilDispositionController as ktdc'
+    }).when('/produktionsprogramm', {
+        templateUrl: '/components/produktionsprogramm/produktionsprogramm.html',
+        controller: 'ProduktionsprogrammController as pc'
     }).when('/bestellverwaltung/erweitert', {
           templateUrl: '/components/bestellverwaltung/erweitert.html',
           controller: 'ErweitertController as ec'

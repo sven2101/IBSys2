@@ -5,6 +5,7 @@ angular.module('app', [
     'ngResource',
     'ngAnimate',
     'FileModule',
+    'ProduktionsprogrammModule',
     'BestellverwaltungModule',
     'pascalprecht.translate',
     'TranslationModule',

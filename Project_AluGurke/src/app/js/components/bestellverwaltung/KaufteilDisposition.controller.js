@@ -3,6 +3,7 @@
 /// <reference path="../appServices/NewTeileService.ts" />
 /// <reference path="../appServices/NewBaumService.ts" />
 /// <reference path="../appServices/BestellService.ts" />
+/// <reference path="../appServices/ProgrammService.ts" />
 /// <reference path="../../model/NewTeilKnoten.ts" />
 /// <reference path="../../model/Bestellung.ts" />
 var ViewModel = (function () {
@@ -24,15 +25,11 @@ var ViewModel = (function () {
     return ViewModel;
 })();
 var KaufteilDispositionController = (function () {
-    function KaufteilDispositionController(teileService, baumService, bestellService) {
+    function KaufteilDispositionController(teileService, baumService, bestellService, programmService) {
         this.alleKaufTeile = new Array();
         this.baumService = baumService;
         this.bestellService = bestellService;
-        this.vertriebsWuensche = [
-            { kinder: 200, damen: 100, herren: 50 },
-            { kinder: 200, damen: 150, herren: 50 },
-            { kinder: 250, damen: 150, herren: 100 },
-            { kinder: 250, damen: 150, herren: 100 }];
+        this.programmService = programmService;
         this.createViewModel(teileService.alleKaufteile);
     }
     KaufteilDispositionController.prototype.createViewModel = function (kaufTeile) {
@@ -42,9 +39,9 @@ var KaufteilDispositionController = (function () {
         }
     };
     KaufteilDispositionController.prototype.getVerbrauch = function (id, periode) {
-        var anzahlKinderFahrrad = this.getAnzahlInBaum(this.baumService.kinderBaum, id) * this.vertriebsWuensche[periode - 1].kinder;
-        var anzahlDamenFahrrad = this.getAnzahlInBaum(this.baumService.damenBaum, id) * this.vertriebsWuensche[periode - 1].damen;
-        var anzahlHerrenFahrrad = this.getAnzahlInBaum(this.baumService.herrenBaum, id) * this.vertriebsWuensche[periode - 1].herren;
+        var anzahlKinderFahrrad = this.getAnzahlInBaum(this.baumService.kinderBaum, id) * this.programmService.getProgrammposition(1, periode).menge;
+        var anzahlDamenFahrrad = this.getAnzahlInBaum(this.baumService.damenBaum, id) * this.programmService.getProgrammposition(2, periode).menge;
+        var anzahlHerrenFahrrad = this.getAnzahlInBaum(this.baumService.herrenBaum, id) * this.programmService.getProgrammposition(3, periode).menge;
         return anzahlKinderFahrrad + anzahlDamenFahrrad + anzahlHerrenFahrrad;
     };
     KaufteilDispositionController.prototype.getAnzahlInBaum = function (baum, id) {
@@ -73,4 +70,4 @@ var KaufteilDispositionController = (function () {
     };
     return KaufteilDispositionController;
 })();
-angular.module('BestellverwaltungModule').controller('KaufteilDispositionController', ['NewTeileService', 'NewBaumService', 'BestellService', KaufteilDispositionController]);
+angular.module('BestellverwaltungModule').controller('KaufteilDispositionController', ['NewTeileService', 'NewBaumService', 'BestellService', 'ProgrammService', KaufteilDispositionController]);
