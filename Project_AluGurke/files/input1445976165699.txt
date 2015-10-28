@@ -1,0 +1,1 @@
+<input><qualitycontrol type='no' losequantity='0' delay='0'/><sellwish/><selldirect/><orderlist><order/></orderlist><productionlist/><workingtimelist/></input>

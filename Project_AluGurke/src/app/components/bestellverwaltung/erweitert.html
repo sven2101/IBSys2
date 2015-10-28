@@ -1,6 +1,20 @@
 <section>
 	<div class="container">
 		<h2>Erweitert</h2>
-		{{ec.neuBestellungen}}
+		<div ng-if="ec.neuBestellungen.length === 0">
+			Keine Neubestellungen vorhanden. Bitte geben Sie zuerst in der Kaufteildisposition die zu bestellenden Mengen an.
+		</div>
+		<div ng-repeat="bestellung in ec.neuBestellungen">
+			<a class="btn btn-info col-md-12" toggle ng-attr-toggleid="{{bestellung.teil_id}}" style="margin-top:2px">
+  				Bestellung für Kaufteil {{bestellung.teil_id}}
+			</a>
+			<div class="collapse" ng-attr-id="{{bestellung.teil_id}}"><!-- alert-danger-->
+  				<table>
+					  <tr>
+						  
+					  </tr>
+				</table>
+			</div>
+		</div>
 	</div>
 </section>

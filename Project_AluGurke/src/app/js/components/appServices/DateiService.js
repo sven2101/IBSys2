@@ -2,6 +2,7 @@
 /// <reference path="../../typeDefinitions/xml2json.d.ts" />
 /// <reference path="BestellService.ts" />
 /// <reference path="../../model/Bestellung.ts" />
+/// <reference path="../../model/NeuBestellung.ts" />
 var DateiService = (function () {
     function DateiService(bestellService) {
         this.dateiErzeugt = false;

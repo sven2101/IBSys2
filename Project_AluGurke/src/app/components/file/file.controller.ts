@@ -15,14 +15,16 @@ class FileController {
 	resource;
 	result: string;
 	dateiService: DateiService;
+	zugangBestellungen: Array<ZugangBestellung>;
 
 	constructor($scope, service, NewTeileService, bestellService, resourceService: ResourceService, dateiService:DateiService) {
 		this.teileService = NewTeileService;
 		this.$scope = $scope;
-		this.baum = service.herrenBaum;
+		this.baum = service.kinderBaum;
 		this.kaufteile = NewTeileService.alleKaufteile;
 		this.resource = resourceService.resource;
 		this.dateiService = dateiService;
+		this.zugangBestellungen = bestellService.zugangBestellungen;
 	}
 	
 	sendPostRequest() {

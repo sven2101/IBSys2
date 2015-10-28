@@ -8,10 +8,11 @@ var FileController = (function () {
         this.id = 24;
         this.teileService = NewTeileService;
         this.$scope = $scope;
-        this.baum = service.herrenBaum;
+        this.baum = service.kinderBaum;
         this.kaufteile = NewTeileService.alleKaufteile;
         this.resource = resourceService.resource;
         this.dateiService = dateiService;
+        this.zugangBestellungen = bestellService.zugangBestellungen;
     }
     FileController.prototype.sendPostRequest = function () {
         var vm = this;
