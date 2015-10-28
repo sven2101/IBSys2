@@ -1,7 +1,15 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
 /// <reference path="../appServices/BestellService.ts" />
-/// <reference path="../../model/Bestellung.ts" />
-/// <reference path="../../model/NeuBestellung.ts" />
+/// <reference path="../../model/Bestellung.ts"/>
+/// <reference path="../../model/NeuBestellung.ts"/>
+/// <reference path="../../model/NewKaufTeil.ts"/>
+
+class ErweitertViewModel {
+	kaufTeil: NewKaufTeil;
+	bestellung: NeuBestellung;
+	
+}
+
 
 class ErweitertController {
 	

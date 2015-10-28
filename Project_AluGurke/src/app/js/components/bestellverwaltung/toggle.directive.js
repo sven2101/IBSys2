@@ -5,7 +5,7 @@ var Toggle = (function () {
     }
     Toggle.prototype.link = function (scope, el, attrs, controller) {
         el.click(function () {
-            $('#' + attrs.toggleid).slideToggle();
+            $('#' + attrs.toggleid).toggle(0);
         });
     };
     return Toggle;
