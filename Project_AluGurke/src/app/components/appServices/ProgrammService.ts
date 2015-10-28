@@ -31,7 +31,7 @@ class ProgrammService {
         ];
     }
 
-    getProgrammposition(id: number,periode: number) {
+    getProgrammposition(id: number,periode: number=1) {
         for (var i = 0; i < this.produktionsprogramm.length; i++) {
             if ( this.produktionsprogramm[i].id === id && this.produktionsprogramm[i].periode === periode) {
                 return this.produktionsprogramm[i];

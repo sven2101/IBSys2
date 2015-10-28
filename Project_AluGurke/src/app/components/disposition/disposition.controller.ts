@@ -2,48 +2,71 @@
 
 class DispositionController{
 
-    $scope;
+
     auftragsService:AuftragService;
     newTeileService:NewTeileService;
-    eTeile:Array<NewErzeugnis>;
-    test:string;
-    auftraege:Array<Auftrag>;
-    map:{[key:number]:Auftrag;}
-    constructor(scope,auftragsService,newTeileService){
-        this.$scope=scope;
+    dispositionService:DispositionService;
+    newBaumService:NewBaumService;
+    models:Array<DispositionModel>;
+    modelsP1:Array<DispositionModel>;
+    modelsP2:Array<DispositionModel>;
+    modelsP3:Array<DispositionModel>;
+    knoten:Array<NewTeilKnoten>;
+
+    constructor(auftragsService,newTeileService,dispositionService,newBaumService){
+        this.dispositionService=dispositionService;
+        this.models=this.dispositionService.models;
+        this.modelsP1=this.dispositionService.dispositionP1;
+        this.modelsP2=this.dispositionService.dispositionP2;
+        this.modelsP3=this.dispositionService.dispositionP3;
         this.auftragsService=auftragsService;
-        this.newTeileService=newTeileService;
-        this.eTeile=newTeileService.alleErzeugnisse;
-        this.eTeile.sort((a,b)=>{return a.id-b.id});
-        this.auftraege=new Array<Auftrag>();
-        this.map={};
+        this.aendern();
     }
     aendern(){
-        this.map={};
-        this.auftraege=[];
-        for(let i=0;i<this.eTeile.length;i++){
-            let anzahl=Number((<HTMLInputElement>document.getElementById("input_"+this.eTeile[i].id)).value);
-            let split=Number((<HTMLInputElement>document.getElementById("select_"+this.eTeile[i].id)).value);
-            if(!isNaN(anzahl)&&anzahl>0&&this.eTeile[i].lagerMenge<anzahl){
-                let auftrag=new Auftrag(this.eTeile[i].id,anzahl-this.eTeile[i].lagerMenge,1);
-                this.map[this.eTeile[i].id]=auftrag;
-                let x=0;
-                while((anzahl-this.eTeile[i].lagerMenge-x)%split!==0){
-                    x+=1;
-                }
-                anzahl=(anzahl-this.eTeile[i].lagerMenge-x)/split;
-                for(let j=0;j<split;j++){
-                    let auftrag2=new Auftrag(this.eTeile[i].id,anzahl+x,1);
-                    if(anzahl>0||x>0){
-                        this.auftraege.push(auftrag2);
-                    }
-                    x=0;
-                }
-            }
-        }
-        this.auftragsService.auftraege=this.auftraege;
+        this.dispositionService.aendern();
     }
 }
 
-angular.module("DispositionModule").controller("DispositionController",["$scope","AuftragService","NewTeileService",DispositionController]);
+class DispositionModel{
+
+    eTeil:NewErzeugnis;
+    geplanterLagerstand:number;
+    produktionsProgramm:ProgrammPosition;
+    split:string;
+    prioritaet:string;
+    anzahl:number;
+    periode:number;
+    auftraege:Array<Auftrag>;
+    auftragInWarteschlange:Array<Auftrag>;
+    auftragAufMaschine:Auftrag;
+
+    constructor(eTeil:NewErzeugnis,x:ProgrammPosition) {
+        this.eTeil = eTeil;
+        this.geplanterLagerstand = 100;
+        this.split = "1";
+        this.prioritaet = "normal";
+        this.produktionsProgramm=x;
+        this.anzahl=666;
+        this.periode=1;
+        this.auftraege=new Array<Auftrag>();
+        this.auftragInWarteschlange=new Array<Auftrag>();
+    }
+    getWarteschlange(){
+        let x=0;
+        for(let i=0;i<this.auftragInWarteschlange.length;i++){
+            x+=this.auftragInWarteschlange[i].anzahl;
+        }
+        return x;
+    }
+    getMaterialAufMaschine(){
+        if(this.auftragAufMaschine==null){
+            return 0;
+        }
+        else{
+            return this.auftragAufMaschine.anzahl;
+        }
+    }
+}
+
+angular.module("DispositionModule").controller("DispositionController",["AuftragService","NewTeileService","DispositionService","NewBaumService",DispositionController]);
 

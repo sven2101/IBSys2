@@ -49,6 +49,7 @@ class NewTeileService {
 				return this.alleErzeugnisse[i]
 			}
 		}
+		return null;
 	}
 	
 	getKaufTeil(id:number) {

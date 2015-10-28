@@ -41,6 +41,7 @@ var NewTeileService = (function () {
                 return this.alleErzeugnisse[i];
             }
         }
+        return null;
     };
     NewTeileService.prototype.getKaufTeil = function (id) {
         for (var i = 0; i < this.alleKaufteile.length; i++) {
