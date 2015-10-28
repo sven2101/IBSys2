@@ -6,6 +6,7 @@
 {{fc.anzahl}}
 <br>
 <button ng-click="fc.sendPostRequest()">Request</button> {{fc.result}} <br>
+{{fc.zugangBestellungen}}s
 <a ng-if="fc.dateiService.dateiErzeugt" ng-href="/download?dateiName={{fc.dateiService.dateiName}}" target="_blank">Download XML Datei.</a><br>
 <input id="dateiInput" type='file' onchange="verarbeiteDatei(this.files)">
 

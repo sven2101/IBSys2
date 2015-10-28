@@ -1,6 +1,7 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
 /// <reference path="../appServices/BestellService.ts" />
 /// <reference path="../../model/Bestellung.ts" />
+/// <reference path="../../model/NeuBestellung.ts" />
 var ErweitertController = (function () {
     function ErweitertController(bestellService) {
         this.getNeuBestellungen(bestellService.neuBestellungen);

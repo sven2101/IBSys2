@@ -12,6 +12,7 @@ var FileController = (function () {
         this.kaufteile = NewTeileService.alleKaufteile;
         this.resource = resourceService.resource;
         this.dateiService = dateiService;
+        this.zugangBestellungen = bestellService.zugangBestellungen;
     }
     FileController.prototype.sendPostRequest = function () {
         var vm = this;

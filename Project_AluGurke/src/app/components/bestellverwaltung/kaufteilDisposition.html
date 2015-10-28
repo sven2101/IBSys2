@@ -14,7 +14,7 @@
 				<th class="text-center">Verbrauch<br>n+1</th>
 				<th class="text-center">Verbrauch<br>n+2</th>
 				<th class="text-center">Verbrauch<br>n+3</th>
-				<th class="text-center">Bestell-<br>menge</th>
+				<th class="text-center">Bestellmenge</th>
 				<th class="text-center">Eil</th>
 			</tr>
 			<tr ng-repeat="teil in ktdc.alleKaufTeile"  ng-class="{danger: ktdc.mussBestellen(teil), warning: ktdc.sollteBestellen(teil)}" ng-attr-id="{{teil.id}}">
@@ -33,7 +33,7 @@
 				<td>{{::teil.verbrauch2}}</td>
 				<td>{{::teil.verbrauch3}}</td>
 				<td>{{::teil.verbrauch4}}</td>
-				<td><input type="number" ng-model="ktdc.bestellService.getNeubestellung(teil.id).menge"></td>
+				<td><input type="number" min="0" ng-model="ktdc.bestellService.getNeubestellung(teil.id).menge"></td>
 				<td><input type="checkbox" ng-model="ktdc.bestellService.getNeubestellung(teil.id).eil"></td>
 			</tr>
 		</table>

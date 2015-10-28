@@ -2,12 +2,13 @@
 /// <reference path="../../typeDefinitions/xml2json.d.ts" />
 /// <reference path="BestellService.ts" />
 /// <reference path="../../model/Bestellung.ts" />
+/// <reference path="../../model/NeuBestellung.ts" />
 
 class DateiService {
 
 	dateiName: string;
 	dateiErzeugt: boolean;
-	neuBestellungen: Array<Bestellung>;
+	neuBestellungen: Array<NeuBestellung>;
 
 	constructor(bestellService: BestellService) {
 		this.dateiErzeugt = false;

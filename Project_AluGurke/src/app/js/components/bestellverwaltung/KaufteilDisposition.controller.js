@@ -5,7 +5,6 @@
 /// <reference path="../appServices/BestellService.ts" />
 /// <reference path="../appServices/ProgrammService.ts" />
 /// <reference path="../../model/NewTeilKnoten.ts" />
-/// <reference path="../../model/Bestellung.ts" />
 var ViewModel = (function () {
     function ViewModel(id, mfw, teileWert, wbz, wbzAbw, dm, bk, lm, v1, v2, v3, v4, rw) {
         this.id = id;
@@ -35,7 +34,7 @@ var KaufteilDispositionController = (function () {
     KaufteilDispositionController.prototype.createViewModel = function (kaufTeile) {
         for (var i = 0; i < kaufTeile.length; i++) {
             var t = kaufTeile[i];
-            this.alleKaufTeile.push(new ViewModel(t.id, t.mehrfachVerwendung, t.teileWert, t.wiederBeschaffungsZeit, t.wbzAbweichung, t.discontMenge, t.bestellKosten, t.lagerMenge, this.getVerbrauch(t.id, 1), this.getVerbrauch(t.id, 2), this.getVerbrauch(t.id, 3), this.getVerbrauch(t.id, 4), t.lagerMenge / ((this.getVerbrauch(t.id, 1) + this.getVerbrauch(t.id, 2) + this.getVerbrauch(t.id, 3) + this.getVerbrauch(t.id, 4)) / 4)));
+            this.alleKaufTeile.push(new ViewModel(t.id, t.mehrfachVerwendung, t.teileWert, t.wiederBeschaffungsZeit, t.wbzAbweichung, t.discontMenge, t.bestellKosten, t.lagerMenge, this.getVerbrauch(t.id, 1), this.getVerbrauch(t.id, 2), this.getVerbrauch(t.id, 3), this.getVerbrauch(t.id, 4), this.getReichweite(t.lagerMenge, t.id)));
         }
     };
     KaufteilDispositionController.prototype.getVerbrauch = function (id, periode) {
@@ -43,6 +42,16 @@ var KaufteilDispositionController = (function () {
         var anzahlDamenFahrrad = this.getAnzahlInBaum(this.baumService.damenBaum, id) * this.programmService.getProgrammposition(2, periode).menge;
         var anzahlHerrenFahrrad = this.getAnzahlInBaum(this.baumService.herrenBaum, id) * this.programmService.getProgrammposition(3, periode).menge;
         return anzahlKinderFahrrad + anzahlDamenFahrrad + anzahlHerrenFahrrad;
+    };
+    KaufteilDispositionController.prototype.getReichweite = function (lagerMenge, teil_id) {
+        if (lagerMenge === 0) {
+            return 0;
+        }
+        var gesamtVerbrauch = this.getVerbrauch(teil_id, 1) + this.getVerbrauch(teil_id, 2) + this.getVerbrauch(teil_id, 3) + this.getVerbrauch(teil_id, 4);
+        if (gesamtVerbrauch === 0) {
+            return Number.POSITIVE_INFINITY;
+        }
+        return lagerMenge / gesamtVerbrauch;
     };
     KaufteilDispositionController.prototype.getAnzahlInBaum = function (baum, id) {
         var anzahl = 0;

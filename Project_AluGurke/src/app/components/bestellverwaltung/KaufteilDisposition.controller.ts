@@ -5,7 +5,6 @@
 /// <reference path="../appServices/BestellService.ts" />
 /// <reference path="../appServices/ProgrammService.ts" />
 /// <reference path="../../model/NewTeilKnoten.ts" />
-/// <reference path="../../model/Bestellung.ts" />
 
 class ViewModel {
 	id: number;
@@ -62,7 +61,7 @@ class KaufteilDispositionController {
 				t.wiederBeschaffungsZeit, t.wbzAbweichung,
 				t.discontMenge, t.bestellKosten, t.lagerMenge, this.getVerbrauch(t.id, 1),
 				this.getVerbrauch(t.id, 2), this.getVerbrauch(t.id, 3),
-				this.getVerbrauch(t.id, 4), t.lagerMenge / ((this.getVerbrauch(t.id, 1) + this.getVerbrauch(t.id, 2) + this.getVerbrauch(t.id, 3) + this.getVerbrauch(t.id, 4)) / 4)));
+				this.getVerbrauch(t.id, 4), this.getReichweite(t.lagerMenge,t.id)));
 		}
 	}
 
@@ -72,7 +71,18 @@ class KaufteilDispositionController {
 		var anzahlHerrenFahrrad = this.getAnzahlInBaum(this.baumService.herrenBaum, id) * this.programmService.getProgrammposition(3,periode).menge;
 		return anzahlKinderFahrrad + anzahlDamenFahrrad + anzahlHerrenFahrrad;
 	}
-
+	
+	getReichweite(lagerMenge: number, teil_id:number) {
+		if(lagerMenge === 0){
+			return 0;
+		}
+		var gesamtVerbrauch = this.getVerbrauch(teil_id, 1) + this.getVerbrauch(teil_id, 2) + this.getVerbrauch(teil_id, 3) + this.getVerbrauch(teil_id, 4);
+		if (gesamtVerbrauch === 0) {
+			return Number.POSITIVE_INFINITY;
+		}
+		return lagerMenge / gesamtVerbrauch;
+	}
+	
 	getAnzahlInBaum(baum: NewTeilKnoten, id: number) {
 		var anzahl = 0;
 		if (baum.teil_id === id) {

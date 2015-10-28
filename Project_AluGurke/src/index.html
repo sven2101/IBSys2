@@ -6,6 +6,7 @@
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<style>
 		.nav-side-menu {
+			z-index: 999;
 			overflow: auto;
 			font-family: verdana;
 			font-size: 12px;
@@ -13,7 +14,7 @@
 			background-color: #2e353d;
 			position: fixed;
 			top: 0px;
-			width: 300px;
+			width: 25%px;
 			height: 100%;
 			color: #e1ffff;
 		}
@@ -175,7 +176,7 @@
 				<li> <a href="#/produktionsprogramm">Produktionsprogramm</a></li>
 
 				<li data-toggle="collapse" data-target="#service" class="collapsed">
-					<a href="#"><i></i>Bestellverwaltung <span class="arrow"></span></a>
+					<a href=""><i></i>Bestellverwaltung <span class="arrow"></span></a>
 				</li>
 				<ul class="sub-menu collapse" id="service">
 					<li><a href="#/bestellverwaltung/kaufteildisposition">Kaufteildisposition</a></li>
@@ -189,7 +190,7 @@
 		</div>
 	</div>
 
-	<div ng-view style="margin-left: 300px"></div>
+	<div ng-view style=""></div>
 	</body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
