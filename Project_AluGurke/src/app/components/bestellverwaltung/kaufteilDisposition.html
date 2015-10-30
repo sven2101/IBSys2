@@ -1,21 +1,24 @@
 <section id="bestellverwaltung">
+	<style>
+		.curs {
+			cursor: pointer;
+		}
+	</style>
 	<div id="test" class="container">
 		<table class="table table-bordered text-center table-hover table-condensed">
 			<tr>
-				<th class="text-center">Id</th>
+				<th class="text-center curs" ng-click="ktdc.sortieren('id')">Id</th>
 				<th class="text-center">MFW</th>
-				<th class="text-center">Teile-<br>wert</th>
-				<th class="text-center" data-toggle="tooltip" data-placement="left" title="Tooltip on left">WBZ&nbsp&plusmn<br>Abweichung</th>
-				<th class="text-center">Discont-<br>menge</th>
-				<th class="text-center">Bestellkosten</th>
-				<th class="text-center">Reich-<br>weite</th>
-				<th class="text-center">Lager-<br>menge</th>
-				<th class="text-center">Verbrauch<br>aktuell</th>
-				<th class="text-center">Verbrauch<br>n+1</th>
-				<th class="text-center">Verbrauch<br>n+2</th>
-				<th class="text-center">Verbrauch<br>n+3</th>
-				<th class="text-center">Bestellmenge</th>
-				<th class="text-center">Eil</th>
+				<th class="text-center curs" ng-click="ktdc.sortieren('teileWert')">Teile-<br>wert</th>
+				<th class="text-center curs" ng-click="ktdc.sortieren('wbz')">WBZ&nbsp&plusmn<br>Abweichung</th>
+				<th class="text-center curs" ng-click="ktdc.sortieren('discontMenge')">Discont-<br>menge</th>
+				<th class="text-center curs" ng-click="ktdc.sortieren('bestellKosten')">Bestellkosten</th>
+				<th class="text-center curs" ng-click="ktdc.sortieren('reichweite')">Reich-<br>weite</th>
+				<th class="text-center curs" ng-click="ktdc.sortieren('lagerMenge')">Lager-<br>menge</th>
+				<th class="text-center curs" ng-click="ktdc.sortieren('verbrauch1')">Verbrauch<br>aktuell</th>
+				<th class="text-center curs" ng-click="ktdc.sortieren('verbrauch2')">Verbrauch<br>n+1</th>
+				<th class="text-center curs" ng-click="ktdc.sortieren('verbrauch3')">Verbrauch<br>n+2</th>
+				<th class="text-center curs" ng-click="ktdc.sortieren('verbrauch4')">Verbrauch<br>n+3</th>
 			</tr>
 			<tr ng-repeat="teil in ktdc.alleKaufTeile"  ng-class="{danger: ktdc.mussBestellen(teil), warning: ktdc.sollteBestellen(teil)}" ng-attr-id="{{teil.id}}">
 				<td>{{::teil.id}}</td>
@@ -33,8 +36,7 @@
 				<td>{{::teil.verbrauch2}}</td>
 				<td>{{::teil.verbrauch3}}</td>
 				<td>{{::teil.verbrauch4}}</td>
-				<td><input type="number" min="0" ng-model="ktdc.bestellService.getNeubestellung(teil.id).menge"></td>
-				<td><input type="checkbox" ng-model="ktdc.bestellService.getNeubestellung(teil.id).eil"></td>
+				<td><button type="button" class="btn btn-primary">Bestellen</button></td>
 			</tr>
 		</table>
 	</div>

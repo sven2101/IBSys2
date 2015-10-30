@@ -4,8 +4,10 @@ var Toggle = (function () {
         this.restrict = 'A';
     }
     Toggle.prototype.link = function (scope, el, attrs, controller) {
-        el.click(function () {
-            $('#' + attrs.toggleid).toggle(0);
+        el.children(".panel-body").hide();
+        el.children(".panel-heading").css('cursor', 'pointer');
+        el.children(".panel-heading").click(function () {
+            $(this).siblings(".panel-body").slideToggle("slow");
         });
     };
     return Toggle;

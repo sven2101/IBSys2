@@ -9,8 +9,10 @@ class Toggle {
 	}
 
 	link(scope, el, attrs, controller) {
-		el.click(function(){
-			$('#'+attrs.toggleid).toggle(0);
+		el.children(".panel-body").hide();
+		el.children(".panel-heading").css('cursor', 'pointer');
+		el.children(".panel-heading").click(function () {
+			$(this).siblings(".panel-body").slideToggle("slow");
 		});
 	}
 }
