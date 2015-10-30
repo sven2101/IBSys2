@@ -19,8 +19,6 @@
 				<th class="text-center curs" ng-click="ktdc.sortieren('verbrauch2')">Verbrauch<br>n+1</th>
 				<th class="text-center curs" ng-click="ktdc.sortieren('verbrauch3')">Verbrauch<br>n+2</th>
 				<th class="text-center curs" ng-click="ktdc.sortieren('verbrauch4')">Verbrauch<br>n+3</th>
-				<th class="text-center">Bestellmenge</th>
-				<th class="text-center">Eil</th>
 			</tr>
 			<tr ng-repeat="teil in ktdc.alleKaufTeile"  ng-class="{danger: ktdc.mussBestellen(teil), warning: ktdc.sollteBestellen(teil)}" ng-attr-id="{{teil.id}}">
 				<td>{{::teil.id}}</td>
@@ -38,8 +36,7 @@
 				<td>{{::teil.verbrauch2}}</td>
 				<td>{{::teil.verbrauch3}}</td>
 				<td>{{::teil.verbrauch4}}</td>
-				<td><input type="number" min="0" ng-model="ktdc.bestellService.getNeubestellung(teil.id).menge"></td>
-				<td><input type="checkbox" ng-model="ktdc.bestellService.getNeubestellung(teil.id).eil"></td>
+				<td><button type="button" class="btn btn-primary">Bestellen</button></td>
 			</tr>
 		</table>
 	</div>
