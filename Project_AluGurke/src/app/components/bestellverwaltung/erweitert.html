@@ -1,20 +1,20 @@
 <section>
 	<div class="container">
 		<h2>Erweitert</h2>
-		<div ng-if="ec.neuBestellungen.length === 0">
-			Keine Neubestellungen vorhanden. Bitte geben Sie zuerst in der Kaufteildisposition die zu bestellenden Mengen an.
-		</div>
-		<div ng-repeat="bestellung in ec.neuBestellungen">
-			<a class="btn btn-info col-md-12" toggle ng-attr-toggleid="{{bestellung.teil_id}}" style="margin-top:2px">
-  				Bestellung für Kaufteil {{bestellung.teil_id}}
-			</a>
-			<div class="collapse" ng-attr-id="{{bestellung.teil_id}}"><!-- alert-danger-->
-  				<table>
-					  <tr>
-						  
-					  </tr>
-				</table>
-			</div>
+		<div class="panel panel-default" toggle ng-repeat="model in ec.neuBestellungen">
+  			<div class="panel-heading">
+   				<h3 class="panel-title">Bestellung für Kaufteil {{model.kaufTeil.id}}</h3>
+  			</div>
+  			<div class="panel-body">
+    			<div class="row">
+					<div class="col-md-2">Bestellkosten: {{model.kaufTeil.bestellKosten | currency:"€"}}</div>
+					<div class="col-md-2">Teilewert: {{model.kaufTeil.teileWert | currency:"€"}}</div>
+					<div class="col-md-3">Menge: <input type="number" ng-model="model.bestellung.menge"></div>
+					<div class="col-md-3">Gesamtkosten: {{ec.getGesamtKosten(model) | currency:"€"}}</div>
+				</div>
+				<div class="row">
+				</div>
+ 			 </div>
 		</div>
 	</div>
 </section>

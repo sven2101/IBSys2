@@ -37,14 +37,14 @@ var NewTeileService = (function () {
     };
     NewTeileService.prototype.getErzeugnis = function (id) {
         for (var i = 0; i < this.alleErzeugnisse.length; i++) {
-            if (this.alleErzeugnisse[i].id = id) {
+            if (this.alleErzeugnisse[i].id === id) {
                 return this.alleErzeugnisse[i];
             }
         }
     };
     NewTeileService.prototype.getKaufTeil = function (id) {
         for (var i = 0; i < this.alleKaufteile.length; i++) {
-            if (this.alleKaufteile[i].id = id) {
+            if (this.alleKaufteile[i].id === id) {
                 return this.alleKaufteile[i];
             }
         }

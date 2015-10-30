@@ -77,6 +77,15 @@ var KaufteilDispositionController = (function () {
         }
         return false;
     };
+    KaufteilDispositionController.prototype.sortieren = function (kriterium) {
+        this.alleKaufTeile.sort(function (a, b) {
+            var erg = a[kriterium] - b[kriterium];
+            if (erg === 0) {
+                return a['id'] - b['id'];
+            }
+            return erg;
+        });
+    };
     return KaufteilDispositionController;
 })();
 angular.module('BestellverwaltungModule').controller('KaufteilDispositionController', ['NewTeileService', 'NewBaumService', 'BestellService', 'ProgrammService', KaufteilDispositionController]);

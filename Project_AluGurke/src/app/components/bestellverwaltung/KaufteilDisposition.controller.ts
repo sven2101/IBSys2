@@ -40,11 +40,12 @@ class ViewModel {
 }
 
 class KaufteilDispositionController {
-
+	
 	alleKaufTeile: Array<ViewModel>;
 	baumService: NewBaumService;
 	bestellService: BestellService;
 	programmService: ProgrammService;
+	
 
 	constructor(teileService: NewTeileService, baumService: NewBaumService, bestellService: BestellService, programmService: ProgrammService) {
 		this.alleKaufTeile = new Array();
@@ -108,6 +109,16 @@ class KaufteilDispositionController {
 			return true;
 		}
 		return false;
+	}
+	
+	sortieren(kriterium: string){
+		this.alleKaufTeile.sort(function(a:ViewModel,b:ViewModel){
+			var erg = a[kriterium] - b[kriterium];
+			if(erg === 0) {
+				return a['id'] - b['id']
+			}
+			return erg;
+		});
 	}
 }
 
