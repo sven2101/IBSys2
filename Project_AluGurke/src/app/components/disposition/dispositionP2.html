@@ -14,9 +14,9 @@
     <tbody>
     <tr ng-repeat="model in dc.modelsP2">
         <td><label>{{model.eTeil.id}}</label></td>
-        <td><label>{{model.produktionsProgramm.menge}}</label></td>
+        <td><label>{{model.getProdProg()}}</label></td>
         <td><input id="input_{{model.eTeil.id}}" ng-model="model.geplanterLagerstand" ng-keyup="dc.aendern()"></td>
-        <td><label>{{model.eTeil.lagerMenge}}</label></td>
+        <td><label>{{model.getLagerMenge()}}</label></td>
         <td><label>{{model.getWarteschlange()}}</label></td>
         <td><label>{{model.getMaterialAufMaschine()}}</label></td>
         <td>{{model.anzahl}}</td>

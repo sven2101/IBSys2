@@ -25,6 +25,7 @@ var DispositionService = (function () {
             this.dispositionP1.push(new DispositionModel(this.filter(dispo[i].teil_id), this.programmService.getProgrammposition(1)));
         }
         this.models = this.dispositionP1.concat(this.dispositionP2.concat(this.dispositionP3));
+        this.dispositionP1.sort(function (a, b) { return a.eTeil.id - b.eTeil.id; });
     };
     DispositionService.prototype.dispoP2 = function () {
         var dispo = new Array();
@@ -35,6 +36,7 @@ var DispositionService = (function () {
             this.dispositionP2.push(new DispositionModel(this.filter(dispo[i].teil_id), this.programmService.getProgrammposition(2)));
         }
         this.models = this.dispositionP1.concat(this.dispositionP2.concat(this.dispositionP3));
+        this.dispositionP2.sort(function (a, b) { return a.eTeil.id - b.eTeil.id; });
     };
     DispositionService.prototype.dispoP3 = function () {
         var dispo = new Array();
@@ -45,6 +47,7 @@ var DispositionService = (function () {
             this.dispositionP3.push(new DispositionModel(this.filter(dispo[i].teil_id), this.programmService.getProgrammposition(3)));
         }
         this.models = this.dispositionP1.concat(this.dispositionP2.concat(this.dispositionP3));
+        this.dispositionP3.sort(function (a, b) { return a.eTeil.id - b.eTeil.id; });
     };
     DispositionService.prototype.filter = function (x) {
         var y = this.newTeileService.alleErzeugnisse;
@@ -64,12 +67,14 @@ var DispositionService = (function () {
     };
     DispositionService.prototype.aendern = function () {
         var auftraege = new Array();
+        var auftraegeMFV = new Array();
+        var map;
         for (var i = 0; i < this.models.length; i++) {
             this.models[i].auftraege = [];
             if (isNaN(this.models[i].geplanterLagerstand)) {
                 this.models[i].geplanterLagerstand = 0;
             }
-            this.models[i].anzahl = Number(this.models[i].produktionsProgramm.menge) + Number(this.models[i].geplanterLagerstand) - Number(this.models[i].eTeil.lagerMenge) - Number(this.models[i].getMaterialAufMaschine() - Number(this.models[i].getWarteschlange()));
+            this.models[i].anzahl = Number(this.models[i].getProdProg()) + Number(this.models[i].getGeplanteLagermenge()) - Number(this.models[i].getLagerMenge()) - Number(this.models[i].getMaterialAufMaschine() - Number(this.models[i].getWarteschlange()));
             if (this.models[i].anzahl <= 0 || isNaN(this.models[i].anzahl)) {
                 this.models[i].anzahl = 0;
             }
@@ -83,8 +88,8 @@ var DispositionService = (function () {
                 for (var j = 0; j < Number(this.models[i].split); j++) {
                     var auftrag = new Auftrag(this.models[i].eTeil.id, y + x / Number(this.models[i].split), this.models[i].periode);
                     auftrag.setPriortaet(this.models[i].prioritaet);
-                    this.models[i].auftraege.push(auftrag);
                     y = 0;
+                    this.models[i].auftraege.push(auftrag);
                 }
             }
         }

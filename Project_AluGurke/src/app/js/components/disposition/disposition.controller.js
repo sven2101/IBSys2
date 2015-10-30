@@ -31,6 +31,9 @@ var DispositionModel = (function () {
         for (var i = 0; i < this.auftragInWarteschlange.length; i++) {
             x += this.auftragInWarteschlange[i].anzahl;
         }
+        if (this.eTeil.mehrfachVerwendung) {
+            x = Math.round(x / 3);
+        }
         return x;
     };
     DispositionModel.prototype.getMaterialAufMaschine = function () {
@@ -38,7 +41,35 @@ var DispositionModel = (function () {
             return 0;
         }
         else {
+            if (this.eTeil.mehrfachVerwendung) {
+                return Math.round(this.auftragAufMaschine.anzahl / 3);
+            }
             return this.auftragAufMaschine.anzahl;
+        }
+    };
+    DispositionModel.prototype.getLagerMenge = function () {
+        if (this.eTeil.mehrfachVerwendung) {
+            return Math.round(this.eTeil.lagerMenge / 3);
+        }
+        else {
+            return this.eTeil.lagerMenge;
+        }
+    };
+    DispositionModel.prototype.getProdProg = function () {
+        if (this.eTeil.mehrfachVerwendung) {
+            return Math.round(this.produktionsProgramm.menge / 3);
+        }
+        else {
+            return this.produktionsProgramm.menge;
+        }
+    };
+    DispositionModel.prototype.getGeplanteLagermenge = function () {
+        if (this.eTeil.mehrfachVerwendung) {
+            //return Math.round(this.geplanterLagerstand/3);
+            return this.geplanterLagerstand;
+        }
+        else {
+            return this.geplanterLagerstand;
         }
     };
     return DispositionModel;
