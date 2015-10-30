@@ -3,25 +3,41 @@
 
 class AuftragService {
 	auftraege:Array<Auftrag>;
-
-    constructor(){
+    auftraegeInWarteschlange:Array<Auftrag>;
+    auftraegeAufMaschine:Array<Auftrag>;
+    dispositionService:DispositionService;
+    constructor(DispositionService){
+        this.dispositionService=DispositionService;
         this.auftraege=new Array<Auftrag>();
-        //this.auftraegeSetzen();
+        this.auftraegeAufMaschine=new Array<Auftrag>();
+        this.auftraegeInWarteschlange=new Array<Auftrag>();
+        this.auftraegeSetzen([]);
+    }
+    altLastenVerteilen(){
+        for(let i=0;i<this.auftraegeAufMaschine.length;i++){
+            for(let j=0;j<this.dispositionService.models.length;j++){
+                if(this.dispositionService.models[j].eTeil.id==this.auftraegeAufMaschine[i].erzeugnis_id){
+                    this.dispositionService.models[j].auftragAufMaschine=this.auftraegeAufMaschine[i];
+                }
+            }
+        }
+
+        for(let j=0;j<this.dispositionService.models.length;j++){
+            this.dispositionService.models[j].auftragInWarteschlange=[];
+            for(let i=0;i<this.auftraegeInWarteschlange.length;i++){
+                if(this.dispositionService.models[j].eTeil.id==this.auftraegeInWarteschlange[i].erzeugnis_id){
+                    this.dispositionService.models[j].auftragInWarteschlange.push(this.auftraegeInWarteschlange[i]);
+                }
+            }
+        }
     }
 
-    auftraegeSetzen(){
-        this.auftraege=[
-            new Auftrag(13,100,2),
-            new Auftrag(13,50,1,8),
-            new Auftrag(18,30,2),
-            new Auftrag(10,100,2),
-            new Auftrag(11,100,2),
-            new Auftrag(12,100,2),
-            new Auftrag(16,100,2),
-            new Auftrag(9,100,2,11),
-            new Auftrag(6,100,2,11),
-        ]
+    auftraegeSetzen(auftraege:Array<Auftrag>){
+        this.auftraege=[];
+        this.auftraege=this.auftraege.concat(this.auftraegeAufMaschine);
+        this.auftraege=this.auftraege.concat(this.auftraegeInWarteschlange);
+        this.auftraege=this.auftraege.concat(auftraege);
     }
 }
 
-angular.module('app').factory('AuftragService', [() => new AuftragService()]);
+angular.module('app').factory('AuftragService', [(DispositionService) => new AuftragService(DispositionService)]);

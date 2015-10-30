@@ -1,13 +1,15 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
 var KapazitaetsplanungController = (function () {
-    function KapazitaetsplanungController($scope, arpeitsplatzService, auftragsService) {
+    function KapazitaetsplanungController($scope, arpeitsplatzService, auftragsService, DispositionService) {
         this.$scope = $scope;
         this.arbeitsplatzService = arpeitsplatzService;
         this.auftragService = auftragsService;
+        this.dispositionsService = DispositionService;
         this.ergebnisListe = new Array();
         this.arbeitsplatzService.reset();
         this.auftraegeSetzen();
         this.ergebnisListe = this.mergeArbeitsplaetze();
+        this.dispositionsService.aendern();
     }
     KapazitaetsplanungController.prototype.aendern = function () {
         this.test = this.arbeitsplatzService.map[document.getElementById("input1").value];
@@ -59,4 +61,4 @@ var KapazitaetsplanungController = (function () {
     };
     return KapazitaetsplanungController;
 })();
-angular.module("KapazitaetsplanungModule").controller("KapazitaetsplanungController", ["$scope", "ArbeitsplatzService", "AuftragService", KapazitaetsplanungController]);
+angular.module("KapazitaetsplanungModule").controller("KapazitaetsplanungController", ["$scope", "ArbeitsplatzService", "AuftragService", "DispositionService", KapazitaetsplanungController]);
