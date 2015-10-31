@@ -1,39 +1,83 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
+/// <reference path="../../model/NewTeilKnoten.ts" />
+/// <reference path="../appServices/NewTeileService.ts" />
+/// <reference path="../appServices/ProgrammService.ts" />
+/// <reference path="../appServices/NewBaumService.ts" />
+/// <reference path="../appServices/AuftragService.ts" />
+/// <reference path="../appServices/DispositionService.ts" />
 var DispositionController = (function () {
-    function DispositionController(scope, auftragsService, newTeileService) {
-        this.$scope = scope;
+    function DispositionController(auftragsService, newTeileService, dispositionService, newBaumService) {
+        this.dispositionService = dispositionService;
+        this.models = this.dispositionService.models;
+        this.modelsP1 = this.dispositionService.dispositionP1;
+        this.modelsP2 = this.dispositionService.dispositionP2;
+        this.modelsP3 = this.dispositionService.dispositionP3;
         this.auftragsService = auftragsService;
-        this.newTeileService = newTeileService;
-        this.eTeile = newTeileService.alleErzeugnisse;
-        this.eTeile.sort(function (a, b) { return a.id - b.id; });
-        this.auftraege = new Array();
-        this.map = {};
+        this.aendern();
     }
     DispositionController.prototype.aendern = function () {
-        this.map = {};
-        this.auftraege = [];
-        for (var i = 0; i < this.eTeile.length; i++) {
-            var anzahl = Number(document.getElementById("input_" + this.eTeile[i].id).value);
-            var split = Number(document.getElementById("select_" + this.eTeile[i].id).value);
-            if (!isNaN(anzahl) && anzahl > 0 && this.eTeile[i].lagerMenge < anzahl) {
-                var auftrag = new Auftrag(this.eTeile[i].id, anzahl - this.eTeile[i].lagerMenge, 1);
-                this.map[this.eTeile[i].id] = auftrag;
-                var x = 0;
-                while ((anzahl - this.eTeile[i].lagerMenge - x) % split !== 0) {
-                    x += 1;
-                }
-                anzahl = (anzahl - this.eTeile[i].lagerMenge - x) / split;
-                for (var j = 0; j < split; j++) {
-                    var auftrag2 = new Auftrag(this.eTeile[i].id, anzahl + x, 1);
-                    if (anzahl > 0 || x > 0) {
-                        this.auftraege.push(auftrag2);
-                    }
-                    x = 0;
-                }
-            }
-        }
-        this.auftragsService.auftraege = this.auftraege;
+        this.dispositionService.aendern();
     };
     return DispositionController;
 })();
-angular.module("DispositionModule").controller("DispositionController", ["$scope", "AuftragService", "NewTeileService", DispositionController]);
+var DispositionModel = (function () {
+    function DispositionModel(eTeil, x) {
+        this.eTeil = eTeil;
+        this.geplanterLagerstand = 100;
+        this.split = "1";
+        this.prioritaet = "normal";
+        this.produktionsProgramm = x;
+        this.anzahl = 666;
+        this.periode = 1;
+        this.auftraege = new Array();
+        this.auftragInWarteschlange = new Array();
+    }
+    DispositionModel.prototype.getWarteschlange = function () {
+        var x = 0;
+        for (var i = 0; i < this.auftragInWarteschlange.length; i++) {
+            x += this.auftragInWarteschlange[i].anzahl;
+        }
+        if (this.eTeil.mehrfachVerwendung) {
+            x = Math.round(x / 3);
+        }
+        return x;
+    };
+    DispositionModel.prototype.getMaterialAufMaschine = function () {
+        if (this.auftragAufMaschine == null) {
+            return 0;
+        }
+        else {
+            if (this.eTeil.mehrfachVerwendung) {
+                return Math.round(this.auftragAufMaschine.anzahl / 3);
+            }
+            return this.auftragAufMaschine.anzahl;
+        }
+    };
+    DispositionModel.prototype.getLagerMenge = function () {
+        if (this.eTeil.mehrfachVerwendung) {
+            return Math.round(this.eTeil.lagerMenge / 3);
+        }
+        else {
+            return this.eTeil.lagerMenge;
+        }
+    };
+    DispositionModel.prototype.getProdProg = function () {
+        if (this.eTeil.mehrfachVerwendung) {
+            return Math.round(this.produktionsProgramm.menge / 3);
+        }
+        else {
+            return this.produktionsProgramm.menge;
+        }
+    };
+    DispositionModel.prototype.getGeplanteLagermenge = function () {
+        if (this.eTeil.mehrfachVerwendung) {
+            //return Math.round(this.geplanterLagerstand/3);
+            return this.geplanterLagerstand;
+        }
+        else {
+            return this.geplanterLagerstand;
+        }
+    };
+    return DispositionModel;
+})();
+angular.module("DispositionModule").controller("DispositionController", ["AuftragService", "NewTeileService", "DispositionService", "NewBaumService", DispositionController]);

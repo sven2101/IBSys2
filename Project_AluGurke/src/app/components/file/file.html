@@ -1,20 +1,36 @@
 
-
-<input type="number" ng-model="fc.id">
-<button ng-click="fc.startTest()">Berechne</button>
-<button ng-click="fc.change()">dsfsdfds</button>
-{{fc.anzahl}}
-<br>
-<button ng-click="fc.sendPostRequest()">Request</button> {{fc.result}} <br>
-{{fc.zugangBestellungen}}s
-<a ng-if="fc.dateiService.dateiErzeugt" ng-href="/download?dateiName={{fc.dateiService.dateiName}}" target="_blank">Download XML Datei.</a><br>
-<input id="dateiInput" type='file' onchange="verarbeiteDatei(this.files)">
-
+<div class="container">
+	<div class="jumbotron">
+		<div class="row">
+			<form>
+				<div class="form-group">
+					<label for="dateiInput">Datei hier hochladen</label>
+					<input type="file" id="dateiInput" onchange="verarbeiteDatei(this.files)">
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="jumbotron">
+		<div class="row">
+			<div class="col-md-12"><h3>Fertig mit der Eingabe? Dann erstellen Sie hier eine Datei.</h3></div>
+		</div>
+		<div class="row">
+			<div class="col-md-12"><button class="btn btn-success btn-lg btn-block" ng-click="fc.sendPostRequest()">Datei erstellen</button></div>
+		</div>
+		<div class="row">
+			<div ng-if="fc.dateiService.dateiErzeugt" class="col-md-12">
+				<a ng-href="/download?dateiName={{fc.dateiService.dateiName}}" target="_blank">
+				<button class="btn btn-warning btn-lg btn-block">
+				{{fc.result}} downloaden.
+				</button></a>
+			</div>
+		</div>
+	</div>
+</div>
 <script>
 		var verarbeiteDatei= function(dateien) {
     		
 			var datei = dateien[0];
-			var size = datei.size;
 			var type = datei.type;
 			if (type !== 'text/plain') {
 				alert('Ungültiges Dateiformat.');

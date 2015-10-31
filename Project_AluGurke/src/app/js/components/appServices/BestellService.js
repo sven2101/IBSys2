@@ -2,57 +2,51 @@
 /// <reference path="../../model/Bestellung.ts" />
 /// <reference path="../../model/ZugangBestellung.ts" />
 /// <reference path="../../model/NeuBestellung.ts" />
+var BsNeuBestellungenMap = (function () {
+    function BsNeuBestellungenMap() {
+        this.k21 = [];
+        this.k22 = [];
+        this.k23 = [];
+        this.k24 = [];
+        this.k25 = [];
+        this.k27 = [];
+        this.k28 = [];
+        this.k32 = [];
+        this.k33 = [];
+        this.k34 = [];
+        this.k35 = [];
+        this.k36 = [];
+        this.k37 = [];
+        this.k38 = [];
+        this.k39 = [];
+        this.k40 = [];
+        this.k41 = [];
+        this.k42 = [];
+        this.k43 = [];
+        this.k44 = [];
+        this.k45 = [];
+        this.k46 = [];
+        this.k47 = [];
+        this.k48 = [];
+        this.k52 = [];
+        this.k53 = [];
+        this.k57 = [];
+        this.k58 = [];
+        this.k59 = [];
+    }
+    return BsNeuBestellungenMap;
+})();
 var BestellService = (function () {
     function BestellService($rootScope) {
         var _this = this;
         this.laufendeBestellungen = [];
         this.zugangBestellungen = [];
-        this.erzeugeBestellungen();
+        this.neuBestellungen = new BsNeuBestellungenMap();
         $rootScope.$on('fileController.neueDatei', function (event, dateiInhalt) {
             _this.updateLaufendeBestellungen(dateiInhalt.results.futureinwardstockmovement.order);
             _this.updateZugangBestellungen(dateiInhalt.results.inwardstockmovement.order);
         });
     }
-    BestellService.prototype.erzeugeBestellungen = function () {
-        this.neuBestellungen = [
-            new NeuBestellung(false, 21, 0),
-            new NeuBestellung(false, 22, 0),
-            new NeuBestellung(false, 23, 0),
-            new NeuBestellung(false, 24, 0),
-            new NeuBestellung(false, 25, 0),
-            new NeuBestellung(false, 27, 0),
-            new NeuBestellung(false, 28, 0),
-            new NeuBestellung(false, 32, 0),
-            new NeuBestellung(false, 33, 0),
-            new NeuBestellung(false, 34, 0),
-            new NeuBestellung(false, 35, 0),
-            new NeuBestellung(false, 36, 0),
-            new NeuBestellung(false, 37, 0),
-            new NeuBestellung(false, 38, 0),
-            new NeuBestellung(false, 39, 0),
-            new NeuBestellung(false, 40, 0),
-            new NeuBestellung(false, 41, 0),
-            new NeuBestellung(false, 42, 0),
-            new NeuBestellung(false, 43, 0),
-            new NeuBestellung(false, 44, 0),
-            new NeuBestellung(false, 45, 0),
-            new NeuBestellung(false, 46, 0),
-            new NeuBestellung(false, 47, 0),
-            new NeuBestellung(false, 48, 0),
-            new NeuBestellung(false, 52, 0),
-            new NeuBestellung(false, 53, 0),
-            new NeuBestellung(false, 57, 0),
-            new NeuBestellung(false, 58, 0),
-            new NeuBestellung(false, 59, 0),
-        ];
-    };
-    BestellService.prototype.getNeubestellung = function (teil_id) {
-        for (var i = 0; i < this.neuBestellungen.length; i++) {
-            if (this.neuBestellungen[i].teil_id === teil_id) {
-                return this.neuBestellungen[i];
-            }
-        }
-    };
     BestellService.prototype.updateLaufendeBestellungen = function (bestellungen) {
         for (var i = 0; i < bestellungen.length; i++) {
             var b = bestellungen[i];
@@ -60,14 +54,13 @@ var BestellService = (function () {
         }
     };
     BestellService.prototype.updateZugangBestellungen = function (bestellungen) {
-        //alert(bestellungen.length);
         for (var i = 0; i < bestellungen.length; i++) {
             var b = bestellungen[i];
-            this.zugangBestellungen.push(new ZugangBestellung(b._id, this.isEilBestellung(b._mode), b._article, b._amount, b._orderperiod, b._time, b.materialcosts, b._ordercosts, b.entirecosts, b._piececosts));
+            this.zugangBestellungen.push(new ZugangBestellung(b._id, this.isEilBestellung(b._mode), b._article, b._amount, b._orderperiod, b._time, b._materialcosts, b._ordercosts, b._entirecosts, b._piececosts));
         }
     };
     BestellService.prototype.isEilBestellung = function (mode) {
-        if (mode === 4) {
+        if (mode == 4) {
             return true;
         }
         return false;

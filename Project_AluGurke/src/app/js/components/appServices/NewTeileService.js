@@ -12,39 +12,43 @@ var NewTeileService = (function () {
         });
     }
     NewTeileService.prototype.onNeueDatei = function (dateiInhalt) {
-        this.updateLagerMengeKaufTeile(dateiInhalt.results.warehousestock.article);
+        this.updateKaufTeile(dateiInhalt.results.warehousestock.article);
         this.$rootScope.$broadcast('teileService.kaufTeile.updated');
-        this.updateLagerMengeErzeugnisse(dateiInhalt.results.warehousestock.article);
+        this.updateErzeugnisse(dateiInhalt.results.warehousestock.article);
         this.$rootScope.$broadcast('teileService.erzeugnisse.updated');
     };
-    NewTeileService.prototype.updateLagerMengeKaufTeile = function (artikel) {
+    NewTeileService.prototype.updateKaufTeile = function (artikel) {
         for (var i = 0; i < this.alleKaufteile.length; i++) {
             for (var j = 0; j < artikel.length; j++) {
                 if (this.alleKaufteile[i].id == artikel[j]._id) {
                     this.alleKaufteile[i].lagerMenge = artikel[j]._amount;
+                    this.alleKaufteile[i].teileWert = artikel[j]._price;
+                    this.alleKaufteile[i].teileWertNeu = artikel[j]._price;
                 }
             }
         }
     };
-    NewTeileService.prototype.updateLagerMengeErzeugnisse = function (artikel) {
+    NewTeileService.prototype.updateErzeugnisse = function (artikel) {
         for (var i = 0; i < this.alleErzeugnisse.length; i++) {
             for (var j = 0; j < artikel.length; j++) {
                 if (this.alleErzeugnisse[i].id == artikel[j]._id) {
                     this.alleErzeugnisse[i].lagerMenge = artikel[j]._amount;
+                    this.alleErzeugnisse[i].teileWert = artikel[j]._price;
                 }
             }
         }
     };
     NewTeileService.prototype.getErzeugnis = function (id) {
         for (var i = 0; i < this.alleErzeugnisse.length; i++) {
-            if (this.alleErzeugnisse[i].id = id) {
+            if (this.alleErzeugnisse[i].id === id) {
                 return this.alleErzeugnisse[i];
             }
         }
+        return null;
     };
     NewTeileService.prototype.getKaufTeil = function (id) {
         for (var i = 0; i < this.alleKaufteile.length; i++) {
-            if (this.alleKaufteile[i].id = id) {
+            if (this.alleKaufteile[i].id === id) {
                 return this.alleKaufteile[i];
             }
         }

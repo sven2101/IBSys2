@@ -3,19 +3,21 @@
 class KapazitaetsplanungController{
     arbeitsplatzService:ArbeitsplatzService;
     auftragService:AuftragService;
+    dispositionsService:DispositionService;
     ergebnisListe:Array<Arbeitsplatz>;
     test:Fertigungsreihe;
     $scope;
-    constructor($scope,arpeitsplatzService,auftragsService){
+    constructor($scope,arpeitsplatzService,auftragsService,DispositionService){
         this.$scope=$scope;
         this.arbeitsplatzService=arpeitsplatzService;
         this.auftragService=auftragsService;
+        this.dispositionsService=DispositionService;
 
         this.ergebnisListe=new Array<Arbeitsplatz>();
         this.arbeitsplatzService.reset();
         this.auftraegeSetzen();
-
         this.ergebnisListe=this.mergeArbeitsplaetze();
+        this.dispositionsService.aendern();
     }
 
 
@@ -86,5 +88,5 @@ class KapazitaetsplanungController{
 
 }
 
-angular.module("KapazitaetsplanungModule").controller("KapazitaetsplanungController",["$scope","ArbeitsplatzService","AuftragService",KapazitaetsplanungController]);
+angular.module("KapazitaetsplanungModule").controller("KapazitaetsplanungController",["$scope","ArbeitsplatzService","AuftragService","DispositionService",KapazitaetsplanungController]);
 
