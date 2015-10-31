@@ -19,8 +19,6 @@ class ErweitertViewModel {
 
 class ErweitertController {
 
-	//neuBestellungen: Array<ErweitertViewModel>;
-
 	constructor(bestellService: BestellService, teileService: NewTeileService) {
 		//this.getNeuBestellungen(bestellService.neuBestellungen, teileService);
 	}

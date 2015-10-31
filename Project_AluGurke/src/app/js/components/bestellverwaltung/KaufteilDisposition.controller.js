@@ -4,12 +4,13 @@
 /// <reference path="../appServices/NewBaumService.ts" />
 /// <reference path="../appServices/BestellService.ts" />
 /// <reference path="../appServices/ProgrammService.ts" />
+/// <reference path="../appServices/NewTeileService.ts" />
 /// <reference path="../../model/NewTeilKnoten.ts" />
 var ViewModel = (function () {
-    function ViewModel(id, mfw, teileWert, wbz, wbzAbw, dm, bk, lm, v1, v2, v3, v4, rw) {
+    function ViewModel(id, mfw, preis, wbz, wbzAbw, dm, bk, lm, v1, v2, v3, v4, rw, kaufTeil) {
         this.id = id;
         this.mfw = mfw;
-        this.teileWert = teileWert;
+        this.preis = preis;
         this.wbz = wbz;
         this.wbzAbw = wbzAbw;
         this.discontMenge = dm;
@@ -20,23 +21,25 @@ var ViewModel = (function () {
         this.verbrauch3 = v3;
         this.verbrauch4 = v4;
         this.reichweite = rw;
+        this.kaufTeil = kaufTeil;
     }
     return ViewModel;
 })();
 var KaufteilDispositionController = (function () {
     function KaufteilDispositionController(teileService, baumService, bestellService, programmService) {
-        this.alleKaufTeile = new Array();
+        this.alleKaufTeile = [];
         this.baumService = baumService;
         this.bestellService = bestellService;
+        this.teileService = teileService;
         this.programmService = programmService;
         this.createViewModel(teileService.alleKaufteile);
         this.selectedViewModel = this.alleKaufTeile[3];
-        this.neuBestellung = new NeuBestellung(false, 0, 0);
+        this.neuBestellung = new NeuBestellung(false, 0, 0, 0);
     }
     KaufteilDispositionController.prototype.createViewModel = function (kaufTeile) {
         for (var i = 0; i < kaufTeile.length; i++) {
             var t = kaufTeile[i];
-            this.alleKaufTeile.push(new ViewModel(t.id, t.mehrfachVerwendung, t.teileWert, t.wiederBeschaffungsZeit, t.wbzAbweichung, t.discontMenge, t.bestellKosten, t.lagerMenge, this.getVerbrauch(t.id, 1), this.getVerbrauch(t.id, 2), this.getVerbrauch(t.id, 3), this.getVerbrauch(t.id, 4), this.getReichweite(t.lagerMenge, t.id)));
+            this.alleKaufTeile.push(new ViewModel(t.id, t.mehrfachVerwendung, t.preis, t.wiederBeschaffungsZeit, t.wbzAbweichung, t.discontMenge, t.bestellKosten, t.lagerMenge, this.getVerbrauch(t.id, 1), this.getVerbrauch(t.id, 2), this.getVerbrauch(t.id, 3), this.getVerbrauch(t.id, 4), this.getReichweite(t.lagerMenge, t.id), t));
         }
     };
     KaufteilDispositionController.prototype.getVerbrauch = function (id, periode) {
@@ -96,7 +99,8 @@ var KaufteilDispositionController = (function () {
         if (this.neuBestellung.menge <= 0) {
             return;
         }
-        this.bestellService.neuBestellungen['k' + this.selectedViewModel.id].push(new NeuBestellung(this.neuBestellung.eil, this.neuBestellung.teil_id, this.neuBestellung.menge));
+        this.bestellService.neuBestellungen['k' + this.selectedViewModel.id].push(new NeuBestellung(this.neuBestellung.eil, this.neuBestellung.teil_id, this.neuBestellung.menge, this.getNeuBestellungsKosten(this.neuBestellung)));
+        this.selectedViewModel.kaufTeil.teileWertNeu = this.getNeuenTeileWert();
     };
     KaufteilDispositionController.prototype.deleteNeueBestellung = function (bestellung) {
         var neuBestellungen;
@@ -106,6 +110,19 @@ var KaufteilDispositionController = (function () {
                 neuBestellungen.splice(i, 1);
             }
         }
+    };
+    KaufteilDispositionController.prototype.getNeuenTeileWert = function () {
+        var bestandAlt = this.selectedViewModel.lagerMenge;
+        var teileWertAlt = this.selectedViewModel.kaufTeil.teileWert;
+        var bestellKosten = 0;
+        var bestellMenge = 0;
+        var bestellungen = this.bestellService.neuBestellungen['k' + this.selectedViewModel.id];
+        for (var i = 0; i < bestellungen.length; i++) {
+            bestellKosten += bestellungen[i].kosten;
+            bestellMenge += bestellungen[i].menge;
+        }
+        var teileWertNeu = (bestandAlt * teileWertAlt + bestellKosten) / (bestandAlt * 1 + bestellMenge * 1);
+        return Math.round(teileWertNeu * 100) / 100;
     };
     KaufteilDispositionController.prototype.getLaufendeBestellungen = function (teil_id) {
         var result = [];
@@ -118,7 +135,7 @@ var KaufteilDispositionController = (function () {
     };
     KaufteilDispositionController.prototype.getLaufendeBestellungKosten = function (bestellung) {
         var kosten = 0;
-        kosten += bestellung.menge * this.selectedViewModel.teileWert;
+        kosten += bestellung.menge * this.selectedViewModel.preis;
         if (bestellung.eil) {
             kosten += 10 * this.selectedViewModel.bestellKosten;
         }
@@ -128,15 +145,21 @@ var KaufteilDispositionController = (function () {
         return kosten;
     };
     KaufteilDispositionController.prototype.getNeuBestellungsKosten = function (bestellung) {
-        var kosten = 0;
-        kosten += bestellung.menge * this.selectedViewModel.teileWert;
-        if (bestellung.eil) {
-            kosten += 10 * this.selectedViewModel.bestellKosten;
+        var materialKosten = 0;
+        var bestellKosten = 0;
+        if (bestellung.menge >= this.selectedViewModel.discontMenge) {
+            materialKosten += bestellung.menge * this.selectedViewModel.preis * 0.9;
         }
         else {
-            kosten += this.selectedViewModel.bestellKosten;
+            materialKosten += bestellung.menge * this.selectedViewModel.preis;
         }
-        return kosten;
+        if (bestellung.eil) {
+            bestellKosten += 10 * this.selectedViewModel.bestellKosten;
+        }
+        else {
+            bestellKosten += this.selectedViewModel.bestellKosten;
+        }
+        return bestellKosten + materialKosten;
     };
     return KaufteilDispositionController;
 })();

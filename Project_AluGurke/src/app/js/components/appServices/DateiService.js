@@ -33,18 +33,14 @@ var DateiService = (function () {
     DateiService.prototype.getNewOrders = function () {
         var orders = [];
         for (var property in this.neuBestellungen) {
-            console.log(property);
             if (this.neuBestellungen.hasOwnProperty(property)) {
                 var array = this.neuBestellungen[property];
                 for (var i = 0; i < array.length; i++) {
                     var newOrder = {
                         _article: array[i].teil_id,
                         _quantity: array[i].menge,
-                        _modus: "5"
+                        _modus: array[i] ? "4" : "5"
                     };
-                    if (array[i].eil) {
-                        newOrder._modus = "4";
-                    }
                     orders.push(newOrder);
                 }
             }

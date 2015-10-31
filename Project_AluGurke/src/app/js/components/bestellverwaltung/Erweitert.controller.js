@@ -12,7 +12,6 @@ var ErweitertViewModel = (function () {
     return ErweitertViewModel;
 })();
 var ErweitertController = (function () {
-    //neuBestellungen: Array<ErweitertViewModel>;
     function ErweitertController(bestellService, teileService) {
         //this.getNeuBestellungen(bestellService.neuBestellungen, teileService);
     }

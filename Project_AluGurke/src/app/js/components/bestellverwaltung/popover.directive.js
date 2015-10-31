@@ -5,7 +5,7 @@ var Fade = (function () {
     }
     Fade.prototype.link = function (scope, el, attrs, controller) {
         el.click(function () {
-            $('#' + attrs.out).fadeOut(500, function () {
+            $('#' + attrs.out).fadeOut(450, function () {
                 $('#' + attrs.in).fadeIn(300);
             });
         });

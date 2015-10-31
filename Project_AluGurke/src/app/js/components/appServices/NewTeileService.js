@@ -12,21 +12,22 @@ var NewTeileService = (function () {
         });
     }
     NewTeileService.prototype.onNeueDatei = function (dateiInhalt) {
-        this.updateLagerMengeKaufTeile(dateiInhalt.results.warehousestock.article);
+        this.updateKaufTeile(dateiInhalt.results.warehousestock.article);
         this.$rootScope.$broadcast('teileService.kaufTeile.updated');
-        this.updateLagerMengeErzeugnisse(dateiInhalt.results.warehousestock.article);
+        this.updateErzeugnisse(dateiInhalt.results.warehousestock.article);
         this.$rootScope.$broadcast('teileService.erzeugnisse.updated');
     };
-    NewTeileService.prototype.updateLagerMengeKaufTeile = function (artikel) {
+    NewTeileService.prototype.updateKaufTeile = function (artikel) {
         for (var i = 0; i < this.alleKaufteile.length; i++) {
             for (var j = 0; j < artikel.length; j++) {
                 if (this.alleKaufteile[i].id == artikel[j]._id) {
                     this.alleKaufteile[i].lagerMenge = artikel[j]._amount;
+                    this.alleKaufteile[i].teileWert = artikel[j]._price;
                 }
             }
         }
     };
-    NewTeileService.prototype.updateLagerMengeErzeugnisse = function (artikel) {
+    NewTeileService.prototype.updateErzeugnisse = function (artikel) {
         for (var i = 0; i < this.alleErzeugnisse.length; i++) {
             for (var j = 0; j < artikel.length; j++) {
                 if (this.alleErzeugnisse[i].id == artikel[j]._id) {

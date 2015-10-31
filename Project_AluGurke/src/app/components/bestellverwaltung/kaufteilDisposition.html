@@ -8,9 +8,9 @@
 		<table class="table table-bordered text-center table-hover table-condensed">
 			<tr>
 				<th class="text-center curs" ng-click="ktdc.sortieren('id')">Id</th>
-				<th class="text-center">MFW</th>
-				<th class="text-center curs" ng-click="ktdc.sortieren('teileWert')">Teile-<br>wert</th>
-				<th class="text-center curs" ng-click="ktdc.sortieren('wbz')">WBZ&nbsp&plusmn<br>Abweichung</th>
+				<th class="text-center" title="Mehrfachverwendung">MFW</th>
+				<th class="text-center curs" ng-click="ktdc.sortieren('preis')">Preis</th>
+				<th class="text-center curs" ng-click="ktdc.sortieren('wbz')" title="Wiederbeschaffungszeit">WBZ&nbsp&plusmn<br>Abweichung</th>
 				<th class="text-center curs" ng-click="ktdc.sortieren('discontMenge')">Discont-<br>menge</th>
 				<th class="text-center curs" ng-click="ktdc.sortieren('bestellKosten')">Bestellkosten</th>
 				<th class="text-center curs" ng-click="ktdc.sortieren('reichweite')">Reich-<br>weite</th>
@@ -27,7 +27,7 @@
 					<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="teil.mfw"></span>
 					<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!teil.mfw"></span>
 				</td>
-				<td>{{::teil.teileWert | currency:"€"}}</td>
+				<td>{{::teil.preis | currency:"€"}}</td>
 				<td>{{::teil.wbz}} &plusmn({{teil.wbzAbw}})</td>
 				<td>{{::teil.discontMenge}}</td>
 				<td>{{::teil.bestellKosten | currency:"€"}}</td>
@@ -51,9 +51,9 @@
 				<table class="table table-bordered text-center table-condensed">
 				<tr>
 					<th class="text-center">Id</th>
-					<th class="text-center">MFW</th>
-					<th class="text-center">Teile-<br>wert</th>
-					<th class="text-center">WBZ&nbsp&plusmn<br>Abweichung</th>
+					<th class="text-center" title="Mehrfachverwendung">MFW</th>
+					<th class="text-center">Preis</th>
+					<th class="text-center" title="Wiederbeschaffungszeit">WBZ&nbsp&plusmn<br>Abweichung</th>
 					<th class="text-center">Discont-<br>menge</th>
 					<th class="text-center">Bestellkosten</th>
 					<th class="text-center">Reich-<br>weite</th>
@@ -69,7 +69,7 @@
 						<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="ktdc.selectedViewModel.mfw"></span>
 						<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!ktdc.selectedViewModel.mfw"></span>
 					</td>
-					<td>{{ktdc.selectedViewModel.teileWert | currency:"€"}}</td>
+					<td>{{ktdc.selectedViewModel.preis | currency:"€"}}</td>
 					<td>{{ktdc.selectedViewModel.wbz}} &plusmn({{ktdc.selectedViewModel.wbzAbw}})</td>
 					<td>{{ktdc.selectedViewModel.discontMenge}}</td>
 					<td>{{ktdc.selectedViewModel.bestellKosten | currency:"€"}}</td>
@@ -99,7 +99,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-4 "><button type="button" class="btn btn-success btn-block" ng-click="ktdc.neueBestellungErstellen()">Erstellen</button></div>
+				<div class="col-md-4 "><button type="button" class="btn btn-success btn-lg btn-block" ng-click="ktdc.neueBestellungErstellen()">Erstellen</button></div>
 			</div>
 		</div>	
 		<div class="row">
@@ -117,7 +117,7 @@
 					<tr class="curs" ng-repeat="bestellung in ktdc.bestellService.neuBestellungen['k'+ktdc.selectedViewModel.id]" ng-click="ktdc.deleteNeueBestellung(bestellung)">
 						<td>{{bestellung.menge}}</td>
 						<td>{{bestellung.eil}}</td>
-						<td>{{ktdc.getNeuBestellungsKosten(bestellung)| currency:"€"}}</td>
+						<td>{{bestellung.kosten | currency:"€"}}</td>
 					</tr>
 				</table>
 			</div>
