@@ -30,6 +30,8 @@ var KaufteilDispositionController = (function () {
         this.bestellService = bestellService;
         this.programmService = programmService;
         this.createViewModel(teileService.alleKaufteile);
+        this.selectedViewModel = this.alleKaufTeile[3];
+        this.neuBestellung = new NeuBestellung(false, 0, 0);
     }
     KaufteilDispositionController.prototype.createViewModel = function (kaufTeile) {
         for (var i = 0; i < kaufTeile.length; i++) {
@@ -51,7 +53,7 @@ var KaufteilDispositionController = (function () {
         if (gesamtVerbrauch === 0) {
             return Number.POSITIVE_INFINITY;
         }
-        return lagerMenge / gesamtVerbrauch;
+        return lagerMenge / (gesamtVerbrauch / 4);
     };
     KaufteilDispositionController.prototype.getAnzahlInBaum = function (baum, id) {
         var anzahl = 0;
@@ -85,6 +87,56 @@ var KaufteilDispositionController = (function () {
             }
             return erg;
         });
+    };
+    KaufteilDispositionController.prototype.select = function (model) {
+        this.selectedViewModel = model;
+        this.neuBestellung.teil_id = model.id;
+    };
+    KaufteilDispositionController.prototype.neueBestellungErstellen = function () {
+        if (this.neuBestellung.menge <= 0) {
+            return;
+        }
+        this.bestellService.neuBestellungen['k' + this.selectedViewModel.id].push(new NeuBestellung(this.neuBestellung.eil, this.neuBestellung.teil_id, this.neuBestellung.menge));
+    };
+    KaufteilDispositionController.prototype.deleteNeueBestellung = function (bestellung) {
+        var neuBestellungen;
+        neuBestellungen = this.bestellService.neuBestellungen['k' + this.selectedViewModel.id];
+        for (var i = 0; i < neuBestellungen.length; i++) {
+            if (neuBestellungen[i].timestamp === bestellung.timestamp) {
+                neuBestellungen.splice(i, 1);
+            }
+        }
+    };
+    KaufteilDispositionController.prototype.getLaufendeBestellungen = function (teil_id) {
+        var result = [];
+        for (var i = 0; i < this.bestellService.laufendeBestellungen.length; i++) {
+            if (this.bestellService.laufendeBestellungen[i].teil_id == teil_id) {
+                result.push(this.bestellService.laufendeBestellungen[i]);
+            }
+        }
+        return result;
+    };
+    KaufteilDispositionController.prototype.getLaufendeBestellungKosten = function (bestellung) {
+        var kosten = 0;
+        kosten += bestellung.menge * this.selectedViewModel.teileWert;
+        if (bestellung.eil) {
+            kosten += 10 * this.selectedViewModel.bestellKosten;
+        }
+        else {
+            kosten += this.selectedViewModel.bestellKosten;
+        }
+        return kosten;
+    };
+    KaufteilDispositionController.prototype.getNeuBestellungsKosten = function (bestellung) {
+        var kosten = 0;
+        kosten += bestellung.menge * this.selectedViewModel.teileWert;
+        if (bestellung.eil) {
+            kosten += 10 * this.selectedViewModel.bestellKosten;
+        }
+        else {
+            kosten += this.selectedViewModel.bestellKosten;
+        }
+        return kosten;
     };
     return KaufteilDispositionController;
 })();

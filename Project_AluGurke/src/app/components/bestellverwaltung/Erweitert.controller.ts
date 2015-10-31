@@ -19,28 +19,19 @@ class ErweitertViewModel {
 
 class ErweitertController {
 
-	neuBestellungen: Array<ErweitertViewModel>;
+	//neuBestellungen: Array<ErweitertViewModel>;
 
 	constructor(bestellService: BestellService, teileService: NewTeileService) {
-		this.getNeuBestellungen(bestellService.neuBestellungen, teileService);
+		//this.getNeuBestellungen(bestellService.neuBestellungen, teileService);
 	}
 
 	getNeuBestellungen(bestellungen: Array<NeuBestellung>, teileService: NewTeileService) {
-		this.neuBestellungen = [];
+		/*this.neuBestellungen = [];
 		for (var i = 0; i < bestellungen.length; i++) {
 			if (bestellungen[i].menge > 0) {
 				this.neuBestellungen.push(new ErweitertViewModel(teileService.getKaufTeil(bestellungen[i].teil_id), bestellungen[i]));
 			}
-		}
-	}
-
-	getGesamtKosten(model: ErweitertViewModel) {
-		if (model.bestellung.split.length === 0) {
-			return model.kaufTeil.bestellKosten + model.bestellung.menge * model.kaufTeil.teileWert;
-		}
-		else {
-			return model.kaufTeil.bestellKosten * model.bestellung.split.length + model.bestellung.menge * model.kaufTeil.teileWert;
-		}
+		}*/
 	}
 }
 

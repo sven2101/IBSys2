@@ -20,7 +20,7 @@ var DateiService = (function () {
                 sellwish: [],
                 selldirect: [],
                 orderlist: {
-                    order: this.getOrders()
+                    order: this.getNewOrders()
                 },
                 productionlist: [],
                 workingtimelist: []
@@ -30,19 +30,23 @@ var DateiService = (function () {
         var xml = x2js.json2xml_str(json);
         return xml;
     };
-    DateiService.prototype.getOrders = function () {
+    DateiService.prototype.getNewOrders = function () {
         var orders = [];
-        for (var i = 0; i < this.neuBestellungen.length; i++) {
-            if (this.neuBestellungen[i].menge !== 0) {
-                var newOrder = {
-                    _article: this.neuBestellungen[i].teil_id,
-                    _quantity: this.neuBestellungen[i].menge,
-                    _modus: "5"
-                };
-                if (this.neuBestellungen[i].eil) {
-                    newOrder._modus = "4";
+        for (var property in this.neuBestellungen) {
+            console.log(property);
+            if (this.neuBestellungen.hasOwnProperty(property)) {
+                var array = this.neuBestellungen[property];
+                for (var i = 0; i < array.length; i++) {
+                    var newOrder = {
+                        _article: array[i].teil_id,
+                        _quantity: array[i].menge,
+                        _modus: "5"
+                    };
+                    if (array[i].eil) {
+                        newOrder._modus = "4";
+                    }
+                    orders.push(newOrder);
                 }
-                orders.push(newOrder);
             }
         }
         return orders;

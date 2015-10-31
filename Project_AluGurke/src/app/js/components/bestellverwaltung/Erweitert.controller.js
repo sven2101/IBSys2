@@ -12,24 +12,17 @@ var ErweitertViewModel = (function () {
     return ErweitertViewModel;
 })();
 var ErweitertController = (function () {
+    //neuBestellungen: Array<ErweitertViewModel>;
     function ErweitertController(bestellService, teileService) {
-        this.getNeuBestellungen(bestellService.neuBestellungen, teileService);
+        //this.getNeuBestellungen(bestellService.neuBestellungen, teileService);
     }
     ErweitertController.prototype.getNeuBestellungen = function (bestellungen, teileService) {
-        this.neuBestellungen = [];
+        /*this.neuBestellungen = [];
         for (var i = 0; i < bestellungen.length; i++) {
             if (bestellungen[i].menge > 0) {
                 this.neuBestellungen.push(new ErweitertViewModel(teileService.getKaufTeil(bestellungen[i].teil_id), bestellungen[i]));
             }
-        }
-    };
-    ErweitertController.prototype.getGesamtKosten = function (model) {
-        if (model.bestellung.split.length === 0) {
-            return model.kaufTeil.bestellKosten + model.bestellung.menge * model.kaufTeil.teileWert;
-        }
-        else {
-            return model.kaufTeil.bestellKosten * model.bestellung.split.length + model.bestellung.menge * model.kaufTeil.teileWert;
-        }
+        }*/
     };
     return ErweitertController;
 })();

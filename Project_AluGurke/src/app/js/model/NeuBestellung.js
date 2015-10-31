@@ -3,7 +3,7 @@ var NeuBestellung = (function () {
         this.eil = eil;
         this.teil_id = teil_id;
         this.menge = menge;
-        this.split = [];
+        this.timestamp = new Date().getTime();
     }
     return NeuBestellung;
 })();
