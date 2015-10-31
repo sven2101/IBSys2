@@ -34,17 +34,15 @@ class ProgrammService {
         ];
     }
 
-<<<<<<< HEAD
+
     erzeugeDirectsalesPosition() {
     this.directsales[1]=new DirectSalesPosition(1,0,0,0);
     this.directsales[2]=new DirectSalesPosition(2,0,0,0);
     this.directsales[3]=new DirectSalesPosition(3,0,0,0);
     }
 
-    getProgrammposition(id: number,periode: number) {
-=======
+
     getProgrammposition(id: number,periode: number=1) {
->>>>>>> ff620f4d240f29e57958c969d48386fc7c48a00f
         for (var i = 0; i < this.produktionsprogramm.length; i++) {
             if ( this.produktionsprogramm[i].id === id && this.produktionsprogramm[i].periode === periode) {
                 return this.produktionsprogramm[i];
