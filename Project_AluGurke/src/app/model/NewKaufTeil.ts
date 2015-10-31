@@ -5,12 +5,12 @@ class NewKaufTeil {
 	teileWert: number;
 	teileWertNeu: number;
 	lagerMenge: number;
-	mehrfachVerwendung: boolean;
+	mfw: boolean;
 
 	discontMenge: number;
 	bestellKosten: number;
-	wiederBeschaffungsZeit: number;
-	wbzAbweichung: number;
+	wbz: number;
+	wbzAbw: number;
 
 	constructor(id: number, bezeichnung: string, preis: number, lagerMenge: number, mehrfachVerwendung: boolean,
 		discontMenge: number, bestellKosten: number, wiederBeschaffungsZeit: number, wbzAbweichung: number) {
@@ -18,12 +18,12 @@ class NewKaufTeil {
 		this.bezeichnung = bezeichnung;
 		this.preis = preis;
 		this.lagerMenge = lagerMenge;
-		this.mehrfachVerwendung = mehrfachVerwendung;
+		this.mfw = mehrfachVerwendung;
 
 		this.discontMenge = discontMenge;
 		this.bestellKosten = bestellKosten;
-		this.wiederBeschaffungsZeit = wiederBeschaffungsZeit;
-		this.wbzAbweichung = wbzAbweichung;
+		this.wbz = wiederBeschaffungsZeit;
+		this.wbzAbw = wbzAbweichung;
 
 		this.teileWert = 0;
 		this.teileWertNeu = 0;

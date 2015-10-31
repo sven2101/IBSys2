@@ -4,11 +4,11 @@ var NewKaufTeil = (function () {
         this.bezeichnung = bezeichnung;
         this.preis = preis;
         this.lagerMenge = lagerMenge;
-        this.mehrfachVerwendung = mehrfachVerwendung;
+        this.mfw = mehrfachVerwendung;
         this.discontMenge = discontMenge;
         this.bestellKosten = bestellKosten;
-        this.wiederBeschaffungsZeit = wiederBeschaffungsZeit;
-        this.wbzAbweichung = wbzAbweichung;
+        this.wbz = wiederBeschaffungsZeit;
+        this.wbzAbw = wbzAbweichung;
         this.teileWert = 0;
         this.teileWertNeu = 0;
     }

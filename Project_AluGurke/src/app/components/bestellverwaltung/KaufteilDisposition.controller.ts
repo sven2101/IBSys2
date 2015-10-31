@@ -8,14 +8,7 @@
 /// <reference path="../../model/NewTeilKnoten.ts" />
 
 class ViewModel {
-	id: number;
-	mfw: boolean;
-	preis: number;
-	wbz: number;
-	wbzAbw: number;
-	discontMenge: number;
-	bestellKosten: number;
-	lagerMenge: number;
+
 	verbrauch1: number;
 	verbrauch2: number;
 	verbrauch3: number;
@@ -23,16 +16,7 @@ class ViewModel {
 	reichweite: number;
 	kaufTeil: NewKaufTeil;
 
-	constructor(id: number, mfw: boolean, preis: number, wbz: number, wbzAbw: number, dm: number,
-		bk: number, lm: number, v1: number, v2: number, v3: number, v4: number, rw: number, kaufTeil: NewKaufTeil) {
-		this.id = id;
-		this.mfw = mfw;
-		this.preis = preis;
-		this.wbz = wbz;
-		this.wbzAbw = wbzAbw;
-		this.discontMenge = dm;
-		this.bestellKosten = bk;
-		this.lagerMenge = lm;
+	constructor(v1: number, v2: number, v3: number, v4: number, rw: number, kaufTeil: NewKaufTeil) {
 		this.verbrauch1 = v1;
 		this.verbrauch2 = v2;
 		this.verbrauch3 = v3;
@@ -68,9 +52,7 @@ class KaufteilDispositionController {
 	createViewModel(kaufTeile: Array<NewKaufTeil>) {
 		for (var i = 0; i < kaufTeile.length; i++) {
 			var t = kaufTeile[i];
-			this.alleKaufTeile.push(new ViewModel(t.id, t.mehrfachVerwendung, t.preis,
-				t.wiederBeschaffungsZeit, t.wbzAbweichung,
-				t.discontMenge, t.bestellKosten, t.lagerMenge, this.getVerbrauch(t.id, 1),
+			this.alleKaufTeile.push(new ViewModel(this.getVerbrauch(t.id, 1),
 				this.getVerbrauch(t.id, 2), this.getVerbrauch(t.id, 3),
 				this.getVerbrauch(t.id, 4), this.getReichweite(t.lagerMenge, t.id), t));
 		}
@@ -108,14 +90,14 @@ class KaufteilDispositionController {
 	}
 
 	mussBestellen(teil: ViewModel) {
-		if ((teil.reichweite - teil.wbz) < 1) {
+		if ((teil.reichweite - teil.kaufTeil.wbz) < 1) {
 			return true;
 		}
 		return false;
 	}
 
 	sollteBestellen(teil: ViewModel) {
-		if (((teil.reichweite - teil.wbz) > 1) && ((teil.reichweite - teil.wbzAbw - teil.wbz) < 1)) {
+		if (((teil.reichweite - teil.kaufTeil.wbz) > 1) && ((teil.reichweite - teil.kaufTeil.wbzAbw - teil.kaufTeil.wbz) < 1)) {
 			return true;
 		}
 		return false;
@@ -123,30 +105,36 @@ class KaufteilDispositionController {
 
 	sortieren(kriterium: string) {
 		this.alleKaufTeile.sort(function(a: ViewModel, b: ViewModel) {
-			var erg = a[kriterium] - b[kriterium];
-			if (erg === 0) {
-				return a['id'] - b['id']
+			var erg;
+			if (a.hasOwnProperty(kriterium)) {
+				erg = a[kriterium] - b[kriterium];
+				
+			} else {
+				erg = a.kaufTeil[kriterium] - b.kaufTeil[kriterium];
 			}
+			if (erg === 0) {
+					return a.kaufTeil['id'] - b.kaufTeil['id']
+				}
 			return erg;
 		});
 	}
 
 	select(model: ViewModel) {
 		this.selectedViewModel = model;
-		this.neuBestellung.teil_id = model.id;
+		this.neuBestellung.teil_id = model.kaufTeil.id;
 	}
 
 	neueBestellungErstellen() {
 		if (this.neuBestellung.menge <= 0) {
 			return;
 		}
-		this.bestellService.neuBestellungen['k' + this.selectedViewModel.id].push(new NeuBestellung(this.neuBestellung.eil, this.neuBestellung.teil_id, this.neuBestellung.menge, this.getNeuBestellungsKosten(this.neuBestellung)));
+		this.bestellService.neuBestellungen['k' + this.selectedViewModel.kaufTeil.id].push(new NeuBestellung(this.neuBestellung.eil, this.neuBestellung.teil_id, this.neuBestellung.menge, this.getNeuBestellungsKosten(this.neuBestellung)));
 		this.selectedViewModel.kaufTeil.teileWertNeu = this.getNeuenTeileWert();
 	}
 
 	deleteNeueBestellung(bestellung: NeuBestellung) {
 		var neuBestellungen: Array<NeuBestellung>;
-		neuBestellungen = this.bestellService.neuBestellungen['k' + this.selectedViewModel.id];
+		neuBestellungen = this.bestellService.neuBestellungen['k' + this.selectedViewModel.kaufTeil.id];
 		for (var i = 0; i < neuBestellungen.length; i++) {
 			if (neuBestellungen[i].timestamp === bestellung.timestamp) {
 				neuBestellungen.splice(i, 1);
@@ -155,13 +143,13 @@ class KaufteilDispositionController {
 	}
 
 	getNeuenTeileWert() {
-		var bestandAlt = this.selectedViewModel.lagerMenge;
+		var bestandAlt = this.selectedViewModel.kaufTeil.lagerMenge;
 		var teileWertAlt = this.selectedViewModel.kaufTeil.teileWert;
 
 		var bestellKosten = 0;
 		var bestellMenge = 0;
 
-		var bestellungen = this.bestellService.neuBestellungen['k' + this.selectedViewModel.id];
+		var bestellungen = this.bestellService.neuBestellungen['k' + this.selectedViewModel.kaufTeil.id];
 		for (var i = 0; i < bestellungen.length; i++) {
 			bestellKosten += bestellungen[i].kosten;
 			bestellMenge += bestellungen[i].menge;
@@ -182,11 +170,11 @@ class KaufteilDispositionController {
 
 	getLaufendeBestellungKosten(bestellung: Bestellung) {
 		var kosten = 0;
-		kosten += bestellung.menge * this.selectedViewModel.preis;
+		kosten += bestellung.menge * this.selectedViewModel.kaufTeil.preis;
 		if (bestellung.eil) {
-			kosten += 10 * this.selectedViewModel.bestellKosten;
+			kosten += 10 * this.selectedViewModel.kaufTeil.bestellKosten;
 		} else {
-			kosten += this.selectedViewModel.bestellKosten
+			kosten += this.selectedViewModel.kaufTeil.bestellKosten
 		}
 		return kosten;
 	}
@@ -194,15 +182,15 @@ class KaufteilDispositionController {
 	getNeuBestellungsKosten(bestellung: NeuBestellung) {
 		var materialKosten = 0;
 		var bestellKosten = 0;
-		if (bestellung.menge >= this.selectedViewModel.discontMenge) {
-			materialKosten += bestellung.menge * this.selectedViewModel.preis * 0.9;
+		if (bestellung.menge >= this.selectedViewModel.kaufTeil.discontMenge) {
+			materialKosten += bestellung.menge * this.selectedViewModel.kaufTeil.preis * 0.9;
 		} else {
-			materialKosten += bestellung.menge * this.selectedViewModel.preis;
+			materialKosten += bestellung.menge * this.selectedViewModel.kaufTeil.preis;
 		}
 		if (bestellung.eil) {
-			bestellKosten += 10 * this.selectedViewModel.bestellKosten;
+			bestellKosten += 10 * this.selectedViewModel.kaufTeil.bestellKosten;
 		} else {
-			bestellKosten += this.selectedViewModel.bestellKosten
+			bestellKosten += this.selectedViewModel.kaufTeil.bestellKosten
 		}
 		return bestellKosten + materialKosten;
 	}

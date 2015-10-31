@@ -23,6 +23,7 @@ var NewTeileService = (function () {
                 if (this.alleKaufteile[i].id == artikel[j]._id) {
                     this.alleKaufteile[i].lagerMenge = artikel[j]._amount;
                     this.alleKaufteile[i].teileWert = artikel[j]._price;
+                    this.alleKaufteile[i].teileWertNeu = artikel[j]._price;
                 }
             }
         }
@@ -32,6 +33,7 @@ var NewTeileService = (function () {
             for (var j = 0; j < artikel.length; j++) {
                 if (this.alleErzeugnisse[i].id == artikel[j]._id) {
                     this.alleErzeugnisse[i].lagerMenge = artikel[j]._amount;
+                    this.alleErzeugnisse[i].teileWert = artikel[j]._price;
                 }
             }
         }

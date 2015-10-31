@@ -1,6 +1,11 @@
 /**
  * Created by Max on 28.10.2015.
  */
+/// <reference path="../../model/NewTeilKnoten.ts" />
+/// <reference path="../appServices/NewTeileService.ts" />
+/// <reference path="../appServices/ProgrammService.ts" />
+/// <reference path="../appServices/NewBaumService.ts" />
+/// <reference path="../appServices/AuftragService.ts" />
 class DispositionService{
 
     dispositionP1:Array<DispositionModel>;
