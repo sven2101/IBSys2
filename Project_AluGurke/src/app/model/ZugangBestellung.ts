@@ -4,14 +4,17 @@ class ZugangBestellung {
 	teil_id: number;
 	menge: number;
 	bestellPeriode: number;
-	zeit: number;
+	zeit: {
+		periode:number;
+		tag:number
+	};
 	materialKosten: number;
 	bestellKosten: number;
 	gesamtKosten: number;
 	stückKosten: number;
 
 
-	constructor(id: number, eil: boolean, teil_id: number, menge: number, bestellPeriode: number, zeit: number, materialKosten: number, bestellKosten: number, gesamtKosten: number, stückKosten: number) {
+	constructor(id: number, eil: boolean, teil_id: number, menge: number, bestellPeriode: number, zeit: {periode:number,tag:number}, materialKosten: number, bestellKosten: number, gesamtKosten: number, stückKosten: number) {
 		this.id = id;
 		this.eil = eil;
 		this.teil_id = teil_id;

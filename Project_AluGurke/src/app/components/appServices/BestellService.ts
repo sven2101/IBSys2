@@ -60,10 +60,30 @@ class BestellService {
 	}
 
 	updateZugangBestellungen(bestellungen) {
+		var ersteBestellungEndet = bestellungen[0]._time * 1;
+		var startPeriode = bestellungen[0]._orderperiod * 1;
 		for (var i = 0; i < bestellungen.length; i++) {
 			var b = bestellungen[i];
-			this.zugangBestellungen.push(new ZugangBestellung(b._id, this.isEilBestellung(b._mode), b._article, b._amount, b._orderperiod, b._time, b._materialcosts, b._ordercosts, b._entirecosts, b._piececosts));
+			this.zugangBestellungen.push(new ZugangBestellung(b._id, this.isEilBestellung(b._mode), b._article, b._amount, b._orderperiod,
+				this.getEndZeitpunkt(ersteBestellungEndet, startPeriode, b._time), b._materialcosts, b._ordercosts, b._entirecosts, b._piececosts));
 		}
+	}
+
+	getEndZeitpunkt(ersteBestellungEndet: number, startPeriode: number, bestellungEndet: number) {
+		var anzahlTageErsteBestellung = ersteBestellungEndet / 60 / 24;
+		var bestellungEndetTage = bestellungEndet / 60 / 24;
+		var differenz = bestellungEndetTage - anzahlTageErsteBestellung;
+		var restTage = anzahlTageErsteBestellung % 5;
+		var anzahlPerioden = (anzahlTageErsteBestellung - restTage) / 5;
+
+		var endPeriode = startPeriode - 1 + anzahlPerioden;
+		var endTag = restTage + differenz + 1;
+
+		if (endTag > 5) {
+			endTag = endTag % 5;
+			endPeriode += 1;
+		}
+		return { periode: endPeriode, tag: endTag };
 	}
 
 	isEilBestellung(mode: number) {

@@ -60,8 +60,8 @@ class KaufteilDispositionController {
 
 	getVerbrauch(id: number, periode: number) {
 		var anzahlKinderFahrrad = this.getAnzahlInBaum(this.baumService.kinderBaum, id) * this.programmService.getProgrammposition(1, periode).menge + this.programmService.getDirectsalesPosition(1).menge;
-		var anzahlDamenFahrrad = this.getAnzahlInBaum(this.baumService.damenBaum, id) * this.programmService.getProgrammposition(2, periode).menge+ this.programmService.getDirectsalesPosition(2).menge;
-		var anzahlHerrenFahrrad = this.getAnzahlInBaum(this.baumService.herrenBaum, id) * this.programmService.getProgrammposition(3, periode).menge+ this.programmService.getDirectsalesPosition(3).menge;
+		var anzahlDamenFahrrad = this.getAnzahlInBaum(this.baumService.damenBaum, id) * this.programmService.getProgrammposition(2, periode).menge + this.programmService.getDirectsalesPosition(2).menge;
+		var anzahlHerrenFahrrad = this.getAnzahlInBaum(this.baumService.herrenBaum, id) * this.programmService.getProgrammposition(3, periode).menge + this.programmService.getDirectsalesPosition(3).menge;
 		return anzahlKinderFahrrad + anzahlDamenFahrrad + anzahlHerrenFahrrad;
 	}
 
@@ -72,6 +72,16 @@ class KaufteilDispositionController {
 		var gesamtVerbrauch = this.getVerbrauch(teil_id, 1) + this.getVerbrauch(teil_id, 2) + this.getVerbrauch(teil_id, 3) + this.getVerbrauch(teil_id, 4);
 		if (gesamtVerbrauch === 0) {
 			return Number.POSITIVE_INFINITY;
+		}
+		var reichweite = 0;
+		var menge = lagerMenge;
+		for (var i = 1; i <= 4; i++) {
+			if (menge - this.getVerbrauch(teil_id, i) >= 0) {
+				reichweite += 1;
+				menge -= this.getVerbrauch(teil_id, i);
+			} else {
+				reichweite += menge / this.getVerbrauch(teil_id, i);
+			}
 		}
 		return lagerMenge / (gesamtVerbrauch / 4);
 	}
@@ -108,13 +118,13 @@ class KaufteilDispositionController {
 			var erg;
 			if (a.hasOwnProperty(kriterium)) {
 				erg = a[kriterium] - b[kriterium];
-				
+
 			} else {
 				erg = a.kaufTeil[kriterium] - b.kaufTeil[kriterium];
 			}
 			if (erg === 0) {
-					return a.kaufTeil['id'] - b.kaufTeil['id']
-				}
+				return a.kaufTeil['id'] - b.kaufTeil['id'];
+			}
 			return erg;
 		});
 	}
@@ -174,6 +184,9 @@ class KaufteilDispositionController {
 	getLaufendeBestellungKosten(bestellung: Bestellung) {
 		var kosten = 0;
 		kosten += bestellung.menge * this.selectedViewModel.kaufTeil.preis;
+		if(bestellung.menge >= this.selectedViewModel.kaufTeil.discontMenge && !bestellung.eil) {
+			kosten = Math.round(kosten * 0.9*100)/100;
+		}
 		if (bestellung.eil) {
 			kosten += 10 * this.selectedViewModel.kaufTeil.bestellKosten;
 		} else {
@@ -185,7 +198,7 @@ class KaufteilDispositionController {
 	getNeuBestellungsKosten(bestellung: NeuBestellung) {
 		var materialKosten = 0;
 		var bestellKosten = 0;
-		if (bestellung.menge >= this.selectedViewModel.kaufTeil.discontMenge) {
+		if (bestellung.menge >= this.selectedViewModel.kaufTeil.discontMenge && !bestellung.eil) {
 			materialKosten += bestellung.menge * this.selectedViewModel.kaufTeil.preis * 0.9;
 		} else {
 			materialKosten += bestellung.menge * this.selectedViewModel.kaufTeil.preis;
