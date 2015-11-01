@@ -28,7 +28,7 @@
 					<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!teil.kaufTeil.mfw"></span>
 				</td>
 				<td>{{::teil.kaufTeil.preis | currency:"€"}}</td>
-				<td>{{::teil.kaufTeil.wbz}} &plusmn({{teil.wbzAbw}})</td>
+				<td>{{::teil.kaufTeil.wbz}} &plusmn({{teil.kaufTeil.wbzAbw}})</td>
 				<td>{{::teil.kaufTeil.discontMenge}}</td>
 				<td>{{::teil.kaufTeil.bestellKosten | currency:"€"}}</td>
 				<td>{{::teil.reichweite | number:2}}</td>
@@ -43,7 +43,7 @@
 	<!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<div id ="details" class="container" style="display:none">
 		<div class="row">
-			 <div class="col-md-8"><h2>Ansicht für Kaufteil {{ktdc.selectedViewModel.id}}</h2></div>
+			 <div class="col-md-8"><h2>Ansicht für Kaufteil {{ktdc.selectedViewModel.kaufTeil.id}}</h2></div>
 			 <div class="col-md-4 "><button type="button" class="btn btn-info btn-block btn-lg" fade out="details" in="tablecontainer">Zurück</button></div>
 		</div>
 		<div class="row">
@@ -70,7 +70,7 @@
 						<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!ktdc.selectedViewModel.kaufTeil.mfw"></span>
 					</td>
 					<td>{{ktdc.selectedViewModel.kaufTeil.preis | currency:"€"}}</td>
-					<td>{{ktdc.selectedViewModel.kaufTeil.wbz}} &plusmn({{ktdc.selectedViewModel.wbzAbw}})</td>
+					<td>{{ktdc.selectedViewModel.kaufTeil.wbz}} &plusmn({{ktdc.selectedViewModel.kaufTeil.wbzAbw}})</td>
 					<td>{{ktdc.selectedViewModel.kaufTeil.discontMenge}}</td>
 					<td>{{ktdc.selectedViewModel.kaufTeil.bestellKosten | currency:"€"}}</td>
 					<td>{{ktdc.selectedViewModel.reichweite | number:2}}</td>
@@ -129,7 +129,7 @@
 						<th class="text-center">Periode</th>
 						<th class="text-center">Kosten</th>
 					</tr>
-					<tr ng-repeat="bestellung in ktdc.getLaufendeBestellungen(ktdc.selectedViewModel.id)">
+					<tr ng-repeat="bestellung in ktdc.getLaufendeBestellungen(ktdc.selectedViewModel.kaufTeil.id)">
 						<td>{{bestellung.menge}}</td>
 						<td>{{bestellung.eil}}</td>
 						<td>{{bestellung.periode}}</td>

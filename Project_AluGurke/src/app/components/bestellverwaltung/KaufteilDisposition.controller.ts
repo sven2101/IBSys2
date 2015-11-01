@@ -59,9 +59,9 @@ class KaufteilDispositionController {
 	}
 
 	getVerbrauch(id: number, periode: number) {
-		var anzahlKinderFahrrad = this.getAnzahlInBaum(this.baumService.kinderBaum, id) * this.programmService.getProgrammposition(1, periode).menge;
-		var anzahlDamenFahrrad = this.getAnzahlInBaum(this.baumService.damenBaum, id) * this.programmService.getProgrammposition(2, periode).menge;
-		var anzahlHerrenFahrrad = this.getAnzahlInBaum(this.baumService.herrenBaum, id) * this.programmService.getProgrammposition(3, periode).menge;
+		var anzahlKinderFahrrad = this.getAnzahlInBaum(this.baumService.kinderBaum, id) * this.programmService.getProgrammposition(1, periode).menge + this.programmService.getDirectsalesPosition(1).menge;
+		var anzahlDamenFahrrad = this.getAnzahlInBaum(this.baumService.damenBaum, id) * this.programmService.getProgrammposition(2, periode).menge+ this.programmService.getDirectsalesPosition(2).menge;
+		var anzahlHerrenFahrrad = this.getAnzahlInBaum(this.baumService.herrenBaum, id) * this.programmService.getProgrammposition(3, periode).menge+ this.programmService.getDirectsalesPosition(3).menge;
 		return anzahlKinderFahrrad + anzahlDamenFahrrad + anzahlHerrenFahrrad;
 	}
 
@@ -130,6 +130,8 @@ class KaufteilDispositionController {
 		}
 		this.bestellService.neuBestellungen['k' + this.selectedViewModel.kaufTeil.id].push(new NeuBestellung(this.neuBestellung.eil, this.neuBestellung.teil_id, this.neuBestellung.menge, this.getNeuBestellungsKosten(this.neuBestellung)));
 		this.selectedViewModel.kaufTeil.teileWertNeu = this.getNeuenTeileWert();
+		this.neuBestellung.menge = 0;
+		this.neuBestellung.eil = false;
 	}
 
 	deleteNeueBestellung(bestellung: NeuBestellung) {
@@ -140,6 +142,7 @@ class KaufteilDispositionController {
 				neuBestellungen.splice(i, 1);
 			}
 		}
+		this.selectedViewModel.kaufTeil.teileWertNeu = this.getNeuenTeileWert();
 	}
 
 	getNeuenTeileWert() {

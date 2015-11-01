@@ -11,20 +11,20 @@ class NewTeileService {
 		this.erzeugeKaufTeile();
 		this.erzeugeErzeignisse();
 		this.$rootScope = $rootScope;
-		this.$rootScope.$on('fileController.neueDatei',(event,dateiInhalt) =>{
+		this.$rootScope.$on('fileController.neueDatei', (event, dateiInhalt) => {
 			this.onNeueDatei(dateiInhalt);
 		});
 	}
-	
-	onNeueDatei(dateiInhalt){
+
+	onNeueDatei(dateiInhalt) {
 		this.updateKaufTeile(dateiInhalt.results.warehousestock.article);
 		this.$rootScope.$broadcast('teileService.kaufTeile.updated');
 		this.updateErzeugnisse(dateiInhalt.results.warehousestock.article);
 		this.$rootScope.$broadcast('teileService.erzeugnisse.updated');
 	}
-	
+
 	updateKaufTeile(artikel) {
-		for (var i = 0; i < this.alleKaufteile.length; i++) {	
+		for (var i = 0; i < this.alleKaufteile.length; i++) {
 			for (var j = 0; j < artikel.length; j++) {
 				if (this.alleKaufteile[i].id == artikel[j]._id) {
 					this.alleKaufteile[i].lagerMenge = artikel[j]._amount;
@@ -34,9 +34,9 @@ class NewTeileService {
 			}
 		}
 	}
-	
+
 	updateErzeugnisse(artikel) {
-		for (var i = 0; i < this.alleErzeugnisse.length; i++) {	
+		for (var i = 0; i < this.alleErzeugnisse.length; i++) {
 			for (var j = 0; j < artikel.length; j++) {
 				if (this.alleErzeugnisse[i].id == artikel[j]._id) {
 					this.alleErzeugnisse[i].lagerMenge = artikel[j]._amount;
@@ -45,8 +45,8 @@ class NewTeileService {
 			}
 		}
 	}
-	
-	getErzeugnis (id: number) {
+
+	getErzeugnis(id: number) {
 		for (var i = 0; i < this.alleErzeugnisse.length; i++) {
 			if (this.alleErzeugnisse[i].id === id) {
 				return this.alleErzeugnisse[i]
@@ -54,15 +54,15 @@ class NewTeileService {
 		}
 		return null;
 	}
-	
-	getKaufTeil(id:number) {
+
+	getKaufTeil(id: number) {
 		for (var i = 0; i < this.alleKaufteile.length; i++) {
 			if (this.alleKaufteile[i].id === id) {
 				return this.alleKaufteile[i];
 			}
 		}
 	}
-	
+
 	erzeugeKaufTeile() {
 		this.alleKaufteile = [
 			new NewKaufTeil(21, 'Kette(K)', 5.00, 0, false, 300, 50, 1.8, 0.4),
@@ -130,4 +130,4 @@ class NewTeileService {
 	}
 }
 
-angular.module('app').factory('NewTeileService', ['$rootScope',($rootScope) => new NewTeileService($rootScope)]);
+angular.module('app').factory('NewTeileService', ['$rootScope', ($rootScope) => new NewTeileService($rootScope)]);

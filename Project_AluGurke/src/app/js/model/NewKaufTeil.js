@@ -9,8 +9,8 @@ var NewKaufTeil = (function () {
         this.bestellKosten = bestellKosten;
         this.wbz = wiederBeschaffungsZeit;
         this.wbzAbw = wbzAbweichung;
-        this.teileWert = 0;
-        this.teileWertNeu = 0;
+        this.teileWert = preis;
+        this.teileWertNeu = preis;
     }
     return NewKaufTeil;
 })();

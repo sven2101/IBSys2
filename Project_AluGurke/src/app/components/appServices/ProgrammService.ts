@@ -54,7 +54,6 @@ class ProgrammService {
     {
       return this.directsales[id];
     }
-
 }
 
 angular.module('app').factory('ProgrammService', [() => new ProgrammService()]);
