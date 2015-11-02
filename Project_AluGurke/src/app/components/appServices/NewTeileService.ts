@@ -5,9 +5,11 @@
 class NewTeileService {
 	alleKaufteile: Array<NewKaufTeil>;
 	alleErzeugnisse: Array<NewErzeugnis>;
+	bestellService: BestellService;
 	$rootScope;
 
-	constructor($rootScope) {
+	constructor($rootScope,bestellService:BestellService) {
+		this.bestellService = bestellService;
 		this.erzeugeKaufTeile();
 		this.erzeugeErzeignisse();
 		this.$rootScope = $rootScope;
@@ -30,11 +32,32 @@ class NewTeileService {
 					this.alleKaufteile[i].lagerMenge = artikel[j]._amount;
 					this.alleKaufteile[i].teileWert = artikel[j]._price;
 					this.alleKaufteile[i].teileWertNeu = artikel[j]._price;
+					if(this.bestellService.neuBestellungen['k'+this.alleKaufteile[i].id].length != 0){
+						this.alleKaufteile[i].teileWertNeu = 
+						this.getKaufTeilTeileWertNeu(this.alleKaufteile[i].lagerMenge,this.alleKaufteile[i].teileWert,
+						this.alleKaufteile[i].id);
+					}
+					
 				}
 			}
 		}
 	}
-
+	
+	getKaufTeilTeileWertNeu(lagerMenge:number,teileWertAlt:number,id:number){
+		var bestellKosten = 0;
+		var bestellMenge = 0;
+		var bestellungen = this.bestellService.neuBestellungen['k' +id];
+		for (var i = 0; i < bestellungen.length; i++) {
+			bestellKosten += bestellungen[i].kosten;
+			bestellMenge += bestellungen[i].menge;
+		}
+		if(lagerMenge == 0 && bestellMenge == 0) {
+			return teileWertAlt;
+		}
+		var teileWertNeu = (lagerMenge * teileWertAlt + bestellKosten) / (lagerMenge * 1 + bestellMenge * 1);
+		return Math.round(teileWertNeu * 100) / 100;
+	}
+	
 	updateErzeugnisse(artikel) {
 		for (var i = 0; i < this.alleErzeugnisse.length; i++) {
 			for (var j = 0; j < artikel.length; j++) {
@@ -130,4 +153,4 @@ class NewTeileService {
 	}
 }
 
-angular.module('app').factory('NewTeileService', ['$rootScope', ($rootScope) => new NewTeileService($rootScope)]);
+angular.module('app').factory('NewTeileService', ['$rootScope','BestellService', ($rootScope,bestellService) => new NewTeileService($rootScope,bestellService)]);

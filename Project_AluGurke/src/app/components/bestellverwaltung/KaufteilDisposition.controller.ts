@@ -15,14 +15,18 @@ class ViewModel {
 	verbrauch4: number;
 	reichweite: number;
 	kaufTeil: NewKaufTeil;
+	laufendeBestellungen:Array<ZugangBestellung>;
+	eingehendeBestellungen: Array<Bestellung>;
 
-	constructor(v1: number, v2: number, v3: number, v4: number, rw: number, kaufTeil: NewKaufTeil) {
+	constructor(v1: number, v2: number, v3: number, v4: number, rw: number, kaufTeil: NewKaufTeil,lb:Array<ZugangBestellung>,eb:Array<Bestellung>) {
 		this.verbrauch1 = v1;
 		this.verbrauch2 = v2;
 		this.verbrauch3 = v3;
 		this.verbrauch4 = v4;
 		this.reichweite = rw;
 		this.kaufTeil = kaufTeil;
+		this.laufendeBestellungen = lb;
+		this.eingehendeBestellungen = eb;
 	}
 }
 
@@ -54,7 +58,8 @@ class KaufteilDispositionController {
 			var t = kaufTeile[i];
 			this.alleKaufTeile.push(new ViewModel(this.getVerbrauch(t.id, 1),
 				this.getVerbrauch(t.id, 2), this.getVerbrauch(t.id, 3),
-				this.getVerbrauch(t.id, 4), this.getReichweite(t.lagerMenge, t.id), t));
+				this.getVerbrauch(t.id, 4), this.getReichweite(t.lagerMenge, t.id), t,this.getLaufendeBestellungen(t.id),this.getEingehendeBestellungen(t.id)));
+			this.alleKaufTeile[i].kaufTeil.teileWertNeu = this.getNeuenTeileWert(this.alleKaufTeile[i]);
 		}
 	}
 
@@ -139,7 +144,7 @@ class KaufteilDispositionController {
 			return;
 		}
 		this.bestellService.neuBestellungen['k' + this.selectedViewModel.kaufTeil.id].push(new NeuBestellung(this.neuBestellung.eil, this.neuBestellung.teil_id, this.neuBestellung.menge, this.getNeuBestellungsKosten(this.neuBestellung)));
-		this.selectedViewModel.kaufTeil.teileWertNeu = this.getNeuenTeileWert();
+		this.selectedViewModel.kaufTeil.teileWertNeu = this.getNeuenTeileWert(this.selectedViewModel);
 		this.neuBestellung.menge = 0;
 		this.neuBestellung.eil = false;
 	}
@@ -152,20 +157,23 @@ class KaufteilDispositionController {
 				neuBestellungen.splice(i, 1);
 			}
 		}
-		this.selectedViewModel.kaufTeil.teileWertNeu = this.getNeuenTeileWert();
+		this.selectedViewModel.kaufTeil.teileWertNeu = this.getNeuenTeileWert(this.selectedViewModel);
 	}
 
-	getNeuenTeileWert() {
-		var bestandAlt = this.selectedViewModel.kaufTeil.lagerMenge;
-		var teileWertAlt = this.selectedViewModel.kaufTeil.teileWert;
+	getNeuenTeileWert(viewModel: ViewModel) {
+		var bestandAlt = viewModel.kaufTeil.lagerMenge;
+		var teileWertAlt = viewModel.kaufTeil.teileWert;
 
 		var bestellKosten = 0;
 		var bestellMenge = 0;
 
-		var bestellungen = this.bestellService.neuBestellungen['k' + this.selectedViewModel.kaufTeil.id];
+		var bestellungen = this.bestellService.neuBestellungen['k' + viewModel.kaufTeil.id];
 		for (var i = 0; i < bestellungen.length; i++) {
 			bestellKosten += bestellungen[i].kosten;
 			bestellMenge += bestellungen[i].menge;
+		}
+		if(bestandAlt == 0 && bestellMenge == 0) {
+			return teileWertAlt;
 		}
 		var teileWertNeu = (bestandAlt * teileWertAlt + bestellKosten) / (bestandAlt * 1 + bestellMenge * 1);
 		return Math.round(teileWertNeu * 100) / 100;
@@ -176,6 +184,16 @@ class KaufteilDispositionController {
 		for (var i = 0; i < this.bestellService.laufendeBestellungen.length; i++) {
 			if (this.bestellService.laufendeBestellungen[i].teil_id == teil_id) {
 				result.push(this.bestellService.laufendeBestellungen[i]);
+			}
+		}
+		return result;
+	}
+	
+	getEingehendeBestellungen(teil_id: number){
+		var result = [];
+		for (var i = 0; i < this.bestellService.zugangBestellungen.length; i++) {
+			if (this.bestellService.zugangBestellungen[i].teil_id == teil_id) {
+				result.push(this.bestellService.zugangBestellungen[i]);
 			}
 		}
 		return result;

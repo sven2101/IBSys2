@@ -43,49 +43,49 @@
 	<!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<div id ="details" class="container" style="display:none">
 		<div class="row">
-			 <div class="col-md-8"><h2>Ansicht für Kaufteil {{ktdc.selectedViewModel.kaufTeil.id}}</h2></div>
-			 <div class="col-md-4 "><button type="button" class="btn btn-info btn-block btn-lg" fade out="details" in="tablecontainer">Zurück</button></div>
+			 <div class="col-sm-8"><h2>Ansicht für Kaufteil {{ktdc.selectedViewModel.kaufTeil.id}}</h2></div>
+			 <div class="col-sm-4 "><button type="button" class="btn btn-info btn-block" fade out="details" in="tablecontainer">Zurück</button></div>
 		</div>
 		<div class="row">
-			 <div class="col-md-12 ">
+			 <div class="col-md-12">
 				<table class="table table-bordered text-center table-condensed">
-				<tr>
-					<th class="text-center">Id</th>
-					<th class="text-center" title="Mehrfachverwendung">MFW</th>
-					<th class="text-center">Preis</th>
-					<th class="text-center" title="Wiederbeschaffungszeit">WBZ&nbsp&plusmn<br>Abweichung</th>
-					<th class="text-center">Discont-<br>menge</th>
-					<th class="text-center">Bestellkosten</th>
-					<th class="text-center">Reich-<br>weite</th>
-					<th class="text-center">Lager-<br>menge</th>
-					<th class="text-center">Verbrauch<br>aktuell</th>
-					<th class="text-center">Verbrauch<br>n+1</th>
-					<th class="text-center">Verbrauch<br>n+2</th>
-					<th class="text-center">Verbrauch<br>n+3</th>
-				</tr>
-				<tr ng-class="{danger: ktdc.mussBestellen(ktdc.selectedViewModel), warning: ktdc.sollteBestellen(ktdc.selectedViewModel)}">
-					<td>{{ktdc.selectedViewModel.kaufTeil.id}}</td>
-					<td>
-						<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="ktdc.selectedViewModel.kaufTeil.mfw"></span>
-						<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!ktdc.selectedViewModel.kaufTeil.mfw"></span>
-					</td>
-					<td>{{ktdc.selectedViewModel.kaufTeil.preis | currency:"€"}}</td>
-					<td>{{ktdc.selectedViewModel.kaufTeil.wbz}} &plusmn({{ktdc.selectedViewModel.kaufTeil.wbzAbw}})</td>
-					<td>{{ktdc.selectedViewModel.kaufTeil.discontMenge}}</td>
-					<td>{{ktdc.selectedViewModel.kaufTeil.bestellKosten | currency:"€"}}</td>
-					<td>{{ktdc.selectedViewModel.reichweite | number:2}}</td>
-					<td>{{ktdc.selectedViewModel.kaufTeil.lagerMenge}}</td>
-					<td>{{ktdc.selectedViewModel.verbrauch1}}</td>
-					<td>{{ktdc.selectedViewModel.verbrauch2}}</td>
-					<td>{{ktdc.selectedViewModel.verbrauch3}}</td>
-					<td>{{ktdc.selectedViewModel.verbrauch4}}</td>
-				</tr>
-			</table>
+					<tr>
+						<th class="text-center">Id</th>
+						<th class="text-center" title="Mehrfachverwendung">MFW</th>
+						<th class="text-center">Preis</th>
+						<th class="text-center" title="Wiederbeschaffungszeit">WBZ&nbsp&plusmn<br>Abweichung</th>
+						<th class="text-center">Discont-<br>menge</th>
+						<th class="text-center">Bestellkosten</th>
+						<th class="text-center">Reich-<br>weite</th>
+						<th class="text-center">Lager-<br>menge</th>
+						<th class="text-center">Verbrauch<br>aktuell</th>
+						<th class="text-center">Verbrauch<br>n+1</th>
+						<th class="text-center">Verbrauch<br>n+2</th>
+						<th class="text-center">Verbrauch<br>n+3</th>
+					</tr>
+					<tr ng-class="{danger: ktdc.mussBestellen(ktdc.selectedViewModel), warning: ktdc.sollteBestellen(ktdc.selectedViewModel)}">
+						<td>{{ktdc.selectedViewModel.kaufTeil.id}}</td>
+						<td>
+							<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="ktdc.selectedViewModel.kaufTeil.mfw"></span>
+							<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!ktdc.selectedViewModel.kaufTeil.mfw"></span>
+						</td>
+						<td>{{ktdc.selectedViewModel.kaufTeil.preis | currency:"€"}}</td>
+						<td>{{ktdc.selectedViewModel.kaufTeil.wbz}} &plusmn({{ktdc.selectedViewModel.kaufTeil.wbzAbw}})</td>
+						<td>{{ktdc.selectedViewModel.kaufTeil.discontMenge}}</td>
+						<td>{{ktdc.selectedViewModel.kaufTeil.bestellKosten | currency:"€"}}</td>
+						<td>{{ktdc.selectedViewModel.reichweite | number:2}}</td>
+						<td>{{ktdc.selectedViewModel.kaufTeil.lagerMenge}}</td>
+						<td>{{ktdc.selectedViewModel.verbrauch1}}</td>
+						<td>{{ktdc.selectedViewModel.verbrauch2}}</td>
+						<td>{{ktdc.selectedViewModel.verbrauch3}}</td>
+						<td>{{ktdc.selectedViewModel.verbrauch4}}</td>
+					</tr>
+				</table>
+			</div>
 		</div>
-		</div>
-		<div class="jumbotron jumbotron-fluid">
-			<div class="row ">
-				<div class="col-md-12">
+		<div>
+			<div class="row jumbotron">
+				<div class="col-md-6">
 					<h3>Neue Bestellung erstellen</h3>
 					<form>
 						<div class="form-group">
@@ -96,18 +96,23 @@
 							</label>
 						</div>
 					<form>
+					<button type="button" class="btn btn-success btn-block" ng-click="ktdc.neueBestellungErstellen()">Erstellen</button>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4 "><button type="button" class="btn btn-success btn-lg btn-block" ng-click="ktdc.neueBestellungErstellen()">Erstellen</button></div>
+				<div class="col-md-6">
+					<div class="row">
+						<div class="col-md-12"><h3>TeileWert</h3></div>
+						<div class="col-md-3"><h4>Alt: {{ktdc.selectedViewModel.kaufTeil.teileWert | currency:"€"}}</h4></div>
+						<div class="col-md-3"><h4>Neu: {{ktdc.selectedViewModel.kaufTeil.teileWertNeu | currency:"€"}}</h4></div>
+					</div>
+				</div>
 			</div>
 		</div>	
 		<div class="row">
-			<div class="col-md-5"><h3>Neue Bestellungen:</h3></div>
-			<div class="col-md-7"><h3>Laufende Bestellungen:</h3></div>
+			<div class="col-md-6"><h3>Neue Bestellungen:</h3></div>
+			<div class="col-md-6"><h3>Vorschläge:</h3></div>
 		</div>
 		<div class="row">
-				<div class="col-md-5">
+				<div class="col-md-6">
 					<table class="table table-bordered text-center table-hover table-condensed">
 					<tr>
 						<th class="text-center">Menge</th>
@@ -116,22 +121,64 @@
 					</tr>
 					<tr class="curs" ng-repeat="bestellung in ktdc.bestellService.neuBestellungen['k'+ktdc.selectedViewModel.kaufTeil.id]" ng-click="ktdc.deleteNeueBestellung(bestellung)">
 						<td>{{bestellung.menge}}</td>
-						<td>{{bestellung.eil}}</td>
+						<td>
+							<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="bestellung.eil"></span>
+							<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!bestellung.eil"></span>
+						</td>
 						<td>{{bestellung.kosten | currency:"€"}}</td>
 					</tr>
 				</table>
 			</div>
-			<div class="col-md-7">
+			<div class="col-md-6">
+				<table class="table table-bordered text-center table-hover table-condensed">
+					<tr>
+						<th class="text-center">Übernehmen</th>
+						<th class="text-center">Menge</th>
+						<th class="text-center">Eil</th>
+						<th class="text-center">Kosten</th>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-md-6"><h3>Eingehende Bestellungen:</h3></div>
+			<div class="col-md-6"><h3>Laufende Bestellungen:</h3></div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<table class="table table-bordered text-center table-condensed">
+					<tr>
+						<th class="text-center">Menge</th>
+						<th class="text-center">Eil</th>
+						<th class="text-center">Beendet</th>
+						<th class="text-center">Kosten</th>
+					</tr>
+					<tr ng-repeat="bestellung in ktdc.selectedViewModel.eingehendeBestellungen">
+						<td>{{bestellung.menge}}</td>
+						<td>
+							<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="bestellung.eil"></span>
+							<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!bestellung.eil"></span>
+						</td>
+						<td>{{bestellung.zeit.periode}}-{{bestellung.zeit.tag}}-0-0</td>
+						<td>{{bestellung.gesamtKosten | currency:"€"}}</td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-md-6">
 					<table class="table table-bordered text-center table-condensed">
 					<tr>
 						<th class="text-center">Menge</th>
 						<th class="text-center">Eil</th>
-						<th class="text-center">Periode</th>
+						<th class="text-center">Auftragsperiode</th>
 						<th class="text-center">Kosten</th>
 					</tr>
-					<tr ng-repeat="bestellung in ktdc.getLaufendeBestellungen(ktdc.selectedViewModel.kaufTeil.id)">
+					<tr ng-repeat="bestellung in ktdc.selectedViewModel.laufendeBestellungen">
 						<td>{{bestellung.menge}}</td>
-						<td>{{bestellung.eil}}</td>
+						<td>
+							<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="bestellung.eil"></span>
+							<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!bestellung.eil"></span>
+						</td>
 						<td>{{bestellung.periode}}</td>
 						<td>{{ktdc.getLaufendeBestellungKosten(bestellung) | currency:"€"}}</td>
 					</tr>
