@@ -35,6 +35,9 @@ angular.module('app')
     }).when('/lager', {
         templateUrl: '/components/lager/lager.html',
         controller: 'LagerController as lc'
-    })
+    }).when('/fertigungsAuftraege', {
+            templateUrl: '/components/FertigungsAuftraege/FertigungsAuftraege.html',
+            controller: 'FertigungsAuftraegeController as fac'
+        })
   }]);
 

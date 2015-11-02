@@ -1,47 +1,49 @@
 <h1 >Disposition P1</h1>
-<table align="center" class="table table-striped table-hover ">
-    <tr>
-        <th>id</th>
-        <th>ProdProg</th>
-        <th>geplanter Lagerstand</th>
-        <th>Lagerstand</th>
-        <th>Aufträge in Warteschlange</th>
-        <th>Material auf Maschine</th>
-        <th>Fertigungsauftrag</th>
-        <th>Splitten in</th>
-        <th>Prorität</th>
-    </tr>
-    <tbody>
-    <tr ng-repeat="model in dc.modelsP1">
-        <td><label>{{model.eTeil.id}}</label></td>
-        <td><label>{{model.getProdProg()}}</label></td>
-        <td><input id="input_{{model.eTeil.id}}" ng-model="model.geplanterLagerstand" ng-keyup="dc.aendern()"></td>
-        <td><label>{{model.getLagerMenge()}}</label></td>
-        <td><label>{{model.getWarteschlange()}}</label></td>
-        <td><label>{{model.getMaterialAufMaschine()}}</label></td>
-        <td>{{model.anzahl}}</td>
-        <td >
-            <select type="number" ng-model="model.split" ng-click="dc.aendern()">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-            </select>
-        </td>
-        <td>
-            <select ng-model="model.prioritaet" ng-click="dc.aendern()">
-                <option>normal</option>
-                <option>hoch</option>
-                <option>kritisch</option>
-            </select>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<div class="container">
+    <table align="center" class="table table-striped table-hover ">
+        <tr>
+            <th>id</th>
+            <th>ProdProg</th>
+            <th>geplanter Lagerstand</th>
+            <th>Lagerstand</th>
+            <th>Aufträge in Warteschlange</th>
+            <th>Material auf Maschine</th>
+            <th>Fertigungsauftrag</th>
+            <th>Splitten in</th>
+            <th>Prorität</th>
+        </tr>
+        <tbody>
+        <tr ng-repeat="model in dc.modelsP1">
+            <td><label>{{model.eTeil.id}}</label></td>
+            <td><label>{{model.getProdProg()}}</label></td>
+            <td><input id="input_{{model.eTeil.id}}" ng-model="model.geplanterLagerstand" ng-keyup="dc.aendern()"></td>
+            <td><label>{{model.getLagerMenge()}}</label></td>
+            <td><label>{{model.getWarteschlange()}}</label></td>
+            <td><label>{{model.getMaterialAufMaschine()}}</label></td>
+            <td>{{model.anzahl}}</td>
+            <td >
+                <select type="number" ng-model="model.split" ng-click="dc.aendern()">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </td>
+            <td>
+                <select ng-model="model.prioritaet" ng-click="dc.aendern()">
+                    <option>normal</option>
+                    <option>hoch</option>
+                    <option>kritisch</option>
+                </select>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 <h5>{{dc.auftragsService.auftraege}}</h5>

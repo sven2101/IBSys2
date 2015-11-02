@@ -83,7 +83,7 @@ class DispositionService{
         for(let i=0;i<dispo.length;i++){
             let temp=this.filter2(dispo[i].teil_id);
             if(temp==null){
-                let x=new DispositionModel(this.filter(dispo[i].teil_id),this.programmService.getProgrammposition(1));
+                let x=new DispositionModel(this.filter(dispo[i].teil_id),this.programmService.getProgrammposition(1),this.programmService.getDirectsalesPosition(1));
                 this.dispositionP1.push(x);
                 this.models.push(x);
             }
@@ -103,7 +103,7 @@ class DispositionService{
         for(let i=0;i<dispo.length;i++){
             let temp=this.filter2(dispo[i].teil_id);
             if(temp==null){
-                let x=new DispositionModel(this.filter(dispo[i].teil_id),this.programmService.getProgrammposition(2));
+                let x=new DispositionModel(this.filter(dispo[i].teil_id),this.programmService.getProgrammposition(2),this.programmService.getDirectsalesPosition(2));
                 this.dispositionP2.push(x);
                 this.models.push(x);
             }
@@ -123,7 +123,7 @@ class DispositionService{
         for(let i=0;i<dispo.length;i++){
             let temp=this.filter2(dispo[i].teil_id);
             if(temp==null){
-                let x=new DispositionModel(this.filter(dispo[i].teil_id),this.programmService.getProgrammposition(3));
+                let x=new DispositionModel(this.filter(dispo[i].teil_id),this.programmService.getProgrammposition(3),this.programmService.getDirectsalesPosition(3));
                 this.dispositionP3.push(x);
                 this.models.push(x);
             }
@@ -135,7 +135,7 @@ class DispositionService{
 
     }
     dispoP1rekursuiv(wurzel:NewTeilKnoten,oberModel:DispositionModel=null){
-        let x=new DispositionModel(this.filter(wurzel.teil_id),this.programmService.getProgrammposition(1));
+        let x=new DispositionModel(this.filter(wurzel.teil_id),this.programmService.getProgrammposition(1),this.programmService.getDirectsalesPosition(1));
         if(wurzel.teil_id!=1||wurzel.teil_id!=2||wurzel.teil_id!=3){
             x.oberModel=oberModel;
         }
@@ -152,7 +152,7 @@ class DispositionService{
 
     }
     dispoP2rekursuiv(wurzel:NewTeilKnoten,oberModel:DispositionModel=null){
-        let x=new DispositionModel(this.filter(wurzel.teil_id),this.programmService.getProgrammposition(2));
+        let x=new DispositionModel(this.filter(wurzel.teil_id),this.programmService.getProgrammposition(2),this.programmService.getDirectsalesPosition(2));
         if(wurzel.teil_id!=1||wurzel.teil_id!=2||wurzel.teil_id!=3){
             x.oberModel=oberModel;
         }
@@ -169,7 +169,7 @@ class DispositionService{
 
     }
     dispoP3rekursuiv(wurzel:NewTeilKnoten,oberModel:DispositionModel=null){
-        let x=new DispositionModel(this.filter(wurzel.teil_id),this.programmService.getProgrammposition(3));
+        let x=new DispositionModel(this.filter(wurzel.teil_id),this.programmService.getProgrammposition(3),this.programmService.getDirectsalesPosition(3));
         if(wurzel.teil_id!=1||wurzel.teil_id!=2||wurzel.teil_id!=3){
             x.oberModel=oberModel;
         }
@@ -261,6 +261,7 @@ class DispositionService{
         for(let i=0;i<this.auftragService.auftraege.length;i++){
             this.arbeitsplatzService.map[this.auftragService.auftraege[i].erzeugnis_id].auftragSetzten(this.auftragService.auftraege[i]);
         }
+        this.auftragService.altLastenVerteilen(this.models);
     }
     altLastenVerteilen(models:Array<DispositionModel>){
         for(let i=0;i<this.auftragService.auftraegeAufMaschine.length;i++){

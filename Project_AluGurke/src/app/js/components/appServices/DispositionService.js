@@ -65,7 +65,7 @@ var DispositionService = (function () {
         for (var i = 0; i < dispo.length; i++) {
             var temp = this.filter2(dispo[i].teil_id);
             if (temp == null) {
-                var x = new DispositionModel(this.filter(dispo[i].teil_id), this.programmService.getProgrammposition(1));
+                var x = new DispositionModel(this.filter(dispo[i].teil_id), this.programmService.getProgrammposition(1), this.programmService.getDirectsalesPosition(1));
                 this.dispositionP1.push(x);
                 this.models.push(x);
             }
@@ -83,7 +83,7 @@ var DispositionService = (function () {
         for (var i = 0; i < dispo.length; i++) {
             var temp = this.filter2(dispo[i].teil_id);
             if (temp == null) {
-                var x = new DispositionModel(this.filter(dispo[i].teil_id), this.programmService.getProgrammposition(2));
+                var x = new DispositionModel(this.filter(dispo[i].teil_id), this.programmService.getProgrammposition(2), this.programmService.getDirectsalesPosition(2));
                 this.dispositionP2.push(x);
                 this.models.push(x);
             }
@@ -101,7 +101,7 @@ var DispositionService = (function () {
         for (var i = 0; i < dispo.length; i++) {
             var temp = this.filter2(dispo[i].teil_id);
             if (temp == null) {
-                var x = new DispositionModel(this.filter(dispo[i].teil_id), this.programmService.getProgrammposition(3));
+                var x = new DispositionModel(this.filter(dispo[i].teil_id), this.programmService.getProgrammposition(3), this.programmService.getDirectsalesPosition(3));
                 this.dispositionP3.push(x);
                 this.models.push(x);
             }
@@ -113,7 +113,7 @@ var DispositionService = (function () {
     };
     DispositionService.prototype.dispoP1rekursuiv = function (wurzel, oberModel) {
         if (oberModel === void 0) { oberModel = null; }
-        var x = new DispositionModel(this.filter(wurzel.teil_id), this.programmService.getProgrammposition(1));
+        var x = new DispositionModel(this.filter(wurzel.teil_id), this.programmService.getProgrammposition(1), this.programmService.getDirectsalesPosition(1));
         if (wurzel.teil_id != 1 || wurzel.teil_id != 2 || wurzel.teil_id != 3) {
             x.oberModel = oberModel;
         }
@@ -130,7 +130,7 @@ var DispositionService = (function () {
     };
     DispositionService.prototype.dispoP2rekursuiv = function (wurzel, oberModel) {
         if (oberModel === void 0) { oberModel = null; }
-        var x = new DispositionModel(this.filter(wurzel.teil_id), this.programmService.getProgrammposition(2));
+        var x = new DispositionModel(this.filter(wurzel.teil_id), this.programmService.getProgrammposition(2), this.programmService.getDirectsalesPosition(2));
         if (wurzel.teil_id != 1 || wurzel.teil_id != 2 || wurzel.teil_id != 3) {
             x.oberModel = oberModel;
         }
@@ -147,7 +147,7 @@ var DispositionService = (function () {
     };
     DispositionService.prototype.dispoP3rekursuiv = function (wurzel, oberModel) {
         if (oberModel === void 0) { oberModel = null; }
-        var x = new DispositionModel(this.filter(wurzel.teil_id), this.programmService.getProgrammposition(3));
+        var x = new DispositionModel(this.filter(wurzel.teil_id), this.programmService.getProgrammposition(3), this.programmService.getDirectsalesPosition(3));
         if (wurzel.teil_id != 1 || wurzel.teil_id != 2 || wurzel.teil_id != 3) {
             x.oberModel = oberModel;
         }
@@ -236,6 +236,7 @@ var DispositionService = (function () {
         for (var i = 0; i < this.auftragService.auftraege.length; i++) {
             this.arbeitsplatzService.map[this.auftragService.auftraege[i].erzeugnis_id].auftragSetzten(this.auftragService.auftraege[i]);
         }
+        this.auftragService.altLastenVerteilen(this.models);
     };
     DispositionService.prototype.altLastenVerteilen = function (models) {
         for (var i = 0; i < this.auftragService.auftraegeAufMaschine.length; i++) {

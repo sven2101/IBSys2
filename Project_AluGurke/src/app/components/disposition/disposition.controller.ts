@@ -42,6 +42,7 @@ class DispositionModel{
     eTeil:NewErzeugnis;
     geplanterLagerstand:number;
     produktionsProgramm:ProgrammPosition;
+    directSale:DirectSalesPosition;
     split:string;
     prioritaet:string;
     anzahl:number;
@@ -51,7 +52,7 @@ class DispositionModel{
     auftragAufMaschine:Auftrag;
     oberModel:DispositionModel;
 
-    constructor(eTeil:NewErzeugnis,x:ProgrammPosition) {
+    constructor(eTeil:NewErzeugnis,x:ProgrammPosition,y:DirectSalesPosition) {
         this.eTeil = eTeil;
         this.geplanterLagerstand = 50;
         this.split = "1";
@@ -61,7 +62,7 @@ class DispositionModel{
         this.periode=1;
         this.auftraege=new Array<Auftrag>();
         this.auftragInWarteschlange=new Array<Auftrag>();
-
+        this.directSale=y;
 
     }
     getWarteschlange(){
@@ -91,10 +92,10 @@ class DispositionModel{
     }
     getProdProg(){
         if(this.oberModel==null){
-            return this.produktionsProgramm.menge;
+            return this.produktionsProgramm.menge+this.directSale.menge;
         }
         else{
-            return this.oberModel.anzahl;
+            return this.oberModel.anzahl+this.oberModel.getWarteschlange();
         }
 
     }
