@@ -63,7 +63,7 @@ class ArbeitsplatzService {
         this.map[16]=new Fertigungsreihe(this.getAP(6,16,this.getAP(14,16)));
         this.map[50]=new Fertigungsreihe(this.getAP(2,50));
         this.map[51]=new Fertigungsreihe(this.getAP(3,51));
-        this.map[26]=new Fertigungsreihe(this.getAP(7,26,this.getAP(7,26)));
+        this.map[26]=new Fertigungsreihe(this.getAP(7,26,this.getAP(15,26)));
         this.map[1]=new Fertigungsreihe(this.getAP(4,1));
         //P2
         this.map[14]=new Fertigungsreihe(this.getAP(13,14,this.getAP(12,14,this.getAP(8,14,this.getAP(7,14,this.getAP(9,14))))));
@@ -103,6 +103,7 @@ class ArbeitsplatzService {
             this.fertigungsreihen[i].reset();
         }
     }
+
 
 
 }

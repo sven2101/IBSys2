@@ -4,15 +4,14 @@
 
 </div>
 <div>
-    <h1>{{kpc.service.arbeitsplaetze.length}}</h1>
-    <input id="input1" ng-keyup="kpc.aendern()">
-    <h5>{{kpc.test.ersterArbeitsplatz}}</h5>
-
+<h5>{{kpc.models}}</h5>
+<button ng-click="kpc.berechnen()">berechnen</button>
 
     <table align="center" class="table table-striped table-hover ">
         <tr>
             <th>name</th>
             <th>arbeitszeit</th>
+            <th>Verfügnare Zeit</th>
             <th>Anzahl Aufträge</th>
             <th>Anzahl arbeitsplatzfremder Aufträge</th>
             <th>Anzahl Schichten</th>
@@ -21,24 +20,27 @@
             <th>Ueber3</th>
         </tr>
         <tbody>
-            <tr ng-repeat="arbeitsplatz in kpc.ergebnisListe">
-                <td>{{arbeitsplatz.name}}</td>
-                <td>{{arbeitsplatz.arbeitszeit}}</td>
-                <td>{{arbeitsplatz.auftraege.length}}</td>
-                <td>{{arbeitsplatz.arbeitsplatzFremdeAuftraege.length}}</td>
+            <tr ng-repeat="model in kpc.models">
+                <td>{{model.name.split("_")[0]}}</td>
+                <td>{{model.arbeitsplatz.arbeitszeit}}</td>
+                <td>{{model.zeitVerfuegung}}</td>
+                <td>{{model.arbeitsplatz.auftraege.length}}</td>
+                <td>{{model.arbeitsplatz.arbeitsplatzFremdeAuftraege.length}}</td>
                 <td>
-                    <select id="select21_arbeitsplatz.id">
+                    <select ng-model="model.anzahlSchichten" ng-click="kpc.aendern()">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
                     </select>
                 </td>
-                <td><input id="input21_select2_arbeitsplatz.id" style="width:30px;"></td>
-                <td><input id="input22_select2_arbeitsplatz.id" style="width:30px;"></td>
-                <td><input id="input23_select2_arbeitsplatz.id" style="width:30px;"></td>
+                <td><input ng-model="model.ueberstunden1" ng-keyup="kpc.aendern()" style="width:30px;"></td>
+                <td><input ng-model="model.ueberstunden2" ng-keyup="kpc.aendern()"style="width:30px;"></td>
+                <td><input ng-model="model.ueberstunden3" ng-keyup="kpc.aendern()"style="width:30px;"></td>
+                </div>
             </tr>
         </tbody>
     </table>
+    <h5>{{kpc.kapazitaetsplanungService.arbeitsplatzService.fertigungsreihen}}</h5>
 
 
 </div>

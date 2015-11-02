@@ -1,7 +1,8 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
 var DispositionController = (function () {
-    function DispositionController(auftragsService, newTeileService, dispositionService, newBaumService) {
+    function DispositionController(auftragsService, newTeileService, dispositionService, newBaumService, kapazitaetsplanungService) {
         this.dispositionService = dispositionService;
+        this.kapazitaetsplanungService = kapazitaetsplanungService;
         this.models = this.dispositionService.models;
         this.modelsP1 = this.dispositionService.dispositionP1;
         this.modelsP2 = this.dispositionService.dispositionP2;
@@ -11,17 +12,18 @@ var DispositionController = (function () {
     }
     DispositionController.prototype.aendern = function () {
         this.dispositionService.aendern();
+        this.kapazitaetsplanungService.aendern();
     };
     return DispositionController;
 })();
 var DispositionModel = (function () {
     function DispositionModel(eTeil, x) {
         this.eTeil = eTeil;
-        this.geplanterLagerstand = 100;
+        this.geplanterLagerstand = 50;
         this.split = "1";
         this.prioritaet = "normal";
         this.produktionsProgramm = x;
-        this.anzahl = 666;
+        this.anzahl = 0;
         this.periode = 1;
         this.auftraege = new Array();
         this.auftragInWarteschlange = new Array();
@@ -32,7 +34,7 @@ var DispositionModel = (function () {
             x += this.auftragInWarteschlange[i].anzahl;
         }
         if (this.eTeil.mehrfachVerwendung) {
-            x = Math.round(x / 3);
+            return Math.round(x / 3);
         }
         return x;
     };
@@ -40,38 +42,28 @@ var DispositionModel = (function () {
         if (this.auftragAufMaschine == null) {
             return 0;
         }
-        else {
-            if (this.eTeil.mehrfachVerwendung) {
-                return Math.round(this.auftragAufMaschine.anzahl / 3);
-            }
-            return this.auftragAufMaschine.anzahl;
+        if (this.eTeil.mehrfachVerwendung) {
+            return Math.round(this.auftragAufMaschine.anzahl / 3);
         }
+        return this.auftragAufMaschine.anzahl;
     };
     DispositionModel.prototype.getLagerMenge = function () {
         if (this.eTeil.mehrfachVerwendung) {
             return Math.round(this.eTeil.lagerMenge / 3);
         }
-        else {
-            return this.eTeil.lagerMenge;
-        }
+        return this.eTeil.lagerMenge;
     };
     DispositionModel.prototype.getProdProg = function () {
-        if (this.eTeil.mehrfachVerwendung) {
-            return Math.round(this.produktionsProgramm.menge / 3);
+        if (this.oberModel == null) {
+            return this.produktionsProgramm.menge;
         }
         else {
-            return this.produktionsProgramm.menge;
+            return this.oberModel.anzahl;
         }
     };
     DispositionModel.prototype.getGeplanteLagermenge = function () {
-        if (this.eTeil.mehrfachVerwendung) {
-            //return Math.round(this.geplanterLagerstand/3);
-            return this.geplanterLagerstand;
-        }
-        else {
-            return this.geplanterLagerstand;
-        }
+        return this.geplanterLagerstand;
     };
     return DispositionModel;
 })();
-angular.module("DispositionModule").controller("DispositionController", ["AuftragService", "NewTeileService", "DispositionService", "NewBaumService", DispositionController]);
+angular.module("DispositionModule").controller("DispositionController", ["AuftragService", "NewTeileService", "DispositionService", "NewBaumService", "KapazitaetsplanungService", DispositionController]);

@@ -9,30 +9,30 @@ var AuftragService = (function () {
         this.auftraegeExport = new Array();
         this.auftraegeSetzen([]);
     }
-    AuftragService.prototype.altLastenVerteilen = function () {
+    AuftragService.prototype.altLastenVerteilen = function (models) {
         for (var i = 0; i < this.auftraegeAufMaschine.length; i++) {
-            for (var j = 0; j < this.dispositionService.models.length; j++) {
-                if (this.dispositionService.models[j].eTeil.id == this.auftraegeAufMaschine[i].erzeugnis_id) {
-                    this.dispositionService.models[j].auftragAufMaschine = this.auftraegeAufMaschine[i];
+            for (var j = 0; j < models.length; j++) {
+                if (models[j].eTeil.id == this.auftraegeAufMaschine[i].erzeugnis_id) {
+                    models[j].auftragAufMaschine = this.auftraegeAufMaschine[i];
                 }
             }
         }
-        for (var j = 0; j < this.dispositionService.models.length; j++) {
-            this.dispositionService.models[j].auftragInWarteschlange = [];
+        for (var j = 0; j < models.length; j++) {
+            models[j].auftragInWarteschlange = [];
             for (var i = 0; i < this.auftraegeInWarteschlange.length; i++) {
-                if (this.dispositionService.models[j].eTeil.id == this.auftraegeInWarteschlange[i].erzeugnis_id) {
-                    this.dispositionService.models[j].auftragInWarteschlange.push(this.auftraegeInWarteschlange[i]);
+                if (models[j].eTeil.id == this.auftraegeInWarteschlange[i].erzeugnis_id) {
+                    models[j].auftragInWarteschlange.push(this.auftraegeInWarteschlange[i]);
                 }
             }
         }
     };
     AuftragService.prototype.auftraegeSetzen = function (auftraege) {
-        var x = this.mergeAuftraege(auftraege);
+        //let x=this.mergeAuftraege(auftraege);
         this.auftraege = [];
-        this.auftraegeExport = x;
+        this.auftraegeExport = auftraege;
         this.auftraege = this.auftraege.concat(this.auftraegeAufMaschine);
         this.auftraege = this.auftraege.concat(this.auftraegeInWarteschlange);
-        this.auftraege = this.auftraege.concat(x);
+        this.auftraege = this.auftraege.concat(auftraege);
     };
     AuftragService.prototype.mergeAuftraege = function (auftraege) {
         var temp = new Array();

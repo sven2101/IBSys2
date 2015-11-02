@@ -21,7 +21,7 @@ class Fertigungsreihe{
             temp=temp.nachfolger;
         }
     }
-    auftraegSetzten(x:Auftrag){
+    auftragSetzten(x:Auftrag){
         let temp:ArbeitsplatzKnoten=null;
         if(x.arbeitsplatz_id!=0){
             temp=this.map[x.arbeitsplatz_id];

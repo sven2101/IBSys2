@@ -15,7 +15,7 @@ var Fertigungsreihe = (function () {
             temp = temp.nachfolger;
         }
     };
-    Fertigungsreihe.prototype.auftraegSetzten = function (x) {
+    Fertigungsreihe.prototype.auftragSetzten = function (x) {
         var temp = null;
         if (x.arbeitsplatz_id != 0) {
             temp = this.map[x.arbeitsplatz_id];
