@@ -1,6 +1,11 @@
 /**
  * Created by Max on 28.10.2015.
  */
+/// <reference path="../../model/NewTeilKnoten.ts" />
+/// <reference path="../appServices/NewTeileService.ts" />
+/// <reference path="../appServices/ProgrammService.ts" />
+/// <reference path="../appServices/NewBaumService.ts" />
+/// <reference path="../appServices/AuftragService.ts" />
 var DispositionService = (function () {
     function DispositionService(ProgrammService, NewTeileService, NewBaumService, AuftragService, ArbeitsplatzService) {
         this.programmService = ProgrammService;

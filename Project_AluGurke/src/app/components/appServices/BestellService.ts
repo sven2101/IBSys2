@@ -3,61 +3,53 @@
 /// <reference path="../../model/ZugangBestellung.ts" />
 /// <reference path="../../model/NeuBestellung.ts" />
 
+class BsNeuBestellungenMap {
+	k21: Array<NeuBestellung> = [];
+	k22: Array<NeuBestellung> = [];
+	k23: Array<NeuBestellung> = [];
+	k24: Array<NeuBestellung> = [];
+	k25: Array<NeuBestellung> = [];
+	k27: Array<NeuBestellung> = [];
+	k28: Array<NeuBestellung> = [];
+	k32: Array<NeuBestellung> = [];
+	k33: Array<NeuBestellung> = [];
+	k34: Array<NeuBestellung> = [];
+	k35: Array<NeuBestellung> = [];
+	k36: Array<NeuBestellung> = [];
+	k37: Array<NeuBestellung> = [];
+	k38: Array<NeuBestellung> = [];
+	k39: Array<NeuBestellung> = [];
+	k40: Array<NeuBestellung> = [];
+	k41: Array<NeuBestellung> = [];
+	k42: Array<NeuBestellung> = [];
+	k43: Array<NeuBestellung> = [];
+	k44: Array<NeuBestellung> = [];
+	k45: Array<NeuBestellung> = [];
+	k46: Array<NeuBestellung> = [];
+	k47: Array<NeuBestellung> = [];
+	k48: Array<NeuBestellung> = [];
+	k52: Array<NeuBestellung> = [];
+	k53: Array<NeuBestellung> = [];
+	k57: Array<NeuBestellung> = [];
+	k58: Array<NeuBestellung> = [];
+	k59: Array<NeuBestellung> = [];
+}
+
 class BestellService {
 	laufendeBestellungen: Array<Bestellung>;
 	zugangBestellungen: Array<ZugangBestellung>;
-	neuBestellungen: Array<NeuBestellung>;
+
+	neuBestellungen: BsNeuBestellungenMap;
 
 	constructor($rootScope) {
 		this.laufendeBestellungen = [];
 		this.zugangBestellungen = [];
-		this.erzeugeBestellungen();
+		this.neuBestellungen = new BsNeuBestellungenMap();
+
 		$rootScope.$on('fileController.neueDatei', (event, dateiInhalt) => {
 			this.updateLaufendeBestellungen(dateiInhalt.results.futureinwardstockmovement.order);
 			this.updateZugangBestellungen(dateiInhalt.results.inwardstockmovement.order);
 		});
-	}
-
-	erzeugeBestellungen() {
-		this.neuBestellungen = [
-			new NeuBestellung(false, 21, 0),
-			new NeuBestellung(false, 22, 0),
-			new NeuBestellung(false, 23, 0),
-			new NeuBestellung(false, 24, 0),
-			new NeuBestellung(false, 25, 0),
-			new NeuBestellung(false, 27, 0),
-			new NeuBestellung(false, 28, 0),
-			new NeuBestellung(false, 32, 0),
-			new NeuBestellung(false, 33, 0),
-			new NeuBestellung(false, 34, 0),
-			new NeuBestellung(false, 35, 0),
-			new NeuBestellung(false, 36, 0),
-			new NeuBestellung(false, 37, 0),
-			new NeuBestellung(false, 38, 0),
-			new NeuBestellung(false, 39, 0),
-			new NeuBestellung(false, 40, 0),
-			new NeuBestellung(false, 41, 0),
-			new NeuBestellung(false, 42, 0),
-			new NeuBestellung(false, 43, 0),
-			new NeuBestellung(false, 44, 0),
-			new NeuBestellung(false, 45, 0),
-			new NeuBestellung(false, 46, 0),
-			new NeuBestellung(false, 47, 0),
-			new NeuBestellung(false, 48, 0),
-			new NeuBestellung(false, 52, 0),
-			new NeuBestellung(false, 53, 0),
-			new NeuBestellung(false, 57, 0),
-			new NeuBestellung(false, 58, 0),
-			new NeuBestellung(false, 59, 0),
-		];
-	}
-
-	getNeubestellung(teil_id: number) {
-		for (var i = 0; i < this.neuBestellungen.length; i++) {
-			if (this.neuBestellungen[i].teil_id === teil_id) {
-				return this.neuBestellungen[i];
-			}
-		}
 	}
 
 	updateLaufendeBestellungen(bestellungen) {
@@ -68,15 +60,34 @@ class BestellService {
 	}
 
 	updateZugangBestellungen(bestellungen) {
-		//alert(bestellungen.length);
+		var ersteBestellungEndet = bestellungen[0]._time * 1;
+		var startPeriode = bestellungen[0]._orderperiod * 1;
 		for (var i = 0; i < bestellungen.length; i++) {
 			var b = bestellungen[i];
-			this.zugangBestellungen.push(new ZugangBestellung(b._id, this.isEilBestellung(b._mode), b._article, b._amount, b._orderperiod, b._time, b.materialcosts, b._ordercosts, b.entirecosts, b._piececosts));
+			this.zugangBestellungen.push(new ZugangBestellung(b._id, this.isEilBestellung(b._mode), b._article, b._amount, b._orderperiod,
+				this.getEndZeitpunkt(ersteBestellungEndet, startPeriode, b._time), b._materialcosts, b._ordercosts, b._entirecosts, b._piececosts));
 		}
 	}
 
+	getEndZeitpunkt(ersteBestellungEndet: number, startPeriode: number, bestellungEndet: number) {
+		var anzahlTageErsteBestellung = ersteBestellungEndet / 60 / 24;
+		var bestellungEndetTage = bestellungEndet / 60 / 24;
+		var differenz = bestellungEndetTage - anzahlTageErsteBestellung;
+		var restTage = anzahlTageErsteBestellung % 5;
+		var anzahlPerioden = (anzahlTageErsteBestellung - restTage) / 5;
+
+		var endPeriode = startPeriode - 1 + anzahlPerioden;
+		var endTag = restTage + differenz + 1;
+
+		if (endTag > 5) {
+			endTag = endTag % 5;
+			endPeriode += 1;
+		}
+		return { periode: endPeriode, tag: endTag };
+	}
+
 	isEilBestellung(mode: number) {
-		if (mode === 4) {
+		if (mode == 4) {
 			return true;
 		}
 		return false;

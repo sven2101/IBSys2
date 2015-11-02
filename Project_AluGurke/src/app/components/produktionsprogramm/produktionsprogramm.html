@@ -1,34 +1,99 @@
 <section id="produktionsprogramm">
     <div id="test" class="container">
-        <table class="table table-bordered text-center table-hover table-condensed">
+        <div class="panel  panel-default">
+            <div class="panel-heading">Sales</div>
+            <div class="panel-body">
+        <table align="center"><tr><td>
+        <table class="table table-bordered text-center table-hover table-condensed" style="width:20%;">
             <tr>
-                <th class="text-center">Periode</th>
-                <th class="text-center">1</th>
-                <th class="text-center">2</th>
-                <th class="text-center">3</th>
-                <th class="text-center">4</th>
+                <th class="text-center" colspan="2">Vertriebswunsch</th>
+            </tr>
+            <tr>
+                <th class="text-center">Produkt</th>
+                <th class="text-center">Anzahl</th>
             </tr>
             <tr>
                 <td>P1</td>
                 <td><input type="number" ng-model="pc.programmService.getProgrammposition(1,1).menge"></td>
-                <td><input type="number" ng-model="pc.programmService.getProgrammposition(1,2).menge"></td>
-                <td><input type="number" ng-model="pc.programmService.getProgrammposition(1,3).menge"></td>
-                <td><input type="number" ng-model="pc.programmService.getProgrammposition(1,4).menge"></td>
              </tr>
             <tr>
                 <td>P2</td>
                 <td><input type="number" ng-model="pc.programmService.getProgrammposition(2,1).menge"></td>
+            </tr>
+            <tr>
+                <td>P3</td>
+                <td><input type="number" ng-model="pc.programmService.getProgrammposition(3,1).menge"></td>
+            </tr>
+        </table>
+            </td><td style="padding-left: 75px;">
+        <table class="table table-bordered text-center table-hover table-condensed"  style="width:50%;">
+            <tr>
+                <th class="text-center" colspan="4">Prognose</th>
+            </tr>
+            <tr>
+                <th class="text-center">Periode</th>
+                <th class="text-center">n+1</th>
+                <th class="text-center">n+2</th>
+                <th class="text-center">n+3</th>
+            </tr>
+            <tr>
+                <td>P1</td>
+                <td><input type="number" ng-model="pc.programmService.getProgrammposition(1,2).menge"></td>
+                <td><input type="number" ng-model="pc.programmService.getProgrammposition(1,3).menge"></td>
+                <td><input type="number" ng-model="pc.programmService.getProgrammposition(1,4).menge"></td>
+            </tr>
+            <tr>
+                <td>P2</td>
                 <td><input type="number" ng-model="pc.programmService.getProgrammposition(2,2).menge"></td>
                 <td><input type="number" ng-model="pc.programmService.getProgrammposition(2,3).menge"></td>
                 <td><input type="number" ng-model="pc.programmService.getProgrammposition(2,4).menge"></td>
             </tr>
             <tr>
                 <td>P3</td>
-                <td><input type="number" ng-model="pc.programmService.getProgrammposition(3,1).menge"></td>
                 <td><input type="number" ng-model="pc.programmService.getProgrammposition(3,2).menge"></td>
                 <td><input type="number" ng-model="pc.programmService.getProgrammposition(3,3).menge"></td>
                 <td><input type="number" ng-model="pc.programmService.getProgrammposition(3,4).menge"></td>
             </tr>
         </table>
+
+        </td></tr></table>
+            </div>
+        </div>
+
+        <div class="panel  panel-default">
+            <div class="panel-heading">Direct Sales</div>
+            <div class="panel-body">
+                    <table class="table table-bordered text-center table-hover table-condensed"   align="center" style="width:50%;">
+                        <tr>
+                            <th class="text-center" colspan="4">Direct Sales</th>
+                        </tr>
+                        <tr>
+                            <th class="text-center">Produkt</th>
+                            <th class="text-center">Menge</th>
+                            <th class="text-center">Preis</th>
+                            <th class="text-center">Konventionalstrafe</th>
+                        </tr>
+                        <tr>
+                            <td>P1</td>
+                            <td><input type="number" ng-model="pc.programmService.getDirectsalesPosition(1).menge"></td>
+                            <td><input type="number" ng-model="pc.programmService.getDirectsalesPosition(1).preis"></td>
+                            <td><input type="number" ng-model="pc.programmService.getDirectsalesPosition(1).konventionalstrafe"></td>
+                        </tr>
+                        <tr>
+                            <td>P2</td>
+                            <td><input type="number" ng-model="pc.programmService.getDirectsalesPosition(2).menge"></td>
+                            <td><input type="number" ng-model="pc.programmService.getDirectsalesPosition(2).preis"></td>
+                            <td><input type="number" ng-model="pc.programmService.getDirectsalesPosition(2).konventionalstrafe"></td>
+                        </tr>
+                        <tr>
+                            <td>P3</td>
+                            <td><input type="number" ng-model="pc.programmService.getDirectsalesPosition(3).menge"></td>
+                            <td><input type="number" ng-model="pc.programmService.getDirectsalesPosition(3).preis"></td>
+                            <td><input type="number" ng-model="pc.programmService.getDirectsalesPosition(3).konventionalstrafe"></td>
+                        </tr>
+                    </table>
+            </div>
+        </div>
+
     </div>
 </section>

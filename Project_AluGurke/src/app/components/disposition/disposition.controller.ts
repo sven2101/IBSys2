@@ -1,4 +1,10 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
+/// <reference path="../../model/NewTeilKnoten.ts" />
+/// <reference path="../appServices/NewTeileService.ts" />
+/// <reference path="../appServices/ProgrammService.ts" />
+/// <reference path="../appServices/NewBaumService.ts" />
+/// <reference path="../appServices/AuftragService.ts" />
+/// <reference path="../appServices/DispositionService.ts" />
 
 class DispositionController{
 

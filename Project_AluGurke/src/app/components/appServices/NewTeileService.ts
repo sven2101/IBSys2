@@ -5,45 +5,71 @@
 class NewTeileService {
 	alleKaufteile: Array<NewKaufTeil>;
 	alleErzeugnisse: Array<NewErzeugnis>;
+	bestellService: BestellService;
 	$rootScope;
 
-	constructor($rootScope) {
+	constructor($rootScope,bestellService:BestellService) {
+		this.bestellService = bestellService;
 		this.erzeugeKaufTeile();
 		this.erzeugeErzeignisse();
 		this.$rootScope = $rootScope;
-		this.$rootScope.$on('fileController.neueDatei',(event,dateiInhalt) =>{
+		this.$rootScope.$on('fileController.neueDatei', (event, dateiInhalt) => {
 			this.onNeueDatei(dateiInhalt);
 		});
 	}
-	
-	onNeueDatei(dateiInhalt){
-		this.updateLagerMengeKaufTeile(dateiInhalt.results.warehousestock.article);
+
+	onNeueDatei(dateiInhalt) {
+		this.updateKaufTeile(dateiInhalt.results.warehousestock.article);
 		this.$rootScope.$broadcast('teileService.kaufTeile.updated');
-		this.updateLagerMengeErzeugnisse(dateiInhalt.results.warehousestock.article);
+		this.updateErzeugnisse(dateiInhalt.results.warehousestock.article);
 		this.$rootScope.$broadcast('teileService.erzeugnisse.updated');
 	}
-	
-	updateLagerMengeKaufTeile(artikel) {
-		for (var i = 0; i < this.alleKaufteile.length; i++) {	
+
+	updateKaufTeile(artikel) {
+		for (var i = 0; i < this.alleKaufteile.length; i++) {
 			for (var j = 0; j < artikel.length; j++) {
 				if (this.alleKaufteile[i].id == artikel[j]._id) {
 					this.alleKaufteile[i].lagerMenge = artikel[j]._amount;
+					this.alleKaufteile[i].teileWert = artikel[j]._price;
+					this.alleKaufteile[i].teileWertNeu = artikel[j]._price;
+					if(this.bestellService.neuBestellungen['k'+this.alleKaufteile[i].id].length != 0){
+						this.alleKaufteile[i].teileWertNeu = 
+						this.getKaufTeilTeileWertNeu(this.alleKaufteile[i].lagerMenge,this.alleKaufteile[i].teileWert,
+						this.alleKaufteile[i].id);
+					}
+					
 				}
 			}
 		}
 	}
 	
-	updateLagerMengeErzeugnisse(artikel) {
-		for (var i = 0; i < this.alleErzeugnisse.length; i++) {	
+	getKaufTeilTeileWertNeu(lagerMenge:number,teileWertAlt:number,id:number){
+		var bestellKosten = 0;
+		var bestellMenge = 0;
+		var bestellungen = this.bestellService.neuBestellungen['k' +id];
+		for (var i = 0; i < bestellungen.length; i++) {
+			bestellKosten += bestellungen[i].kosten;
+			bestellMenge += bestellungen[i].menge;
+		}
+		if(lagerMenge == 0 && bestellMenge == 0) {
+			return teileWertAlt;
+		}
+		var teileWertNeu = (lagerMenge * teileWertAlt + bestellKosten) / (lagerMenge * 1 + bestellMenge * 1);
+		return Math.round(teileWertNeu * 100) / 100;
+	}
+	
+	updateErzeugnisse(artikel) {
+		for (var i = 0; i < this.alleErzeugnisse.length; i++) {
 			for (var j = 0; j < artikel.length; j++) {
 				if (this.alleErzeugnisse[i].id == artikel[j]._id) {
 					this.alleErzeugnisse[i].lagerMenge = artikel[j]._amount;
+					this.alleErzeugnisse[i].teileWert = artikel[j]._price;
 				}
 			}
 		}
 	}
-	
-	getErzeugnis (id: number) {
+
+	getErzeugnis(id: number) {
 		for (var i = 0; i < this.alleErzeugnisse.length; i++) {
 			if (this.alleErzeugnisse[i].id === id) {
 				return this.alleErzeugnisse[i]
@@ -51,15 +77,15 @@ class NewTeileService {
 		}
 		return null;
 	}
-	
-	getKaufTeil(id:number) {
+
+	getKaufTeil(id: number) {
 		for (var i = 0; i < this.alleKaufteile.length; i++) {
 			if (this.alleKaufteile[i].id === id) {
 				return this.alleKaufteile[i];
 			}
 		}
 	}
-	
+
 	erzeugeKaufTeile() {
 		this.alleKaufteile = [
 			new NewKaufTeil(21, 'Kette(K)', 5.00, 0, false, 300, 50, 1.8, 0.4),
@@ -127,4 +153,4 @@ class NewTeileService {
 	}
 }
 
-angular.module('app').factory('NewTeileService', ['$rootScope',($rootScope) => new NewTeileService($rootScope)]);
+angular.module('app').factory('NewTeileService', ['$rootScope','BestellService', ($rootScope,bestellService) => new NewTeileService($rootScope,bestellService)]);

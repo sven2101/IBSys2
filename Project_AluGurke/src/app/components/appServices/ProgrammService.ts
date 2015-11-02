@@ -3,14 +3,17 @@
  */
 /// <reference path="../../typeDefinitions/angular.d.ts" />
     /// <reference path="../../model/ProgrammPosition.ts" />
+    /// <reference path="../../model/DirectSalesPosition.ts" />
 
 class ProgrammService {
     produktionsprogramm: Array<ProgrammPosition>;
+    directsales:{[key:number]:DirectSalesPosition;}
 
-    constructor(){
+    constructor() {
+        this.directsales = {};
         this.erzeugeProgrammPositionen();
-
-}
+        this.erzeugeDirectsalesPosition();
+    }
 
     erzeugeProgrammPositionen() {
         this.produktionsprogramm = [
@@ -31,6 +34,14 @@ class ProgrammService {
         ];
     }
 
+
+    erzeugeDirectsalesPosition() {
+    this.directsales[1]=new DirectSalesPosition(1,0,0,0);
+    this.directsales[2]=new DirectSalesPosition(2,0,0,0);
+    this.directsales[3]=new DirectSalesPosition(3,0,0,0);
+    }
+
+
     getProgrammposition(id: number,periode: number=1) {
         for (var i = 0; i < this.produktionsprogramm.length; i++) {
             if ( this.produktionsprogramm[i].id === id && this.produktionsprogramm[i].periode === periode) {
@@ -39,6 +50,10 @@ class ProgrammService {
         }
     }
 
+    getDirectsalesPosition(id:number)
+    {
+      return this.directsales[id];
+    }
 }
 
 angular.module('app').factory('ProgrammService', [() => new ProgrammService()]);
