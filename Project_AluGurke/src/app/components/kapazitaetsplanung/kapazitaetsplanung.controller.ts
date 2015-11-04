@@ -5,15 +5,17 @@ class KapazitaetsplanungController{
     models:Array<KapazitaetModel>;
     kapazitaetsplanungService:KapazitaetsplanungService;
     dispositionService:DispositionService;
+    bestellungBerechnenService:BestellungBerechnenService;
     ergebnis:Array<Arbeitsplatz>;
-    constructor(KapazitaetsplanungService:KapazitaetsplanungService,dispositionService:DispositionService){
+    constructor(KapazitaetsplanungService:KapazitaetsplanungService,dispositionService:DispositionService,bestellungBerechnenService:BestellungBerechnenService){
         this.models=new Array<KapazitaetModel>();
         this.ergebnis=new Array<Arbeitsplatz>();
         this.kapazitaetsplanungService=KapazitaetsplanungService;
         this.dispositionService=dispositionService;
         this.models=this.kapazitaetsplanungService.models;
         this.ergebnis=this.kapazitaetsplanungService.ergebnis;
-
+        this.bestellungBerechnenService=bestellungBerechnenService;
+        this.bestellungBerechnenService.getBestellung(35,1,0,[500,500,500,500]);
         this.aendern();
 
     }
@@ -30,7 +32,7 @@ class KapazitaetsplanungController{
 
 
 }
-angular.module("KapazitaetsplanungModule").controller("KapazitaetsplanungController",["KapazitaetsplanungService","DispositionService",KapazitaetsplanungController]);
+angular.module("KapazitaetsplanungModule").controller("KapazitaetsplanungController",["KapazitaetsplanungService","DispositionService","BestellService","BestellungBerechnenService",KapazitaetsplanungController]);
 class KapazitaetModel{
     anzahlSchichten:string;
     ueberstunden1:number;

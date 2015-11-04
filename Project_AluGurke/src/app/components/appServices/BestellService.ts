@@ -41,10 +41,12 @@ class BestellService {
 
 	neuBestellungen: BsNeuBestellungenMap;
 
+
 	constructor($rootScope) {
 		this.laufendeBestellungen = [];
 		this.zugangBestellungen = [];
 		this.neuBestellungen = new BsNeuBestellungenMap();
+
 
 		$rootScope.$on('fileController.neueDatei', (event, dateiInhalt) => {
 			this.updateLaufendeBestellungen(dateiInhalt.results.futureinwardstockmovement.order);

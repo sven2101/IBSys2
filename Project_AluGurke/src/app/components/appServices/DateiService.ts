@@ -80,7 +80,9 @@ class DateiService {
 	getWorkingTime(){
 		let list=[];
 		let kapa=this.kapazitaetsplanungService.models;
-		kapa.sort(function(a,b){return Number(a.name.split("_")[0])-Number(b.name.split("_")[0])});
+		kapa.sort(function(a,b){
+			console.log(a);
+			return Number(a.name.split("_")[0])-Number(b.name.split("_")[0])});
 		for(let x in kapa){
 			list.push({
 				_station:x.name.split("_")[0],
