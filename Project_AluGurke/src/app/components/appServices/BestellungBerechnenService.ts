@@ -22,11 +22,21 @@ class BestellungBerechnenService{
         return this.timeLineGenerieren(kTeilId,aktuellePeriode,multiplikator,verbrauch);
     }
 
-    bestellungenSuchen(teilId:number):Array<ZugangBestellung>{
+    zugangsBestellungenSuchen(teilId:number):Array<ZugangBestellung>{
         let temp=new Array<ZugangBestellung>();
         for(let i=0;i<this.bestellService.zugangBestellungen.length;i++){
             if(this.bestellService.zugangBestellungen[i].teil_id===teilId){
                 temp.push(this.bestellService.zugangBestellungen[i]);
+            }
+        }
+        return temp;
+    }
+
+    laufendeBestellungenSuchen(teilId:number):Array<Bestellung>{
+        let temp=new Array<Bestellung>();
+        for(let i=0;i<this.bestellService.laufendeBestellungen.length;i++){
+            if(this.bestellService.laufendeBestellungen[i].teil_id===teilId){
+                temp.push(this.bestellService.laufendeBestellungen[i]);
             }
         }
         return temp;
@@ -41,17 +51,33 @@ class BestellungBerechnenService{
         }
     }
 
-    timeLineGenerieren(kTeilId:number,aktuellePeriode:number,x:number,verbrauch:Array<number>){
+    timeLineGenerieren(kTeilId:number,aktuellePeriode:number,multiplikator:number,verbrauch:Array<number>){
         let kTeil=this.kaufTeilSuchen(kTeilId);
-        let multiplikator=x;
-        let bestellungen=this.bestellungenSuchen(kTeilId);
+        let zugangBestellungen=this.zugangsBestellungenSuchen(kTeilId);
+        let laufendeBestellungen=this.laufendeBestellungenSuchen(kTeilId);
         let timeline=Array<number>();
         timeline=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
         let periode=1;
-        let lagerstand=kTeil.lagerMenge+400;
-        for(let i=0;i<bestellungen.length;i++){
-            let liefertermin=kTeil.wbz+multiplikator*kTeil.wbzAbw-(aktuellePeriode-bestellungen[i].bestellPeriode);
-            timeline[Math.round(liefertermin*5)]=bestellungen[i].menge;
+        let lagerstand=kTeil.lagerMenge;
+        for(let i=0;i<zugangBestellungen.length;i++){
+            let liefertermin=0;
+            if(zugangBestellungen[i].eil==true){
+                liefertermin=kTeil.wbz/2;
+            }
+            else{
+                liefertermin=kTeil.wbz+multiplikator*kTeil.wbzAbw-(aktuellePeriode-zugangBestellungen[i].bestellPeriode);
+            }
+            timeline[Math.round(liefertermin*5)]=zugangBestellungen[i].menge;
+        }
+        for(let i=0;i<laufendeBestellungen.length;i++){
+            let liefertermin=0;
+            if(laufendeBestellungen[i].eil==true){
+                liefertermin=kTeil.wbz/2;
+            }
+            else{
+                liefertermin=kTeil.wbz+multiplikator*kTeil.wbzAbw-(aktuellePeriode-laufendeBestellungen[i].periode);
+            }
+            timeline[Math.round(liefertermin*5)]=laufendeBestellungen[i].menge;
         }
         for(let i=0;i<timeline.length;i++){
             lagerstand=lagerstand-Math.round(verbrauch[periode-1]/5);
@@ -82,19 +108,33 @@ class BestellungBerechnenService{
         return reichweite;
     }
 
-    bestellungenGenerieren(kTeilId:number,aktuellePeriode:number,x:number,verbrauch:Array<number>){
+    bestellungenGenerieren(kTeilId:number,aktuellePeriode:number,multiplikator:number,verbrauch:Array<number>){
         let kTeil=this.kaufTeilSuchen(kTeilId);
-        let multiplikator=x;
-        let bestellungen=this.bestellungenSuchen(kTeilId);
-        //bestellungen.push(new ZugangBestellung(35,false,42,500,1,null,0,0,0,0));
-        bestellungen.push(new ZugangBestellung(35,false,42,900,2,null,0,0,0,0));
+        let zugangBestellungen=this.zugangsBestellungenSuchen(kTeilId);
+        let laufendeBestellungen=this.laufendeBestellungenSuchen(kTeilId);
         let timeline=Array<number>();
         timeline=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
         let periode=1;
-        let lagerstand=kTeil.lagerMenge+400;
-        for(let i=0;i<bestellungen.length;i++){
-            let liefertermin=kTeil.wbz+multiplikator*kTeil.wbzAbw-(aktuellePeriode-bestellungen[i].bestellPeriode);
-            timeline[Math.round(liefertermin*5)]=bestellungen[i].menge;
+        let lagerstand=kTeil.lagerMenge;
+        for(let i=0;i<zugangBestellungen.length;i++){
+            let liefertermin=0;
+            if(zugangBestellungen[i].eil==true){
+                liefertermin=kTeil.wbz/2;
+            }
+            else{
+                liefertermin=kTeil.wbz+multiplikator*kTeil.wbzAbw-(aktuellePeriode-zugangBestellungen[i].bestellPeriode);
+            }
+            timeline[Math.round(liefertermin*5)]=zugangBestellungen[i].menge;
+        }
+        for(let i=0;i<laufendeBestellungen.length;i++){
+            let liefertermin=0;
+            if(laufendeBestellungen[i].eil==true){
+                liefertermin=kTeil.wbz/2;
+            }
+            else{
+                liefertermin=kTeil.wbz+multiplikator*kTeil.wbzAbw-(aktuellePeriode-laufendeBestellungen[i].periode);
+            }
+            timeline[Math.round(liefertermin*5)]=laufendeBestellungen[i].menge;
         }
         for(let i=0;i<timeline.length;i++){
             lagerstand=lagerstand-Math.round(verbrauch[periode-1]/5);

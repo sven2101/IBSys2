@@ -8,19 +8,20 @@ var KapazitaetsplanungController = (function () {
         this.models = this.kapazitaetsplanungService.models;
         this.ergebnis = this.kapazitaetsplanungService.ergebnis;
         this.bestellungBerechnenService = bestellungBerechnenService;
-        this.bestellungBerechnenService.getBestellung(35, 1, 0, [500, 500, 500, 500]);
+        console.log(this.bestellungBerechnenService);
+        this.x = this.bestellungBerechnenService.getBestellung(35, 1, 0, [500, 500, 500, 500]);
         this.aendern();
     }
     KapazitaetsplanungController.prototype.aendern = function () {
-        this.kapazitaetsplanungService.aendern();
         this.dispositionService.aendern();
+        this.kapazitaetsplanungService.aendern();
     };
     KapazitaetsplanungController.prototype.berechnen = function () {
         this.kapazitaetsplanungService.zeitSetzten();
     };
     return KapazitaetsplanungController;
 })();
-angular.module("KapazitaetsplanungModule").controller("KapazitaetsplanungController", ["KapazitaetsplanungService", "DispositionService", "BestellService", "BestellungBerechnenService", KapazitaetsplanungController]);
+angular.module("KapazitaetsplanungModule").controller("KapazitaetsplanungController", ["KapazitaetsplanungService", "DispositionService", "BestellungBerechnenService", KapazitaetsplanungController]);
 var KapazitaetModel = (function () {
     function KapazitaetModel(arbeitsplatz) {
         this.name = arbeitsplatz.name;

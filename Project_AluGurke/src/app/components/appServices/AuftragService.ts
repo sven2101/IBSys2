@@ -8,6 +8,7 @@ class AuftragService {
     auftraegeAufMaschine:Array<Auftrag>;
     dispositionService:DispositionService;
 
+
     constructor(DispositionService){
         this.dispositionService=DispositionService;
         this.auftraege=new Array<Auftrag>();

@@ -20,8 +20,11 @@ class DispositionService{
     bestellService:BestellService;
     defaultWerte:Array<number>;
     map:{[key:number]:number;}
+    scope;
+    x;
+    bestellungBerechnenService:BestellungBerechnenService;
 
-    constructor(ProgrammService,NewTeileService,NewBaumService,AuftragService,ArbeitsplatzService,BestellService){
+    constructor(bestellungBerechnenService,$rootScope,ProgrammService,NewTeileService,NewBaumService,AuftragService,ArbeitsplatzService,BestellService){
         this.programmService=ProgrammService;
         this.newTeileService= NewTeileService;
         this.newBaumService=NewBaumService;
@@ -33,6 +36,10 @@ class DispositionService{
         this.models=new Array<DispositionModel>();
         this.arbeitsplatzService=ArbeitsplatzService;
         this.map={};
+        this.scope=$rootScope;
+        this.bestellungBerechnenService=bestellungBerechnenService;
+        this.x=this.bestellungBerechnenService.getBestellung(35,1,1,[100,100,100,100])
+        //this.scope.$watch(this.programmService.getProgrammposition(1),alert("läuft bei dir"));
         this.defaultWerteSetzten();
         this.dispoP1rekursuiv(this.newBaumService.kinderBaum);
         this.dispoP2rekursuiv(this.newBaumService.damenBaum);
@@ -442,4 +449,4 @@ class DispositionService{
 
 
 }
-angular.module('app').factory('DispositionService', ["ProgrammService","NewTeileService","NewBaumService","AuftragService","ArbeitsplatzService","BestellService",(ProgrammService,NewTeileService,NewBaumService,AuftragService,ArbeitsplatzService,BestellService) => new DispositionService(ProgrammService,NewTeileService,NewBaumService,AuftragService,ArbeitsplatzService,BestellService)]);
+angular.module('app').factory('DispositionService', ['BestellungBerechnenService','$rootScope',"ProgrammService","NewTeileService","NewBaumService","AuftragService","ArbeitsplatzService","BestellService",(BestellungBerechnenService,$rootScope,ProgrammService,NewTeileService,NewBaumService,AuftragService,ArbeitsplatzService,BestellService) => new DispositionService(BestellungBerechnenService,$rootScope,ProgrammService,NewTeileService,NewBaumService,AuftragService,ArbeitsplatzService,BestellService)]);

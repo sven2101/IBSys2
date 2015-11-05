@@ -184,6 +184,10 @@
 					</tr>
 				</table>
 			</div>
+			<label>Gamble-Faktor in % von -100 bis 100, je niedriger desto riskanter: </label><input ng-model="ktdc.gambleFaktor">
+			<h3>Bestellung: {{ktdc.getBerechneteBestellung()}}</h3>
+			<h3>Lagerentwicklung pro Tag: {{ktdc.getTimeLine()}}</h3>
+			<h3>Reichweite: {{ktdc.getBerechneteReichweite()}}</h3>
 		</div>
 	</div>
 </section>

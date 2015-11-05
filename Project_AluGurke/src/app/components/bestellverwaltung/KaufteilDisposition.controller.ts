@@ -37,12 +37,12 @@ class KaufteilDispositionController {
 	bestellService: BestellService;
 	teileService: NewTeileService;
 	programmService: ProgrammService;
-
 	selectedViewModel: ViewModel;
 	neuBestellung: NeuBestellung;
+	//Max was here
+	bestellungBerechnenService:BestellungBerechnenService
 
-
-	constructor(teileService: NewTeileService, baumService: NewBaumService, bestellService: BestellService, programmService: ProgrammService) {
+	constructor(teileService: NewTeileService, baumService: NewBaumService, bestellService: BestellService, programmService: ProgrammService,bestellungBerechnenService:BestellungBerechnenService) {
 		this.alleKaufTeile = [];
 		this.baumService = baumService;
 		this.bestellService = bestellService;
@@ -51,6 +51,8 @@ class KaufteilDispositionController {
 		this.createViewModel(teileService.alleKaufteile);
 		this.selectedViewModel = this.alleKaufTeile[3];
 		this.neuBestellung = new NeuBestellung(false, 0, 0, 0);
+		//Max was here
+		this.bestellungBerechnenService=bestellungBerechnenService;
 	}
 
 	createViewModel(kaufTeile: Array<NewKaufTeil>) {
@@ -228,6 +230,30 @@ class KaufteilDispositionController {
 		}
 		return bestellKosten + materialKosten;
 	}
+	//Max was here
+	getBerechneteBestellung(){
+		let x=this.selectedViewModel;
+		return this.bestellungBerechnenService.getBestellung(x.kaufTeil.id,1,this.getGambleFaktor(),[x.verbrauch1,x.verbrauch2,x.verbrauch3,x.verbrauch4]);
+	}
+	//Max was here
+	getTimeLine(){
+		let x=this.selectedViewModel;
+		return this.bestellungBerechnenService.getTimeLine(x.kaufTeil.id,1,this.getGambleFaktor(),[x.verbrauch1,x.verbrauch2,x.verbrauch3,x.verbrauch4]);
+	}
+	//Max was here
+	getBerechneteReichweite(){
+		let x=this.selectedViewModel;
+		return this.bestellungBerechnenService.getReichweite(x.kaufTeil.id,1,this.getGambleFaktor(),[x.verbrauch1,x.verbrauch2,x.verbrauch3,x.verbrauch4]);
+	}
+	//Max was here
+	gambleFaktor=0;
+	//Max was here
+	getGambleFaktor(){
+		if(this.gambleFaktor<-100||this.gambleFaktor>100){
+			this.gambleFaktor=0;
+		}
+		return this.gambleFaktor/100;
+	}
 }
 
-angular.module('BestellverwaltungModule').controller('KaufteilDispositionController', ['NewTeileService', 'NewBaumService', 'BestellService', 'ProgrammService', KaufteilDispositionController]);
+angular.module('BestellverwaltungModule').controller('KaufteilDispositionController', ['NewTeileService', 'NewBaumService', 'BestellService', 'ProgrammService','BestellungBerechnenService', KaufteilDispositionController]);

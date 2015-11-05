@@ -2,13 +2,15 @@
  * Created by Max on 31.10.2015.
  */
 var KapazitaetsplanungService = (function () {
-    function KapazitaetsplanungService(ArbeitsplatzService, AuftragService, DispositionService) {
+    function KapazitaetsplanungService($rootScope, ArbeitsplatzService, AuftragService, DispositionService) {
         this.arbeitsplatzService = ArbeitsplatzService;
         this.auftragService = AuftragService;
         this.dispositionService = DispositionService;
         this.ergebnis = new Array();
         this.models = new Array();
         this.models.push(new KapazitaetModel(new Arbeitsplatz(5, 0, 0, 0)));
+        this.scope = $rootScope;
+        //this.scope.$watch(this.dispositionService.programmService.getProgrammposition(1),this.aendern());
         this.dispositionService.aendern();
         this.aendern();
         //this.zeitSetzten();
@@ -153,4 +155,4 @@ var KapazitaetsplanungService = (function () {
     };
     return KapazitaetsplanungService;
 })();
-angular.module('app').factory('KapazitaetsplanungService', ["ArbeitsplatzService", "AuftragService", "DispositionService", function (ArbeitsplatzService, AuftragService, DispositionService) { return new KapazitaetsplanungService(ArbeitsplatzService, AuftragService, DispositionService); }]);
+angular.module('app').factory('KapazitaetsplanungService', ['$rootScope', "ArbeitsplatzService", "AuftragService", "DispositionService", function ($rootScope, ArbeitsplatzService, AuftragService, DispositionService) { return new KapazitaetsplanungService($rootScope, ArbeitsplatzService, AuftragService, DispositionService); }]);

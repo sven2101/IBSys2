@@ -7,7 +7,7 @@
 /// <reference path="../appServices/NewBaumService.ts" />
 /// <reference path="../appServices/AuftragService.ts" />
 var DispositionService = (function () {
-    function DispositionService(ProgrammService, NewTeileService, NewBaumService, AuftragService, ArbeitsplatzService, BestellService) {
+    function DispositionService(bestellungBerechnenService, $rootScope, ProgrammService, NewTeileService, NewBaumService, AuftragService, ArbeitsplatzService, BestellService) {
         this.programmService = ProgrammService;
         this.newTeileService = NewTeileService;
         this.newBaumService = NewBaumService;
@@ -19,6 +19,10 @@ var DispositionService = (function () {
         this.models = new Array();
         this.arbeitsplatzService = ArbeitsplatzService;
         this.map = {};
+        this.scope = $rootScope;
+        this.bestellungBerechnenService = bestellungBerechnenService;
+        this.x = this.bestellungBerechnenService.getBestellung(35, 1, 1, [100, 100, 100, 100]);
+        //this.scope.$watch(this.programmService.getProgrammposition(1),alert("l�uft bei dir"));
         this.defaultWerteSetzten();
         this.dispoP1rekursuiv(this.newBaumService.kinderBaum);
         this.dispoP2rekursuiv(this.newBaumService.damenBaum);
@@ -412,4 +416,4 @@ var DispositionService = (function () {
     };
     return DispositionService;
 })();
-angular.module('app').factory('DispositionService', ["ProgrammService", "NewTeileService", "NewBaumService", "AuftragService", "ArbeitsplatzService", "BestellService", function (ProgrammService, NewTeileService, NewBaumService, AuftragService, ArbeitsplatzService, BestellService) { return new DispositionService(ProgrammService, NewTeileService, NewBaumService, AuftragService, ArbeitsplatzService, BestellService); }]);
+angular.module('app').factory('DispositionService', ['BestellungBerechnenService', '$rootScope', "ProgrammService", "NewTeileService", "NewBaumService", "AuftragService", "ArbeitsplatzService", "BestellService", function (BestellungBerechnenService, $rootScope, ProgrammService, NewTeileService, NewBaumService, AuftragService, ArbeitsplatzService, BestellService) { return new DispositionService(BestellungBerechnenService, $rootScope, ProgrammService, NewTeileService, NewBaumService, AuftragService, ArbeitsplatzService, BestellService); }]);

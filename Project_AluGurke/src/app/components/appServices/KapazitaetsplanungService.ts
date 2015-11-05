@@ -10,14 +10,16 @@ class KapazitaetsplanungService {
     auftragService:AuftragService
     ergebnis:Array<Arbeitsplatz>;
     models:Array<KapazitaetModel>;
-
-    constructor(ArbeitsplatzService:ArbeitsplatzService,AuftragService:AuftragService,DispositionService:DispositionService) {
+    scope;
+    constructor($rootScope,ArbeitsplatzService:ArbeitsplatzService,AuftragService:AuftragService,DispositionService:DispositionService) {
         this.arbeitsplatzService = ArbeitsplatzService;
         this.auftragService=AuftragService;
         this.dispositionService=DispositionService;
         this.ergebnis=new Array<Arbeitsplatz>();
         this.models=new Array<KapazitaetModel>();
         this.models.push(new KapazitaetModel(new Arbeitsplatz(5,0,0,0)));
+        this.scope=$rootScope;
+        //this.scope.$watch(this.dispositionService.programmService.getProgrammposition(1),this.aendern());
         this.dispositionService.aendern();
         this.aendern();
         //this.zeitSetzten();
@@ -169,4 +171,4 @@ class KapazitaetsplanungService {
     }
 }
 
-angular.module('app').factory('KapazitaetsplanungService', ["ArbeitsplatzService","AuftragService","DispositionService",(ArbeitsplatzService,AuftragService,DispositionService) => new KapazitaetsplanungService(ArbeitsplatzService,AuftragService,DispositionService)]);
+angular.module('app').factory('KapazitaetsplanungService', ['$rootScope',"ArbeitsplatzService","AuftragService","DispositionService",($rootScope,ArbeitsplatzService,AuftragService,DispositionService) => new KapazitaetsplanungService($rootScope,ArbeitsplatzService,AuftragService,DispositionService)]);
