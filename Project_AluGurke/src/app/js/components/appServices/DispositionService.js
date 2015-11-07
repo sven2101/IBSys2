@@ -2,6 +2,7 @@
  * Created by Max on 28.10.2015.
  */
 /// <reference path="../../model/NewTeilKnoten.ts" />
+/// <reference path="../disposition/disposition.controller.ts" />
 /// <reference path="../appServices/NewTeileService.ts" />
 /// <reference path="../appServices/ProgrammService.ts" />
 /// <reference path="../appServices/NewBaumService.ts" />
@@ -20,9 +21,6 @@ var DispositionService = (function () {
         this.arbeitsplatzService = ArbeitsplatzService;
         this.map = {};
         this.scope = $rootScope;
-        this.bestellungBerechnenService = bestellungBerechnenService;
-        this.x = this.bestellungBerechnenService.getBestellung(35, 1, 1, [100, 100, 100, 100]);
-        //this.scope.$watch(this.programmService.getProgrammposition(1),alert("l�uft bei dir"));
         this.defaultWerteSetzten();
         this.dispoP1rekursuiv(this.newBaumService.kinderBaum);
         this.dispoP2rekursuiv(this.newBaumService.damenBaum);
@@ -259,160 +257,6 @@ var DispositionService = (function () {
                 }
             }
         }
-    };
-    //Max was here
-    DispositionService.prototype.bestellungenSuchen = function (teilId) {
-        var temp = new Array();
-        for (var i = 0; i < this.bestellService.zugangBestellungen.length; i++) {
-            if (this.bestellService.zugangBestellungen[i].teil_id === teilId) {
-                temp.push(this.bestellService.zugangBestellungen[i]);
-            }
-        }
-        return temp;
-    };
-    //Max was here
-    DispositionService.prototype.kaufTeilSuchen = function (teilId) {
-        var temp = this.newTeileService.alleKaufteile;
-        for (var i = 0; i < temp.length; i++) {
-            if (temp[i].id === teilId) {
-                return temp[i];
-            }
-        }
-    };
-    //Max was here
-    DispositionService.prototype.timeLineGenerieren = function (kTeilId, aktuellePeriode, x, verbrauch) {
-        if (verbrauch === void 0) { verbrauch = [500, 500, 500, 500]; }
-        //kTeilId=35;
-        var kTeil = this.kaufTeilSuchen(kTeilId);
-        var multiplikator = x;
-        var bestellungen = this.bestellungenSuchen(kTeilId);
-        var timeline = Array();
-        timeline = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-        var periode = 1;
-        var lagerstand = kTeil.lagerMenge + 400;
-        for (var i = 0; i < bestellungen.length; i++) {
-            var liefertermin = kTeil.wbz + multiplikator * kTeil.wbzAbw - (aktuellePeriode - bestellungen[i].bestellPeriode);
-            timeline[Math.round(liefertermin * 5)] = bestellungen[i].menge;
-        }
-        for (var i = 0; i < timeline.length; i++) {
-            lagerstand = lagerstand - Math.round(verbrauch[periode - 1] / 5);
-            timeline[i] += lagerstand;
-            lagerstand = timeline[i];
-            if (i == 4 || i == 9 || i == 14 || i == 19) {
-                periode++;
-            }
-        }
-        return timeline;
-    };
-    DispositionService.prototype.reichweiteBerechenen = function (timeline) {
-        var reichweite = 0;
-        for (var i = 0; i < timeline.length; i++) {
-            if (timeline[i] < 0) {
-                if (i < timeline.length - 1) {
-                    if (timeline[i + 1] < 0) {
-                        break;
-                    }
-                }
-            }
-            else {
-                reichweite += 0.2;
-            }
-        }
-        return reichweite;
-    };
-    DispositionService.prototype.bestellungBerechnen = function (reichweite, kTeilId, multiplikator, timeline) {
-        var kTeil = this.kaufTeilSuchen(kTeilId);
-        if (reichweite < kTeil.wbz + multiplikator * kTeil.wbzAbw) {
-            //Eil
-            var menge = 0;
-            for (var i = reichweite * 5; i < timeline.length && i < (reichweite + kTeil.wbz + multiplikator * kTeil.wbzAbw) * 5; i++) {
-                if (timeline[Math.round(i)] < 0) {
-                    menge += timeline[Math.round(i)] * -1;
-                }
-            }
-            if (menge * 2 > kTeil.discontMenge && menge < kTeil.discontMenge) {
-                menge = kTeil.discontMenge;
-            }
-            return new NeuBestellung(true, kTeilId, menge, 0);
-        }
-        if (reichweite - 1 < kTeil.wbz + multiplikator * kTeil.wbzAbw) {
-            //Normal
-            var menge = 0;
-            for (var i = reichweite * 5; i < timeline.length && i < (reichweite + kTeil.wbz + multiplikator * kTeil.wbzAbw) * 5; i++) {
-                if (timeline[Math.round(i)] < 0) {
-                    menge += timeline[Math.round(i)] * -1;
-                }
-            }
-            if (menge * 2 > kTeil.discontMenge && menge < kTeil.discontMenge) {
-                menge = kTeil.discontMenge;
-            }
-            return new NeuBestellung(false, kTeilId, menge, 0);
-        }
-        return null;
-    };
-    DispositionService.prototype.bestellungenGenerieren = function (kTeilId, aktuellePeriode, x, verbrauch) {
-        if (verbrauch === void 0) { verbrauch = [500, 500, 500, 500]; }
-        var kTeil = this.kaufTeilSuchen(kTeilId);
-        var multiplikator = x;
-        var bestellungen = this.bestellungenSuchen(kTeilId);
-        //bestellungen.push(new ZugangBestellung(35,false,42,500,1,null,0,0,0,0));
-        bestellungen.push(new ZugangBestellung(35, false, 42, 900, 2, null, 0, 0, 0, 0));
-        var timeline = Array();
-        timeline = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-        var periode = 1;
-        var lagerstand = kTeil.lagerMenge + 400;
-        for (var i = 0; i < bestellungen.length; i++) {
-            var liefertermin = kTeil.wbz + multiplikator * kTeil.wbzAbw - (aktuellePeriode - bestellungen[i].bestellPeriode);
-            timeline[Math.round(liefertermin * 5)] = bestellungen[i].menge;
-        }
-        for (var i = 0; i < timeline.length; i++) {
-            lagerstand = lagerstand - Math.round(verbrauch[periode - 1] / 5);
-            timeline[i] += lagerstand;
-            lagerstand = timeline[i];
-            if (i == 4 || i == 9 || i == 14 || i == 19) {
-                periode++;
-            }
-        }
-        var reichweite = 0;
-        for (var i = 0; i < timeline.length; i++) {
-            if (timeline[i] < 0) {
-                if (i < timeline.length - 1) {
-                    if (timeline[i + 1] < 0) {
-                        break;
-                    }
-                }
-            }
-            else {
-                reichweite += 0.2;
-            }
-        }
-        if (reichweite < kTeil.wbz + multiplikator * kTeil.wbzAbw) {
-            //Eil
-            var menge = 0;
-            for (var i = reichweite * 5; i < timeline.length && i < (reichweite + kTeil.wbz + multiplikator * kTeil.wbzAbw) * 5; i++) {
-                if (timeline[Math.round(i)] < 0) {
-                    menge += timeline[Math.round(i)] * -1;
-                }
-            }
-            if (menge * 2 > kTeil.discontMenge && menge < kTeil.discontMenge) {
-                menge = kTeil.discontMenge;
-            }
-            return new NeuBestellung(true, kTeilId, menge, 0);
-        }
-        if (reichweite - 1 < kTeil.wbz + multiplikator * kTeil.wbzAbw) {
-            //Normal
-            var menge = 0;
-            for (var i = reichweite * 5; i < timeline.length && i < (reichweite + kTeil.wbz + multiplikator * kTeil.wbzAbw) * 5; i++) {
-                if (timeline[Math.round(i)] < 0) {
-                    menge += timeline[Math.round(i)] * -1;
-                }
-            }
-            if (menge * 2 > kTeil.discontMenge && menge < kTeil.discontMenge) {
-                menge = kTeil.discontMenge;
-            }
-            return new NeuBestellung(false, kTeilId, menge, 0);
-        }
-        return null;
     };
     return DispositionService;
 })();

@@ -1,29 +1,42 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
 /// <reference path="../../model/Auftrag.ts" />
 var AuftragService = (function () {
-    function AuftragService(DispositionService) {
-        this.dispositionService = DispositionService;
+    function AuftragService($rootScope) {
+        var _this = this;
         this.auftraege = new Array();
         this.auftraegeAufMaschine = new Array();
         this.auftraegeInWarteschlange = new Array();
         this.auftraegeExport = new Array();
+        this.$rootScope = $rootScope;
+        this.$rootScope.$on('fileController.neueDatei', function (event, dateiInhalt) {
+            _this.onNeueDatei(dateiInhalt);
+        });
         this.auftraegeSetzen([]);
     }
-    AuftragService.prototype.altLastenVerteilen = function (models) {
-        for (var i = 0; i < this.auftraegeAufMaschine.length; i++) {
-            for (var j = 0; j < models.length; j++) {
-                if (models[j].eTeil.id == this.auftraegeAufMaschine[i].erzeugnis_id) {
-                    models[j].auftragAufMaschine = this.auftraegeAufMaschine[i];
+    AuftragService.prototype.onNeueDatei = function (dateiInhalt) {
+        this.updateAuftraegeInWarteschlange(dateiInhalt.results.waitinglistworkstations.workplace);
+        this.updateAuftraegeAufMaschine(dateiInhalt.results.ordersinwork.workplace);
+    };
+    AuftragService.prototype.updateAuftraegeInWarteschlange = function (arbeitsplaetze) {
+        this.auftraegeInWarteschlange = [];
+        for (var i = 0; i < arbeitsplaetze.length; i++) {
+            if (arbeitsplaetze[i]._timeneed != 0) {
+                if (Array.isArray(arbeitsplaetze[i].waitinglist)) {
+                    for (var j = 0; j < arbeitsplaetze[i].waitinglist.length; j++) {
+                        var x_1 = arbeitsplaetze[i].waitinglist[j];
+                        this.auftraegeInWarteschlange.push(new Auftrag(x_1._item, x_1._amount, x_1._period));
+                    }
                 }
+                var x = arbeitsplaetze[i].waitinglist;
+                this.auftraegeInWarteschlange.push(new Auftrag(Number(x._item), Number(x._amount), Number(x._period)));
             }
         }
-        for (var j = 0; j < models.length; j++) {
-            models[j].auftragInWarteschlange = [];
-            for (var i = 0; i < this.auftraegeInWarteschlange.length; i++) {
-                if (models[j].eTeil.id == this.auftraegeInWarteschlange[i].erzeugnis_id) {
-                    models[j].auftragInWarteschlange.push(this.auftraegeInWarteschlange[i]);
-                }
-            }
+    };
+    AuftragService.prototype.updateAuftraegeAufMaschine = function (arbeitsplaetze) {
+        this.auftraegeAufMaschine = [];
+        for (var i = 0; i < arbeitsplaetze.length; i++) {
+            var x = arbeitsplaetze[i];
+            this.auftraegeAufMaschine.push(new Auftrag(Number(x._item), Number(x._amount), Number(x._period)));
         }
     };
     AuftragService.prototype.auftraegeSetzen = function (auftraege) {
@@ -64,6 +77,23 @@ var AuftragService = (function () {
         }
         return null;
     };
+    AuftragService.prototype.altLastenVerteilen = function (models) {
+        for (var i = 0; i < this.auftraegeAufMaschine.length; i++) {
+            for (var j = 0; j < models.length; j++) {
+                if (models[j].eTeil.id == this.auftraegeAufMaschine[i].erzeugnis_id) {
+                    models[j].auftragAufMaschine = this.auftraegeAufMaschine[i];
+                }
+            }
+        }
+        for (var j = 0; j < models.length; j++) {
+            models[j].auftragInWarteschlange = [];
+            for (var i = 0; i < this.auftraegeInWarteschlange.length; i++) {
+                if (models[j].eTeil.id == this.auftraegeInWarteschlange[i].erzeugnis_id) {
+                    models[j].auftragInWarteschlange.push(this.auftraegeInWarteschlange[i]);
+                }
+            }
+        }
+    };
     return AuftragService;
 })();
-angular.module('app').factory('AuftragService', [function (DispositionService) { return new AuftragService(DispositionService); }]);
+angular.module('app').factory('AuftragService', ['$rootScope', function ($rootScope) { return new AuftragService($rootScope); }]);

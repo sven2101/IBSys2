@@ -11,13 +11,11 @@
             <tr>
                 <th>name</th>
                 <th>arbeitszeit</th>
-                <th>Verf�gbare Zeit</th>
+                <th>Verfügbare Zeit</th>
                 <th>Anzahl Aufträge</th>
                 <th>Anzahl arbeitsplatzfremder Aufträge</th>
                 <th>Anzahl Schichten</th>
-                <th>Ueber1</th>
-                <th>Ueber2</th>
-                <th>Ueber3</th>
+                <th>Überstunden</th>          
             </tr>
             <tbody>
             <tr ng-repeat="model in kpc.models">
@@ -33,9 +31,8 @@
                         <option>3</option>
                     </select>
                 </td>
-                <td><input ng-model="model.ueberstunden1" ng-keyup="kpc.aendern()" style="width:30px;"></td>
-                <td><input ng-model="model.ueberstunden2" ng-keyup="kpc.aendern()"style="width:30px;"></td>
-                <td><input ng-model="model.ueberstunden3" ng-keyup="kpc.aendern()"style="width:30px;"></td>
+                <td><input ng-model="model.ueberstunden" ng-keyup="kpc.aendern()" style="width:30px;"></td>
+             
 
             </tr>
             </tbody>
