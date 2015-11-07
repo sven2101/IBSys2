@@ -3,6 +3,7 @@
  */
 /// <reference path="../../typeDefinitions/angular.d.ts" />
 /// <reference path="../../model/ArbeitsplatzKnoten.ts" />
+/// <reference path="../../model/Fertigungsreihe.ts" />
 var ArbeitsplatzService = (function () {
     function ArbeitsplatzService() {
         this.arbeitsplaetze = new Array();

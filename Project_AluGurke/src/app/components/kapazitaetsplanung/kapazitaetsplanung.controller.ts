@@ -1,5 +1,5 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
-
+/// <reference path="../appServices/BestellungBerechnenService.ts" />
 class KapazitaetsplanungController{
 
     models:Array<KapazitaetModel>;
@@ -17,14 +17,13 @@ class KapazitaetsplanungController{
 
         this.ergebnis=this.kapazitaetsplanungService.ergebnis;
         this.bestellungBerechnenService=bestellungBerechnenService;
-        console.log(this.bestellungBerechnenService);
-        this.x=this.bestellungBerechnenService.getBestellung(35,1,0,[500,500,500,500]);
+        this.berechnen();
         this.aendern();
 
     }
     aendern(){
         this.dispositionService.aendern();
-        this.kapazitaetsplanungService.aendern();
+        this.kapazitaetsplanungService.aendern();        
 
     }
     berechnen(){
@@ -39,9 +38,7 @@ class KapazitaetsplanungController{
 angular.module("KapazitaetsplanungModule").controller("KapazitaetsplanungController",["KapazitaetsplanungService","DispositionService","BestellungBerechnenService",KapazitaetsplanungController]);
 class KapazitaetModel{
     anzahlSchichten:string;
-    ueberstunden1:number;
-    ueberstunden2:number;
-    ueberstunden3:number;
+    ueberstunden:number;  
     arbeitsplatz:Arbeitsplatz;
     zeitVerfuegung:number;
     name:string;
@@ -50,9 +47,7 @@ class KapazitaetModel{
     constructor(arbeitsplatz:Arbeitsplatz) {
         this.name = arbeitsplatz.name;
         this.anzahlSchichten="1";
-        this.ueberstunden1=0;
-        this.ueberstunden2=0;
-        this.ueberstunden3=0;
+        this.ueberstunden=0;     
         this.arbeitsplatz=arbeitsplatz;
         this.zeitVerfuegung=2400;
         this.eTeile=new Array<number>();

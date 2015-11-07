@@ -5,35 +5,52 @@ class AuftragService {
 	auftraege:Array<Auftrag>;
     auftraegeExport:Array<Auftrag>;
     auftraegeInWarteschlange:Array<Auftrag>;
-    auftraegeAufMaschine:Array<Auftrag>;
-    dispositionService:DispositionService;
+    auftraegeAufMaschine:Array<Auftrag>;   
+    $rootScope;
 
 
-    constructor(DispositionService){
-        this.dispositionService=DispositionService;
+    constructor($rootScope){    
         this.auftraege=new Array<Auftrag>();
         this.auftraegeAufMaschine=new Array<Auftrag>();
         this.auftraegeInWarteschlange=new Array<Auftrag>();
         this.auftraegeExport=new Array<Auftrag>();
+        this.$rootScope=$rootScope;
+        this.$rootScope.$on('fileController.neueDatei', (event, dateiInhalt) => {
+			this.onNeueDatei(dateiInhalt);
+		});
         this.auftraegeSetzen([]);
+        
     }
-    altLastenVerteilen(models:Array<DispositionModel>){
-        for(let i=0;i<this.auftraegeAufMaschine.length;i++){
-            for(let j=0;j<models.length;j++){
-                if(models[j].eTeil.id==this.auftraegeAufMaschine[i].erzeugnis_id){
-                    models[j].auftragAufMaschine=this.auftraegeAufMaschine[i];
+    
+    
+    onNeueDatei(dateiInhalt) {       
+		this.updateAuftraegeInWarteschlange(dateiInhalt.results.waitinglistworkstations.workplace);
+        this.updateAuftraegeAufMaschine(dateiInhalt.results.ordersinwork.workplace)
+		
+	}
+    updateAuftraegeInWarteschlange(arbeitsplaetze:Array<any>){
+        this.auftraegeInWarteschlange=[];   
+        for(let i=0;i<arbeitsplaetze.length;i++){            
+            if(arbeitsplaetze[i]._timeneed!=0){            
+                if(Array.isArray(arbeitsplaetze[i].waitinglist)){
+                    for(let j=0;j<arbeitsplaetze[i].waitinglist.length;j++){
+                        let x=arbeitsplaetze[i].waitinglist[j];
+                        this.auftraegeInWarteschlange.push(new Auftrag(x._item,x._amount,x._period));                        
+                    }
                 }
+                let x=arbeitsplaetze[i].waitinglist;
+                this.auftraegeInWarteschlange.push(new Auftrag(Number(x._item),Number(x._amount),Number(x._period)));                
             }
         }
-        for(let j=0;j<models.length;j++){
-            models[j].auftragInWarteschlange=[];
-            for(let i=0;i<this.auftraegeInWarteschlange.length;i++){
-                if(models[j].eTeil.id==this.auftraegeInWarteschlange[i].erzeugnis_id){
-                    models[j].auftragInWarteschlange.push(this.auftraegeInWarteschlange[i]);
-                }
-            }
+    }
+    updateAuftraegeAufMaschine(arbeitsplaetze:Array<any>){
+        this.auftraegeAufMaschine=[];        
+        for(let i=0;i<arbeitsplaetze.length;i++){
+            let x=arbeitsplaetze[i];            
+            this.auftraegeAufMaschine.push(new Auftrag(Number(x._item),Number(x._amount),Number(x._period)));
         }
     }
+    
 
     auftraegeSetzen(auftraege:Array<Auftrag>){
 
@@ -75,7 +92,24 @@ class AuftragService {
         }
         return null;
     }
+     altLastenVerteilen(models:Array<DispositionModel>){
+        for(let i=0;i<this.auftraegeAufMaschine.length;i++){
+            for(let j=0;j<models.length;j++){
+                if(models[j].eTeil.id==this.auftraegeAufMaschine[i].erzeugnis_id){
+                    models[j].auftragAufMaschine=this.auftraegeAufMaschine[i];
+                }
+            }
+        }
+        for(let j=0;j<models.length;j++){
+            models[j].auftragInWarteschlange=[];
+            for(let i=0;i<this.auftraegeInWarteschlange.length;i++){
+                if(models[j].eTeil.id==this.auftraegeInWarteschlange[i].erzeugnis_id){
+                    models[j].auftragInWarteschlange.push(this.auftraegeInWarteschlange[i]);
+                }
+            }
+        }
+    }
 
 }
 
-angular.module('app').factory('AuftragService', [(DispositionService) => new AuftragService(DispositionService)]);
+angular.module('app').factory('AuftragService', ['$rootScope',($rootScope) => new AuftragService($rootScope)]);

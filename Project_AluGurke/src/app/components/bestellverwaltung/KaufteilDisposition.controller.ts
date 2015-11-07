@@ -5,6 +5,7 @@
 /// <reference path="../appServices/BestellService.ts" />
 /// <reference path="../appServices/ProgrammService.ts" />
 /// <reference path="../appServices/NewTeileService.ts" />
+/// <reference path="../appServices/BestellungBerechnenService.ts" />
 /// <reference path="../../model/NewTeilKnoten.ts" />
 
 class ViewModel {
@@ -26,7 +27,7 @@ class ViewModel {
 		this.reichweite = rw;
 		this.kaufTeil = kaufTeil;
 		this.laufendeBestellungen = lb;
-		this.eingehendeBestellungen = eb;
+		this.eingehendeBestellungen = eb;		
 	}
 }
 
@@ -41,6 +42,7 @@ class KaufteilDispositionController {
 	neuBestellung: NeuBestellung;
 	//Max was here
 	bestellungBerechnenService:BestellungBerechnenService
+	
 
 	constructor(teileService: NewTeileService, baumService: NewBaumService, bestellService: BestellService, programmService: ProgrammService,bestellungBerechnenService:BestellungBerechnenService) {
 		this.alleKaufTeile = [];
@@ -52,7 +54,8 @@ class KaufteilDispositionController {
 		this.selectedViewModel = this.alleKaufTeile[3];
 		this.neuBestellung = new NeuBestellung(false, 0, 0, 0);
 		//Max was here
-		this.bestellungBerechnenService=bestellungBerechnenService;
+		this.bestellungBerechnenService=bestellungBerechnenService;				
+		this.berechneteBestellungAktualisieren();
 	}
 
 	createViewModel(kaufTeile: Array<NewKaufTeil>) {
@@ -139,16 +142,20 @@ class KaufteilDispositionController {
 	select(model: ViewModel) {
 		this.selectedViewModel = model;
 		this.neuBestellung.teil_id = model.kaufTeil.id;
+		this.berechneteBestellungAktualisieren();
 	}
 
 	neueBestellungErstellen() {
 		if (this.neuBestellung.menge <= 0) {
 			return;
 		}
-		this.bestellService.neuBestellungen['k' + this.selectedViewModel.kaufTeil.id].push(new NeuBestellung(this.neuBestellung.eil, this.neuBestellung.teil_id, this.neuBestellung.menge, this.getNeuBestellungsKosten(this.neuBestellung)));
+		let x=new NeuBestellung(this.neuBestellung.eil, this.neuBestellung.teil_id, this.neuBestellung.menge, this.getNeuBestellungsKosten(this.neuBestellung));
+		x.periode=this.bestellungBerechnenService.aktuellePeriode;
+		this.bestellService.neuBestellungen['k' + this.selectedViewModel.kaufTeil.id].push(x);
 		this.selectedViewModel.kaufTeil.teileWertNeu = this.getNeuenTeileWert(this.selectedViewModel);
 		this.neuBestellung.menge = 0;
-		this.neuBestellung.eil = false;
+		this.neuBestellung.eil = false;		
+		this.berechneteBestellungAktualisieren();
 	}
 
 	deleteNeueBestellung(bestellung: NeuBestellung) {
@@ -160,6 +167,7 @@ class KaufteilDispositionController {
 			}
 		}
 		this.selectedViewModel.kaufTeil.teileWertNeu = this.getNeuenTeileWert(this.selectedViewModel);
+		this.berechneteBestellungAktualisieren();
 	}
 
 	getNeuenTeileWert(viewModel: ViewModel) {
@@ -231,25 +239,38 @@ class KaufteilDispositionController {
 		return bestellKosten + materialKosten;
 	}
 	//Max was here
+	bestellung=null;
+	timeLine=null;
+	reichweite=null;
+	
+	//Max was here
+	berechneteBestellungAktualisieren(){
+		this.bestellung=this.getBerechneteBestellung();
+		this.timeLine=this.getTimeLine();
+		this.reichweite=this.getBerechneteReichweite();
+	}
+	
+	//Max was here
 	getBerechneteBestellung(){
 		let x=this.selectedViewModel;
-		return this.bestellungBerechnenService.getBestellung(x.kaufTeil.id,1,this.getGambleFaktor(),[x.verbrauch1,x.verbrauch2,x.verbrauch3,x.verbrauch4]);
+		return this.bestellungBerechnenService.getBestellung(x.kaufTeil.id,this.getGambleFaktor(),[x.verbrauch1,x.verbrauch2,x.verbrauch3,x.verbrauch4]);
 	}
 	//Max was here
 	getTimeLine(){
 		let x=this.selectedViewModel;
-		return this.bestellungBerechnenService.getTimeLine(x.kaufTeil.id,1,this.getGambleFaktor(),[x.verbrauch1,x.verbrauch2,x.verbrauch3,x.verbrauch4]);
+		return this.bestellungBerechnenService.getTimeLine(x.kaufTeil.id,this.getGambleFaktor(),[x.verbrauch1,x.verbrauch2,x.verbrauch3,x.verbrauch4]);
 	}
 	//Max was here
 	getBerechneteReichweite(){
 		let x=this.selectedViewModel;
-		return this.bestellungBerechnenService.getReichweite(x.kaufTeil.id,1,this.getGambleFaktor(),[x.verbrauch1,x.verbrauch2,x.verbrauch3,x.verbrauch4]);
+		return this.bestellungBerechnenService.getReichweite(x.kaufTeil.id,this.getGambleFaktor(),[x.verbrauch1,x.verbrauch2,x.verbrauch3,x.verbrauch4]);
 	}
 	//Max was here
-	gambleFaktor=0;
+	gambleFaktor=0;	
+
 	//Max was here
 	getGambleFaktor(){
-		if(this.gambleFaktor<-100||this.gambleFaktor>100){
+		if(this.gambleFaktor<-100||this.gambleFaktor>100||isNaN(this.gambleFaktor)){
 			this.gambleFaktor=0;
 		}
 		return this.gambleFaktor/100;

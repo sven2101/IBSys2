@@ -1,4 +1,5 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
+/// <reference path="../appServices/BestellungBerechnenService.ts" />
 var KapazitaetsplanungController = (function () {
     function KapazitaetsplanungController(KapazitaetsplanungService, dispositionService, bestellungBerechnenService) {
         this.models = new Array();
@@ -8,8 +9,7 @@ var KapazitaetsplanungController = (function () {
         this.models = this.kapazitaetsplanungService.models;
         this.ergebnis = this.kapazitaetsplanungService.ergebnis;
         this.bestellungBerechnenService = bestellungBerechnenService;
-        console.log(this.bestellungBerechnenService);
-        this.x = this.bestellungBerechnenService.getBestellung(35, 1, 0, [500, 500, 500, 500]);
+        this.berechnen();
         this.aendern();
     }
     KapazitaetsplanungController.prototype.aendern = function () {
@@ -26,9 +26,7 @@ var KapazitaetModel = (function () {
     function KapazitaetModel(arbeitsplatz) {
         this.name = arbeitsplatz.name;
         this.anzahlSchichten = "1";
-        this.ueberstunden1 = 0;
-        this.ueberstunden2 = 0;
-        this.ueberstunden3 = 0;
+        this.ueberstunden = 0;
         this.arbeitsplatz = arbeitsplatz;
         this.zeitVerfuegung = 2400;
         this.eTeile = new Array();

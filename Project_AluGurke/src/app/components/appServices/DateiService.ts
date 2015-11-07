@@ -2,7 +2,9 @@
 /// <reference path="../../typeDefinitions/xml2json.d.ts" />
 /// <reference path="BestellService.ts" />
 /// <reference path="../../model/Bestellung.ts" />
-/// <reference path="../../model/NeuBestellung.ts" />
+/// <reference path="KapazitaetsplanungService.ts" />
+/// <reference path="AuftragService.ts" />
+
 
 class DateiService {
 

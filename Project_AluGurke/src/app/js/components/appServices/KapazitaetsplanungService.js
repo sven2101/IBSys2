@@ -1,6 +1,9 @@
 /**
  * Created by Max on 31.10.2015.
  */
+/// <reference path="../appServices/ArbeitsplatzService.ts" />
+/// <reference path="../appServices/DispositionService.ts"/>
+/// <reference path="../kapazitaetsplanung/kapazitaetsplanung.controller.ts" />
 var KapazitaetsplanungService = (function () {
     function KapazitaetsplanungService($rootScope, ArbeitsplatzService, AuftragService, DispositionService) {
         this.arbeitsplatzService = ArbeitsplatzService;
@@ -10,86 +13,74 @@ var KapazitaetsplanungService = (function () {
         this.models = new Array();
         this.models.push(new KapazitaetModel(new Arbeitsplatz(5, 0, 0, 0)));
         this.scope = $rootScope;
-        //this.scope.$watch(this.dispositionService.programmService.getProgrammposition(1),this.aendern());
         this.dispositionService.aendern();
         this.aendern();
-        //this.zeitSetzten();
     }
     KapazitaetsplanungService.prototype.aendern = function () {
         for (var i = 0; i < this.models.length; i++) {
             if (this.models[i].name[0] != "5") {
-                if (isNaN(this.models[i].ueberstunden1) || this.models[i].ueberstunden1 < 0) {
-                    this.models[i].ueberstunden1 = 0;
+                if (isNaN(this.models[i].ueberstunden) || this.models[i].ueberstunden < 0) {
+                    this.models[i].ueberstunden = 0;
                 }
-                if (isNaN(this.models[i].ueberstunden2) || this.models[i].ueberstunden2 < 0) {
-                    this.models[i].ueberstunden2 = 0;
-                }
-                if (isNaN(this.models[i].ueberstunden3) || this.models[i].ueberstunden3 < 0) {
-                    this.models[i].ueberstunden3 = 0;
-                }
-                if (this.models[i].ueberstunden1 > 240) {
-                    this.models[i].ueberstunden1 = 240;
-                }
-                if (this.models[i].ueberstunden2 > 240) {
-                    this.models[i].ueberstunden2 = 240;
-                }
-                if (this.models[i].ueberstunden3 > 240) {
-                    this.models[i].ueberstunden3 = 240;
-                }
-                this.models[i].zeitVerfuegung = Number(this.models[i].anzahlSchichten) * 2400 + (Number(this.models[i].ueberstunden1) + Number(this.models[i].ueberstunden2) + Number(this.models[i].ueberstunden3)) * 5;
+                this.models[i].zeitVerfuegung = Number(this.models[i].anzahlSchichten) * 2400 + (Number(this.models[i].ueberstunden * 5));
             }
             else {
                 this.models[i].zeitVerfuegung = 0;
             }
         }
         this.ergebnis = this.mergeArbeitsplaetze();
-        //this.dispositionP1.sort(function(a, b){return a.eTeil.id-b.eTeil.id});
         this.models.sort(function (a, b) { return Number(a.name.split("_")[0]) - Number(b.name.split("_")[0]); });
         return this.models;
     };
     KapazitaetsplanungService.prototype.zeitSetzten = function () {
         for (var i = 0; i < this.models.length; i++) {
             var model = this.models[i];
-            var x = 0;
-            while (model.arbeitsplatz.arbeitszeit > model.zeitVerfuegung || (model.anzahlSchichten == "3" && model.ueberstunden1 == 240 && model.ueberstunden2 == 240 && model.ueberstunden3 == 240)) {
-                if (x > 1000) {
-                    break;
-                }
-                x++;
-                if (model.arbeitsplatz.arbeitszeit <= model.zeitVerfuegung + 1200) {
-                    if (model.anzahlSchichten == "1") {
-                        model.ueberstunden1 = Math.round((model.arbeitsplatz.arbeitszeit - model.zeitVerfuegung) / 5);
-                        model.zeitVerfuegung = 2400 + model.ueberstunden1 * 5;
-                    }
-                    else if (model.anzahlSchichten == "2") {
-                        model.ueberstunden2 = Math.round((model.arbeitsplatz.arbeitszeit - model.zeitVerfuegung) / 5);
-                        model.ueberstunden1 = 240;
-                        model.zeitVerfuegung = 6000 + model.ueberstunden2 * 5;
-                    }
-                    else if (model.anzahlSchichten == "3") {
-                        model.ueberstunden3 = Math.round((model.arbeitsplatz.arbeitszeit - model.zeitVerfuegung) / 5);
-                        model.ueberstunden1 = 240;
-                        model.ueberstunden2 = 240;
-                        model.zeitVerfuegung = 9600 + model.ueberstunden2 * 5;
-                    }
+            if (model.arbeitsplatz.id === 5) {
+                model.zeitVerfuegung = 0;
+                continue;
+            }
+            var zeit = model.arbeitsplatz.arbeitszeit;
+            model.ueberstunden = 0;
+            if (zeit <= 2400) {
+                model.anzahlSchichten = '1';
+                model.zeitVerfuegung = 2400;
+                continue;
+            }
+            else if (zeit <= 3600) {
+                if ((zeit - 2400) * 0.9 < 2400 * 0.55) {
+                    model.ueberstunden = Math.round((zeit - 2400) / 5);
+                    model.anzahlSchichten = '1';
+                    model.zeitVerfuegung = 2400 + model.ueberstunden * 5;
+                    continue;
                 }
                 else {
-                    if (model.anzahlSchichten = "1") {
-                        model.anzahlSchichten = "2";
-                        model.zeitVerfuegung += 2400;
-                    }
-                    else if (model.arbeitsplatz.arbeitszeit <= 10800) {
-                        model.anzahlSchichten = "3";
-                        model.zeitVerfuegung += 2400;
-                    }
-                    else {
-                        model.zeitVerfuegung = 10800;
-                        model.anzahlSchichten = "3";
-                        model.ueberstunden1 = 240;
-                        model.ueberstunden2 = 240;
-                        model.ueberstunden3 = 240;
-                    }
+                    model.anzahlSchichten = '2';
+                    model.zeitVerfuegung = 4800;
+                    continue;
                 }
+            }
+            else if (zeit <= 4800) {
+                model.anzahlSchichten = '2';
+                model.zeitVerfuegung = 4800;
+                continue;
+            }
+            else if (zeit <= 6000) {
+                if ((zeit - 4800) * 0.9 < 2400 * 0.7 && zeit) {
+                    model.ueberstunden = Math.round((zeit - 4800) / 5);
+                    model.anzahlSchichten = '2';
+                    model.zeitVerfuegung = 4800 + model.ueberstunden * 5;
+                    continue;
+                }
+                else {
+                    model.anzahlSchichten = '3';
+                    model.zeitVerfuegung = 7200;
+                    continue;
+                }
+            }
+            else {
+                model.anzahlSchichten = '3';
+                model.zeitVerfuegung = 7200;
+                continue;
             }
         }
     };

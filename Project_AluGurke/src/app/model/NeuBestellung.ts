@@ -4,6 +4,7 @@ class NeuBestellung {
 	menge: number;
 	timestamp: number;
 	kosten: number;
+	periode:number;
 
 	constructor(eil: boolean, teil_id: number, menge: number, kosten:number) {
 		this.eil = eil;
