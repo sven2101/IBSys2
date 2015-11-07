@@ -1,92 +1,82 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
 
 class KapazitaetsplanungController{
-    arbeitsplatzService:ArbeitsplatzService;
-    auftragService:AuftragService;
-    dispositionsService:DispositionService;
-    ergebnisListe:Array<Arbeitsplatz>;
-    test:Fertigungsreihe;
-    $scope;
-    constructor($scope,arpeitsplatzService,auftragsService,DispositionService){
-        this.$scope=$scope;
-        this.arbeitsplatzService=arpeitsplatzService;
-        this.auftragService=auftragsService;
-        this.dispositionsService=DispositionService;
 
-        this.ergebnisListe=new Array<Arbeitsplatz>();
-        this.arbeitsplatzService.reset();
-        this.auftraegeSetzen();
-        this.ergebnisListe=this.mergeArbeitsplaetze();
-        this.dispositionsService.aendern();
+    models:Array<KapazitaetModel>;
+    kapazitaetsplanungService:KapazitaetsplanungService;
+    dispositionService:DispositionService;
+    bestellungBerechnenService:BestellungBerechnenService;
+    ergebnis:Array<Arbeitsplatz>;
+    x;
+    constructor(KapazitaetsplanungService,dispositionService,bestellungBerechnenService){
+        this.models=new Array<KapazitaetModel>();
+        this.ergebnis=new Array<Arbeitsplatz>();
+        this.kapazitaetsplanungService=KapazitaetsplanungService;
+        this.dispositionService=dispositionService;
+        this.models=this.kapazitaetsplanungService.models;
+
+        this.ergebnis=this.kapazitaetsplanungService.ergebnis;
+        this.bestellungBerechnenService=bestellungBerechnenService;
+        console.log(this.bestellungBerechnenService);
+        this.x=this.bestellungBerechnenService.getBestellung(35,1,0,[500,500,500,500]);
+        this.aendern();
+
     }
-
-
     aendern(){
-        this.test=this.arbeitsplatzService.map[(<HTMLInputElement>document.getElementById("input1")).value];
+        this.dispositionService.aendern();
+        this.kapazitaetsplanungService.aendern();
+
     }
-
-
-
-
-    auftraegeSetzen(){
-        for(let i=0;i<this.auftragService.auftraege.length;i++){
-            this.arbeitsplatzService.map[this.auftragService.auftraege[i].erzeugnis_id].auftraegSetzten(this.auftragService.auftraege[i]);
-        }
+    berechnen(){
+        this.kapazitaetsplanungService.zeitSetzten();
     }
-
-    mergeArbeitsplaetze(){
-        let liste =this.arbeitsplatzService.fertigungsreihen;
-        let ergebnisListe=new Array<Arbeitsplatz>();
-        for(let i=0;i<liste.length;i++){
-
-            let listeliste=liste[i].alleArbeitsplaetze();
-            for(let j=0;j<listeliste.length;j++){
-                let temp=this.search(ergebnisListe,listeliste[j]);
-                if(temp===null){
-                    var x=new Arbeitsplatz(listeliste[j].id,listeliste[j].erzeugnis_id,0,0);
-                    x.auftraege=listeliste[j].auftraege;
-                    x.arbeitsplatzFremdeAuftraege=listeliste[j].arbeitsplatzFremdeAuftraege;
-                    x.arbeitszeit=listeliste[j].arbeitszeit;
-                    ergebnisListe.push(x);
-                }
-                else{
-                    temp.arbeitszeit+=listeliste[j].arbeitszeit;
-                    temp.auftraege=temp.auftraege.concat(listeliste[j].auftraege);
-                    temp.arbeitsplatzFremdeAuftraege=temp.arbeitsplatzFremdeAuftraege.concat(listeliste[j].arbeitsplatzFremdeAuftraege);
-                    temp.name+=","+listeliste[j].erzeugnis_id;
-                }
-            }
-        }
-        return ergebnisListe;
-    }
-    contains(a, obj){
-        for (let i = 0; i < a.length; i++) {
-            if (a[i] === obj) {
-                return true;
-            }
-        }
-        return false;
-    }
-    search(a:Array<Arbeitsplatz>,obj:Arbeitsplatz){
-        for(let i=0;i<a.length;i++){
-            if(a[i].id===obj.id){
-                return a[i];
-            }
-        }
-        return null;
-    }
-
-
-
-
-
-
 
 
 
 
 
 }
+angular.module("KapazitaetsplanungModule").controller("KapazitaetsplanungController",["KapazitaetsplanungService","DispositionService","BestellungBerechnenService",KapazitaetsplanungController]);
+class KapazitaetModel{
+    anzahlSchichten:string;
+    ueberstunden1:number;
+    ueberstunden2:number;
+    ueberstunden3:number;
+    arbeitsplatz:Arbeitsplatz;
+    zeitVerfuegung:number;
+    name:string;
+    eTeile:Array<number>;
 
-angular.module("KapazitaetsplanungModule").controller("KapazitaetsplanungController",["$scope","ArbeitsplatzService","AuftragService","DispositionService",KapazitaetsplanungController]);
+    constructor(arbeitsplatz:Arbeitsplatz) {
+        this.name = arbeitsplatz.name;
+        this.anzahlSchichten="1";
+        this.ueberstunden1=0;
+        this.ueberstunden2=0;
+        this.ueberstunden3=0;
+        this.arbeitsplatz=arbeitsplatz;
+        this.zeitVerfuegung=2400;
+        this.eTeile=new Array<number>();
+        this.setName();
+    }
+    setName(){
+        this.eTeile=[];
+        if(this.name[1]=="_"){
+            let temp=name.substring(1,name.length).split(",");
+            name=name.substring(0,1);
+            for(let i=0;i<temp.length;i++){
+                this.eTeile.push(Number(temp[i]));
+            }
+        }
+        else{
+            let temp=name.substring(2,name.length).split(",");
+            name=name.substring(0,2);
+            for(let i=0;i<temp.length;i++){
+                this.eTeile.push(Number(temp[i]));
+            }
+        }
+    }
+
+}
+
+
 

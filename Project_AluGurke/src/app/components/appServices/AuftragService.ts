@@ -8,6 +8,7 @@ class AuftragService {
     auftraegeAufMaschine:Array<Auftrag>;
     dispositionService:DispositionService;
 
+
     constructor(DispositionService){
         this.dispositionService=DispositionService;
         this.auftraege=new Array<Auftrag>();
@@ -16,20 +17,19 @@ class AuftragService {
         this.auftraegeExport=new Array<Auftrag>();
         this.auftraegeSetzen([]);
     }
-    altLastenVerteilen(){
+    altLastenVerteilen(models:Array<DispositionModel>){
         for(let i=0;i<this.auftraegeAufMaschine.length;i++){
-            for(let j=0;j<this.dispositionService.models.length;j++){
-                if(this.dispositionService.models[j].eTeil.id==this.auftraegeAufMaschine[i].erzeugnis_id){
-                    this.dispositionService.models[j].auftragAufMaschine=this.auftraegeAufMaschine[i];
+            for(let j=0;j<models.length;j++){
+                if(models[j].eTeil.id==this.auftraegeAufMaschine[i].erzeugnis_id){
+                    models[j].auftragAufMaschine=this.auftraegeAufMaschine[i];
                 }
             }
         }
-
-        for(let j=0;j<this.dispositionService.models.length;j++){
-            this.dispositionService.models[j].auftragInWarteschlange=[];
+        for(let j=0;j<models.length;j++){
+            models[j].auftragInWarteschlange=[];
             for(let i=0;i<this.auftraegeInWarteschlange.length;i++){
-                if(this.dispositionService.models[j].eTeil.id==this.auftraegeInWarteschlange[i].erzeugnis_id){
-                    this.dispositionService.models[j].auftragInWarteschlange.push(this.auftraegeInWarteschlange[i]);
+                if(models[j].eTeil.id==this.auftraegeInWarteschlange[i].erzeugnis_id){
+                    models[j].auftragInWarteschlange.push(this.auftraegeInWarteschlange[i]);
                 }
             }
         }
@@ -37,12 +37,12 @@ class AuftragService {
 
     auftraegeSetzen(auftraege:Array<Auftrag>){
 
-        let x=this.mergeAuftraege(auftraege);
+        //let x=this.mergeAuftraege(auftraege);
         this.auftraege=[];
-        this.auftraegeExport=x;
+        this.auftraegeExport=auftraege;
         this.auftraege=this.auftraege.concat(this.auftraegeAufMaschine);
         this.auftraege=this.auftraege.concat(this.auftraegeInWarteschlange);
-        this.auftraege=this.auftraege.concat(x);
+        this.auftraege=this.auftraege.concat(auftraege);
     }
     mergeAuftraege(auftraege:Array<Auftrag>){
         let temp:Array<Auftrag>=new Array<Auftrag>();
@@ -75,6 +75,7 @@ class AuftragService {
         }
         return null;
     }
+
 }
 
 angular.module('app').factory('AuftragService', [(DispositionService) => new AuftragService(DispositionService)]);

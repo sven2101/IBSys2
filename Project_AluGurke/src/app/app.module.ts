@@ -11,5 +11,6 @@ angular.module('app', [
 	'TranslationModule',
 	'KapazitaetsplanungModule',
 	'DispositionModule',
-	'LagerModule'
+	'LagerModule',
+	'FertigungsAuftraegeModule'
 ]);
