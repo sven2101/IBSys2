@@ -21,7 +21,7 @@
 				<th class="text-center curs" ng-click="ktdc.sortieren('verbrauch4')">Verbrauch<br>n+3</th>-->
 			</tr>
 			<tr class="curs" ng-repeat-start="teil in ktdc.alleKaufTeile"  ng-class="{danger: ktdc.mussBestellen(teil), warning: ktdc.sollteBestellen(teil)}"
-			ng-click="ktdc.select(teil)" tablerowtoggle tablerowtoggleid="{{teil.kaufTeil.id}}"><!-- fade out="tablecontainer" in="details"  -->
+			ng-click="ktdc.select(teil)" tablerowtoggle tablerowtoggleid="{{teil.kaufTeil.id}}"fade out="tablecontainer" in="details"><!-- fade out="tablecontainer" in="details"  -->
 				<td>{{::teil.kaufTeil.id}}</td>
 				<!--<td>
 					<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="teil.kaufTeil.mfw"></span>
