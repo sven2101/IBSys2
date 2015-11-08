@@ -9,7 +9,9 @@ class TableRowToggle {
 
 	link(scope, el, attrs, controller) {
 		el.click(function(){
-			$('#'+attrs.tablerowtoggleid).toggle(0);
+			$(this).next().toggle(0,function(){
+				$(this).children().fadeToggle(400);
+			});
 		});
 	}
 }

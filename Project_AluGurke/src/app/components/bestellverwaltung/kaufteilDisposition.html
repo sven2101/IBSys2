@@ -15,7 +15,7 @@
 				<th class="text-center curs" ng-click="ktdc.sortieren('verbrauch1')">Verbrauch<br>aktuell</th>
 			</tr>
 			<tr class="curs" ng-repeat-start="teil in ktdc.alleKaufTeile"  ng-class="{danger: ktdc.zeileRot(teil), warning: ktdc.zeileGelb(teil)}"
-			ng-click="ktdc.select(teil)" tablerowtoggle tablerowtoggleid="{{teil.kaufTeil.id}}"fade out="tablecontainer" in="details"><!-- fade out="tablecontainer" in="details"  -->
+			ng-click="ktdc.select(teil)" tablerowtoggle tablerowtoggleid="{{teil.kaufTeil.id}}" fade out="tablecontainer" in="details"><!-- fade out="tablecontainer" in="details"  -->
 				<td>{{::teil.kaufTeil.id}}</td>
 				<td>{{::teil.kaufTeil.preis | currency:"€"}}</td>
 				<td>{{::teil.kaufTeil.wbz}} &plusmn({{teil.kaufTeil.wbzAbw}})</td>
@@ -23,8 +23,8 @@
 				<td>{{::teil.kaufTeil.lagerMenge}}</td>
 				<td>{{::teil.verbrauch1}}</td>
 			</tr>
-			<tr ng-repeat-end >
-				<td colspan="12" ng-attr-id="{{teil.kaufTeil.id}}" style="display:none"><p>hallooooo</p><p>hallooooo</p><p>hallooooo</p><p>hallooooo</p><p>hallooooo</p><p>hallooooo</p></td>
+			<tr ng-repeat-end style="display:none">
+				<td colspan="12" style="display:none"><p>hallooooo</p><p>hallooooo</p><p>hallooooo</p><p>hallooooo</p><p>hallooooo</p><p>hallooooo</p></td>
 			</tr>
 		</table>
 	</div>

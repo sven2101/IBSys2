@@ -147,38 +147,17 @@ class KaufteilDispositionController {
 		this.berechneteBestellungAktualisieren();
 	}
 
-	deleteNeueBestellung(bestellung: NeuBestellung) { //In den Bestellungsservice verschieben
-		var neuBestellungen: Array<NeuBestellung>;
-		neuBestellungen = this.bestellService.neuBestellungen['k' + this.selectedViewModel.kaufTeil.id];
-		for (var i = 0; i < neuBestellungen.length; i++) {
-			if (neuBestellungen[i].timestamp === bestellung.timestamp) {
-				neuBestellungen.splice(i, 1);
-			}
-		}
+	deleteNeueBestellung(bestellung: NeuBestellung) {
+		this.bestellService.deleteNeuBetellung(bestellung.teil_id,bestellung.timestamp);
 		this.selectedViewModel.kaufTeil.teileWertNeu = this.getNeuenTeileWert(this.selectedViewModel);
 		this.berechneteBestellungAktualisieren();
 	}
 
-	getNeuenTeileWert(viewModel: ViewModel) { //TeileService --> inkonsitenzen vermeiden
-		var bestandAlt = viewModel.kaufTeil.lagerMenge;
-		var teileWertAlt = viewModel.kaufTeil.teileWert;
-
-		var bestellKosten = 0;
-		var bestellMenge = 0;
-
-		var bestellungen = this.bestellService.neuBestellungen['k' + viewModel.kaufTeil.id];
-		for (var i = 0; i < bestellungen.length; i++) {
-			bestellKosten += bestellungen[i].kosten;
-			bestellMenge += bestellungen[i].menge;
-		}
-		if(bestandAlt == 0 && bestellMenge == 0) {
-			return teileWertAlt;
-		}
-		var teileWertNeu = (bestandAlt * teileWertAlt + bestellKosten) / (bestandAlt * 1 + bestellMenge * 1);
-		return Math.round(teileWertNeu * 100) / 100;
+	getNeuenTeileWert(viewModel: ViewModel) { 
+		return this.teileService.getKaufTeilTeileWertNeu(viewModel.kaufTeil.lagerMenge,viewModel.kaufTeil.teileWert,viewModel.kaufTeil.id);
 	}
 
-	getLaufendeBestellungen(teil_id: number) {//eventuell auch verschieben in Bestellungsservice
+	getLaufendeBestellungen(teil_id: number) {
 		var result = [];
 		for (var i = 0; i < this.bestellService.laufendeBestellungen.length; i++) {
 			if (this.bestellService.laufendeBestellungen[i].teil_id == teil_id) {

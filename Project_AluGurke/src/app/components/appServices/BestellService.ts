@@ -57,7 +57,7 @@ class BestellService {
 	updateLaufendeBestellungen(bestellungen) {
 		for (var i = 0; i < bestellungen.length; i++) {
 			var b = bestellungen[i];
-			this.laufendeBestellungen.push(new Bestellung(b._id, this.isEilBestellung(b._mode), b._article, b._amount, b._orderperiod));
+			this.laufendeBestellungen.push(new Bestellung(Number(b._id), this.isEilBestellung(b._mode), Number(b._article), Number(b._amount), Number(b._orderperiod)));
 		}
 	}
 
@@ -66,12 +66,12 @@ class BestellService {
 		var startPeriode = bestellungen[0]._orderperiod * 1;
 		for (var i = 0; i < bestellungen.length; i++) {
 			var b = bestellungen[i];
-			this.zugangBestellungen.push(new ZugangBestellung(b._id, this.isEilBestellung(b._mode), b._article, b._amount, b._orderperiod,
-				this.getEndZeitpunkt(ersteBestellungEndet, startPeriode, b._time), b._materialcosts, b._ordercosts, b._entirecosts, b._piececosts));
+			this.zugangBestellungen.push(new ZugangBestellung(Number(b._id), this.isEilBestellung(b._mode), Number(b._article), Number(b._amount), Number(b._orderperiod),
+				this.getEndZeitpunkt(ersteBestellungEndet, startPeriode, b._time), Number(b._materialcosts), Number(b._ordercosts), Number(b._entirecosts), Number(b._piececosts)));
 		}
 	}
 
-	getEndZeitpunkt(ersteBestellungEndet: number, startPeriode: number, bestellungEndet: number) {
+	getEndZeitpunkt(ersteBestellungEndet: number, startPeriode: number, bestellungEndet: number):{periode:number,tag:number} {
 		var anzahlTageErsteBestellung = ersteBestellungEndet / 60 / 24;
 		var bestellungEndetTage = bestellungEndet / 60 / 24;
 		var differenz = bestellungEndetTage - anzahlTageErsteBestellung;
@@ -88,11 +88,21 @@ class BestellService {
 		return { periode: endPeriode, tag: endTag };
 	}
 
-	isEilBestellung(mode: number) {
+	isEilBestellung(mode: number) :boolean{
 		if (mode == 4) {
 			return true;
 		}
 		return false;
+	}
+	
+	deleteNeuBetellung(kaufTeilId:number,timestamp:number){
+		var neuBestellungen = this.neuBestellungen['k'+kaufTeilId];
+		
+		for (var i = 0; i < neuBestellungen.length; i++) {
+			if (neuBestellungen[i].timestamp === timestamp) {
+				neuBestellungen.splice(i, 1);
+			}
+		}
 	}
 }
 

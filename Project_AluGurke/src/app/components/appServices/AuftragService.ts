@@ -35,7 +35,7 @@ class AuftragService {
         var verwendendeErzeugnisse: Array<NewTeilKnoten> = this.getErzeugnisseDieKaufTeilVerwenden(kaufTeilId);
 
         for (var i = 0; i < verwendendeErzeugnisse.length; i++) {
-            gesamtVerbrauch += this.getVerbrauchFürErzeugnis( verwendendeErzeugnisse[i], kaufTeilId);
+            gesamtVerbrauch += this.getVerbrauchFürErzeugnis(verwendendeErzeugnisse[i], kaufTeilId);
         }
 
         return gesamtVerbrauch;
@@ -58,17 +58,17 @@ class AuftragService {
         var verbrauch = 0;
         var produktionsAufträge = this.getProduktionsAufträgeFürErzeugnis(erzeugnisKnoten.teil_id);
         var anzahlVerwendet;
-        
-        for(var i = 0; i < erzeugnisKnoten.bauteile.length;i++){
-            if(erzeugnisKnoten.bauteile[i].teil_id === kaufTeilId){
+
+        for (var i = 0; i < erzeugnisKnoten.bauteile.length; i++) {
+            if (erzeugnisKnoten.bauteile[i].teil_id === kaufTeilId) {
                 anzahlVerwendet = erzeugnisKnoten.bauteile[i].anzahl;
             }
         }
 
-        for(var j = 0; j < produktionsAufträge.length;j++){
+        for (var j = 0; j < produktionsAufträge.length; j++) {
             verbrauch += anzahlVerwendet * produktionsAufträge[j].anzahl;
         }
-        
+
         return verbrauch;
     }
 
