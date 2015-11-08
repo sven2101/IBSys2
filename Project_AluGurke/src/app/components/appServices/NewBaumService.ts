@@ -28,10 +28,10 @@ class NewBaumService {
 
 	getKnoten(teil_id: number): NewTeilKnoten {
 		var gesuchterKnoten = this.durchsucheBaumNachTeilKnoten(this.kinderBaum, teil_id);
-		if (!gesuchterKnoten) {
+		if (gesuchterKnoten == null) {
 			gesuchterKnoten = this.durchsucheBaumNachTeilKnoten(this.damenBaum, teil_id);
 		}
-		if (!gesuchterKnoten) {
+		if (gesuchterKnoten == null) {
 			gesuchterKnoten = this.durchsucheBaumNachTeilKnoten(this.herrenBaum, teil_id);
 		}
 
@@ -49,6 +49,10 @@ class NewBaumService {
 		var gesuchterTeilKnoten: NewTeilKnoten = null;
 		for (var i = 0; i < baum.bauteile.length; i++) {
 			gesuchterTeilKnoten = this.durchsucheBaumNachTeilKnoten(baum.bauteile[i], teil_id);
+			
+			if(gesuchterTeilKnoten){
+				break;
+			}
 		}
 		return gesuchterTeilKnoten;
 	}

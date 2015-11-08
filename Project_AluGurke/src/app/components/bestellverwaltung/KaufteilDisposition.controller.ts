@@ -41,7 +41,7 @@ class KaufteilDispositionController {
 	selectedViewModel: ViewModel;
 	neuBestellung: NeuBestellung;
 	//Max was here
-	bestellungBerechnenService:BestellungBerechnenService	
+	bestellungBerechnenService:BestellungBerechnenService;
 
 	constructor(teileService: NewTeileService, baumService: NewBaumService, bestellService: BestellService, programmService: ProgrammService,bestellungBerechnenService:BestellungBerechnenService) {
 		this.alleKaufTeile = [];

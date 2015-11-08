@@ -64,9 +64,9 @@ class AuftragService {
                 anzahlVerwendet = erzeugnisKnoten.bauteile[i].anzahl;
             }
         }
-        
+
         for(var j = 0; j < produktionsAufträge.length;j++){
-            verbrauch += anzahlVerwendet * produktionsAufträge[i].anzahl;
+            verbrauch += anzahlVerwendet * produktionsAufträge[j].anzahl;
         }
         
         return verbrauch;
