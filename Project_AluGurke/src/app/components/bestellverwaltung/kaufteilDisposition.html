@@ -8,35 +8,20 @@
 		<table class="table table-bordered text-center table-hover table-condensed">
 			<tr>
 				<th class="text-center curs" ng-click="ktdc.sortieren('id')">Id</th>
-				<!--<th class="text-center" title="Mehrfachverwendung">MFW</th>-->
 				<th class="text-center curs" ng-click="ktdc.sortieren('preis')">Preis</th>
 				<th class="text-center curs" ng-click="ktdc.sortieren('wbz')" title="Wiederbeschaffungszeit">WBZ&nbsp&plusmn<br>Abweichung</th>
-				<!--<th class="text-center curs" ng-click="ktdc.sortieren('discontMenge')">Discont-<br>menge</th>
-				<th class="text-center curs" ng-click="ktdc.sortieren('bestellKosten')">Bestellkosten</th>-->
 				<th class="text-center curs" ng-click="ktdc.sortieren('reichweite')">Reich-<br>weite</th>
 				<th class="text-center curs" ng-click="ktdc.sortieren('lagerMenge')">Lager-<br>menge</th>
 				<th class="text-center curs" ng-click="ktdc.sortieren('verbrauch1')">Verbrauch<br>aktuell</th>
-				<!--<th class="text-center curs" ng-click="ktdc.sortieren('verbrauch2')">Verbrauch<br>n+1</th>
-				<th class="text-center curs" ng-click="ktdc.sortieren('verbrauch3')">Verbrauch<br>n+2</th>
-				<th class="text-center curs" ng-click="ktdc.sortieren('verbrauch4')">Verbrauch<br>n+3</th>-->
 			</tr>
-			<tr class="curs" ng-repeat-start="teil in ktdc.alleKaufTeile"  ng-class="{danger: ktdc.mussBestellen(teil), warning: ktdc.sollteBestellen(teil)}"
+			<tr class="curs" ng-repeat-start="teil in ktdc.alleKaufTeile"  ng-class="{danger: ktdc.zeileRot(teil), warning: ktdc.zeileGelb(teil)}"
 			ng-click="ktdc.select(teil)" tablerowtoggle tablerowtoggleid="{{teil.kaufTeil.id}}"fade out="tablecontainer" in="details"><!-- fade out="tablecontainer" in="details"  -->
 				<td>{{::teil.kaufTeil.id}}</td>
-				<!--<td>
-					<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="teil.kaufTeil.mfw"></span>
-					<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!teil.kaufTeil.mfw"></span>
-				</td>-->
 				<td>{{::teil.kaufTeil.preis | currency:"€"}}</td>
 				<td>{{::teil.kaufTeil.wbz}} &plusmn({{teil.kaufTeil.wbzAbw}})</td>
-				<!--<td>{{::teil.kaufTeil.discontMenge}}</td>
-				<td>{{::teil.kaufTeil.bestellKosten | currency:"€"}}</td>-->
 				<td>{{::teil.reichweite | number:2}}</td>
 				<td>{{::teil.kaufTeil.lagerMenge}}</td>
 				<td>{{::teil.verbrauch1}}</td>
-				<!--<td>{{::teil.verbrauch2}}</td>
-				<td>{{::teil.verbrauch3}}</td>
-				<td>{{::teil.verbrauch4}}</td>-->
 			</tr>
 			<tr ng-repeat-end >
 				<td colspan="12" ng-attr-id="{{teil.kaufTeil.id}}" style="display:none"><p>hallooooo</p><p>hallooooo</p><p>hallooooo</p><p>hallooooo</p><p>hallooooo</p><p>hallooooo</p></td>

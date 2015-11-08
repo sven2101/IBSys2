@@ -41,8 +41,7 @@ class KaufteilDispositionController {
 	selectedViewModel: ViewModel;
 	neuBestellung: NeuBestellung;
 	//Max was here
-	bestellungBerechnenService:BestellungBerechnenService
-	
+	bestellungBerechnenService:BestellungBerechnenService	
 
 	constructor(teileService: NewTeileService, baumService: NewBaumService, bestellService: BestellService, programmService: ProgrammService,bestellungBerechnenService:BestellungBerechnenService) {
 		this.alleKaufTeile = [];
@@ -95,27 +94,18 @@ class KaufteilDispositionController {
 		return lagerMenge / (gesamtVerbrauch / 4);
 	}
 
-	getAnzahlInBaum(baum: NewTeilKnoten, id: number) { //In den BaumService verschieben.
-		var anzahl = 0;
-		if (baum.teil_id === id) {
-			anzahl += baum.anzahl;
-		}
-		if (baum.hatBauteile()) {
-			for (var i = 0; i < baum.bauteile.length; i++) {
-				anzahl += this.getAnzahlInBaum(baum.bauteile[i], id);
-			}
-		}
-		return anzahl;
+	getAnzahlInBaum(baum: NewTeilKnoten, id: number):number {
+		return this.baumService.getAnzahlInBaum(baum,id);
 	}
 
-	mussBestellen(teil: ViewModel) {
+	zeileRot(teil: ViewModel):boolean {
 		if ((teil.reichweite - teil.kaufTeil.wbz) < 1) {
 			return true;
 		}
 		return false;
 	}
 
-	sollteBestellen(teil: ViewModel) {
+	zeileGelb(teil: ViewModel):boolean {
 		if (((teil.reichweite - teil.kaufTeil.wbz) > 1) && ((teil.reichweite - teil.kaufTeil.wbzAbw - teil.kaufTeil.wbz) < 1)) {
 			return true;
 		}
@@ -124,17 +114,17 @@ class KaufteilDispositionController {
 
 	sortieren(kriterium: string) {
 		this.alleKaufTeile.sort(function(a: ViewModel, b: ViewModel) {
-			var erg;
+			var differenz;
 			if (a.hasOwnProperty(kriterium)) {
-				erg = a[kriterium] - b[kriterium];
+				differenz = a[kriterium] - b[kriterium];
 
 			} else {
-				erg = a.kaufTeil[kriterium] - b.kaufTeil[kriterium];
+				differenz = a.kaufTeil[kriterium] - b.kaufTeil[kriterium];
 			}
-			if (erg === 0) {
+			if (differenz === 0) {
 				return a.kaufTeil['id'] - b.kaufTeil['id'];
 			}
-			return erg;
+			return differenz;
 		});
 	}
 
