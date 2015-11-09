@@ -1,4 +1,6 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
+/// <reference path="../../typeDefinitions/jquery.d.ts" />
+
 /// <reference path="../../model/NewKaufTeil.ts" />
 /// <reference path="../appServices/NewTeileService.ts" />
 /// <reference path="../appServices/NewBaumService.ts" />
@@ -274,7 +276,7 @@ class KaufteilDispositionController {
 			this.gambleFaktor=0;
 		}
 		return this.gambleFaktor/100;
-	}
+	}	
 }
 
 angular.module('BestellverwaltungModule').controller('KaufteilDispositionController', ['NewTeileService', 'NewBaumService', 'BestellService', 'ProgrammService','BestellungBerechnenService', KaufteilDispositionController]);

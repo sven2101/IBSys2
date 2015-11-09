@@ -11,7 +11,7 @@ class KapazitaetsplanungService {
     auftragService:AuftragService
     ergebnis:Array<Arbeitsplatz>;
     models:Array<KapazitaetModel>;
-    scope;
+    $rootScope;
     constructor($rootScope,ArbeitsplatzService:ArbeitsplatzService,AuftragService:AuftragService,DispositionService:DispositionService) {
         this.arbeitsplatzService = ArbeitsplatzService;
         this.auftragService=AuftragService;
@@ -19,16 +19,23 @@ class KapazitaetsplanungService {
         this.ergebnis=new Array<Arbeitsplatz>();
         this.models=new Array<KapazitaetModel>();
         this.models.push(new KapazitaetModel(new Arbeitsplatz(5,0,0,0)));
-        this.scope=$rootScope;        
+        this.$rootScope=$rootScope;  
+        this.$rootScope.$on('fileController.neueDatei', (event, dateiInhalt) => {
+			this.onNeueDatei(dateiInhalt); 
+        });     
         this.dispositionService.aendern();
-        this.aendern();
-      
+        this.aendern();      
 
     }
+    onNeueDatei(dateiInhalt){
+        this.dispositionService.aendern();
+        this.aendern();  
+    }
+    
     aendern(){
         for(let i=0;i<this.models.length;i++){
             if(this.models[i].name[0]!="5"){
-                if(isNaN(this.models[i].ueberstunden)||this.models[i].ueberstunden<0){
+                if(isNaN(this.models[i].ueberstunden)||this.models[i].ueberstunden<0||this.models[i].anzahlSchichten=="3"){
                     this.models[i].ueberstunden=0;
                 }                
                 this.models[i].zeitVerfuegung=Number(this.models[i].anzahlSchichten)*2400+(Number(this.models[i].ueberstunden*5));

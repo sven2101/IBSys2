@@ -22,6 +22,16 @@ class AuftragService {
         
     }
     
+    getVerbrauchEteil(eTeil_id:number){
+        let verbrauch=0;
+        for(let i=0;i<this.auftraegeExport.length;i++){
+            if(this.auftraegeExport[i].erzeugnis_id==eTeil_id){
+                verbrauch+=this.auftraegeExport[i].anzahl;
+            }
+        }
+        return verbrauch;
+    }
+    
     
     onNeueDatei(dateiInhalt) {       
 		this.updateAuftraegeInWarteschlange(dateiInhalt.results.waitinglistworkstations.workplace);
