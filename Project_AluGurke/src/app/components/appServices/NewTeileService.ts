@@ -29,9 +29,9 @@ class NewTeileService {
 		for (var i = 0; i < this.alleKaufteile.length; i++) {
 			for (var j = 0; j < artikel.length; j++) {
 				if (this.alleKaufteile[i].id == artikel[j]._id) {
-					this.alleKaufteile[i].lagerMenge = artikel[j]._amount;
-					this.alleKaufteile[i].teileWert = artikel[j]._price;
-					this.alleKaufteile[i].teileWertNeu = artikel[j]._price;
+					this.alleKaufteile[i].lagerMenge = Number(artikel[j]._amount);
+					this.alleKaufteile[i].teileWert = Number(artikel[j]._price);
+					this.alleKaufteile[i].teileWertNeu = Number(artikel[j]._price);
 					if(this.bestellService.neuBestellungen['k'+this.alleKaufteile[i].id].length != 0){
 						this.alleKaufteile[i].teileWertNeu = 
 						this.getKaufTeilTeileWertNeu(this.alleKaufteile[i].lagerMenge,this.alleKaufteile[i].teileWert,
@@ -43,7 +43,7 @@ class NewTeileService {
 		}
 	}
 	
-	getKaufTeilTeileWertNeu(lagerMenge:number,teileWertAlt:number,id:number){
+	getKaufTeilTeileWertNeu(lagerMenge:number,teileWertAlt:number,id:number):number{
 		var bestellKosten = 0;
 		var bestellMenge = 0;
 		var bestellungen = this.bestellService.neuBestellungen['k' +id];

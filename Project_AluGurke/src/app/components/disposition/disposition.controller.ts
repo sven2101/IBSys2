@@ -20,7 +20,9 @@ class DispositionController{
     modelsP2:Array<DispositionModel>;
     modelsP3:Array<DispositionModel>;
     knoten:Array<NewTeilKnoten>;
-    kapazitaetsplanungService:KapazitaetsplanungService
+    kapazitaetsplanungService:KapazitaetsplanungService;
+    
+    verbrauch:number;
 
     constructor(auftragsService,newTeileService,dispositionService,newBaumService,kapazitaetsplanungService){
         this.dispositionService=dispositionService;
@@ -31,6 +33,9 @@ class DispositionController{
         this.modelsP3=this.dispositionService.dispositionP3;
         this.auftragsService=auftragsService;
         this.aendern();
+        
+        this.verbrauch = this.auftragsService.getVerbrauch(44);
+        console.log(this.verbrauch);
     }
     aendern(){
         this.dispositionService.aendern();
