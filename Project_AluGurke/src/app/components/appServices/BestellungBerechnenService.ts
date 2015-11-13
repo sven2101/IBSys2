@@ -158,6 +158,7 @@ class BestellungBerechnenService{
             }
             return new NeuBestellung(true,kTeilId,menge,0);
         }
+        
         if(reichweite-1<kTeil.wbz+multiplikator*kTeil.wbzAbw){
             //Normal
             let menge=0;
