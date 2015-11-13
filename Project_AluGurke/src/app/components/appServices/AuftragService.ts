@@ -30,7 +30,7 @@ class AuftragService {
         this.baumService = baumService;
     }
 
-    getVerbrauch(kaufTeilId: number): number {
+    getAktuellenVerbrauch(kaufTeilId: number): number {
         var gesamtVerbrauch = 0;
         var verwendendeErzeugnisse: Array<NewTeilKnoten> = this.getErzeugnisseDieKaufTeilVerwenden(kaufTeilId);
 

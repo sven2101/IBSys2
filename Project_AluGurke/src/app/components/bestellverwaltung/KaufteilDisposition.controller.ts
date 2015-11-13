@@ -106,7 +106,7 @@ class KaufteilDispositionController {
 	}
 
 	zeileGelb(teil: ViewModel):boolean {
-		if (((teil.reichweite - teil.kaufTeil.wbz) > 1) && ((teil.reichweite - teil.kaufTeil.wbzAbw - teil.kaufTeil.wbz) < 1)) {
+		if ((!this.zeileRot(teil) && ((teil.reichweite - teil.kaufTeil.wbzAbw - teil.kaufTeil.wbz) < 1))) {
 			return true;
 		}
 		return false;

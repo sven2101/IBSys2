@@ -1,6 +1,7 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
 /// <reference path="../../model/NewTeilKnoten.ts" />
 /// <reference path="../appServices/ResourceService.ts" />
+/// <reference path="../appServices/KennzahlenService.ts" />
 /// <reference path="../appServices/DateiService.ts" />
 
 class FileController {
@@ -17,7 +18,7 @@ class FileController {
 	dateiService: DateiService;
 	zugangBestellungen: Array<ZugangBestellung>;
 
-	constructor($scope, service, NewTeileService, bestellService, resourceService: ResourceService, dateiService:DateiService) {
+	constructor($scope, service, NewTeileService, bestellService, resourceService: ResourceService, dateiService:DateiService,kennzahlenService:KennzahlenService) {
 		this.teileService = NewTeileService;
 		this.$scope = $scope;
 		this.baum = service.kinderBaum;
@@ -62,4 +63,4 @@ class FileController {
 }
 
 
-angular.module('FileModule').controller('FileController', ['$scope', 'NewBaumService', 'NewTeileService', 'BestellService', 'ResourceService', 'DateiService', FileController]);
+angular.module('FileModule').controller('FileController', ['$scope', 'NewBaumService', 'NewTeileService', 'BestellService', 'ResourceService', 'DateiService','KennzahlenService', FileController]);

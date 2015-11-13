@@ -32,7 +32,7 @@ class DispositionController{
         this.auftragsService=auftragsService;
         this.aendern();
         
-        this.verbrauch = this.auftragsService.getVerbrauch(44);
+        this.verbrauch = this.auftragsService.getAktuellenVerbrauch(44);
         console.log(this.verbrauch);
     }
     aendern(){

@@ -104,6 +104,10 @@ class BestellService {
 			}
 		}
 	}
+	
+	neuBestellungErstellen(){
+		
+	}
 }
 
 angular.module('app').factory('BestellService', ['$rootScope', ($rootScope) => new BestellService($rootScope)]);
