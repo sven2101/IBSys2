@@ -30,14 +30,14 @@ class AuftragService {
         this.baumService = baumService;
     }
 
-    getAktuellenVerbrauch(kaufTeilId: number): number {
+    getAktuellenKaufTeilVerbrauch(kaufTeilId: number): number {
         var gesamtVerbrauch = 0;
         var verwendendeErzeugnisse: Array<NewTeilKnoten> = this.getErzeugnisseDieKaufTeilVerwenden(kaufTeilId);
 
         for (var i = 0; i < verwendendeErzeugnisse.length; i++) {
             gesamtVerbrauch += this.getVerbrauchFürErzeugnis(verwendendeErzeugnisse[i], kaufTeilId);
         }
-
+       
         return gesamtVerbrauch;
     }
 

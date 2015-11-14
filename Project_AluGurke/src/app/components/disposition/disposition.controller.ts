@@ -34,7 +34,7 @@ class DispositionController{
         this.auftragsService=auftragsService;
         this.aendern();
         
-        this.verbrauch = this.auftragsService.getAktuellenVerbrauch(44);
+        this.verbrauch = this.auftragsService.getAktuellenKaufTeilVerbrauch(44); //TODO entfernen
         console.log(this.verbrauch);
     }
     aendern(){

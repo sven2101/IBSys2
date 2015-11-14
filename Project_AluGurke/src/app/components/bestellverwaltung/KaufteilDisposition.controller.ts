@@ -1,78 +1,115 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
-/// <reference path="../../typeDefinitions/jquery.d.ts" />
-
 /// <reference path="../../model/NewKaufTeil.ts" />
 /// <reference path="../appServices/NewTeileService.ts" />
 /// <reference path="../appServices/NewBaumService.ts" />
 /// <reference path="../appServices/BestellService.ts" />
 /// <reference path="../appServices/ProgrammService.ts" />
 /// <reference path="../appServices/NewTeileService.ts" />
+/// <reference path="../appServices/AuftragService.ts" />
 /// <reference path="../appServices/BestellungBerechnenService.ts" />
 /// <reference path="../../model/NewTeilKnoten.ts" />
 
 class ViewModel {
 
-	verbrauch1: number;
-	verbrauch2: number;
-	verbrauch3: number;
-	verbrauch4: number;
+	verbrauchAktuell: number;
 	reichweite: number;
 	kaufTeil: NewKaufTeil;
-	laufendeBestellungen:Array<ZugangBestellung>;
-	eingehendeBestellungen: Array<Bestellung>;
+	mengeAktuellerLagerZugang: number;
+	mengeZukuenftigerLagerZugang: number;
+	neueBestellungen: Array<NeuBestellung>;
 
-	constructor(v1: number, v2: number, v3: number, v4: number, rw: number, kaufTeil: NewKaufTeil,lb:Array<ZugangBestellung>,eb:Array<Bestellung>) {
-		this.verbrauch1 = v1;
-		this.verbrauch2 = v2;
-		this.verbrauch3 = v3;
-		this.verbrauch4 = v4;
+	constructor(verbrauchAktuell: number, rw: number, kaufTeil: NewKaufTeil,
+		malz: number, mzlz: number, nb: Array<NeuBestellung>) {
+		this.verbrauchAktuell = verbrauchAktuell;
 		this.reichweite = rw;
 		this.kaufTeil = kaufTeil;
-		this.laufendeBestellungen = lb;
-		this.eingehendeBestellungen = eb;		
+		this.mengeAktuellerLagerZugang = malz;
+		this.mengeZukuenftigerLagerZugang = mzlz;
+		this.neueBestellungen = nb;
 	}
 }
 
 class KaufteilDispositionController {
 
-	alleKaufTeile: Array<ViewModel>;
+	kaufTeileVM: Array<ViewModel>;
 	baumService: NewBaumService;
 	bestellService: BestellService;
 	teileService: NewTeileService;
 	programmService: ProgrammService;
 	selectedViewModel: ViewModel;
 	neuBestellung: NeuBestellung;
-	//Max was here
-	bestellungBerechnenService:BestellungBerechnenService;
+	bestellungBerechnenService: BestellungBerechnenService;
+	auftragService: AuftragService;
 
-	constructor(teileService: NewTeileService, baumService: NewBaumService, bestellService: BestellService, programmService: ProgrammService,bestellungBerechnenService:BestellungBerechnenService) {
-		this.alleKaufTeile = [];
+	constructor(teileService: NewTeileService, baumService: NewBaumService, bestellService: BestellService,
+		programmService: ProgrammService, bestellungBerechnenService: BestellungBerechnenService, auftragService: AuftragService) {
+		this.auftragService = auftragService;
+		this.kaufTeileVM = [];
 		this.baumService = baumService;
 		this.bestellService = bestellService;
 		this.teileService = teileService;
 		this.programmService = programmService;
 		this.createViewModel(teileService.alleKaufteile);
-		this.selectedViewModel = this.alleKaufTeile[3];
-		this.neuBestellung = new NeuBestellung(false, 0, 0, 0);
-		//Max was here
-		this.bestellungBerechnenService=bestellungBerechnenService;				
-		this.berechneteBestellungAktualisieren();
+		this.selectedViewModel = this.kaufTeileVM[3];
+		this.neuBestellung = new NeuBestellung(false, 0, 0, 0, 1);
+		this.bestellungBerechnenService = bestellungBerechnenService;
+		//this.berechneteBestellungAktualisieren();
 	}
 
 	createViewModel(kaufTeile: Array<NewKaufTeil>) {
 		for (var i = 0; i < kaufTeile.length; i++) {
-			var t = kaufTeile[i];
-			this.alleKaufTeile.push(new ViewModel(this.getVerbrauch(t.id, 1),
-				this.getVerbrauch(t.id, 2), this.getVerbrauch(t.id, 3),
-				this.getVerbrauch(t.id, 4), this.getReichweite(t.lagerMenge, t.id), t,this.getLaufendeBestellungen(t.id),this.getEingehendeBestellungen(t.id)));
-			this.alleKaufTeile[i].kaufTeil.teileWertNeu = this.getNeuenTeileWert(this.alleKaufTeile[i]);
+			var teil = kaufTeile[i];
+			var verbrauchAktuell = this.getVerbrauch(teil.id, 1);
+			var reichWeite = this.getReichweite(teil.lagerMenge, teil.id);
+			var malz = this.getMengeAktuellerLagerZugang(teil.id);
+			var mzlz = this.getMengeZukünftigerLagerzugang(teil.id);
+			var nb = this.bestellService.neuBestellungen['k' + teil.id];
+
+			var vm = new ViewModel(verbrauchAktuell, reichWeite, teil, malz, mzlz, nb);
+			this.kaufTeileVM.push(vm);
 		}
 	}
 
-	getVerbrauch(id: number, periode: number) {
-		var anzahlKinderFahrrad = this.getAnzahlInBaum(this.baumService.kinderBaum, id) * this.programmService.getProgrammposition(1, periode).menge + this.programmService.getDirectsalesPosition(1).menge;
-		var anzahlDamenFahrrad = this.getAnzahlInBaum(this.baumService.damenBaum, id) * this.programmService.getProgrammposition(2, periode).menge + this.programmService.getDirectsalesPosition(2).menge;
-		var anzahlHerrenFahrrad = this.getAnzahlInBaum(this.baumService.herrenBaum, id) * this.programmService.getProgrammposition(3, periode).menge + this.programmService.getDirectsalesPosition(3).menge;
+	getMengeAktuellerLagerZugang(teil_id: number): number {
+		var zugangBestellungen = this.bestellService.getZugangBestellungen(teil_id);
+		if (zugangBestellungen.length === 0 || zugangBestellungen == null) {
+			return 0;
+		}
+
+		var menge = 0;
+
+		for (var i = 0; i < zugangBestellungen.length; i++) {
+			menge += zugangBestellungen[i].menge;
+		}
+		return menge;
+	}
+
+	getMengeZukünftigerLagerzugang(teil_id: number): number {
+		var laufendeBestellungen = this.bestellService.getLaufendeBestellungen(teil_id);
+		if (laufendeBestellungen.length === 0 || laufendeBestellungen == null) {
+			return 0;
+		}
+		var menge = 0;
+
+		for (var i = 0; i < laufendeBestellungen.length; i++) {
+			menge += laufendeBestellungen[i].menge;
+		}
+		return menge;
+	}
+
+	getVerbrauch(teil_id: number, periode: number): number {
+		if (periode === 1) {
+			var verbrauch = this.auftragService.getAktuellenKaufTeilVerbrauch(teil_id);
+			if(verbrauch !== 0){
+				return this.auftragService.getAktuellenKaufTeilVerbrauch(teil_id);
+			}
+		}
+		if (periode > 4) {
+			return 0;
+		}
+		var anzahlKinderFahrrad = this.getAnzahlInBaum(this.baumService.kinderBaum, teil_id) * this.programmService.getProgrammposition(1, periode).menge + this.programmService.getDirectsalesPosition(1).menge;
+		var anzahlDamenFahrrad = this.getAnzahlInBaum(this.baumService.damenBaum, teil_id) * this.programmService.getProgrammposition(2, periode).menge + this.programmService.getDirectsalesPosition(2).menge;
+		var anzahlHerrenFahrrad = this.getAnzahlInBaum(this.baumService.herrenBaum, teil_id) * this.programmService.getProgrammposition(3, periode).menge + this.programmService.getDirectsalesPosition(3).menge;
 		return anzahlKinderFahrrad + anzahlDamenFahrrad + anzahlHerrenFahrrad;
 	}
 
@@ -93,21 +130,21 @@ class KaufteilDispositionController {
 				reichweite += lagerMenge / this.getVerbrauch(teil_id, i);
 			}
 		}
-		return lagerMenge / (gesamtVerbrauch / 4);
+		return reichweite;
 	}
 
-	getAnzahlInBaum(baum: NewTeilKnoten, id: number):number {
-		return this.baumService.getAnzahlInBaum(baum,id);
+	getAnzahlInBaum(baum: NewTeilKnoten, id: number): number {
+		return this.baumService.getAnzahlInBaum(baum, id);
 	}
 
-	zeileRot(teil: ViewModel):boolean {
+	zeileRot(teil: ViewModel): boolean {
 		if ((teil.reichweite - teil.kaufTeil.wbz) < 1) {
 			return true;
 		}
 		return false;
 	}
 
-	zeileGelb(teil: ViewModel):boolean {
+	zeileGelb(teil: ViewModel): boolean {
 		if ((!this.zeileRot(teil) && ((teil.reichweite - teil.kaufTeil.wbzAbw - teil.kaufTeil.wbz) < 1))) {
 			return true;
 		}
@@ -115,7 +152,7 @@ class KaufteilDispositionController {
 	}
 
 	sortieren(kriterium: string) {
-		this.alleKaufTeile.sort(function(a: ViewModel, b: ViewModel) {
+		this.kaufTeileVM.sort(function(a: ViewModel, b: ViewModel) {
 			var differenz;
 			if (a.hasOwnProperty(kriterium)) {
 				differenz = a[kriterium] - b[kriterium];
@@ -133,118 +170,64 @@ class KaufteilDispositionController {
 	select(model: ViewModel) {
 		this.selectedViewModel = model;
 		this.neuBestellung.teil_id = model.kaufTeil.id;
-		this.berechneteBestellungAktualisieren();
+		//this.berechneteBestellungAktualisieren();
 	}
 
-	neueBestellungErstellen() { //In den Bestellungsservice verschieben
+	/*neueBestellungErstellen() {
 		if (this.neuBestellung.menge <= 0) {
 			return;
 		}
-		let x=new NeuBestellung(this.neuBestellung.eil, this.neuBestellung.teil_id, this.neuBestellung.menge, this.getNeuBestellungsKosten(this.neuBestellung));
-		x.periode=this.bestellungBerechnenService.aktuellePeriode;
-		this.bestellService.neuBestellungen['k' + this.selectedViewModel.kaufTeil.id].push(x);
-		this.selectedViewModel.kaufTeil.teileWertNeu = this.getNeuenTeileWert(this.selectedViewModel);
+		this.bestellService.neuBestellungErstellen(this.neuBestellung.eil, this.neuBestellung.teil_id, this.neuBestellung.menge, 1);
 		this.neuBestellung.menge = 0;
-		this.neuBestellung.eil = false;		
-		this.berechneteBestellungAktualisieren();
-	}
+		this.neuBestellung.eil = false;
+		//this.berechneteBestellungAktualisieren();
+	}*/
 
 	deleteNeueBestellung(bestellung: NeuBestellung) {
-		this.bestellService.deleteNeuBetellung(bestellung.teil_id,bestellung.timestamp);
-		this.selectedViewModel.kaufTeil.teileWertNeu = this.getNeuenTeileWert(this.selectedViewModel);
-		this.berechneteBestellungAktualisieren();
+		this.bestellService.deleteNeuBetellung(bestellung.teil_id, bestellung.timestamp);
+		//this.berechneteBestellungAktualisieren();
 	}
 
-	getNeuenTeileWert(viewModel: ViewModel) { 
-		return this.teileService.getKaufTeilTeileWertNeu(viewModel.kaufTeil.lagerMenge,viewModel.kaufTeil.teileWert,viewModel.kaufTeil.id);
-	}
-
-	getLaufendeBestellungen(teil_id: number) {
-		var result = [];
-		for (var i = 0; i < this.bestellService.laufendeBestellungen.length; i++) {
-			if (this.bestellService.laufendeBestellungen[i].teil_id == teil_id) {
-				result.push(this.bestellService.laufendeBestellungen[i]);
-			}
-		}
-		return result;
-	}
-	
-	getEingehendeBestellungen(teil_id: number){// auch verschieben
-		var result = [];
-		for (var i = 0; i < this.bestellService.zugangBestellungen.length; i++) {
-			if (this.bestellService.zugangBestellungen[i].teil_id == teil_id) {
-				result.push(this.bestellService.zugangBestellungen[i]);
-			}
-		}
-		return result;
-	}
-
-	getLaufendeBestellungKosten(bestellung: Bestellung) { //verschieben in Bestellungsservice
-		var kosten = 0;
-		kosten += bestellung.menge * this.selectedViewModel.kaufTeil.preis;
-		if(bestellung.menge >= this.selectedViewModel.kaufTeil.discontMenge && !bestellung.eil) {
-			kosten = Math.round(kosten * 0.9*100)/100;
-		}
-		if (bestellung.eil) {
-			kosten += 10 * this.selectedViewModel.kaufTeil.bestellKosten;
-		} else {
-			kosten += this.selectedViewModel.kaufTeil.bestellKosten
-		}
-		return kosten;
-	}
-
-	getNeuBestellungsKosten(bestellung: NeuBestellung) { // verschieben
-		var materialKosten = 0;
-		var bestellKosten = 0;
-		if (bestellung.menge >= this.selectedViewModel.kaufTeil.discontMenge && !bestellung.eil) {
-			materialKosten += bestellung.menge * this.selectedViewModel.kaufTeil.preis * 0.9;
-		} else {
-			materialKosten += bestellung.menge * this.selectedViewModel.kaufTeil.preis;
-		}
-		if (bestellung.eil) {
-			bestellKosten += 10 * this.selectedViewModel.kaufTeil.bestellKosten;
-		} else {
-			bestellKosten += this.selectedViewModel.kaufTeil.bestellKosten
-		}
-		return bestellKosten + materialKosten;
+	getNeuenTeileWert(viewModel: ViewModel) {
+		return this.teileService.getKaufTeilTeileWertNeu(viewModel.kaufTeil.lagerMenge, viewModel.kaufTeil.teileWert, viewModel.kaufTeil.id);
 	}
 	//Max was here
-	bestellung=null;
-	timeLine=null;
-	reichweite=null;
+	/*bestellung = null;
+	timeLine = null;
+	reichweite = null;
 	
 	//Max was here
-	berechneteBestellungAktualisieren(){
-		this.bestellung=this.getBerechneteBestellung();
-		this.timeLine=this.getTimeLine();
-		this.reichweite=this.getBerechneteReichweite();
+	berechneteBestellungAktualisieren() {
+		this.bestellung = this.getBerechneteBestellung();
+		this.timeLine = this.getTimeLine();
+		this.reichweite = this.getBerechneteReichweite();
 	}
 	
 	//Max was here
-	getBerechneteBestellung(){
-		let x=this.selectedViewModel;
-		return this.bestellungBerechnenService.getBestellung(x.kaufTeil.id,this.getGambleFaktor(),[x.verbrauch1,x.verbrauch2,x.verbrauch3,x.verbrauch4]);
+	getBerechneteBestellung() {
+		let x = this.selectedViewModel;
+		return this.bestellungBerechnenService.getBestellung(x.kaufTeil.id, this.getGambleFaktor(), [x.verbrauch1, x.verbrauch2, x.verbrauch3, x.verbrauch4]);
 	}
 	//Max was here
-	getTimeLine(){
-		let x=this.selectedViewModel;
-		return this.bestellungBerechnenService.getTimeLine(x.kaufTeil.id,this.getGambleFaktor(),[x.verbrauch1,x.verbrauch2,x.verbrauch3,x.verbrauch4]);
+	getTimeLine() {
+		let x = this.selectedViewModel;
+		return this.bestellungBerechnenService.getTimeLine(x.kaufTeil.id, this.getGambleFaktor(), [x.verbrauch1, x.verbrauch2, x.verbrauch3, x.verbrauch4]);
 	}
 	//Max was here
-	getBerechneteReichweite(){
-		let x=this.selectedViewModel;
-		return this.bestellungBerechnenService.getReichweite(x.kaufTeil.id,this.getGambleFaktor(),[x.verbrauch1,x.verbrauch2,x.verbrauch3,x.verbrauch4]);
+	getBerechneteReichweite() {
+		let x = this.selectedViewModel;
+		return this.bestellungBerechnenService.getReichweite(x.kaufTeil.id, this.getGambleFaktor(), [x.verbrauch1, x.verbrauch2, x.verbrauch3, x.verbrauch4]);
 	}
 	//Max was here
-	gambleFaktor=0;	
+	gambleFaktor = 0;	
 
 	//Max was here
-	getGambleFaktor(){
-		if(this.gambleFaktor<-100||this.gambleFaktor>100||isNaN(this.gambleFaktor)){
-			this.gambleFaktor=0;
+	getGambleFaktor() {
+		if (this.gambleFaktor < -100 || this.gambleFaktor > 100 || isNaN(this.gambleFaktor)) {
+			this.gambleFaktor = 0;
 		}
-		return this.gambleFaktor/100;
-	}	
+		return this.gambleFaktor / 100;
+	}*/
 }
 
-angular.module('BestellverwaltungModule').controller('KaufteilDispositionController', ['NewTeileService', 'NewBaumService', 'BestellService', 'ProgrammService','BestellungBerechnenService', KaufteilDispositionController]);
+angular.module('BestellverwaltungModule').controller('KaufteilDispositionController', ['NewTeileService', 'NewBaumService', 'BestellService', 'ProgrammService', 'BestellungBerechnenService', 'AuftragService', KaufteilDispositionController]);

@@ -18,7 +18,7 @@ var AuftragService = (function () {
         this.teileService = teileService;
         this.baumService = baumService;
     }
-    AuftragService.prototype.getAktuellenVerbrauch = function (kaufTeilId) {
+    AuftragService.prototype.getAktuellenKaufTeilVerbrauch = function (kaufTeilId) {
         var gesamtVerbrauch = 0;
         var verwendendeErzeugnisse = this.getErzeugnisseDieKaufTeilVerwenden(kaufTeilId);
         for (var i = 0; i < verwendendeErzeugnisse.length; i++) {

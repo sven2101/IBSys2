@@ -17,7 +17,7 @@ var DispositionController = (function () {
         this.modelsP3 = this.dispositionService.dispositionP3;
         this.auftragsService = auftragsService;
         this.aendern();
-        this.verbrauch = this.auftragsService.getAktuellenVerbrauch(44);
+        this.verbrauch = this.auftragsService.getAktuellenKaufTeilVerbrauch(44); //TODO entfernen
         console.log(this.verbrauch);
     }
     DispositionController.prototype.aendern = function () {

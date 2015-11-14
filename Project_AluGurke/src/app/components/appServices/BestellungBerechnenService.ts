@@ -156,7 +156,7 @@ class BestellungBerechnenService{
             if(menge*2>kTeil.discontMenge&&menge<kTeil.discontMenge){
                 menge=kTeil.discontMenge;
             }
-            return new NeuBestellung(true,kTeilId,menge,0);
+            return new NeuBestellung(true,kTeilId,menge,0,1); //TODO PERIODE
         }
         
         if(reichweite-1<kTeil.wbz+multiplikator*kTeil.wbzAbw){
@@ -170,7 +170,7 @@ class BestellungBerechnenService{
             if(menge*2>kTeil.discontMenge&&menge<kTeil.discontMenge){
                 menge=kTeil.discontMenge;
             }
-            return new NeuBestellung(false,kTeilId,menge,0);
+            return new NeuBestellung(false,kTeilId,menge,0,1); //TODO PERIODE
         }
         return null;
     }

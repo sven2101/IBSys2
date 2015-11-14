@@ -40,13 +40,17 @@ class BestellService {
 	zugangBestellungen: Array<ZugangBestellung>;
 
 	neuBestellungen: BsNeuBestellungenMap;
-
+	teileServicee: NewTeileService;
 
 	constructor($rootScope) {
 		this.laufendeBestellungen = [];
 		this.zugangBestellungen = [];
 		this.neuBestellungen = new BsNeuBestellungenMap();
-
+		
+		this.neuBestellungen['k21'].push(new NeuBestellung(false,21,100,99,1));
+		var b = new NeuBestellung(true,21,199,177,1);
+		b.timestamp = 44;
+		this.neuBestellungen['k21'].push(b);
 
 		$rootScope.$on('fileController.neueDatei', (event, dateiInhalt) => {
 			this.updateLaufendeBestellungen(dateiInhalt.results.futureinwardstockmovement.order);
@@ -71,7 +75,7 @@ class BestellService {
 		}
 	}
 
-	getEndZeitpunkt(ersteBestellungEndet: number, startPeriode: number, bestellungEndet: number):{periode:number,tag:number} {
+	getEndZeitpunkt(ersteBestellungEndet: number, startPeriode: number, bestellungEndet: number): { periode: number, tag: number } {
 		var anzahlTageErsteBestellung = ersteBestellungEndet / 60 / 24;
 		var bestellungEndetTage = bestellungEndet / 60 / 24;
 		var differenz = bestellungEndetTage - anzahlTageErsteBestellung;
@@ -88,26 +92,68 @@ class BestellService {
 		return { periode: endPeriode, tag: endTag };
 	}
 
-	isEilBestellung(mode: number) :boolean{
+	isEilBestellung(mode: number): boolean {
 		if (mode == 4) {
 			return true;
 		}
 		return false;
 	}
-	
-	deleteNeuBetellung(kaufTeilId:number,timestamp:number){
-		var neuBestellungen = this.neuBestellungen['k'+kaufTeilId];
-		
+
+	deleteNeuBetellung(kaufTeilId: number, timestamp: number) {
+		var neuBestellungen = this.neuBestellungen['k' + kaufTeilId];
+
 		for (var i = 0; i < neuBestellungen.length; i++) {
 			if (neuBestellungen[i].timestamp === timestamp) {
 				neuBestellungen.splice(i, 1);
 			}
 		}
 	}
+
+	neuBestellungErstellen(eil: boolean, teil:NewKaufTeil, menge: number, periode: number): void {
+		var kosten = this.getBestellungsKosten(menge, eil,teil);
+		var bestellung = new NeuBestellung(eil, teil.id, menge, kosten, periode);
+		this.neuBestellungen['k' + bestellung.teil_id].push(bestellung);
+	}
+
+	getBestellungsKosten(menge: number, eil: boolean,kaufTeil:NewKaufTeil): number {
+		var materialKosten = 0;
+		var bestellKosten = 0;
+
+		if (menge >= kaufTeil.discontMenge && !eil) {
+			materialKosten += menge * kaufTeil.preis * 0.9;
+		} else {
+			materialKosten += menge * kaufTeil.preis;
+		}
+		if (eil) {
+			bestellKosten += 10 * kaufTeil.bestellKosten;
+		} else {
+			bestellKosten += kaufTeil.bestellKosten
+		}
+
+		return bestellKosten + materialKosten;
+	}
 	
-	neuBestellungErstellen(){
+	getLaufendeBestellungen(teil_id:number):Array<Bestellung>{
+		var bestellungen = new Array<Bestellung>();
+		for (var i = 0; i < this.laufendeBestellungen.length; i++) {
+			if (this.laufendeBestellungen[i].teil_id == teil_id) {
+				bestellungen.push(this.laufendeBestellungen[i]);
+			}
+		}
+		return bestellungen;
+	}
+	
+	getZugangBestellungen(teil_id:number):Array<ZugangBestellung>{
+		var aktuellerZugang = new Array<ZugangBestellung>();
 		
+		for (var i = 0; i < this.zugangBestellungen.length; i++) {
+			if (this.zugangBestellungen[i].teil_id == teil_id) {
+				aktuellerZugang.push(this.zugangBestellungen[i]);
+			}
+		}
+		
+		return aktuellerZugang;
 	}
 }
 
-angular.module('app').factory('BestellService', ['$rootScope', ($rootScope) => new BestellService($rootScope)]);
+angular.module('app').factory('BestellService', ['$rootScope',($rootScope) => new BestellService($rootScope)]);
