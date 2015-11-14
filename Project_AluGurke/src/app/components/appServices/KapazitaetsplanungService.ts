@@ -37,8 +37,10 @@ class KapazitaetsplanungService {
             if(this.models[i].name[0]!="5"){
                 if(isNaN(this.models[i].ueberstunden)||this.models[i].ueberstunden<0||this.models[i].anzahlSchichten=="3"){
                     this.models[i].ueberstunden=0;
+                }else if(this.models[i].ueberstunden>240){
+                    this.models[i].ueberstunden=240;
                 }                
-                this.models[i].zeitVerfuegung=Number(this.models[i].anzahlSchichten)*2400+(Number(this.models[i].ueberstunden*5));
+                this.models[i].zeitVerfuegung=Number(this.models[i].anzahlSchichten)*2400+(Math.round(Number(this.models[i].ueberstunden*5)));
             }
             else
             {

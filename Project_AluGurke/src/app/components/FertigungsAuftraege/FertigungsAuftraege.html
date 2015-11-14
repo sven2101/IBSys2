@@ -1,24 +1,62 @@
-<h1 >FertigungsAuftr�ge</h1>
-
-<div>
-
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Fertigungsaufträge</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a>Disposition</a>
+            </li>
+            <li class="active">
+                <strong>Fertigungsaufträge</strong>
+            </li>
+        </ol>
+    </div>
 </div>
-<div>
-
-    <div class="container">
-        <table align="center" class="table table-striped table-hover ">
-            <tr>
-                <th>Erzeugnis</th>
-                <th>anzahl</th>
-                <th>Priorit�t</th>
-            </tr>
-            <tbody>
-            <tr ng-repeat="auftrag in fac.auftraege">
-                <td>{{auftrag.erzeugnis_id}}</td>
-                <td>{{auftrag.anzahl}}</td>
-                <td>{{auftrag.prioritaet}}</td>
-            </tr>
-            </tbody>
-        </table>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Fertigungsaufträge</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#">Config option 1</a>
+                            </li>
+                            <li><a href="#">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Erzeugnis</th>
+                                <th>Anzahl</th>
+                                <th>Priorität</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="auftrag in fac.auftraege">
+                                <td>{{auftrag.erzeugnis_id}}</td>
+                                <td>{{auftrag.anzahl}}</td>
+                                <td>{{auftrag.prioritaet}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
