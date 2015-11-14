@@ -1,0 +1,941 @@
+<div ng-controller="kaufteilController">
+    <table class="table">
+        <thead>
+        <tr data-pg-collapsed="">
+            <th colspan="5">{{produktionsprogramm()}}</th>
+        </tr>
+        <tr data-pg-collapsed="">
+            <th>{{periode()}}</th>
+            <th>{{periodeValue()+1}} </th>
+            <th>{{periodeValue()+2}}</th>
+            <th>{{periodeValue()+3}}</th>
+            <th>{{periodeValue() + 4}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>P1</td>
+            <td><input type="text" class="form-control" value="0" ng-model="p1_1Value" readonly></td>
+            <td><input type="text" class="form-control" value="0" ng-model="p1_2Value"></td>
+            <td><input type="text" class="form-control" value="0" ng-model="p1_3Value"></td>
+            <td><input type="text" class="form-control" value="0" ng-model="p1_4Value"></td>
+        </tr>
+        <tr>
+            <td>P2</td>
+            <td><input type="text" class="form-control" value="0" ng-model="p2_1Value" readonly></td>
+            <td><input type="text" class="form-control" value="0" ng-model="p2_2Value"></td>
+            <td><input type="text" class="form-control" value="0" ng-model="p2_3Value"></td>
+            <td><input type="text" class="form-control" value="0" ng-model="p2_4Value"></td>
+        </tr>
+        <tr>
+            <td>P3</td>
+            <td><input type="text" class="form-control" value="0" ng-model="p3_1Value" readonly></td>
+            <td><input type="text" class="form-control" value="0" ng-model="p3_2Value"></td>
+            <td><input type="text" class="form-control" value="0" ng-model="p3_3Value"></td>
+            <td><input type="text" class="form-control" value="0" ng-model="p3_4Value"></td>
+        </tr>
+        </tbody>
+    </table>
+<table class="table">
+		<thead>
+			<tr data-pg-collapsed="">
+				<th rowspan="2" width="5%">{{number()}}</th>
+				<th rowspan="2" width="5%">{{lieferfrist()}}</th>
+				<th rowspan="2" width="5%">{{abweichung()}}</th>
+				<th colspan="3">{{verwendung()}}</th>
+				<th rowspan="2" width="10%">{{diskontmenge()}}</th>
+				<th rowspan="2" width="10%">{{anfangsbestand()}}</th>
+				<th colspan="4">{{bruttobedarf()}}</th>
+				<th colspan="2">{{bestellung()}}</th>
+				<th colspan="4">{{wareneingang()}}</th>
+			</tr>
+			<tr style="display: table-row;">
+				<th style="display: table-cell;" width="5%">P1</th>
+				<th style="display: table-cell;" width="5%">P2</th>
+				<th style="display: table-cell;" width="5%">P3</th>
+				<th style="display: table-cell;" width="5%">{{periode1()}}</th>
+				<th style="display: table-cell;" width="5%">{{periode2()}}</th>
+				<th style="display: table-cell;" width="5%">{{periode3()}}</th>
+				<th style="display: table-cell;" width="5%">{{periode4()}}</th>
+				<th style="display: table-cell;" width="5%">{{gesamtmenge()}}</th>
+				<th style="display: table-cell;" width="5%">{{modus()}}</th>
+				<th style="display: table-cell;" width="5%">{{periode2()}}</th>
+				<th style="display: table-cell;" width="5%">{{periode3()}}</th>
+				<th style="display: table-cell;" width="5%">{{periode4()}}</th>
+				<th style="display: table-cell;" width="5%">{{periode5()}}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>21</td>
+				<td>1.8</td>
+				<td>0.4</td>
+				<td type="text">1x</td>
+				<td type="text"></td>
+				<td type="text"></td>
+				<td type="text">300</td>
+				<td type="text">{{k21Lagerbestand()}}</td>
+				<td><input type="text" class="form-control" 
+					value="{{k21_1Value()}}" readonly></td>
+				<td><input type="text" class="form-control" 
+					value="{{k21_2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k21_3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k21_4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k21_SumValue()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control" value="{{k21Bestellung()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k21_Plan2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k21_Plan3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k21_Plan4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k21_Plan5Value()}}" readonly></td>
+			</tr>
+			<tr>
+				<td>22</td>
+				<td>1.7</td>
+				<td>0.4</td>
+				<td type="text"></td>
+				<td type="text">1x</td>
+				<td type="text"></td>
+				<td type="text">300</td>
+				<td type="text">{{k22Lagerbestand()}}</td>
+				<td><input type="text" class="form-control" 
+					value="{{k22_1Value()}}" readonly></td>
+				<td><input type="text" class="form-control" 
+					value="{{k22_2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control" value="{{k22_3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control" value="{{k22_4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k22_SumValue()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"   value="{{k22Bestellung()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k22_Plan2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k22_Plan3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k22_Plan4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k22_Plan5Value()}}" readonly></td>
+			</tr>
+			<tr>
+				<td>23</td>
+				<td>1.2</td>
+				<td>0.2</td>
+				<td type="text"></td>
+				<td type="text"></td>
+				<td type="text">1x</td>
+				<td type="text">300</td>
+				<td type="text">{{k23Lagerbestand()}}</td>
+				<td><input type="text" class="form-control" 
+					value="{{k23_1Value()}}" readonly></td>
+				<td><input type="text" class="form-control" 
+					value="{{k23_2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k23_3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k23_4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k23_SumValue()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"   value="{{k23Bestellung()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k23_Plan2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k23_Plan3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k23_Plan4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k23_Plan5Value()}}" readonly></td>
+			</tr>
+			<tr>
+				<td>24</td>
+				<td>3.2</td>
+				<td>0.3</td>
+				<td type="text">7x</td>
+				<td type="text">7x</td>
+				<td type="text">7x</td>
+				<td type="text">6100</td>
+				<td type="text">{{k24Lagerbestand()}}</td>
+				<td><input type="text" class="form-control" 
+					value="{{k24_1Value()}}" readonly></td>
+				<td><input type="text" class="form-control" 
+					value="{{k24_2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k24_3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k24_4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k24_SumValue()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"   value="{{k24Bestellung()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k24_Plan2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k24_Plan3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k24_Plan4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k24_Plan5Value()}}" readonly></td>
+			</tr>
+			<tr>
+				<td>25</td>
+				<td>0.9</td>
+				<td>0.2</td>
+				<td type="text">4x</td>
+				<td type="text">4x</td>
+				<td type="text">4x</td>
+				<td type="text">3600</td>
+				<td type="text">{{k25Lagerbestand()}}</td>
+				<td><input type="text" class="form-control" 
+					value="{{k25_1Value()}}" readonly></td>
+				<td><input type="text" class="form-control" 
+					value="{{k25_2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k25_3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k25_4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k25_SumValue()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"   value="{{k25Bestellung()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k25_Plan2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k25_Plan3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k25_Plan4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k25_Plan5Value()}}" readonly></td>
+			</tr>
+			<tr>
+				<td>27</td>
+				<td>0.9</td>
+				<td>0.2</td>
+				<td type="text">2x</td>
+				<td type="text">2x</td>
+				<td type="text">2x</td>
+				<td type="text">1800</td>
+				<td type="text">{{k27Lagerbestand()}}</td>
+				<td><input type="text" class="form-control" 
+					value="{{k27_1Value()}}" readonly></td>
+				<td><input type="text" class="form-control" 
+					value="{{k27_2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k27_3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k27_4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k27_SumValue()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"   value="{{k27Bestellung()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k27_Plan2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k27_Plan3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k27_Plan4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k27_Plan5Value()}}" readonly></td>
+			</tr>
+			<tr>
+				<td>28</td>
+				<td>1.7</td>
+				<td>0.4</td>
+				<td type="text">4x</td>
+				<td type="text">5x</td>
+				<td type="text">6x</td>
+				<td type="text">4500</td>
+				<td type="text">{{k28Lagerbestand()}}</td>
+				<td><input type="text" class="form-control" 
+					value="{{k28_1Value()}}" readonly></td>
+				<td><input type="text" class="form-control" 
+					value="{{k28_2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k28_3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k28_4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k28_SumValue()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"   value="{{k28Bestellung()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k28_Plan2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k28_Plan3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k28_Plan4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k28_Plan5Value()}}" readonly></td>
+			</tr>
+			<tr>
+				<td>32</td>
+				<td>2.1</td>
+				<td>0.5</td>
+				<td type="text">3x</td>
+				<td type="text">3x</td>
+				<td type="text">3x</td>
+				<td type="text">2700</td>
+				<td type="text">{{k32Lagerbestand()}}</td>
+				<td><input type="text" class="form-control" 
+					value="{{k32_1Value()}}" readonly></td>
+				<td><input type="text" class="form-control" 
+					value="{{k32_2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k32_3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k32_4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k32_SumValue()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"   value="{{k32Bestellung()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k32_Plan2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k32_Plan3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k32_Plan4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k32_Plan5Value()}}" readonly></td>
+			</tr>
+			<tr>
+				<td>33</td>
+				<td>1.9</td>
+				<td>0.5</td>
+				<td type="text"></td>
+				<td type="text"></td>
+				<td type="text">2x</td>
+				<td type="text">900</td>
+				<td type="text">{{k33Lagerbestand()}}</td>
+				<td><input type="text" class="form-control" 
+					value="{{k33_1Value()}}" readonly></td>
+				<td><input type="text" class="form-control" 
+					value="{{k33_2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k33_3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k33_4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k33_SumValue()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"   value="{{k33Bestellung()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k33_Plan2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k33_Plan3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k33_Plan4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k33_Plan5Value()}}" readonly></td>
+			</tr>
+			<tr>
+				<td>34</td>
+				<td>1.6</td>
+				<td>0.3</td>
+				<td type="text"></td>
+				<td type="text"></td>
+				<td type="text">72x</td>
+				<td type="text">22000</td>
+				<td type="text">{{k34Lagerbestand()}}</td>
+				<td><input type="text" class="form-control" 
+					value="{{k34_1Value()}}" readonly></td>
+				<td><input type="text" class="form-control" 
+					value="{{k34_2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k34_3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k34_4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k34_SumValue()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"   value="{{k34Bestellung()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k34_Plan2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k34_Plan3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k34_Plan4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k34_Plan5Value()}}" readonly></td>
+			</tr>
+			<tr>
+				<td>35</td>
+				<td>2.2</td>
+				<td>0.4</td>
+				<td type="text">4x</td>
+				<td type="text">4x</td>
+				<td type="text">4x</td>
+				<td type="text">3600</td>
+				<td type="text">{{k35Lagerbestand()}}</td>
+				<td><input type="text" class="form-control" 
+					value="{{k35_1Value()}}" readonly></td>
+				<td><input type="text" class="form-control" 
+					value="{{k35_2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k35_3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k35_4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k35_SumValue()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"   value="{{k35Bestellung()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k35_Plan2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k35_Plan3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k35_Plan4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k35_Plan5Value()}}" readonly></td>
+			</tr>
+			<tr>
+				<td>36</td>
+				<td>1.2</td>
+				<td>0.1</td>
+				<td type="text">1x</td>
+				<td type="text">1x</td>
+				<td type="text">1x</td>
+				<td type="text">900</td>
+				<td type="text">{{k36Lagerbestand()}}</td>
+				<td><input type="text" class="form-control" 
+					value="{{k36_1Value()}}" readonly></td>
+				<td><input type="text" class="form-control" 
+					value="{{k36_2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k36_3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k36_4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k36_SumValue()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"   value="{{k36Bestellung()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k36_Plan2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k36_Plan3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k36_Plan4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k36_Plan5Value()}}" readonly></td>
+			</tr>
+			<tr>
+				<td>37</td>
+				<td>1.5</td>
+				<td>0.3</td>
+				<td type="text">1x</td>
+				<td type="text">1x</td>
+				<td type="text">1x</td>
+				<td type="text">900</td>
+				<td type="text">{{k37Lagerbestand()}}</td>
+				<td><input type="text" class="form-control" 
+					value="{{k37_1Value()}}" readonly></td>
+				<td><input type="text" class="form-control" 
+					value="{{k37_2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k37_3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k37_4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k37_SumValue()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"   value="{{k37Bestellung()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k37_Plan2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k37_Plan3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k37_Plan4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k37_Plan5Value()}}" readonly></td>
+			</tr>
+			<tr>
+				<td>38</td>
+				<td>1.7</td>
+				<td>0.4</td>
+				<td type="text">1x</td>
+				<td type="text">1x</td>
+				<td type="text">1x</td>
+				<td type="text">300</td>
+				<td type="text">{{k38Lagerbestand()}}</td>
+				<td><input type="text" class="form-control" 
+					value="{{k38_1Value()}}" readonly></td>
+				<td><input type="text" class="form-control" 
+					value="{{k38_2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k38_3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k38_4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k38_SumValue()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"   value="{{k38Bestellung()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k38_Plan2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k38_Plan3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k38_Plan4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k38_Plan5Value()}}" readonly></td>
+			</tr>
+			<tr>
+				<td>39</td>
+				<td>1.5</td>
+				<td>0.3</td>
+				<td type="text">2x</td>
+				<td type="text">2x</td>
+				<td type="text">2x</td>
+				<td type="text">1800</td>
+				<td type="text">{{k39Lagerbestand()}}</td>
+				<td><input type="text" class="form-control" 
+					value="{{k39_1Value()}}" readonly></td>
+				<td><input type="text" class="form-control" 
+					value="{{k39_2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k39_3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k39_4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k39_SumValue()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"   value="{{k39Bestellung()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k39_Plan2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k39_Plan3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k39_Plan4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k39_Plan5Value()}}" readonly></td>
+			</tr>
+			<tr>
+				<td>40</td>
+				<td>1.7</td>
+				<td>0.2</td>
+				<td type="text">1x</td>
+				<td type="text">1x</td>
+				<td type="text">1x</td>
+				<td type="text">900</td>
+				<td type="text">{{k40Lagerbestand()}}</td>
+				<td><input type="text" class="form-control" 
+					value="{{k40_1Value()}}" readonly></td>
+				<td><input type="text" class="form-control" 
+					value="{{k40_2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k40_3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k40_4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k40_SumValue()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control" value="{{k40Bestellung()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k40_Plan2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k40_Plan3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k40_Plan4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k40_Plan5Value()}}" readonly></td>
+			</tr>
+			<tr>
+				<td>41</td>
+				<td>0.9</td>
+				<td>0.2</td>
+				<td type="text">1x</td>
+				<td type="text">1x</td>
+				<td type="text">1x</td>
+				<td type="text">900</td>
+				<td type="text">{{k41Lagerbestand()}}</td>
+				<td><input type="text" class="form-control" 
+					value="{{k41_1Value()}}" readonly></td>
+				<td><input type="text" class="form-control" 
+					value="{{k41_2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k41_3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k41_4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k41_SumValue()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control" value="{{k41Bestellung()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k41_Plan2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k41_Plan3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k41_Plan4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k41_Plan5Value()}}" readonly></td>
+			</tr>
+			<tr>
+				<td>42</td>
+				<td>1.2</td>
+				<td>0.3</td>
+				<td type="text">2x</td>
+				<td type="text">2x</td>
+				<td type="text">2x</td>
+				<td type="text">1800</td>
+				<td type="text">{{k42Lagerbestand()}}</td>
+				<td><input type="text" class="form-control" 
+					value="{{k42_1Value()}}" readonly></td>
+				<td><input type="text" class="form-control" 
+					value="{{k42_2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k42_3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k42_4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k42_SumValue()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"   value="{{k42Bestellung()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k42_Plan2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k42_Plan3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k42_Plan4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k42_Plan5Value()}}" readonly></td>
+			</tr>
+			<tr>
+				<td>43</td>
+				<td>2.0</td>
+				<td>0.5</td>
+				<td type="text">1x</td>
+				<td type="text">1x</td>
+				<td type="text">1x</td>
+				<td type="text">2700</td>
+				<td type="text">{{k43Lagerbestand()}}</td>
+				<td><input type="text" class="form-control" 
+					value="{{k43_1Value()}}" readonly></td>
+				<td><input type="text" class="form-control" 
+					value="{{k43_2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k43_3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k43_4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k43_SumValue()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"   value="{{k43Bestellung()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k43_Plan2Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k43_Plan3Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k43_Plan4Value()}}" readonly></td>
+				<td style="display: table-cell;"><input type="text"
+					class="form-control"  value="{{k43_Plan5Value()}}" readonly></td>
+			</tr>
+            <tr>
+                <td>44</td>
+                <td>1.0</td>
+                <td>0.2</td>
+                <td type="text">3x</td>
+                <td type="text">3x</td>
+                <td type="text">3x</td>
+                <td type="text">900</td>
+                <td type="text">{{k44Lagerbestand()}}</td>
+                <td><input type="text" class="form-control" 
+                    value="{{k44_1Value()}}" readonly></td>
+                <td><input type="text" class="form-control" 
+                    value="{{k44_2Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k44_3Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k44_4Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k44_SumValue()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"   value="{{k44Bestellung()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k44_Plan2Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k44_Plan3Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k44_Plan4Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k44_Plan5Value()}}" readonly></td>
+            </tr>
+            <tr>
+                <td>45</td>
+                <td>1.7</td>
+                <td>0.3</td>
+                <td type="text">1x</td>
+                <td type="text">1x</td>
+                <td type="text">1x</td>
+                <td type="text">900</td>
+                <td type="text">{{k45Lagerbestand()}}</td>
+                <td><input type="text" class="form-control" 
+                    value="{{k45_1Value()}}" readonly></td>
+                <td><input type="text" class="form-control" 
+                    value="{{k45_2Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k45_3Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k45_4Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k45_SumValue()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"   value="{{k45Bestellung()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k45_Plan2Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k45_Plan3Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k45_Plan4Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k45_Plan5Value()}}" readonly></td>
+            </tr>
+            <tr>
+                <td>46</td>
+                <td>0.9</td>
+                <td>0.3</td>
+                <td type="text">1x</td>
+                <td type="text">1x</td>
+                <td type="text">1x</td>
+                <td type="text">900</td>
+                <td type="text">{{k46Lagerbestand()}}</td>
+                <td><input type="text" class="form-control" 
+                    value="{{k46_1Value()}}" readonly></td>
+                <td><input type="text" class="form-control" 
+                    value="{{k46_2Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k46_3Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k46_4Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k46_SumValue()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"   value="{{k46Bestellung()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k46_Plan2Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k46_Plan3Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k46_Plan4Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k46_Plan5Value()}}" readonly></td>
+            </tr>
+            <tr>
+                <td>47</td>
+                <td>1.1</td>
+                <td>0.1</td>
+                <td type="text">1x</td>
+                <td type="text">1x</td>
+                <td type="text">1x</td>
+                <td type="text">900</td>
+                <td type="text">{{k47Lagerbestand()}}</td>
+                <td><input type="text" class="form-control" 
+                    value="{{k47_1Value()}}" readonly></td>
+                <td><input type="text" class="form-control" 
+                    value="{{k47_2Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k47_3Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k47_4Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k47_SumValue()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"   value="{{k47Bestellung()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k47_Plan2Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k47_Plan3Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k47_Plan4Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k47_Plan5Value()}}" readonly></td>
+            </tr>
+            <tr>
+                <td>48</td>
+                <td>1.0</td>
+                <td>0.2</td>
+                <td type="text">2x</td>
+                <td type="text">2x</td>
+                <td type="text">2x</td>
+                <td type="text">1800</td>
+                <td type="text">{{k48Lagerbestand()}}</td>
+                <td><input type="text" class="form-control" 
+                    value="{{k48_1Value()}}" readonly></td>
+                <td><input type="text" class="form-control" 
+                    value="{{k48_2Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k48_3Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k48_4Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k48_SumValue()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"   value="{{k48Bestellung()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k48_Plan2Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k48_Plan3Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k48_Plan4Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k48_Plan5Value()}}" readonly></td>
+            </tr>
+            <tr>
+                <td>52</td>
+                <td>1.6</td>
+                <td>0.4</td>
+                <td type="text">2x</td>
+                <td type="text"></td>
+                <td type="text"></td>
+                <td type="text">600</td>
+                <td type="text">{{k52Lagerbestand()}}</td>
+                <td><input type="text" class="form-control" 
+                    value="{{k52_1Value()}}" readonly></td>
+                <td><input type="text" class="form-control" 
+                    value="{{k52_2Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k52_3Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k52_4Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k52_SumValue()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"   value="{{k52Bestellung()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k52_Plan2Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k52_Plan3Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k52_Plan4Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k52_Plan5Value()}}" readonly></td>
+            </tr>
+            <tr>
+                <td>53</td>
+                <td>1.6</td>
+                <td>0.2</td>
+                <td type="text">72x</td>
+                <td type="text"></td>
+                <td type="text"></td>
+                <td type="text">22000</td>
+                <td type="text">{{k53Lagerbestand()}}</td>
+                <td><input type="text" class="form-control" 
+                    value="{{k53_1Value()}}" readonly></td>
+                <td><input type="text" class="form-control" 
+                    value="{{k53_2Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k53_3Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k53_4Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k53_SumValue()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"   value="{{k53Bestellung()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k53_Plan2Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k53_Plan3Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k53_Plan4Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k53_Plan5Value()}}" readonly></td>
+            </tr>
+            <tr>
+                <td>57</td>
+                <td>1.7</td>
+                <td>0.3</td>
+                <td type="text"></td>
+                <td type="text">2x</td>
+                <td type="text"></td>
+                <td type="text">600</td>
+                <td type="text">{{k57Lagerbestand()}}</td>
+                <td><input type="text" class="form-control" 
+                    value="{{k57_1Value()}}" readonly></td>
+                <td><input type="text" class="form-control" 
+                    value="{{k57_2Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k57_3Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k57_4Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k57_SumValue()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"   value="{{k57Bestellung()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k57_Plan2Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k57_Plan3Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k57_Plan4Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k57_Plan5Value()}}" readonly></td>
+            </tr>
+            <tr>
+                <td>58</td>
+                <td>1.6</td>
+                <td>0.5</td>
+                <td type="text"></td>
+                <td type="text">72x</td>
+                <td type="text"></td>
+                <td type="text">22000</td>
+                <td type="text">{{k58Lagerbestand()}}</td>
+                <td><input type="text" class="form-control" 
+                    value="{{k58_1Value()}}" readonly></td>
+                <td><input type="text" class="form-control" 
+                    value="{{k58_2Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k58_3Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k58_4Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k58_SumValue()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"   value="{{k58Bestellung()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k58_Plan2Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k58_Plan3Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k58_Plan4Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k58_Plan5Value()}}" readonly></td>
+            </tr>
+            <tr>
+                <td>59</td>
+                <td>0.7</td>
+                <td>0.2</td>
+                <td type="text">2x</td>
+                <td type="text">2x</td>
+                <td type="text">2x</td>
+                <td type="text">1800</td>
+                <td type="text">{{k59Lagerbestand()}}</td>
+                <td><input type="text" class="form-control" 
+                    value="{{k59_1Value()}}" readonly></td>
+                <td><input type="text" class="form-control" 
+                    value="{{k59_2Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k59_3Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k59_4Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k59_SumValue()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"   value="{{k59Bestellung()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k59_Plan2Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k59_Plan3Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k59_Plan4Value()}}" readonly></td>
+                <td style="display: table-cell;"><input type="text"
+                    class="form-control"  value="{{k59_Plan5Value()}}" readonly></td>
+            </tr>
+		</tbody>
+	</table>
+</div>

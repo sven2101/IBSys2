@@ -1,0 +1,463 @@
+    <div>
+                <table class="table" ng-controller="p1Controller">
+                    <thead>
+                        <tr style="display: table-row;">
+                            <th>#</th>
+                            <th>{{direktverkauf()}}</th>
+                            <th></th>
+                            <th>{{vertriebswunsch()}}
+                            </th>
+                            <th style="display: table-cell;">
+                            </th>
+                            <th style="display: table-cell;">
+                                ({{warteschlange()}})
+                            </th>
+                            <th style="display: table-cell;">
+                                <br>
+                            </th>
+                            <th>{{planLagerbestand()}}
+                            </th>
+                            <th style="display: table-cell;">
+                                <br>
+                            </th>
+                            <th>{{istLagerbestand()}}
+                            </th>
+                            <th style="display: table-cell;">
+                                <br>
+                            </th>
+                            <th style="display: table-cell;">{{warteschlange()}}
+                            </th>
+                            <th style="display: table-cell;">
+                                <br>
+                            </th>
+                            <th style="display: table-cell;">{{bearbeitung()}}
+                            </th>
+                            <th style="display: table-cell;">
+                                <br>
+                            </th>
+                            <th style="display: table-cell;">{{produktionsprogramm()}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="display: table-row;">
+                            <td>P1</td>
+                            <td>
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="p1Direktverkauf">
+                            </td>
+                            <td><br>+</td>
+                            <td>
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="p1Absatz">
+                            </td>
+                            <td>
+                                <br>
+                            </td>
+                            <td><br>+</td>
+                            <td style="display: table-cell;"></td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="p1PlanLagerbestand">
+                            </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="p1IstLagerbestand" READONLY>
+                            </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="p1Warteschlange" READONLY>
+                                    </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="p1Bearbeitung" READONLY>
+                                    </td>
+                            <td style="display: table-cell;">=</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{p1_Plan()}}" READONLY>
+                                    </td>
+                        </tr>
+                        <tr>
+                            <td>E26</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{p1_Plan()}}" READONLY>
+                            </td>
+                            <td>
+                                +
+                            </td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{p1_Warteschlange()}}" READONLY>
+                            </td>
+                            <td style="display: table-cell;">+</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e26PlanLagerbestand"><br>
+                            </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e26IstLagerbestand" READONLY>
+                            </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e26Warteschlange" READONLY>
+                                    </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e26Bearbeitung" READONLY>
+                                    </td>
+                            <td style="display: table-cell;">=</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e26_Plan()}}" READONLY>
+                                    </td>
+                        </tr>
+                        <tr>
+                            <td>E51</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{p1_Plan()}}" READONLY>
+                            </td>
+                            <td>
+                                +
+                            </td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{p1_Warteschlange()}}" READONLY>
+                                    </td>
+                            <td style="display: table-cell;">+</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e51PlanLagerbestand">
+                                    <br>
+                                    </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e51IstLagerbestand" READONLY>
+                                    </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e51Warteschlange" READONLY>
+                                    </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e51Bearbeitung" READONLY>
+                                    </td>
+                            <td style="display: table-cell;">=</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e51_Plan()}}" READONLY>
+                                    </td>
+                        </tr>
+                        <tr style="display: table-row;">
+                            <td>E16</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e51_Plan()}}" READONLY>
+                            </td>
+                            <td>
+                                +
+                            </td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e51_Warteschlange()}}" READONLY>
+                                    </td>
+                            <td style="display: table-cell;">+</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e16PlanLagerbestand">
+                                    <br>
+                                    </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e16IstLagerbestand" READONLY>
+                                    </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e16Warteschlange" READONLY>
+                                    </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e16Bearbeitung" READONLY>
+                                    </td>
+                            <td style="display: table-cell;">=</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e16_Plan()}}" READONLY>
+                                    </td>
+                        </tr>
+                        <tr style="display: table-row;">
+                            <td>E17</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e51_Plan()}}" READONLY>
+                            </td>
+                            <td>
+                                +
+                            </td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e51_Warteschlange()}}" READONLY>
+                            </td>
+                            <td style="display: table-cell;">+</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e17PlanLagerbestand">
+                                    <br>
+                            </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e17IstLagerbestand" READONLY>
+                            </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e17Warteschlange" READONLY>
+                                    </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e17Bearbeitung" READONLY>
+                                    </td>
+                            <td style="display: table-cell;">=</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e17_Plan()}}" READONLY>
+                                    </td>
+                        </tr>
+                        <tr style="display: table-row;">
+                            <td>E50</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e51_Plan()}}" READONLY>
+                            </td>
+                            <td>
+                                +
+                            </td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e51_Warteschlange()}}" READONLY>
+                            </td>
+                            <td style="display: table-cell;">+</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e50PlanLagerbestand">
+                                    <br>
+                            </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e50IstLagerbestand" READONLY>
+                            </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e50Warteschlange" READONLY>
+                                    </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e50Bearbeitung" READONLY>
+                                    </td>
+                            <td style="display: table-cell;">=</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e50_Plan()}}" READONLY>
+                                    </td>
+                        </tr>
+                        <tr style="display: table-row;">
+                            <td>E4</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e50_Plan()}}" READONLY>
+                            </td>
+                            <td>
+                                +
+                            </td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e50_Warteschlange()}}" READONLY>
+                                    </td>
+                            <td style="display: table-cell;">+</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e4PlanLagerbestand">
+                                    <br>
+                            </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e4IstLagerbestand" READONLY>
+                            </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e4Warteschlange" READONLY>
+                            </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e4Bearbeitung" READONLY>
+                            </td>
+                            <td style="display: table-cell;">=</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e4_Plan()}}" READONLY>
+                            </td>
+                        </tr>
+                        <tr style="display: table-row;">
+                            <td>E10</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e50_Plan()}}" READONLY>
+                            </td>
+                            <td>
+                                +
+                            </td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e50_Warteschlange()}}" READONLY>
+                            </td>
+                            <td style="display: table-cell;">+</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e10PlanLagerbestand">
+                                    <br>
+                            </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e10IstLagerbestand" READONLY>
+                            </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e10Warteschlange" READONLY>
+                            </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e10Bearbeitung" READONLY>
+                            </td>
+                            <td style="display: table-cell;">=</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e10_Plan()}}" READONLY>
+                            </td>
+                        </tr>
+                        <tr style="display: table-row;">
+                            <td>E49</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e50_Plan()}}" READONLY>
+                            </td>
+                            <td>
+                                +
+                            </td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e50_Warteschlange()}}" READONLY>
+                            </td>
+                            <td style="display: table-cell;">+</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e49PlanLagerbestand">
+                                    <br>
+                            </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e49IstLagerbestand" READONLY>
+                            </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e49Warteschlange" READONLY>
+                            </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e49Bearbeitung" READONLY>
+                            </td>
+                            <td style="display: table-cell;">=</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e49_Plan()}}" READONLY>
+                                    </td>
+                        </tr>
+                        <tr style="display: table-row;">
+                            <td>E7</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e49_Plan()}}" READONLY>
+                            </td>
+                            <td>
+                                +
+                            </td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e49_Warteschlange()}}" READONLY>
+                            </td>
+                            <td style="display: table-cell;">+</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e7PlanLagerbestand">
+                                    <br>
+                            </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e7IstLagerbestand" READONLY>
+                            </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e7Warteschlange" READONLY>
+                                    </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e7Bearbeitung" READONLY>
+                                    </td>
+                            <td style="display: table-cell;">=</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e7_Plan()}}" READONLY>
+                                    </td>
+                        </tr>
+                        <tr style="display: table-row;">
+                            <td>E13</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e49_Plan()}}" READONLY>
+                            </td>
+                            <td>
+                                +
+                            </td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e49_Warteschlange()}}" READONLY>
+                            </td>
+                            <td style="display: table-cell;">+</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e13PlanLagerbestand">
+                                    <br>
+                            </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e13IstLagerbestand" READONLY>
+                            </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e13Warteschlange" READONLY>
+                            </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e13Bearbeitung" READONLY>
+                            </td>
+                            <td style="display: table-cell;">=</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e13_Plan()}}" READONLY>
+                            </td>
+                        </tr>
+                        <tr style="display: table-row;">
+                            <td>E18</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e49_Plan()}}" READONLY>
+                            </td>
+                            <td>
+                                +
+                            </td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e49_Warteschlange()}}" READONLY>
+                            </td>
+                            <td style="display: table-cell;">+</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e18PlanLagerbestand">
+                                    <br>
+                            </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e18IstLagerbestand" READONLY>
+                            </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e18Warteschlange" READONLY>
+                            </td>
+                            <td style="display: table-cell;">-</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" ng-model="e18Bearbeitung" READONLY>
+                            </td>
+                            <td style="display: table-cell;">=</td>
+                            <td style="display: table-cell;">
+                                <input type="text" class="form-control" placeholder="Placeholder text" value="{{e18_Plan()}}" READONLY>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
