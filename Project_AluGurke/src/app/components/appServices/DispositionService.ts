@@ -7,6 +7,7 @@
 /// <reference path="../appServices/ProgrammService.ts" />
 /// <reference path="../appServices/NewBaumService.ts" />
 /// <reference path="../appServices/AuftragService.ts" />
+/// <reference path="../appServices/SettingsService.ts" />
 class DispositionService{
 
     dispositionP1:Array<DispositionModel>;
@@ -19,13 +20,15 @@ class DispositionService{
     auftragService:AuftragService;
     arbeitsplatzService:ArbeitsplatzService
     bestellService:BestellService;
-    defaultWerte:Array<number>;
+    settingsService:SettingsService;
+    defaultWerte:Array<number>; 
     map:{[key:number]:number;}
+       
     scope;
     
     bestellungBerechnenService:BestellungBerechnenService;
 
-    constructor(bestellungBerechnenService,$rootScope,ProgrammService,NewTeileService,NewBaumService,AuftragService,ArbeitsplatzService,BestellService){
+    constructor(bestellungBerechnenService,$rootScope,ProgrammService,NewTeileService,NewBaumService,AuftragService,ArbeitsplatzService,BestellService,settingsService){
         this.programmService=ProgrammService;
         this.newTeileService= NewTeileService;
         this.newBaumService=NewBaumService;
@@ -36,51 +39,15 @@ class DispositionService{
         this.dispositionP3=new Array<DispositionModel>();
         this.models=new Array<DispositionModel>();
         this.arbeitsplatzService=ArbeitsplatzService;
-        this.map={};
+        this.settingsService=settingsService;
         this.scope=$rootScope;       
-        this.defaultWerteSetzten();
+        this.map=this.settingsService.dispositionDefaultWerte;
         this.dispoP1rekursuiv(this.newBaumService.kinderBaum);
         this.dispoP2rekursuiv(this.newBaumService.damenBaum);
         this.dispoP3rekursuiv(this.newBaumService.herrenBaum);
-
         this.altLastenVerteilen(this.models);
-
         this.aendern();
-    }
-    defaultWerteSetzten(){
-        this.map[1]=20;
-        this.map[26]=70;
-        this.map[51]=30;
-        this.map[16]=70;
-        this.map[17]=30;
-        this.map[50]=30;
-        this.map[4]=70;
-        this.map[10]=100;
-        this.map[49]=30;
-        this.map[7]=70;
-        this.map[13]=100;
-        this.map[18]=100;
-
-        this.map[2]=20;
-        this.map[56]=30;
-        this.map[55]=30;
-        this.map[5]=70;
-        this.map[11]=100;
-        this.map[54]=30;
-        this.map[8]=70;
-        this.map[14]=100;
-        this.map[19]=100;
-
-        this.map[3]=20;
-        this.map[31]=30;
-        this.map[30]=30;
-        this.map[6]=70;
-        this.map[12]=100;
-        this.map[29]=30;
-        this.map[9]=70;
-        this.map[15]=100;
-        this.map[20]=100;
-    }
+    }    
     dispoP1(){
         let dispo=new Array<NewTeilKnoten>();
 
@@ -295,4 +262,4 @@ class DispositionService{
 
 
 }
-angular.module('app').factory('DispositionService', ['BestellungBerechnenService','$rootScope',"ProgrammService","NewTeileService","NewBaumService","AuftragService","ArbeitsplatzService","BestellService",(BestellungBerechnenService,$rootScope,ProgrammService,NewTeileService,NewBaumService,AuftragService,ArbeitsplatzService,BestellService) => new DispositionService(BestellungBerechnenService,$rootScope,ProgrammService,NewTeileService,NewBaumService,AuftragService,ArbeitsplatzService,BestellService)]);
+angular.module('app').factory('DispositionService', ['BestellungBerechnenService','$rootScope',"ProgrammService","NewTeileService","NewBaumService","AuftragService","ArbeitsplatzService","BestellService","SettingsService",(BestellungBerechnenService,$rootScope,ProgrammService,NewTeileService,NewBaumService,AuftragService,ArbeitsplatzService,BestellService,SettingsService) => new DispositionService(BestellungBerechnenService,$rootScope,ProgrammService,NewTeileService,NewBaumService,AuftragService,ArbeitsplatzService,BestellService,SettingsService)]);

@@ -12,5 +12,6 @@ angular.module('app', [
 	'KapazitaetsplanungModule',
 	'DispositionModule',
 	'LagerModule',
-	'FertigungsAuftraegeModule'
+	'FertigungsAuftraegeModule',
+	'SettingsModule'
 ]);

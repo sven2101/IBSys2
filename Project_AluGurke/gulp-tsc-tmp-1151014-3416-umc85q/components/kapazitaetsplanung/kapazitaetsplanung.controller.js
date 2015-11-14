@@ -1,19 +1,15 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
 /// <reference path="../appServices/BestellungBerechnenService.ts" />
-/// <reference path="../appServices/SettingsService.ts" />
 var KapazitaetsplanungController = (function () {
-    function KapazitaetsplanungController(KapazitaetsplanungService, dispositionService, bestellungBerechnenService, settingsService) {
+    function KapazitaetsplanungController(KapazitaetsplanungService, dispositionService, bestellungBerechnenService) {
         this.models = new Array();
         this.ergebnis = new Array();
         this.kapazitaetsplanungService = KapazitaetsplanungService;
         this.dispositionService = dispositionService;
         this.models = this.kapazitaetsplanungService.models;
-        this.settingsService = settingsService;
         this.ergebnis = this.kapazitaetsplanungService.ergebnis;
         this.bestellungBerechnenService = bestellungBerechnenService;
-        if (this.settingsService.model.arbeitszeitGenerieren) {
-            this.kapazitaetsplanungService.zeitSetzten();
-        }
+        this.berechnen();
         this.aendern();
     }
     KapazitaetsplanungController.prototype.aendern = function () {
@@ -25,7 +21,7 @@ var KapazitaetsplanungController = (function () {
     };
     return KapazitaetsplanungController;
 })();
-angular.module("KapazitaetsplanungModule").controller("KapazitaetsplanungController", ["KapazitaetsplanungService", "DispositionService", "BestellungBerechnenService", "SettingsService", KapazitaetsplanungController]);
+angular.module("KapazitaetsplanungModule").controller("KapazitaetsplanungController", ["KapazitaetsplanungService", "DispositionService", "BestellungBerechnenService", KapazitaetsplanungController]);
 var KapazitaetModel = (function () {
     function KapazitaetModel(arbeitsplatz) {
         this.name = arbeitsplatz.name;

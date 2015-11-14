@@ -1,5 +1,6 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
 /// <reference path="../appServices/BestellungBerechnenService.ts" />
+/// <reference path="../appServices/SettingsService.ts" />
 class KapazitaetsplanungController{
 
     models:Array<KapazitaetModel>;
@@ -7,17 +8,20 @@ class KapazitaetsplanungController{
     dispositionService:DispositionService;
     bestellungBerechnenService:BestellungBerechnenService;
     ergebnis:Array<Arbeitsplatz>;
-    x;
-    constructor(KapazitaetsplanungService,dispositionService,bestellungBerechnenService){
+    settingsService:SettingsService;
+    constructor(KapazitaetsplanungService,dispositionService,bestellungBerechnenService,settingsService){
         this.models=new Array<KapazitaetModel>();
         this.ergebnis=new Array<Arbeitsplatz>();
         this.kapazitaetsplanungService=KapazitaetsplanungService;
         this.dispositionService=dispositionService;
         this.models=this.kapazitaetsplanungService.models;
+        this.settingsService=settingsService;
 
         this.ergebnis=this.kapazitaetsplanungService.ergebnis;
         this.bestellungBerechnenService=bestellungBerechnenService;
-        this.berechnen();
+        if(this.settingsService.model.arbeitszeitGenerieren){
+            this.kapazitaetsplanungService.zeitSetzten();
+        }
         this.aendern();
 
     }
@@ -35,7 +39,7 @@ class KapazitaetsplanungController{
 
 
 }
-angular.module("KapazitaetsplanungModule").controller("KapazitaetsplanungController",["KapazitaetsplanungService","DispositionService","BestellungBerechnenService",KapazitaetsplanungController]);
+angular.module("KapazitaetsplanungModule").controller("KapazitaetsplanungController",["KapazitaetsplanungService","DispositionService","BestellungBerechnenService","SettingsService",KapazitaetsplanungController]);
 class KapazitaetModel{
     anzahlSchichten:string;
     ueberstunden:number;  

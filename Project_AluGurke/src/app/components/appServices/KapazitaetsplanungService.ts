@@ -80,7 +80,7 @@ class KapazitaetsplanungService {
                  model.zeitVerfuegung=4800;
                 continue;
             }else if(zeit<=6000){
-                if((zeit-4800)*0.9<2400*0.7&&zeit){
+                if((zeit-4800)*0.9<2400*0.7){
                     model.ueberstunden=Math.round((zeit-4800)/5);
                     model.anzahlSchichten='2';
                     model.zeitVerfuegung=4800+model.ueberstunden*5;
@@ -115,13 +115,11 @@ class KapazitaetsplanungService {
                     var x=new Arbeitsplatz(listeliste[j].id,listeliste[j].erzeugnis_id,0,0);
                     x.auftraege=listeliste[j].auftraege;
                     x.arbeitsplatzFremdeAuftraege=listeliste[j].arbeitsplatzFremdeAuftraege;
-                    x.arbeitszeit=listeliste[j].arbeitszeit;
-                    //x.arbeitszeit+=666;
+                    x.arbeitszeit=listeliste[j].arbeitszeit;   
                     ergebnisListe.push(x);
                 }
                 else{
-                    temp.arbeitszeit+=listeliste[j].arbeitszeit;
-                    //x.arbeitszeit+=999;
+                    temp.arbeitszeit+=listeliste[j].arbeitszeit;          
                     temp.auftraege=temp.auftraege.concat(listeliste[j].auftraege);
                     temp.arbeitsplatzFremdeAuftraege=temp.arbeitsplatzFremdeAuftraege.concat(listeliste[j].arbeitsplatzFremdeAuftraege);
                     temp.name+=","+listeliste[j].erzeugnis_id;

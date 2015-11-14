@@ -41,6 +41,9 @@ angular.module('app')
     }).when('/fertigungsAuftraege', {
             templateUrl: '/components/FertigungsAuftraege/FertigungsAuftraege.html',
             controller: 'FertigungsAuftraegeController as fac'
+    }).when('/settings', {
+            templateUrl: '/components/settings/settings.html',
+            controller: 'SettingsController as sc'
         })
   }]);
 

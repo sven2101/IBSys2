@@ -7,8 +7,9 @@
 /// <reference path="../appServices/ProgrammService.ts" />
 /// <reference path="../appServices/NewBaumService.ts" />
 /// <reference path="../appServices/AuftragService.ts" />
+/// <reference path="../appServices/SettingsService.ts" />
 var DispositionService = (function () {
-    function DispositionService(bestellungBerechnenService, $rootScope, ProgrammService, NewTeileService, NewBaumService, AuftragService, ArbeitsplatzService, BestellService) {
+    function DispositionService(bestellungBerechnenService, $rootScope, ProgrammService, NewTeileService, NewBaumService, AuftragService, ArbeitsplatzService, BestellService, settingsService) {
         this.programmService = ProgrammService;
         this.newTeileService = NewTeileService;
         this.newBaumService = NewBaumService;
@@ -19,47 +20,15 @@ var DispositionService = (function () {
         this.dispositionP3 = new Array();
         this.models = new Array();
         this.arbeitsplatzService = ArbeitsplatzService;
-        this.map = {};
+        this.settingsService = settingsService;
         this.scope = $rootScope;
-        this.defaultWerteSetzten();
+        this.map = this.settingsService.dispositionDefaultWerte;
         this.dispoP1rekursuiv(this.newBaumService.kinderBaum);
         this.dispoP2rekursuiv(this.newBaumService.damenBaum);
         this.dispoP3rekursuiv(this.newBaumService.herrenBaum);
         this.altLastenVerteilen(this.models);
         this.aendern();
     }
-    DispositionService.prototype.defaultWerteSetzten = function () {
-        this.map[1] = 20;
-        this.map[26] = 70;
-        this.map[51] = 30;
-        this.map[16] = 70;
-        this.map[17] = 30;
-        this.map[50] = 30;
-        this.map[4] = 70;
-        this.map[10] = 100;
-        this.map[49] = 30;
-        this.map[7] = 70;
-        this.map[13] = 100;
-        this.map[18] = 100;
-        this.map[2] = 20;
-        this.map[56] = 30;
-        this.map[55] = 30;
-        this.map[5] = 70;
-        this.map[11] = 100;
-        this.map[54] = 30;
-        this.map[8] = 70;
-        this.map[14] = 100;
-        this.map[19] = 100;
-        this.map[3] = 20;
-        this.map[31] = 30;
-        this.map[30] = 30;
-        this.map[6] = 70;
-        this.map[12] = 100;
-        this.map[29] = 30;
-        this.map[9] = 70;
-        this.map[15] = 100;
-        this.map[20] = 100;
-    };
     DispositionService.prototype.dispoP1 = function () {
         var dispo = new Array();
         var wurzel = this.newBaumService.kinderBaum;
@@ -260,4 +229,4 @@ var DispositionService = (function () {
     };
     return DispositionService;
 })();
-angular.module('app').factory('DispositionService', ['BestellungBerechnenService', '$rootScope', "ProgrammService", "NewTeileService", "NewBaumService", "AuftragService", "ArbeitsplatzService", "BestellService", function (BestellungBerechnenService, $rootScope, ProgrammService, NewTeileService, NewBaumService, AuftragService, ArbeitsplatzService, BestellService) { return new DispositionService(BestellungBerechnenService, $rootScope, ProgrammService, NewTeileService, NewBaumService, AuftragService, ArbeitsplatzService, BestellService); }]);
+angular.module('app').factory('DispositionService', ['BestellungBerechnenService', '$rootScope', "ProgrammService", "NewTeileService", "NewBaumService", "AuftragService", "ArbeitsplatzService", "BestellService", "SettingsService", function (BestellungBerechnenService, $rootScope, ProgrammService, NewTeileService, NewBaumService, AuftragService, ArbeitsplatzService, BestellService, SettingsService) { return new DispositionService(BestellungBerechnenService, $rootScope, ProgrammService, NewTeileService, NewBaumService, AuftragService, ArbeitsplatzService, BestellService, SettingsService); }]);
