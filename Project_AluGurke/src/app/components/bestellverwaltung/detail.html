@@ -94,6 +94,56 @@
 					</div>
 				</div>
 			</div>
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="ibox">
+						<div class="ibox-title"><h2>Aktueller Lagerzugang</h2></div>
+						<div class="ibox-content">
+							<table class="table table-bordered text-center table-condensed">
+								<tr>
+									<th class="text-center">Eil</th>
+									<th class="text-center">Menge</th>
+									<th class="text-center">Gesamt-<br>kosten</th>
+									<th class="text-center">Bestell-<br>periode</th>
+									<th class="text-center">Zeit</th>
+								</tr>
+								<tr ng-repeat="zugang in dbvc.aktuellerLagerzugang">
+									<td>
+										<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="zugang.eil"></span>
+										<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!zugang.eil"></span>
+									</td>
+									<td>{{zugang.menge}}</td>
+									<td>{{zugang.gesamtKosten | currency:"€"}}</td>
+									<td>{{zugang.bestellPeriode}}</td>
+									<td>{{zugang.zeit.periode}}-{{zugang.zeit.tag}}-0-0</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="ibox">
+						<div class="ibox-title"><h2>Zukünftiger Lagerzugang</h2></div>
+						<div class="ibox-content">
+							<table class="table table-bordered text-center table-condensed">
+								<tr>
+									<th class="text-center">Eil</th>
+									<th class="text-center">Menge</th>
+									<th class="text-center">Bestell-<br>periode</th>
+								</tr>
+								<tr ng-repeat="bestellung in dbvc.laufendeBestellungen">
+									<td>
+										<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="bestellung.eil"></span>
+										<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!bestellung.eil"></span>
+									</td>
+									<td>{{bestellung.menge}}</td>
+									<td>{{bestellung.periode}}</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </section>

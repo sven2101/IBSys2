@@ -14,6 +14,9 @@ class DetailBestellVerwaltungController {
 	bestellService:BestellService;
 	neueBestellung:NeuBestellung;
 	
+	aktuellerLagerzugang:Array<ZugangBestellung>;
+	laufendeBestellungen:Array<Bestellung>;
+	
 	verbrauchAktuell:number;
 	verbrauch1:number;
 	verbrauch2:number;
@@ -31,6 +34,8 @@ class DetailBestellVerwaltungController {
 		
 		this.neueBestellungen = bestellService.neuBestellungen['k'+this.kaufTeil.id];
 		this.neueBestellung = new NeuBestellung(false,this.kaufTeil.id,0,0,1);
+		this.aktuellerLagerzugang = bestellService.getZugangBestellungen(this.kaufTeil.id);
+		this.laufendeBestellungen = bestellService.getLaufendeBestellungen(this.kaufTeil.id);
 		
 		this.verbrauchAktuell = utilService.getVerbrauch(this.kaufTeil.id,1);
 		this.verbrauch1 = utilService.getVerbrauch(this.kaufTeil.id,2);
