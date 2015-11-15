@@ -42,9 +42,12 @@
 											</tr>
 										</thead>
 										<tr ng-repeat="bestellung in teil.neueBestellungen">
-											<td>{{bestellung.eil}}</td>
+											<td>
+												<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="bestellung.eil"></span>
+												<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!bestellung.eil"></span>
+											</td>
 											<td>{{bestellung.menge}}</td>
-											<td>{{bestellung.kosten}}</td>
+											<td>{{bestellung.kosten | currency:"€"}}</td>
 											<td>
 												<button type="button" class="btn btn-danger btn-sm btn-circle" ng-click="ktdc.deleteNeueBestellung(bestellung)">
 													<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
@@ -68,7 +71,7 @@
 										</tr>
 										<tr>
 											<td>Menge an zukünftigem Lagerzugang</td>
-											<td> {{teil.mengeZukuenftigerLagerZugang}}</td>
+											<td>{{teil.mengeZukuenftigerLagerZugang}}</td>
 										</tr>
 									</table>
 									<a  ng-href="#/bestellverwaltung/kaufteildisposition/{{teil.kaufTeil.id}}"><button type="button" class="btn btn-info btn-block">Details</button></a>

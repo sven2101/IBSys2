@@ -10,12 +10,13 @@
 						<div class="ibox-content">
 							<table class="table table-bordered text-center table-condensed">
 								<tr>
+									<th>MFW</th>
 									<th class="text-center">Preis</th>
-									<th class="text-center">Teilewert</th>
-									<th class="text-center">Lagermenge</th>
-									<th class="text-center">Discontmenge</th>
+									<th class="text-center">Teile-<br>wert</th>
+									<th class="text-center">Lager-<br>menge</th>
+									<th class="text-center">Discont-<br>menge</th>
 									<th class="text-center">WBZ &plusmn<br>Abweichung</th>
-									<th class="text-center">Bestellkosten</th>
+									<th class="text-center">Bestell-<br>kosten</th>
 									<th class="text-center">Verbrauch <br> aktuell</th>
 									<th class="text-center">Verbrauch <br> Periode {{dbvc.periode+1}}</th>
 									<th class="text-center">Verbrauch <br> Periode {{dbvc.periode+2}}</th>
@@ -23,6 +24,10 @@
 									<th class="text-center">Reichweite</th>
 								</tr>
 								<tr  ng-class="{danger: dbvc.zeileRot(), warning: dbvc.zeileGelb()}">
+									<td>
+										<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="dbvc.kaufTeil.mfw"></span>
+										<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!dbvc.kaufTeil.mfw"></span>
+									</td>
 									<td>{{dbvc.kaufTeil.preis | currency:"€"}}</td>
 									<td>{{dbvc.kaufTeil.teileWert | currency:"€"}}</td>
 									<td>{{dbvc.kaufTeil.lagerMenge}}</td>
@@ -47,9 +52,23 @@
 						<div class="ibox-content">
 							<table class="table table-bordered text-center table-hover table-condensed">
 								<tr>
-									<th class="text-center">Menge</th>
 									<th class="text-center">Eil</th>
+									<th class="text-center">Menge</th>
 									<th class="text-center">Kosten</th>
+									<th class="text-center"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></th>
+								</tr>
+								<tr ng-repeat="bestellung in dbvc.neueBestellungen">
+									<td>
+										<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="bestellung.eil"></span>
+										<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!bestellung.eil"></span>
+									</td>
+									<td>{{bestellung.menge}}</td>
+									<td>{{bestellung.kosten | currency:"€"}}</td>
+									<td>
+										<button type="button" class="btn btn-danger btn-sm btn-circle" ng-click="dbvc.deleteNeueBestellung(bestellung)">
+											<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+										</button>
+									</td>
 								</tr>
 							</table>
 						</div>
@@ -62,14 +81,14 @@
 							<form>
 								<div class="form-group">
 									<label for="mengeInput" class="sr-only">Menge</label>
-									<input type="number" placeholder="Menge" class="form-control" id="mengeInput" min="0">
+									<input type="number" placeholder="Menge" class="form-control" id="mengeInput" min="1" ng-model="dbvc.neueBestellung.menge">
 								</div>
 								<div class="checkbox">
 									<label>
-										<input type="checkbox">Eilbestellung
+										<input type="checkbox" ng-model="dbvc.neueBestellung.eil">Eilbestellung
 									</label>
 								</div>
-								<button class="btn btn.white" type="submit">Anlegen</button>
+								<button class="btn btn.white" type="submit" ng-click="dbvc.createNeueBestellung()">Anlegen</button>
 							</form>
 						</div>
 					</div>

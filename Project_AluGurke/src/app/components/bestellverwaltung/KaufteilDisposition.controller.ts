@@ -38,7 +38,7 @@ class KaufteilDispositionController {
 	teileService: NewTeileService;
 	programmService: ProgrammService;
 	selectedViewModel: ViewModel;
-	neuBestellung: NeuBestellung;
+	//neuBestellung: NeuBestellung;
 	bestellungBerechnenService: BestellungBerechnenService;
 	auftragService: AuftragService;
 	utilService: BestellverwaltungUtilService;
@@ -54,7 +54,7 @@ class KaufteilDispositionController {
 		this.programmService = programmService;
 		this.createViewModel(teileService.alleKaufteile);
 		this.selectedViewModel = this.kaufTeileVM[3];
-		this.neuBestellung = new NeuBestellung(false, 0, 0, 0, 1);
+		//this.neuBestellung = new NeuBestellung(false, 0, 0, 0, 1);
 		this.bestellungBerechnenService = bestellungBerechnenService;
 		
 		//this.berechneteBestellungAktualisieren();
@@ -139,7 +139,7 @@ class KaufteilDispositionController {
 
 	select(model: ViewModel):void {
 		this.selectedViewModel = model;
-		this.neuBestellung.teil_id = model.kaufTeil.id;
+		//this.neuBestellung.teil_id = model.kaufTeil.id;
 		//this.berechneteBestellungAktualisieren();
 	}
 
