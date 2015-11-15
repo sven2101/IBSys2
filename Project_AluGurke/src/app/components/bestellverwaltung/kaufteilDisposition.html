@@ -4,7 +4,7 @@
 			cursor: pointer;
 		}
 	</style>
-	<div id="tablecontainer" class="container">
+	<div class="wrapper-content animated fadeInRight">
 		<table class="table table-bordered text-center table-hover table-condensed">
 			<tr>
 				<th class="text-center curs" ng-click="ktdc.sortieren('id')">Id</th>
@@ -27,41 +27,53 @@
 				<td colspan="12" style="display:none">
 					<div class="row">
 						<div class="col-md-6">
-							<table class="table table-bordered text-center">
-								<caption>Neue Bestellungen</caption>
-								<thead>
-									<tr>
-										<th class="text-center">Eil</th>
-										<th class="text-center">Menge</th>
-										<th class="text-center">Kosten</th>
-										<th class="text-center"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></th>
-									</tr>
-								</thead>
-								<tr ng-repeat="bestellung in teil.neueBestellungen">
-									<td>{{bestellung.eil}}</td>
-									<td>{{bestellung.menge}}</td>
-									<td>{{bestellung.kosten}}</td>
-									<td>
-										<button type="button" class="btn btn-danger btn-sm" ng-click="ktdc.deleteNeueBestellung(bestellung)">
-											<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-										</button>
-									</td>
-								</tr>
-							</table>
+							<div class="ibox">
+								<div class="ibox-title">
+									<h3>Neue Bestellungen</h3>
+								</div>
+								<div class="ibox-content">
+									<table class="table table-bordered text-center">
+										<thead>
+											<tr>
+												<th class="text-center">Eil</th>
+												<th class="text-center">Menge</th>
+												<th class="text-center">Kosten</th>
+												<th class="text-center"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></th>
+											</tr>
+										</thead>
+										<tr ng-repeat="bestellung in teil.neueBestellungen">
+											<td>{{bestellung.eil}}</td>
+											<td>{{bestellung.menge}}</td>
+											<td>{{bestellung.kosten}}</td>
+											<td>
+												<button type="button" class="btn btn-danger btn-sm btn-circle" ng-click="ktdc.deleteNeueBestellung(bestellung)">
+													<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+												</button>
+											</td>
+										</tr>
+									</table>
+								</div>
+							</div>
 						</div>
 						<div class="col-md-4">
-							<table class="table table-bordered">
-								<caption>Kennzahlen</caption>
-								<tr>
-									<td>Menge an aktuellem Lagerzugang</td>
-									<td>{{teil.mengeAktuellerLagerZugang}}</td>
-								</tr>
-								<tr>
-									<td>Menge an zukünftigem Bestellungen</td>
-									<td> {{teil.mengeZukuenftigerLagerZugang}}</td>
-								</tr>
-							</table>
-							<a  ng-href="#/bestellverwaltung/kaufteildisposition/{{teil.kaufTeil.id}}"><button type="button" class="btn btn-info btn-block">Details</button></a>
+							<div class="ibox">
+								<div class="ibox-title">
+									<h3>Kennzahlen</h3>
+								</div>
+								<div class="ibox-content">
+									<table class="table table-bordered">
+										<tr>
+											<td>Menge an aktuellem Lagerzugang</td>
+											<td>{{teil.mengeAktuellerLagerZugang}}</td>
+										</tr>
+										<tr>
+											<td>Menge an zukünftigem Lagerzugang</td>
+											<td> {{teil.mengeZukuenftigerLagerZugang}}</td>
+										</tr>
+									</table>
+									<a  ng-href="#/bestellverwaltung/kaufteildisposition/{{teil.kaufTeil.id}}"><button type="button" class="btn btn-info btn-block">Details</button></a>
+								</div>
+							</div>
 						</div>
 					</div>
 				</td>

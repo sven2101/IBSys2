@@ -1,6 +1,7 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
 /// <reference path="../../model/NewKaufTeil.ts" />
 /// <reference path="../../model/NewErzeugnis.ts" />
+/// <reference path="./BestellService.ts" />
 
 class NewTeileService {
 	alleKaufteile: Array<NewKaufTeil>;
@@ -80,7 +81,7 @@ class NewTeileService {
 
 	getKaufTeil(id: number) {
 		for (var i = 0; i < this.alleKaufteile.length; i++) {
-			if (this.alleKaufteile[i].id === id) {
+			if (this.alleKaufteile[i].id == id) {
 				return this.alleKaufteile[i];
 			}
 		}

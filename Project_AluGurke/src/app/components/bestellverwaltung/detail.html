@@ -1,6 +1,80 @@
 <section>
 	<div class="container">
-		<h2>Detailainsicht für Kaufteil {{dbvc.teil_id}}</h2>
-		{{dbvc.teil_id}}
+		<div class="wrapper-content animated fadeInRight">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="ibox">
+						<div class="ibox-title">
+							<h2>Detailainsicht für Kaufteil {{dbvc.teil_id}} {{dbvc.kaufTeil.bezeichnung}}</h2>
+						</div>
+						<div class="ibox-content">
+							<table class="table table-bordered text-center table-condensed">
+								<tr>
+									<th class="text-center">Preis</th>
+									<th class="text-center">Teilewert</th>
+									<th class="text-center">Lagermenge</th>
+									<th class="text-center">Discontmenge</th>
+									<th class="text-center">WBZ &plusmn<br>Abweichung</th>
+									<th class="text-center">Bestellkosten</th>
+									<th class="text-center">Verbrauch <br> aktuell</th>
+									<th class="text-center">Verbrauch <br> Periode {{dbvc.periode+1}}</th>
+									<th class="text-center">Verbrauch <br> Periode {{dbvc.periode+2}}</th>
+									<th class="text-center">Verbrauch <br> Periode {{dbvc.periode+3}}</th>
+									<th class="text-center">Reichweite</th>
+								</tr>
+								<tr  ng-class="{danger: dbvc.zeileRot(), warning: dbvc.zeileGelb()}">
+									<td>{{dbvc.kaufTeil.preis | currency:"€"}}</td>
+									<td>{{dbvc.kaufTeil.teileWert | currency:"€"}}</td>
+									<td>{{dbvc.kaufTeil.lagerMenge}}</td>
+									<td>{{dbvc.kaufTeil.discontMenge}}</td>
+									<td>{{dbvc.kaufTeil.wbz}} &plusmn ({{dbvc.kaufTeil.wbzAbw}})</td>
+									<td>{{dbvc.kaufTeil.bestellKosten}}</td>
+									<td>{{dbvc.verbrauchAktuell}}</td>
+									<td>{{dbvc.verbrauch1}}</td>
+									<td>{{dbvc.verbrauch2}}</td>
+									<td>{{dbvc.verbrauch3}}</td>
+									<td>{{dbvc.reichweite}}</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="ibox">
+						<div class="ibox-title"><h2>Neue Bestellungen</h2></div>
+						<div class="ibox-content">
+							<table class="table table-bordered text-center table-hover table-condensed">
+								<tr>
+									<th class="text-center">Menge</th>
+									<th class="text-center">Eil</th>
+									<th class="text-center">Kosten</th>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="ibox">
+						<div class="ibox-title"><h2>Neue Bestellung anlegen</h2></div>
+						<div class="ibox-content">
+							<form>
+								<div class="form-group">
+									<label for="mengeInput" class="sr-only">Menge</label>
+									<input type="number" placeholder="Menge" class="form-control" id="mengeInput" min="0">
+								</div>
+								<div class="checkbox">
+									<label>
+										<input type="checkbox">Eilbestellung
+									</label>
+								</div>
+								<button class="btn btn.white" type="submit">Anlegen</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </section>
