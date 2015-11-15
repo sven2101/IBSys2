@@ -17,6 +17,9 @@ angular.module('app')
     }).when('/bestellverwaltung/kaufteildisposition/:kaufteilid', {
           templateUrl: '/components/bestellverwaltung/detail.html',
           controller: 'DetailBestellVerwaltungController as dbvc'
+    }).when('/bestellverwaltung/ueberblick', {
+          templateUrl: '/components/bestellverwaltung/bestellueberblick.html',
+          controller: 'BestellUeberblickController as buc'
     }).when('/produktionsprogramm', {
         templateUrl: '/components/produktionsprogramm/produktionsprogramm.html',
         controller: 'ProduktionsprogrammController as pc'
