@@ -3,16 +3,19 @@
  */
 /// <reference path="BestellService.ts" />
 /// <reference path="NewTeileService.ts" />
+/// <reference path="../bestellverwaltung/bestellverwaltungUtil.service.ts" />
 class BestellungBerechnenService{
 
     bestellService:BestellService;
     newTeileService:NewTeileService;
+    bestellverwaltungUtilService:BestellverwaltungUtilService;
     $rootScope;
     aktuellePeriode;
 
-    constructor(BestellService:BestellService, NewTeileService:NewTeileService,$rootScope) {
-        this.bestellService = BestellService;
+    constructor(BestellService:BestellService, NewTeileService:NewTeileService,$rootScope,bestellverwaltungUtilService) {
+        this.bestellService = BestellService;        
         this.newTeileService = NewTeileService;
+        this.bestellverwaltungUtilService=bestellverwaltungUtilService;
         this.$rootScope=$rootScope;
         this.aktuellePeriode=1;
         this.$rootScope.$on('fileController.neueDatei', (event, dateiInhalt) => {
@@ -175,4 +178,4 @@ class BestellungBerechnenService{
         return null;
     }
 }
-angular.module('app').factory('BestellungBerechnenService', ['BestellService','NewTeileService','$rootScope', (BestellService,NewTeileService,$rootScope) => new BestellungBerechnenService(BestellService,NewTeileService,$rootScope)]);
+angular.module('app').factory('BestellungBerechnenService', ['BestellService','NewTeileService','$rootScope','BestellverwaltungUtilService', (BestellService,NewTeileService,$rootScope,BestellverwaltungUtilService) => new BestellungBerechnenService(BestellService,NewTeileService,$rootScope,BestellverwaltungUtilService)]);
