@@ -8,6 +8,7 @@
 /// <reference path="../appServices/AuftragService.ts" />
 /// <reference path="../appServices/BestellungBerechnenService.ts" />
 /// <reference path="../../model/NewTeilKnoten.ts" />
+/// <reference path="./BestellverwaltungUtil.service.ts" />
 
 class ViewModel {
 
@@ -37,13 +38,15 @@ class KaufteilDispositionController {
 	teileService: NewTeileService;
 	programmService: ProgrammService;
 	selectedViewModel: ViewModel;
-	neuBestellung: NeuBestellung;
+	//neuBestellung: NeuBestellung;
 	bestellungBerechnenService: BestellungBerechnenService;
 	auftragService: AuftragService;
+	utilService: BestellverwaltungUtilService;
 
 	constructor(teileService: NewTeileService, baumService: NewBaumService, bestellService: BestellService,
-		programmService: ProgrammService, bestellungBerechnenService: BestellungBerechnenService, auftragService: AuftragService) {
+		programmService: ProgrammService, bestellungBerechnenService: BestellungBerechnenService, auftragService: AuftragService,utilService:BestellverwaltungUtilService) {
 		this.auftragService = auftragService;
+		this.utilService = utilService;
 		this.kaufTeileVM = [];
 		this.baumService = baumService;
 		this.bestellService = bestellService;
@@ -51,8 +54,9 @@ class KaufteilDispositionController {
 		this.programmService = programmService;
 		this.createViewModel(teileService.alleKaufteile);
 		this.selectedViewModel = this.kaufTeileVM[3];
-		this.neuBestellung = new NeuBestellung(false, 0, 0, 0, 1);
+		//this.neuBestellung = new NeuBestellung(false, 0, 0, 0, 1);
 		this.bestellungBerechnenService = bestellungBerechnenService;
+		
 		//this.berechneteBestellungAktualisieren();
 	}
 
@@ -98,39 +102,11 @@ class KaufteilDispositionController {
 	}
 
 	getVerbrauch(teil_id: number, periode: number): number {
-		if (periode === 1) {
-			var verbrauch = this.auftragService.getAktuellenKaufTeilVerbrauch(teil_id);
-			if(verbrauch !== 0){
-				return this.auftragService.getAktuellenKaufTeilVerbrauch(teil_id);
-			}
-		}
-		if (periode > 4) {
-			return 0;
-		}
-		var anzahlKinderFahrrad = this.getAnzahlInBaum(this.baumService.kinderBaum, teil_id) * this.programmService.getProgrammposition(1, periode).menge + this.programmService.getDirectsalesPosition(1).menge;
-		var anzahlDamenFahrrad = this.getAnzahlInBaum(this.baumService.damenBaum, teil_id) * this.programmService.getProgrammposition(2, periode).menge + this.programmService.getDirectsalesPosition(2).menge;
-		var anzahlHerrenFahrrad = this.getAnzahlInBaum(this.baumService.herrenBaum, teil_id) * this.programmService.getProgrammposition(3, periode).menge + this.programmService.getDirectsalesPosition(3).menge;
-		return anzahlKinderFahrrad + anzahlDamenFahrrad + anzahlHerrenFahrrad;
+		return this.utilService.getVerbrauch(teil_id,periode);
 	}
 
-	getReichweite(lagerMenge: number, teil_id: number) {
-		if (lagerMenge === 0) {
-			return 0;
-		}
-		var gesamtVerbrauch = this.getVerbrauch(teil_id, 1) + this.getVerbrauch(teil_id, 2) + this.getVerbrauch(teil_id, 3) + this.getVerbrauch(teil_id, 4);
-		if (gesamtVerbrauch === 0) {
-			return Number.POSITIVE_INFINITY;
-		}
-		var reichweite = 0;
-		for (var i = 1; i <= 4; i++) {
-			if (lagerMenge - this.getVerbrauch(teil_id, i) >= 0) {
-				reichweite += 1;
-				lagerMenge -= this.getVerbrauch(teil_id, i);
-			} else {
-				reichweite += lagerMenge / this.getVerbrauch(teil_id, i);
-			}
-		}
-		return reichweite;
+	getReichweite(lagerMenge: number, teil_id: number):number {
+		return this.utilService.getReichweite(lagerMenge,teil_id);
 	}
 
 	getAnzahlInBaum(baum: NewTeilKnoten, id: number): number {
@@ -138,20 +114,14 @@ class KaufteilDispositionController {
 	}
 
 	zeileRot(teil: ViewModel): boolean {
-		if ((teil.reichweite - teil.kaufTeil.wbz) < 1) {
-			return true;
-		}
-		return false;
+		return this.utilService.zeileRot(teil.reichweite,teil.kaufTeil.wbz);
 	}
 
 	zeileGelb(teil: ViewModel): boolean {
-		if ((!this.zeileRot(teil) && ((teil.reichweite - teil.kaufTeil.wbzAbw - teil.kaufTeil.wbz) < 1))) {
-			return true;
-		}
-		return false;
+		return this.utilService.zeileGelb(teil.reichweite,teil.kaufTeil.wbz,teil.kaufTeil.wbzAbw);
 	}
 
-	sortieren(kriterium: string) {
+	sortieren(kriterium: string):void {
 		this.kaufTeileVM.sort(function(a: ViewModel, b: ViewModel) {
 			var differenz;
 			if (a.hasOwnProperty(kriterium)) {
@@ -167,9 +137,9 @@ class KaufteilDispositionController {
 		});
 	}
 
-	select(model: ViewModel) {
+	select(model: ViewModel):void {
 		this.selectedViewModel = model;
-		this.neuBestellung.teil_id = model.kaufTeil.id;
+		//this.neuBestellung.teil_id = model.kaufTeil.id;
 		//this.berechneteBestellungAktualisieren();
 	}
 
@@ -183,12 +153,12 @@ class KaufteilDispositionController {
 		//this.berechneteBestellungAktualisieren();
 	}*/
 
-	deleteNeueBestellung(bestellung: NeuBestellung) {
+	deleteNeueBestellung(bestellung: NeuBestellung):void {
 		this.bestellService.deleteNeuBetellung(bestellung.teil_id, bestellung.timestamp);
 		//this.berechneteBestellungAktualisieren();
 	}
 
-	getNeuenTeileWert(viewModel: ViewModel) {
+	getNeuenTeileWert(viewModel: ViewModel):number {
 		return this.teileService.getKaufTeilTeileWertNeu(viewModel.kaufTeil.lagerMenge, viewModel.kaufTeil.teileWert, viewModel.kaufTeil.id);
 	}
 	//Max was here
@@ -230,4 +200,5 @@ class KaufteilDispositionController {
 	}*/
 }
 
-angular.module('BestellverwaltungModule').controller('KaufteilDispositionController', ['NewTeileService', 'NewBaumService', 'BestellService', 'ProgrammService', 'BestellungBerechnenService', 'AuftragService', KaufteilDispositionController]);
+angular.module('BestellverwaltungModule').controller('KaufteilDispositionController', ['NewTeileService', 'NewBaumService', 'BestellService', 'ProgrammService', 
+'BestellungBerechnenService', 'AuftragService','BestellverwaltungUtilService','DispositionService', KaufteilDispositionController]);

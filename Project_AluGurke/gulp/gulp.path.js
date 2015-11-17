@@ -10,8 +10,8 @@ module.exports = {
         },
         assets: {
             x2js: {
-                src: 'src/assets/js/**',
-                dst: 'build/assets/js'
+                src: 'src/assets/**/*',
+                dst: 'build/assets'
             }
         },
         angular: {
@@ -21,6 +21,7 @@ module.exports = {
                 'src/app/js/model/*.js',
                 'src/app/js/components/**/*.module.js',
                 'src/app/js/components/appServices/*.js',
+				'src/app/js/components/**/*.service.js',
                 'src/app/js/components/**/*.controller.js',
                 'src/app/js/components/**/*.directive.js'
             ],
@@ -33,7 +34,7 @@ module.exports = {
                 'src/app/model/*.ts',
                 'src/app/components/appServices/*.ts',
                 'src/app/components/**/*.module.ts',
-                'src/app/components/app-services/*.ts',
+				'src/app/components/**/*.service.ts',
                 'src/app/components/**/*.controller.ts',
                 'src/app/components/**/*.directive.ts'
             ],
