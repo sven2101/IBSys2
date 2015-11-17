@@ -32,10 +32,9 @@ class DispositionController{
         this.modelsP2=this.dispositionService.dispositionP2;
         this.modelsP3=this.dispositionService.dispositionP3;
         this.auftragsService=auftragsService;
-        this.aendern();
-        
+        this.aendern();        
         this.verbrauch = this.auftragsService.getAktuellenKaufTeilVerbrauch(44); //TODO entfernen
-        console.log(this.verbrauch);
+        
     }
     aendern(){
         this.dispositionService.aendern();
