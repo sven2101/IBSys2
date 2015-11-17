@@ -18,7 +18,6 @@ var DispositionController = (function () {
         this.auftragsService = auftragsService;
         this.aendern();
         this.verbrauch = this.auftragsService.getAktuellenKaufTeilVerbrauch(44); //TODO entfernen
-        console.log(this.verbrauch);
     }
     DispositionController.prototype.aendern = function () {
         this.dispositionService.aendern();

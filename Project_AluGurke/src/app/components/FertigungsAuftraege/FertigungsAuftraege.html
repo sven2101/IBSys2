@@ -48,13 +48,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="auftrag in fac.auftraege">
-                                <td>{{auftrag.erzeugnis_id}}</td>
-                                <td>{{auftrag.anzahl}}</td>
-                                <td>{{auftrag.prioritaet}}</td>
+                            <tr ng-repeat="model in fac.models">
+                                <td>{{model.auftrag.erzeugnis_id}}</td>
+                                <td>{{model.auftrag.anzahl}}</td>
+                                <td>{{model.auftrag.prioritaet}}</td>
                             </tr>
                         </tbody>
                     </table>
+                    <button ng-click="fac.aendern();">test</button>
                 </div>
             </div>
         </div>
