@@ -33,14 +33,16 @@ class ChartPie {
 		];
 
 		var options = {
-			animationEasing: "easeInOutCubic",
-			animateScale: true,
-			legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span class=\"label\" style=\"background-color:<%=segments[i].fillColor%>\">"
-			+ "      </span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>",
-			onAnimationComplete: function() { legendeContainer.animate({ opacity: 1 }); }
-		};
-		//var pieChart = new Chart(ctx).Pie(data, options);
-		//legendeContainer.append(pieChart.generateLegend());
+
+			   animationEasing : "easeInOutCubic",
+			   animateScale: true,
+			    legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span class=\"label\" style=\"background-color:<%=segments[i].fillColor%>\">"
+				+" </span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>",
+				onAnimationComplete: function(){legendeContainer.animate({opacity:1});}
+		}
+		var pieChart = new Chart(ctx).Pie(data, options);
+		legendeContainer.append(pieChart.generateLegend());
+
 	}
 }
 
