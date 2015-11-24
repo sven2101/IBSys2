@@ -1,5 +1,6 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
 /// <reference path="../appServices/BestellService.ts" />
+/// <reference path="../../model/PieChartData.ts" />
 
 class BestellUeberblickController {
 
@@ -8,31 +9,31 @@ class BestellUeberblickController {
 	anzahlNeuBestellungen: number = 0;
 	anzahlNormalBestellungen: number = 0;
 	anzahlEilBestellungen: number = 0;
-	
-	gesamtKosten:number = 0;
-	normalKosten:number = 0;
-	eilKosten:number = 0;
-	
+
+	gesamtKosten: number = 0;
+	normalKosten: number = 0;
+	eilKosten: number = 0;
+
 	data = [
-    {
-        value: 300,
-        color:"#F7464A",
-        highlight: "#FF5A5E",
-        label: "Red"
-    },
-    {
-        value: 50,
-        color: "#46BFBD",
-        highlight: "#5AD3D1",
-        label: "Green"
-    },
-    {
-        value: 100,
-        color: "#FDB45C",
-        highlight: "#FFC870",
-        label: "Yellow"
-    }
-];
+		{
+			value: 300,
+			color: "#F7464A",
+			highlight: "#FF5A5E",
+			label: "Red"
+		},
+		{
+			value: 50,
+			color: "#46BFBD",
+			highlight: "#5AD3D1",
+			label: "Green"
+		},
+		{
+			value: 100,
+			color: "#FDB45C",
+			highlight: "#FFC870",
+			label: "Yellow"
+		}
+	];
 
 	neueBestellungen: Array<NeuBestellung>;
 
@@ -60,16 +61,16 @@ class BestellUeberblickController {
 			this.setEilOderNormalAnzahl(neueBestellungen[i]);
 		}
 	}
-	
-	analysiereKosten(bestellung:NeuBestellung){
-		this.gesamtKosten +=bestellung.kosten;
-		if(bestellung.eil){
+
+	analysiereKosten(bestellung: NeuBestellung) {
+		this.gesamtKosten += bestellung.kosten;
+		if (bestellung.eil) {
 			this.eilKosten += bestellung.kosten;
 		} else {
 			this.normalKosten += bestellung.kosten;
 		}
 	}
-	
+
 	setEilOderNormalAnzahl(bestellung: NeuBestellung) {
 		if (bestellung.eil) {
 			this.anzahlEilBestellungen++;

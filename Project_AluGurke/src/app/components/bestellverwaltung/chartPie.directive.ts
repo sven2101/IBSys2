@@ -12,11 +12,11 @@ class ChartPie {
 		var canvas = document.createElement('canvas');
 		var ctx = canvas.getContext("2d");
 		el.append(canvas);
-		
-		var legendeContainer= $(document.createElement('div'));
-		legendeContainer.css('opacity',0);
+
+		var legendeContainer = $(document.createElement('div'));
+		legendeContainer.css('opacity', 0);
 		el.append(legendeContainer);
-		
+
 		var data = [
 			{
 				value: 300,
@@ -30,17 +30,19 @@ class ChartPie {
 				highlight: "#5AD3D1",
 				label: "Kosten Normalbestellungen"
 			}
-		]
-		
+		];
+
 		var options = {
+
 			   animationEasing : "easeInOutCubic",
 			   animateScale: true,
 			    legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span class=\"label\" style=\"background-color:<%=segments[i].fillColor%>\">"
-				+"      </span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>",
+				+" </span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>",
 				onAnimationComplete: function(){legendeContainer.animate({opacity:1});}
 		}
 		var pieChart = new Chart(ctx).Pie(data, options);
 		legendeContainer.append(pieChart.generateLegend());
+
 	}
 }
 

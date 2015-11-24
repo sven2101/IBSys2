@@ -1,21 +1,34 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
-/// <reference path="../appServices/DispositionService.ts" />
+/// <reference path="../appServices/FertigungsAuftraegeService.ts" />
 
 class FertigungsAuftraegeController{
 
-    auftraege:Array<Auftrag>;
-    auftragService:AuftragService;
-    dispositionService:DispositionService;
+    models:Array<FertigungsAuftraegeModel>;
+    fertigungsAuftraegeService:FertigungsAuftraegeService;
+   
 
 
-    constructor( auftragService:AuftragService,dispositionService:DispositionService) {
-        this.auftraege = new Array<Auftrag>();
-        this.auftragService = auftragService;
-        this.auftraege=this.auftragService.auftraegeExport;
-        this.auftraege.sort(function(a:Auftrag, b:Auftrag){return a.erzeugnis_id-b.erzeugnis_id});
-        this.dispositionService=dispositionService;
+    constructor(fertigungsAuftraegeService:FertigungsAuftraegeService) { 
+        this.fertigungsAuftraegeService = fertigungsAuftraegeService;       
+        //this.models.sort(function(a:FertigungsAuftraegeModel, b:FertigungsAuftraegeModel){return a.erzeugnis_id-b.erzeugnis_id});
+        this.models=this.fertigungsAuftraegeService.models;
+        this.aendern();   
+    }
+    
+    aendern(){
+        this.fertigungsAuftraegeService.aendern();
+
     }
 }
-angular.module("FertigungsAuftraegeModule").controller("FertigungsAuftraegeController",["AuftragService","DispositionService",FertigungsAuftraegeController]);
+class FertigungsAuftraegeModel{
+    auftrag:Auftrag;
+    
+    constructor(auftrag:Auftrag){
+        this.auftrag=auftrag;
+    }
+    
+}
+
+angular.module("FertigungsAuftraegeModule").controller("FertigungsAuftraegeController",["FertigungsAuftraegeService",FertigungsAuftraegeController]);
 
 
