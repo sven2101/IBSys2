@@ -18,7 +18,7 @@ class LoginController {
         var vm = this;
         this.resource.login({ benutzername: this.user,passwort:this.password}, function(result, headers) {
             if(result.erg == '202') {
-                vm.location.path("/home");
+                vm.location.path('/');
             }else if(result.erg == '400') {
                 alert("Bad Request!");
             }else if(result.erg == '502'){

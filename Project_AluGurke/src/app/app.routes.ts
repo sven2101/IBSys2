@@ -6,11 +6,12 @@ angular.module('app')
   function ($routeProvider) {
     $routeProvider.
     when('/', {
-      templateUrl: '/components/home/home.html'
-    }).
-      when('/file', {
-      templateUrl: '/components/file/file.html',
-      controller: 'FileController as fc'
+            templateUrl: '/components/home/home.html'
+    }).when('/home', {
+            templateUrl: '/components/home/home.html'
+    }).when('/file', {
+           templateUrl: '/components/file/file.html',
+           controller: 'FileController as fc'
     }).when('/bestellverwaltung/kaufteildisposition', {
           templateUrl: '/components/bestellverwaltung/kaufteilDisposition.html',
           controller: 'KaufteilDispositionController as ktdc'
@@ -51,7 +52,7 @@ angular.module('app')
             templateUrl: '/components/login/login.html',
             controller: 'LoginController as lgc'
     }).when('/register', {
-        templateUrl: '/components/register/register.html',
+            templateUrl: '/components/register/register.html',
             controller: 'RegisterController as rgc'
     })
 

@@ -5,12 +5,25 @@
     /// <reference path="../appServices/ResourceService.ts" />
 class MainController {
     resource;
-    derTest : String="yxcvbnmrfjk";
+    name;
+    isLoggedIn;
 
      constructor(resourceService: ResourceService) {
         this.resource = resourceService.resource;
-        this.derTest = "halllo";
+        this.isLoggedIn = false;
+        this.checkSession();
     }
-
+    checkSession() {
+        var vm = this;
+        this.resource.session('', function(result, headers) {
+            if(result.session.name) {
+                vm.name = result.session.name;
+                vm.isLoggedIn = true;
+            }else {
+                vm.name = 'Gast';
+                vm.isLoggedIn = false;
+            }
+        });
+    }
 }
 angular.module('MainModule').controller('MainController', ['ResourceService',MainController]);

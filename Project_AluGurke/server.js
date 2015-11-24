@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.use(express.static('build'));
 app.use(session({secret: 'ssshhhhh'}));
 
-app.get('/start', function (req, res) {
+app.get('/', function (req, res) {
 		res.sendFile('index.html');
 });
 

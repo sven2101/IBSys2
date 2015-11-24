@@ -39,7 +39,9 @@ module.exports = function (app) {
 		}
 	});
 
-
+	app.get('/session', function (req, res) {
+		res.send({ session: req.session });
+	});
 	app.post('/addBenutzer', function (req, res) {
 		if(mongoose.connection.readyState == 1 && !req.session.name) {
 			var benutzerName = req.body.benutzername;
