@@ -8,10 +8,12 @@ class MainController {
     name;
     isLoggedIn;
 
-     constructor(resourceService: ResourceService) {
+     constructor(resourceService: ResourceService,$rootScope) {
         this.resource = resourceService.resource;
         this.isLoggedIn = false;
         this.checkSession();
+         var vm = this;
+        $rootScope.$on('refreshAfterLogin', function(event) { vm.checkSession(); });
     }
     checkSession() {
         var vm = this;
@@ -25,5 +27,7 @@ class MainController {
             }
         });
     }
+
+
 }
-angular.module('MainModule').controller('MainController', ['ResourceService',MainController]);
+angular.module('MainModule').controller('MainController', ['ResourceService','$rootScope',MainController]);

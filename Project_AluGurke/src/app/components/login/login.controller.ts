@@ -6,10 +6,12 @@
 class LoginController {
     resource;
     location;
+    $scope;
     user : String;
     password : String;
 
-    constructor(resourceService: ResourceService,$location) {
+    constructor(resourceService: ResourceService,$location,$scope) {
+        this.$scope = $scope;
         this.location = $location;
         this.resource = resourceService.resource;
     }
@@ -19,6 +21,7 @@ class LoginController {
         this.resource.login({ benutzername: this.user,passwort:this.password}, function(result, headers) {
             if(result.erg == '202') {
                 vm.location.path('/');
+                vm.$scope.$emit('refreshAfterLogin');
             }else if(result.erg == '400') {
                 alert("Bad Request!");
             }else if(result.erg == '502'){
@@ -27,5 +30,9 @@ class LoginController {
         });
     }
 
+
+
+
+
 }
-angular.module('LoginModule').controller('LoginController', ['ResourceService','$location',LoginController]);
+angular.module('LoginModule').controller('LoginController', ['ResourceService','$location','$scope',LoginController]);
