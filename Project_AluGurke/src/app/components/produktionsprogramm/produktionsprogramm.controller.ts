@@ -3,15 +3,16 @@
  */
     /// <reference path="../../typeDefinitions/angular.d.ts" />
     /// <reference path="../appServices/ProgrammService.ts" />
-
+    /// <reference path="../appServices/ResourceService.ts" />
 class ProduktionsprogrammController {
 
     programmService: ProgrammService;
-
-    constructor( programmService: ProgrammService) {
+    resource;
+    constructor( programmService: ProgrammService,resourceService: ResourceService) {
         this.programmService = programmService;
+        this.resource = resourceService.resource;
     }
 }
 
 
-angular.module('ProduktionsprogrammModule').controller('ProduktionsprogrammController', ['ProgrammService',ProduktionsprogrammController]);
+angular.module('ProduktionsprogrammModule').controller('ProduktionsprogrammController', ['ProgrammService', 'ResourceService',ProduktionsprogrammController]);

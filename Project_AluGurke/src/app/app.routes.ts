@@ -47,6 +47,13 @@ angular.module('app')
     }).when('/settings', {
             templateUrl: '/components/settings/settings.html',
             controller: 'SettingsController as sc'
-        })
+    }).when('/login', {
+            templateUrl: '/components/login/login.html',
+            controller: 'LoginController as lgc'
+    }).when('/register', {
+        templateUrl: '/components/register/register.html',
+            controller: 'RegisterController as rgc'
+    })
+
   }]);
 

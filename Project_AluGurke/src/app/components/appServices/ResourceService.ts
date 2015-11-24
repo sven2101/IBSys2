@@ -6,7 +6,9 @@ class ResourceService {
 	
 	constructor($resource) {
 		this.resource = $resource(':pfad', {}, {
-			createFile: {method: 'POST', params: {pfad: 'file'}}
+			createFile: {method: 'POST', params: {pfad: 'file'}},
+			createUser: {method: 'POST', params: {pfad: 'addBenutzer'}},
+			login:	{method: 'POST', params: {pfad: 'checkLogin'}}
 		});
 	}
 }

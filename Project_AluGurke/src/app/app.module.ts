@@ -1,4 +1,4 @@
-/// <reference path="typeDefinitions/angular.d.ts" />
+/// <reference path="typeDefinitions/angular.d.ts" />#
 "use strict";
 angular.module('app', [
 	'ngRoute',
@@ -13,5 +13,11 @@ angular.module('app', [
 	'DispositionModule',
 	'LagerModule',
 	'FertigungsAuftraegeModule',
-	'SettingsModule'
+	'SettingsModule',
+	'LoginModule',
+	'RegisterModule',
+	'MainModule'
 ]);
+
+
+
