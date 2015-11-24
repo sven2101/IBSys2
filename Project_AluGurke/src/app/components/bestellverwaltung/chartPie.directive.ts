@@ -42,7 +42,6 @@ class ChartPie {
 		}
 		var pieChart = new Chart(ctx).Pie(data, options);
 		legendeContainer.append(pieChart.generateLegend());
-
 	}
 }
 

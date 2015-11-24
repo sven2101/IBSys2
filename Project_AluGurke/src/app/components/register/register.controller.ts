@@ -5,17 +5,20 @@
     /// <reference path="../appServices/ResourceService.ts" />
 class RegisterController {
     resource;
+    location;
     user : String;
     password : String;
 
-    constructor( resourceService: ResourceService) {
+    constructor( resourceService: ResourceService,$location) {
         this.resource = resourceService.resource;
+        this.location = $location;
     }
 
     addUser() {
+        var vm = this;
         this.resource.createUser({benutzername: this.user,passwort:this.password}, function(result, headers) {
             if(result.erg == '200') {
-                alert('User created redirect to login..$location..');
+                vm.location.path("/");
             }else if(result.erg == '400') {
                 alert("Passwort oder Benutzername zu kurz!");
             }else if(result.erg == '500') {
