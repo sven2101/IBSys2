@@ -63,13 +63,14 @@ class BestellungBerechnenService{
         let temp=this.newTeileService.alleKaufteile;
         for(let i=0;i<temp.length;i++){
             if(temp[i].id===teilId){
+                
                 return temp[i];
             }
         }
     }
 
-    timeLineGenerieren(kTeilId:number,aktuellePeriode:number,multiplikator:number,verbrauch:Array<number>){
-        let kTeil=this.kaufTeilSuchen(kTeilId);
+    timeLineGenerieren(kTeilId:number,aktuellePeriode:number,multiplikator:number,verbrauch:Array<number>):Array<number>{
+        let kTeil=this.newTeileService.getKaufTeil(kTeilId);
         let zugangBestellungen=this.zugangsBestellungenSuchen(kTeilId);
         let laufendeBestellungen=this.laufendeBestellungenSuchen(kTeilId);
         let ausgehendeBestellungen=this.ausgehendeBestellungSuchen(kTeilId);

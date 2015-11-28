@@ -102,12 +102,12 @@ module.exports = function (app) {
 		req.session.destroy(function(err) {
 			if (err) console.log(err);
 			else {
+				res.send({erg: '200'});
 				console.log("logout success");
-				res.redirect('/#/login');
 			}
 		});
 		} else{
-			res.redirect('/#/login');
+			res.send({erg: '502'});
 			console.log('No Database Connection!')
 		}
 	});

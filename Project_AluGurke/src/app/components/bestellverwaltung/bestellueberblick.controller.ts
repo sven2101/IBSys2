@@ -1,10 +1,12 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
 /// <reference path="../appServices/BestellService.ts" />
+/// <reference path="../appServices/NewTeileService.ts" />
 /// <reference path="../../model/PieChartData.ts" />
 
 class BestellUeberblickController {
 
 	bestellService: BestellService;
+	teileService: NewTeileService;
 
 	anzahlNeuBestellungen: number = 0;
 	anzahlNormalBestellungen: number = 0;
@@ -37,33 +39,58 @@ class BestellUeberblickController {
 
 	neueBestellungen: Array<NeuBestellung>;
 
-	constructor(bestellService: BestellService) {
+	constructor(bestellService: BestellService, teileService: NewTeileService) {
 		this.neueBestellungen = [];
 		this.bestellService = bestellService;
+		this.teileService = teileService;
 		this.setNeueBestellungen();
 		this.analysiere(this.neueBestellungen);
 	}
 
-	setNeueBestellungen() {
+	setNeueBestellungen(): void {
 		for (var array in this.bestellService.neuBestellungen) {
 			if (this.bestellService.neuBestellungen.hasOwnProperty(array)) {
 				for (var i = 0; i < this.bestellService.neuBestellungen[array].length; i++) {
 					this.neueBestellungen.push(this.bestellService.neuBestellungen[array][i]);
-					this.analysiereKosten(this.bestellService.neuBestellungen[array][i]);
 				}
 			}
 		}
 	}
 
-	analysiere(neueBestellungen: Array<NeuBestellung>) {
+	analysiere(neueBestellungen: Array<NeuBestellung>): void {
 		this.anzahlNeuBestellungen = neueBestellungen.length;
 		for (var i = 0; i < neueBestellungen.length; i++) {
-			this.setEilOderNormalAnzahl(neueBestellungen[i]);
+			this.erhoeheEilOderNormalAnzahl(neueBestellungen[i]);
+			this.analysiereKosten(neueBestellungen[i]);
 		}
 	}
 
-	analysiereKosten(bestellung: NeuBestellung) {
+	analysiereKosten(bestellung: NeuBestellung): void {
+
+
 		this.gesamtKosten += bestellung.kosten;
+		this.erhoeheEilOderNormalKosten(bestellung);
+	}
+
+	getBestellKosten(bestellung: NeuBestellung): number {
+		var kaufTeil = this.teileService.getKaufTeil(bestellung.teil_id);
+		if (bestellung.eil) {
+			return kaufTeil.bestellKosten * 10;
+		}
+		return kaufTeil.bestellKosten;
+	}
+
+	getMaterialKosten(bestellung: NeuBestellung) {
+		var kaufTeil = this.teileService.getKaufTeil(bestellung.teil_id);
+
+		return kaufTeil.preis * bestellung.menge;
+	}
+	
+	getStueckKosten(bestellung: NeuBestellung){
+		return bestellung.kosten / bestellung.menge;
+	}
+
+	erhoeheEilOderNormalKosten(bestellung: NeuBestellung): void {
 		if (bestellung.eil) {
 			this.eilKosten += bestellung.kosten;
 		} else {
@@ -71,7 +98,7 @@ class BestellUeberblickController {
 		}
 	}
 
-	setEilOderNormalAnzahl(bestellung: NeuBestellung) {
+	erhoeheEilOderNormalAnzahl(bestellung: NeuBestellung): void {
 		if (bestellung.eil) {
 			this.anzahlEilBestellungen++;
 		} else {
@@ -81,4 +108,4 @@ class BestellUeberblickController {
 }
 
 angular.module('BestellverwaltungModule').controller('BestellUeberblickController', [
-	'BestellService', BestellUeberblickController]);
+	'BestellService', 'NewTeileService', BestellUeberblickController]);

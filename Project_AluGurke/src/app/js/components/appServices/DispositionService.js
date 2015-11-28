@@ -29,60 +29,6 @@ var DispositionService = (function () {
         this.altLastenVerteilen(this.models);
         this.aendern();
     }
-    DispositionService.prototype.dispoP1 = function () {
-        var dispo = new Array();
-        var wurzel = this.newBaumService.kinderBaum;
-        this.rekursiv(wurzel, dispo);
-        this.dispositionP1 = [];
-        for (var i = 0; i < dispo.length; i++) {
-            var temp = this.filter2(dispo[i].teil_id);
-            if (temp == null) {
-                var x = new DispositionModel(this.filter(dispo[i].teil_id), this.programmService.getProgrammposition(1), this.programmService.getDirectsalesPosition(1));
-                this.dispositionP1.push(x);
-                this.models.push(x);
-            }
-            else {
-                this.dispositionP1.push(temp);
-            }
-        }
-        this.dispositionP1.sort(function (a, b) { return a.eTeil.id - b.eTeil.id; });
-    };
-    DispositionService.prototype.dispoP2 = function () {
-        var dispo = new Array();
-        var wurzel = this.newBaumService.damenBaum;
-        this.rekursiv(wurzel, dispo);
-        this.dispositionP2 = [];
-        for (var i = 0; i < dispo.length; i++) {
-            var temp = this.filter2(dispo[i].teil_id);
-            if (temp == null) {
-                var x = new DispositionModel(this.filter(dispo[i].teil_id), this.programmService.getProgrammposition(2), this.programmService.getDirectsalesPosition(2));
-                this.dispositionP2.push(x);
-                this.models.push(x);
-            }
-            else {
-                this.dispositionP2.push(temp);
-            }
-        }
-        this.dispositionP2.sort(function (a, b) { return a.eTeil.id - b.eTeil.id; });
-    };
-    DispositionService.prototype.dispoP3 = function () {
-        var dispo = new Array();
-        var wurzel = this.newBaumService.herrenBaum;
-        this.rekursiv(wurzel, dispo);
-        this.dispositionP3 = [];
-        for (var i = 0; i < dispo.length; i++) {
-            var temp = this.filter2(dispo[i].teil_id);
-            if (temp == null) {
-                var x = new DispositionModel(this.filter(dispo[i].teil_id), this.programmService.getProgrammposition(3), this.programmService.getDirectsalesPosition(3));
-                this.dispositionP3.push(x);
-                this.models.push(x);
-            }
-            else {
-                this.dispositionP3.push(temp);
-            }
-        }
-        this.dispositionP3.sort(function (a, b) { return a.eTeil.id - b.eTeil.id; });
-    };
     DispositionService.prototype.dispoP1rekursuiv = function (wurzel, oberModel) {
         if (oberModel === void 0) { oberModel = null; }
         var x = new DispositionModel(this.filter(wurzel.teil_id), this.programmService.getProgrammposition(1), this.programmService.getDirectsalesPosition(1));

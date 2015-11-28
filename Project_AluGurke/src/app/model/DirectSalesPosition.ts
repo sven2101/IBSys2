@@ -8,10 +8,10 @@ class DirectSalesPosition {
     konventionalstrafe:number;
 
 
-    constructor(id:number,periode:number,menge:number,konventionalstrafe:number){
+    constructor(id:number,preis:number,menge:number,konventionalstrafe:number){
         this.id = id;
         this.menge = menge;
-        this.preis = periode;
+        this.preis = preis;
         this.konventionalstrafe = konventionalstrafe;
     }
 }

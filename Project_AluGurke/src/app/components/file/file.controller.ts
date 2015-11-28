@@ -24,8 +24,8 @@ class FileController {
 		this.baum = service.kinderBaum;
 		this.kaufteile = NewTeileService.alleKaufteile;
 		this.resource = resourceService.resource;
-		this.dateiService = dateiService;
 		this.zugangBestellungen = bestellService.zugangBestellungen;
+		this.dateiService = dateiService;
 	}
 	
 	sendPostRequest() {

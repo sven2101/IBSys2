@@ -9,6 +9,7 @@ class ResourceService {
 			createFile: {method: 'POST', params: {pfad: 'file'}},
 			createUser: {method: 'POST', params: {pfad: 'addBenutzer'}},
 			login:	{method: 'POST', params: {pfad: 'checkLogin'}},
+			logout:{method: 'GET', params: {pfad: 'logout'}},
 			session:{method: 'GET', params: {pfad: 'session'}}
 		});
 	}

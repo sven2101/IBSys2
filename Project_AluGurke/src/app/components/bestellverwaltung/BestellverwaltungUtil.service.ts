@@ -1,4 +1,7 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
+/// <reference path="../../model/NewTeilKnoten.ts" />
+/// <reference path="../appServices/ProgrammService.ts" />
+/// <reference path="../appServices/AuftragService.ts" />
 
 class BestellverwaltungUtilService {
 	

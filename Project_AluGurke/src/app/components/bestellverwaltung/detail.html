@@ -1,4 +1,23 @@
 <section>
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="col-lg-10">
+			<h2>Detailansicht</h2>
+			<ol class="breadcrumb">
+				<li>
+					<a href="/#/">Home</a>
+				</li>
+				<li>
+					<a>Bestellverwaltung</a>
+				</li>
+				<li>
+					<a href="/#/bestellverwaltung/kaufteildisposition">Kaufteildisposition</a>
+				</li>
+				<li class="active">
+					<strong>Detailansicht</strong>
+				</li>
+			</ol>
+		</div>
+	</div>
 	<div class="container">
 		<div class="wrapper-content animated fadeInRight">
 			<div class="row">
@@ -33,7 +52,7 @@
 									<td>{{dbvc.kaufTeil.lagerMenge}}</td>
 									<td>{{dbvc.kaufTeil.discontMenge}}</td>
 									<td>{{dbvc.kaufTeil.wbz}} &plusmn ({{dbvc.kaufTeil.wbzAbw}})</td>
-									<td>{{dbvc.kaufTeil.bestellKosten}}</td>
+									<td>{{dbvc.kaufTeil.bestellKosten | currency:"€"}}</td>
 									<td>{{dbvc.verbrauchAktuell}}</td>
 									<td>{{dbvc.verbrauch1}}</td>
 									<td>{{dbvc.verbrauch2}}</td>
@@ -88,7 +107,7 @@
 										<input type="checkbox" ng-model="dbvc.neueBestellung.eil">Eilbestellung
 									</label>
 								</div>
-								<button class="btn btn.white" type="submit" ng-click="dbvc.createNeueBestellung()">Anlegen</button>
+								<button class="btn btn-primary" type="submit" ng-click="dbvc.createNeueBestellung()">Anlegen</button>
 							</form>
 						</div>
 					</div>
@@ -140,6 +159,16 @@
 									<td>{{bestellung.periode}}</td>
 								</tr>
 							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="ibox">
+						<div class="ibox-title"><h2>Entwicklung durchschnittlicher Lagerbestand</h2></div>
+						<div class="ibox-content">
+							{{dbvc.timeLine}}
 						</div>
 					</div>
 				</div>

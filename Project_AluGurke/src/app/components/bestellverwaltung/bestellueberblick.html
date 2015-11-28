@@ -1,6 +1,22 @@
 <section>
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="col-lg-10">
+			<h2>Bestellüberblick</h2>
+			<ol class="breadcrumb">
+				<li>
+					<a href="/#/">Home</a>
+				</li>
+				<li>
+					<a>Bestellverwaltung</a>
+				</li>
+				<li class="active">
+					<strong>Bestellüberblick</strong>
+				</li>
+			</ol>
+		</div>
+	</div>
 	<div class="wrapper-content animated fadeInRight">
-		<div class="row">
+		<!--<div class="row">
 			<div class="ibox">
 				<div class="ibox-title"><h2>Statistik</h2></div>
 				<div class="ibox-content">
@@ -11,6 +27,63 @@
 					<div id="legende"></div>
  				</div>
 			</div>
-		</div>
+		</div><!-- /row-->
+		<div class="row">
+			<div class="ibox">
+				<div class="ibox-title"><h2>Kennzahlen</h2></div>
+				<div class="ibox-content">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="widget lazur-bg p-xl">
+								<h2>Anzahl neuer Bestellungen: {{buc.anzahlNeuBestellungen}}</h2>
+								<ul>
+									<li>Normalbestellungen: {{buc.anzahlNormalBestellungen}}</li>
+									<li>Eilbestellungen: {{buc.anzahlEilBestellungen}}</li>
+								</ul>
+							</div>
+						</div><!-- /col-->
+						<div class="col-lg-6">
+							<div class="widget lazur-bg p-xl">
+								<h2>Gesamtkosten: {{buc.gesamtKosten | currency:"€"}}</h2>
+								<ul>
+									<li>Normalbestellungen: {{buc.normalKosten | currency:"€"}}</li>
+									<li>Eilbestellungen: {{buc.eilKosten | currency:"€"}}</li>
+								</ul>
+							</div>
+						</div><!-- /col-->
+					</div><!-- /row-->
+ 				</div><!-- /ibox-content-->
+			</div><!-- /ibox-->
+		</div><!-- /row-->
+		<div class="row">
+			<div class="ibox">
+				<div class="ibox-title"><h2>Neue Bestellungen</h2></div>
+				<div class="ibox-content">
+					<table class="table table-bordered table-hover text-center table-condensed">
+						<tr>
+							<th class="text-center">Teil ID</th>
+							<th class="text-center">Eil</th>
+							<th class="text-center">Menge</th>
+							<th class="text-center">Bestellkosten</th>
+							<th class="text-center">Materialkosten</th>
+							<th class="text-center">Gesamtkosten</th>
+							<th class="text-center">Stückkosten</th>
+						</tr>
+						<tr ng-repeat="bestellung in buc.neueBestellungen">
+							<td>{{bestellung.teil_id}}</td>
+							<td>
+								<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="bestellung.eil"></span>
+										<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!bestellung.eil"></span>
+							</td>
+							<td>{{bestellung.menge}}</td>
+							<td>{{buc.getBestellKosten(bestellung) | currency:"€"}}</td>
+							<td>{{buc.getMaterialKosten(bestellung) | currency:"€"}}</td>
+							<td>{{bestellung.kosten | currency:"€"}}</td>
+							<td>{{buc.getStueckKosten(bestellung) | currency:"€"}}</td>
+						</tr>
+					</table>
+				</div><!-- /ibox-content-->
+			</div><!-- /ibox-->
+		</div><!-- /row-->
 	</div>
 </section>
