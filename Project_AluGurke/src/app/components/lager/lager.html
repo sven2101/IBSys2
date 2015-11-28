@@ -1,65 +1,81 @@
-<div class="row wrapper border-bottom white-bg page-heading">
-	<div class="col-lg-10">
-		<h2>Lager</h2>
-		<ol class="breadcrumb">
-			<li>
-				<a href="/#/">Home</a>
-			</li>
-			<li class="active">
-				<strong>Lager</strong>
-			</li>
-		</ol>
-	</div>
-</div>
 <section>
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="col-lg-10">
+			<h2>Lager</h2>
+			<ol class="breadcrumb">
+				<li>
+					<a href="/#/">Home</a>
+				</li>
+				<li class="active">
+					<strong>Lager</strong>
+				</li>
+			</ol>
+		</div>
+	</div>
 	<div class="container">
-	<div>
-		<input type="checkbox" ng-model="lc.showErzeugnisse"> Erzeugnisse
-		<input type="checkbox" ng-model="lc.showKaufTeile"> Kaufteile
-	</div>
-	<div ng-if="lc.showErzeugnisse">
-		<h2>Erzeugnisse</h2>
-		<table class="table table-bordered text-center table-striped table-condensed">
-			<tr>
-				<th class="text-center">Id</th>
-				<th class="text-center">MFW</th>
-				<th class="text-center">Teilewert</th>
-				<th class="text-center">Lagermenge</th>
-				<th class="text-center">Summe</th>
-			</tr>
-			<tr ng-repeat="teil in lc.alleErzeugnisse">
-				<td>{{::teil.id}}</td>
-				<td>
-					<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="teil.mehrfachVerwendung"></span>
-					<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!teil.mehrfachVerwendung"></span>
-				</td>
-				<td>{{::teil.teileWert | currency:"€"}}</td>
-				<td>{{::teil.lagerMenge}}</td>
-				<td>{{teil.lagerMenge * teil.teileWert | currency:'€'}}</td>
-			</tr>
-		</table>
-	</div>
-	<div ng-if="lc.showKaufTeile">
-		<h2>Kaufteile</h2>
-		<table class="table table-bordered text-center table-striped table-condensed">
-			<tr>
-				<th class="text-center">Id</th>
-				<th class="text-center">MFW</th>
-				<th class="text-center">Teilewert</th>
-				<th class="text-center">Lagermenge</th>
-				<th class="text-center">Summe</th>
-			</tr>
-			<tr ng-repeat="teil in lc.alleKaufTeile">
-				<td>{{::teil.id}}</td>
-				<td>
-					<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="teil.mfw"></span>
-					<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!teil.mfw"></span>
-				</td>
-				<td>{{::teil.teileWertNeu | currency:"€"}}</td>
-				<td>{{::teil.lagerMenge}}</td>
-				<td>{{teil.lagerMenge * teil.teileWert | currency:'€'}}</td>
-			</tr>
-		</table>
-	</div>
-	</div>
+		<div class="wrapper-content animated fadeInRight">
+			<div class="ibox">
+				<div class="ibox-title">
+					<ul class="nav nav-tabs">
+							<li class="active" ng-click="lc.toggleShowErzeugnisse()">
+								<a data-toggle="tab" href="" aria-expanded="true">Erzeugnisse</a>
+							</li>
+							<li ng-click="lc.toggleShowKaufTeile()">
+								<a data-toggle="tab" href="" aria-expanded="true">Kaufteile</a>
+							</li>
+						</ul>
+				</div>
+				<div class="ibox-content">
+					<div class="tabs-container">
+						<div id="tab-1" class="tab-pane active">
+							<div ng-if="lc.showErzeugnisse">
+								<table class="table table-bordered text-center table-hover table-condensed">
+									<tr>
+										<th class="text-center curs" ng-click="lc.sortiereErzeugnisse('id')">Id</th>
+										<th class="text-center curs" ng-click="lc.sortiereErzeugnisse('mehrfachVerwendung')">MFW</th>
+										<th class="text-center curs" ng-click="lc.sortiereErzeugnisse('teileWert')">Teilewert</th>
+										<th class="text-center curs" ng-click="lc.sortiereErzeugnisse('lagerMenge')">Lagermenge</th>
+										<th class="text-center curs" ng-click="lc.sortiereErzeugnisse('summe')">Summe</th>
+									</tr>
+									<tr ng-repeat="teil in lc.alleErzeugnisse">
+										<td>{{::teil.id}}</td>
+										<td>
+											<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="teil.mehrfachVerwendung"></span>
+											<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!teil.mehrfachVerwendung"></span>
+										</td>
+										<td>{{::teil.teileWert | currency:"€"}}</td>
+										<td>{{::teil.lagerMenge}}</td>
+										<td>{{teil.lagerMenge * teil.teileWert | currency:'€'}}</td>
+									</tr>
+								</table>
+							</div>
+						</div><!--/tab 1 -->
+						<div id="tab-2" class="tab-pane">
+							<div ng-if="lc.showKaufTeile">
+								<table class="table table-bordered text-center table-hover table-condensed">
+									<tr>
+										<th class="text-center curs" ng-click="lc.sortiereKaufTeile('id')">Id</th>
+										<th class="text-center curs" ng-click="lc.sortiereKaufTeile('mfw')">MFW</th>
+										<th class="text-center curs" ng-click="lc.sortiereKaufTeile('teileWert')">Teilewert</th>
+										<th class="text-center curs" ng-click="lc.sortiereKaufTeile('lagerMenge')">Lagermenge</th>
+										<th class="text-center curs" ng-click="lc.sortiereKaufTeile('summe')">Summe</th>
+									</tr>
+									<tr ng-repeat="teil in lc.alleKaufTeile">
+										<td>{{::teil.id}}</td>
+										<td>
+											<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="teil.mfw"></span>
+											<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!teil.mfw"></span>
+										</td>
+										<td>{{::teil.teileWertNeu | currency:"€"}}</td>
+										<td>{{::teil.lagerMenge}}</td>
+										<td>{{teil.lagerMenge * teil.teileWert | currency:'€'}}</td>
+									</tr>
+								</table>
+							</div>
+						</div><!--/tab 2 -->
+					</div>
+				</div>
+			</div>
+		</div><!-- /wrapper -->
+	</div><!-- /containter -->
 </section>
