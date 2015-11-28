@@ -12,14 +12,17 @@ class DateiService {
 	dateiErzeugt: boolean;
 	neuBestellungen: BsNeuBestellungenMap;
 	auftragService:AuftragService;
-	kapazitaetsplanungService:KapazitaetsplanungService
+	kapazitaetsplanungService:KapazitaetsplanungService;
+	programmService: ProgrammService;
 
-	constructor(bestellService: BestellService,auftragService:AuftragService,kapazitaetsplanungService:KapazitaetsplanungService) {
+	constructor(bestellService: BestellService,auftragService:AuftragService,
+	kapazitaetsplanungService:KapazitaetsplanungService,programmService:ProgrammService) {
 		this.dateiErzeugt = false;
 		this.dateiName = "none";
 		this.neuBestellungen = bestellService.neuBestellungen;
 		this.auftragService=auftragService;
 		this.kapazitaetsplanungService=kapazitaetsplanungService;
+		this.programmService = programmService;
 	}
 
 	getInhalt() {
@@ -30,16 +33,20 @@ class DateiService {
 					_losequantity: "0",
 					_delay: "0"
 				},
-				sellwish: [],
-				selldirect: [],
+				sellwish: {
+					item:this.getSellWish()
+				},
+				selldirect: {
+					item: this.getDirectSales()
+				},
 				orderlist: {
 					order: this.getNewOrders()
 				},
 				productionlist: {
-					production:this.getProductionList()
+					production:[]//this.getProductionList()
 				},
 				workingtimelist: {
-					workingtimeList:this.getWorkingTime()
+					workingtimeList:[]//this.getWorkingTime()
 				}
 			}
 		};
@@ -60,7 +67,7 @@ class DateiService {
 					var newOrder = {
 						_article: array[i].teil_id,
 						_quantity: array[i].menge,
-						_modus: array[i] ? "4" : "5"
+						_modus: array[i].eil ? "4" : "5"
 					}
 					orders.push(newOrder);
 				}
@@ -68,6 +75,56 @@ class DateiService {
 		}
 		return orders;
 	}
+	
+	getSellWish(){
+		var wish = [];
+		var p1 = {
+			_article: 1,
+			_quantity: this.programmService.produktionsprogramm[0].menge
+		};
+		var p2 = {
+			_article: 2,
+			_quantity: this.programmService.produktionsprogramm[4].menge
+		};
+		var p3 = {
+			_article: 3,
+			_quantity: this.programmService.produktionsprogramm[8].menge
+		};
+		
+		wish.push(p1);
+		wish.push(p2);
+		wish.push(p3);
+		return wish;
+	}
+	
+	getDirectSales(){
+		var directSales = [];
+		var p1 = {
+			_article: 1,
+			_quantity:this.programmService.directsales[1].menge,
+			_price:this.programmService.directsales[1].preis,
+			_penalty:this.programmService.directsales[1].konventionalstrafe
+		};
+		var p2 = {
+			_article: 2,
+			_quantity:this.programmService.directsales[2].menge,
+			_price:this.programmService.directsales[2].preis,
+			_penalty:this.programmService.directsales[2].konventionalstrafe
+		};
+		var p3 = {
+			_article: 3,
+			_quantity:this.programmService.directsales[3].menge,
+			_price:this.programmService.directsales[3].preis,
+			_penalty:this.programmService.directsales[3].konventionalstrafe
+		};
+		
+		directSales.push(p1);
+		directSales.push(p2);
+		directSales.push(p3);
+		
+		return directSales;
+	}
+	
 	getProductionList(){
 		let list=[];
 		let auftrageExport=this.auftragService.auftraegeExport.sort(function(a,b){return a.prioritaet-b.prioritaet});
@@ -96,4 +153,5 @@ class DateiService {
 	}
 }
 
-angular.module('app').factory('DateiService', ['BestellService',"AuftragService","KapazitaetsplanungService", (BestellService,AuftragService,KapazitaetsplanungService) => new DateiService(BestellService,AuftragService,KapazitaetsplanungService)]);
+angular.module('app').factory('DateiService', ['BestellService','AuftragService','KapazitaetsplanungService','ProgrammService', 
+(BestellService,AuftragService,KapazitaetsplanungService,programmService) => new DateiService(BestellService,AuftragService,KapazitaetsplanungService,programmService)]);
