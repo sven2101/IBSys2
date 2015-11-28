@@ -10,6 +10,7 @@ var AuftragService = (function () {
         this.auftraegeAufMaschine = new Array();
         this.auftraegeInWarteschlange = new Array();
         this.auftraegeExport = new Array();
+        this.auftraegeTemp = new Array();
         this.$rootScope = $rootScope;
         this.$rootScope.$on('fileController.neueDatei', function (event, dateiInhalt) {
             _this.onNeueDatei(dateiInhalt);

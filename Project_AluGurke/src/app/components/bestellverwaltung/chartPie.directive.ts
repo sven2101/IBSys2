@@ -40,8 +40,8 @@ class ChartPie {
 				+" </span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>",
 				onAnimationComplete: function(){legendeContainer.animate({opacity:1});}
 		}
-		var pieChart = new Chart(ctx).Pie(data, options);
-		legendeContainer.append(pieChart.generateLegend());
+		//var pieChart = new Chart(ctx).Pie(data, options);
+		//legendeContainer.append(pieChart.generateLegend());
 	}
 }
 

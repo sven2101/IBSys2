@@ -7,6 +7,7 @@
 class AuftragService {
     auftraege: Array<Auftrag>;
     auftraegeExport: Array<Auftrag>;
+    auftraegeTemp: Array<Auftrag>;
     auftraegeInWarteschlange: Array<Auftrag>;
     auftraegeAufMaschine: Array<Auftrag>;
 
@@ -20,6 +21,7 @@ class AuftragService {
         this.auftraegeAufMaschine = new Array<Auftrag>();
         this.auftraegeInWarteschlange = new Array<Auftrag>();
         this.auftraegeExport = new Array<Auftrag>();
+        this.auftraegeTemp = new Array<Auftrag>();
         this.$rootScope = $rootScope;
         this.$rootScope.$on('fileController.neueDatei', (event, dateiInhalt) => {
             this.onNeueDatei(dateiInhalt);
