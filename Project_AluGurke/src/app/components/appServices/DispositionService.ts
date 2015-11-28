@@ -47,6 +47,10 @@ class DispositionService{
         this.dispoP3rekursuiv(this.newBaumService.herrenBaum);
         this.altLastenVerteilen(this.models);
         this.aendern();
+        var vm = this;
+        $rootScope.$on('pc.programmaenderung',function(){
+            vm.aendern();
+        });
     }    
     dispoP1(){
         let dispo=new Array<NewTeilKnoten>();
@@ -66,8 +70,8 @@ class DispositionService{
             }
         }
         this.dispositionP1.sort(function(a, b){return a.eTeil.id-b.eTeil.id});
-
     }
+    
     dispoP2(){
         let dispo=new Array<NewTeilKnoten>();
 
@@ -88,6 +92,7 @@ class DispositionService{
         this.dispositionP2.sort(function(a, b){return a.eTeil.id-b.eTeil.id});
 
     }
+    
     dispoP3(){
         let dispo=new Array<NewTeilKnoten>();
 
@@ -184,7 +189,8 @@ class DispositionService{
             teile.push(knoten);
         }
     }
-    aendern() {
+    
+    aendern():void {
         let auftraege = new Array<Auftrag>();
         let auftraegeMFV =new Array<Auftrag>();
         let map:{[key:number]:number;}
@@ -254,12 +260,5 @@ class DispositionService{
             }
         }
     }
-   
-
-   
-
-
-
-
 }
 angular.module('app').factory('DispositionService', ['BestellungBerechnenService','$rootScope',"ProgrammService","NewTeileService","NewBaumService","AuftragService","ArbeitsplatzService","BestellService","SettingsService",(BestellungBerechnenService,$rootScope,ProgrammService,NewTeileService,NewBaumService,AuftragService,ArbeitsplatzService,BestellService,SettingsService) => new DispositionService(BestellungBerechnenService,$rootScope,ProgrammService,NewTeileService,NewBaumService,AuftragService,ArbeitsplatzService,BestellService,SettingsService)]);

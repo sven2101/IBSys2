@@ -28,6 +28,10 @@ var DispositionService = (function () {
         this.dispoP3rekursuiv(this.newBaumService.herrenBaum);
         this.altLastenVerteilen(this.models);
         this.aendern();
+        var vm = this;
+        $rootScope.$on('pc.programmaenderung', function () {
+            vm.aendern();
+        });
     }
     DispositionService.prototype.dispoP1 = function () {
         var dispo = new Array();
