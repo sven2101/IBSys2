@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Max-Hermann/IBSys2.git"
+    "url": "git+x"
   },
   "keywords": [
     "MEAN"
@@ -17,9 +17,9 @@
   "author": "Marius",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Max-Hermann/IBSys2/issues"
+    "url": "x"
   },
-  "homepage": "https://github.com/Max-Hermann/IBSys2#readme",
+  "homepage": "x",
   "dependencies": {
     "body-parser": "^1.14.1",
     "browser-sync": "^2.9.8",

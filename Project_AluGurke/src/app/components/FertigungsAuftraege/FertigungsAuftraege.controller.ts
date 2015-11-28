@@ -9,22 +9,46 @@ class FertigungsAuftraegeController{
 
 
     constructor(fertigungsAuftraegeService:FertigungsAuftraegeService) { 
-        this.fertigungsAuftraegeService = fertigungsAuftraegeService;       
-        //this.models.sort(function(a:FertigungsAuftraegeModel, b:FertigungsAuftraegeModel){return a.erzeugnis_id-b.erzeugnis_id});
-        this.models=this.fertigungsAuftraegeService.models;
-        this.aendern();   
+        this.fertigungsAuftraegeService = fertigungsAuftraegeService;
+        this.models=this.fertigungsAuftraegeService.models;   
+        this.models.sort(function(a:FertigungsAuftraegeModel, b:FertigungsAuftraegeModel){return a.auftrag.erzeugnis_id-b.auftrag.erzeugnis_id});
+        this.aendern();
+       
+    }
+    oeffnen(id:number){
+        let x=document.getElementById("fac_"+id);
+        x.hidden=!x.hidden;      
     }
     
     aendern(){
         this.fertigungsAuftraegeService.aendern();
-
+    }
+    prioAendern(){
+        this.fertigungsAuftraegeService.prioAendern();
     }
 }
 class FertigungsAuftraegeModel{
     auftrag:Auftrag;
+    auftraege:Array<Auftrag>;
+    split:String;
+    split2:String;
+    show:boolean=true;
+    prioritaet:Array<string>;
+    
     
     constructor(auftrag:Auftrag){
         this.auftrag=auftrag;
+        this.auftraege=[];
+        this.auftraege.push(this.auftrag);
+        this.split=this.auftrag.anzahl.toString();
+        this.show=false;
+        let prio=["kritisch","hoch","normal"];
+        this.prioritaet=new Array<string>();
+        this.prioritaet.push(prio[this.auftrag.prioritaet-1]);
+    }
+    triggerShow(){
+        this.show=!this.show;
+        console.log(this.show);
     }
     
 }

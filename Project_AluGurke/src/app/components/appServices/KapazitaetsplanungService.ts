@@ -29,6 +29,7 @@ class KapazitaetsplanungService {
     }
     onNeueDatei(dateiInhalt){
         this.dispositionService.aendern();
+        
         this.aendern();  
     }
     

@@ -16,7 +16,7 @@ class KapazitaetsplanungController{
         this.dispositionService=dispositionService;
         this.models=this.kapazitaetsplanungService.models;
         this.settingsService=settingsService;
-
+        
         this.ergebnis=this.kapazitaetsplanungService.ergebnis;
         this.bestellungBerechnenService=bestellungBerechnenService;
         if(this.settingsService.model.arbeitszeitGenerieren){

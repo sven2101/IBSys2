@@ -19,24 +19,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Disposition P2</h5>
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-wrench"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#">Config option 1</a>
-                            </li>
-                            <li><a href="#">Config option 2</a>
-                            </li>
-                        </ul>
-                        <a class="close-link">
-                            <i class="fa fa-times"></i>
-                        </a>
-                    </div>
+                    <h5>Disposition P3</h5>
                 </div>
                 <div class="ibox-content">
                     <table class="table table-hover">
@@ -49,8 +32,6 @@
                                 <th>Aufträge in Warteschlange</th>
                                 <th>Material auf Maschine</th>
                                 <th>Fertigungsauftrag</th>
-                                <th>Splitten in</th>
-                                <th>Prorität</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -74,27 +55,7 @@
                                     <label>{{model.getMaterialAufMaschine()}}</label>
                                 </td>
                                 <td>{{model.anzahl}}</td>
-                                <td>
-                                    <select class="form-control" type="number" ng-model="model.split" ng-click="dc.aendern()" style="width:75px;">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select class="form-control" ng-model="model.prioritaet" ng-click="dc.aendern()" style="width:105px;">
-                                        <option>normal</option>
-                                        <option>hoch</option>
-                                        <option>kritisch</option>
-                                    </select>
-                                </td>
+
                             </tr>
                         </tbody>
                     </table>

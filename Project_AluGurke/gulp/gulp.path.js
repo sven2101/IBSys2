@@ -40,6 +40,6 @@ module.exports = {
             ],
             dst: 'src/app/js'
         },
-        proxy: 'http://localhost:3789'
+        proxy: 'http://localhost:3210'
     }
 };
