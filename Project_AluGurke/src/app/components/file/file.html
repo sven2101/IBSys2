@@ -1,3 +1,23 @@
+<head>
+	<style>
+		.fileUpload {
+			position: relative;
+			overflow: hidden;
+			margin-left: 15px;
+		}
+		.fileUpload input.upload {
+			position: absolute;
+			top: 0;
+			right: 0;
+			margin: 0;
+			padding: 0;
+			font-size: 20px;
+			cursor: pointer;
+			opacity: 0;
+			filter: alpha(opacity=0);
+		}
+</style>
+</head>
 <div class="row wrapper border-bottom white-bg page-heading">
 	<div class="col-lg-10">
 		<h2>Datei</h2>
@@ -18,8 +38,13 @@
 				<div class="row">
 					<form>
 						<div class="form-group">
-							<label for="dateiInput">Datei hier hochladen</label>
-							<input type="file" id="dateiInput" onchange="verarbeiteDatei(this.files)">
+							<div class="col-md-12"><h3>Simulationsdatei hochladen</h3></div>
+							<div class="fileUpload btn btn-success ">
+								<div class="col-md-12">
+									<i class="fa fa-upload"></i>&nbsp;&nbsp;<span class="bold">Datei hochladen</span>
+									<input type="file" id="dateiInput" onchange="verarbeiteDatei(this.files)" class="upload">
+								</div>
+							</div>
 						</div>
 					</form>
 				</div><!-- /row -->
@@ -28,10 +53,10 @@
 		<div class="ibox">
 			<div class="jumbotron">
 				<div class="row">
-					<div class="col-md-12"><h3>Fertig mit der Eingabe? Dann erstellen Sie hier eine Datei.</h3></div>
+					<div class="col-md-12"><h3>Fertig mit der Eingabe? Dann erstellen Sie hier eine Datei für die Simulation</h3></div>
 				</div>
 				<div class="row">
-					<div class="col-md-12"><button class="btn btn-success btn-lg btn-block" ng-click="fc.sendPostRequest()">Datei erstellen</button></div>
+					<div class="col-md-12"><button class="btn btn-success  btn-lg btn-block" ng-click="fc.sendPostRequest()">Datei erstellen</button></div>
 				</div>
 				<div class="row">
 					<div ng-if="fc.dateiService.dateiErzeugt" class="col-md-12">
