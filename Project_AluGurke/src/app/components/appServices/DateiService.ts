@@ -43,10 +43,10 @@ class DateiService {
 					order: this.getNewOrders()
 				},
 				productionlist: {
-					production:[]//this.getProductionList()
+					production:this.getProductionList()
 				},
 				workingtimelist: {
-					workingtimeList:[]//this.getWorkingTime()
+					workingtimeList:this.getWorkingTime()
 				}
 			}
 		};
@@ -127,11 +127,18 @@ class DateiService {
 	
 	getProductionList(){
 		let list=[];
-		let auftrageExport=this.auftragService.auftraegeExport.sort(function(a,b){return Number(a.prioritaet)-Number(b.prioritaet)});
-		for(let x in auftrageExport){
+		let auftrageExport=this.auftragService.auftraegeExport.sort(function(a,b)
+		{
+			let i=Number(a.prioritaet)-Number(b.prioritaet);
+			if(i==0){
+				return a.erzeugnis_id-b.erzeugnis_id;
+			}
+			return i;
+		});
+		for(let i=0;i< auftrageExport.length;i++){
 			list.push({
-				_article:x.erzeugnis_id,
-				_quantity:x.anzahl
+				_article:auftrageExport[i].erzeugnis_id,
+				_quantity:auftrageExport[i].anzahl
 			});
 		}
 		return list;
@@ -139,14 +146,13 @@ class DateiService {
 	getWorkingTime(){
 		let list=[];
 		let kapa=this.kapazitaetsplanungService.models;
-		kapa.sort(function(a,b){
-			console.log(a);
+		kapa.sort(function(a,b){		
 			return Number(a.name.split("_")[0])-Number(b.name.split("_")[0])});
-		for(let x in kapa){
+		for(let i=0;i<kapa.length;i++){
 			list.push({
-				_station:x.name.split("_")[0],
-				_shift:x.anzahlSchichten,
-				_overtime:x.ueberstunden1+x.ueberstunden2+x.ueberstunden3
+				_station:kapa[i].name.split("_")[0],
+				_shift:kapa[i].anzahlSchichten,
+				_overtime:kapa[i].ueberstunden
 			});
 		}
 		return list;
