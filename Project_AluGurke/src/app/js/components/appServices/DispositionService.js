@@ -204,11 +204,20 @@ var DispositionService = (function () {
             }
         }
         this.auftragService.auftraegeSetzen(auftraege2);
+        this.auftragService.auftraegeTemp = auftraege2;
         this.arbeitsplatzService.reset();
         for (var i = 0; i < this.auftragService.auftraege.length; i++) {
             this.arbeitsplatzService.map[this.auftragService.auftraege[i].erzeugnis_id].auftragSetzten(this.auftragService.auftraege[i]);
         }
         this.auftragService.altLastenVerteilen(this.models);
+    };
+    DispositionService.prototype.auftraegeAktualisieren = function (auftraege) {
+        this.auftragService.auftraegeSetzen(auftraege);
+        this.arbeitsplatzService.reset();
+        for (var i = 0; i < this.auftragService.auftraege.length; i++) {
+            this.arbeitsplatzService.map[this.auftragService.auftraege[i].erzeugnis_id].auftragSetzten(this.auftragService.auftraege[i]);
+        }
+        this.altLastenVerteilen(this.models);
     };
     DispositionService.prototype.altLastenVerteilen = function (models) {
         for (var i = 0; i < this.auftragService.auftraegeAufMaschine.length; i++) {

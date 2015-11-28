@@ -14,29 +14,13 @@
         </ol>
     </div>
 </div>
+<h5>{{fac.fertigungsAuftraegeService.auftragService.auftraegeExport}}</h5>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Fertigungsaufträge</h5>
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-wrench"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#">Config option 1</a>
-                            </li>
-                            <li><a href="#">Config option 2</a>
-                            </li>
-                        </ul>
-                        <a class="close-link">
-                            <i class="fa fa-times"></i>
-                        </a>
-                    </div>
                 </div>
                 <div class="ibox-content">
                     <table class="table table-hover">
@@ -45,19 +29,63 @@
                                 <th>Erzeugnis</th>
                                 <th>Anzahl</th>
                                 <th>Priorität</th>
+                                <th>Auftragspositionen, mit Komma getrennt</th>
+                                <th>Details</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="model in fac.models">
+                            <tr ng-repeat-start="model in fac.models">
                                 <td>{{model.auftrag.erzeugnis_id}}</td>
                                 <td>{{model.auftrag.anzahl}}</td>
-                                <td>{{model.auftrag.prioritaet}}</td>
+                                <td>
+                                    <select class="form-control" ng-model="model.auftrag.prioritaetString" ng-click="fac.prioAendern()" style="width:110px;">
+                                        <option>normal</option>
+                                        <option>hoch</option>
+                                        <option>kritisch</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input class="form-control" ng-model="model.split" ng-keyup="fac.aendern();">
+                                </td>
+                                <td>
+                                    <button class="form-control" ng-click="fac.oeffnen(model.auftrag.erzeugnis_id)" style="width:40px;"><i class="fa fa-plus"></i></button>
+                                </td>
+                            </tr>
+                            <tr id="fac_{{model.auftrag.erzeugnis_id}}" hidden="true" tr ng-repeat-end>
+
+                                <td colspan="12">
+                                    <div class="row">
+                                        <div class="ibox-content">
+                                            <h3>Auftragspositionen</h3>
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <th>Anzahl</th>
+                                                    <th>Priorität</th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="auftrag in model.auftraege">
+                                                        <td>{{auftrag.anzahl}}</td>
+                                                        <td>
+                                                            <select class="form-control" ng-model="auftrag.prioritaetString" ng-click="fac.prioAendern()" style="width:110px;">
+                                                                <option>normal</option>
+                                                                <option>hoch</option>
+                                                                <option>kritisch</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    </td>
+
                             </tr>
                         </tbody>
                     </table>
-                    <button ng-click="fac.aendern();">test</button>
+
                 </div>
             </div>
         </div>
+
     </div>
 </div>
