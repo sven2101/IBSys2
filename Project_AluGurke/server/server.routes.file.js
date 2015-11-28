@@ -1,6 +1,7 @@
 var fs = require('fs');
 var mongoose = require('mongoose');
 var session = require('express-session');
+var bcrypt = require('bcryptjs');
 var sess;
 
 module.exports = function (app) {
@@ -47,21 +48,31 @@ module.exports = function (app) {
 			var benutzerName = req.body.benutzername;
 			var passwort = req.body.passwort;
 			var Benutzer = mongoose.model('benutzer');
-			var benutzer = new Benutzer({
-				name: benutzerName,
-				password: passwort
-			});
-			benutzer.save(function (err) {
-				if (err) {
-					res.send({erg: '500'});
-				}
-				else if (benutzerName.length < 3 && passwort < 5) {
-					res.send({erg: '400'});
-				} else {
-					res.send({erg: '200'});
-					console.log('benutzer gespeichert mit ' + benutzerName + ' und passwort ' + passwort)
+
+			mongoose.model('benutzer').findOne({name: benutzerName}, function (err, benutzer) {
+				if(benutzer)
+					res.send({erg: '409'});
+				else
+				{
+					var hash = bcrypt.hashSync(passwort, bcrypt.genSaltSync(10));
+					var benutzerModel = new Benutzer({
+						name: benutzerName,
+						password: hash
+					});
+					benutzerModel.save(function (err) {
+						if (err) {
+							res.send({erg: '500'});
+						}
+						else if (benutzerName.length < 3 && passwort < 5) {
+							res.send({erg: '400'});
+						} else {
+							res.send({erg: '200'});
+							console.log('benutzer gespeichert mit ' + benutzerName + ' und passwort ' + hash+'('+passwort+')')
+						}
+					})
 				}
 			})
+
 		}else{
 				res.send({erg: '502'});
 				console.log('No Database Connection or you have already an account!')
@@ -76,7 +87,8 @@ module.exports = function (app) {
 
 			mongoose.model('benutzer').findOne({name: benutzerName}, function (err, benutzer) {
 					if (benutzer && passwort) {
-						if (benutzer.password == passwort) {
+
+						if (bcrypt.compareSync(passwort, benutzer.password)) {
 							sess = req.session;
 							sess.name = benutzer.name;
 							res.send({erg: '202'});

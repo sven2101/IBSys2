@@ -6,7 +6,7 @@
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="assets/css/animate.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">	
-	<title>Project_AluGurke</title>
+	<title>SC Manager</title>
 </head>
 
 <body class="md-skin fixed-sidebar" ng-controller="MainController as mctrl">
@@ -15,23 +15,34 @@
         <div class="sidebar-collapse">
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
-                    <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="assets/img/profile_small.jpg" />
-                             </span>
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{mctrl.name}}</strong>
-                             </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
-                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="profile.html">Profile</a></li>
-                            <li><a href="contacts.html">Contacts</a></li>
-                            <li><a href="mailbox.html">Mailbox</a></li>
+                    <div class="dropdown profile-element">
+                        <span>
+                             <div ng-if="mctrl.isLoggedIn">
+                                <img alt="image" class="img-circle" src="assets/img/alugurke.png" />
+                             </div>
+                            <div ng-if="!mctrl.isLoggedIn">
+                                 <img alt="image" class="img-circle" src="assets/img/guest.png" />
+                             </div>
+                        </span>
+                        <span class="clear"> <span  class="text-muted text-xs block"> <strong class="font-bold">{{mctrl.name}}</strong> </span> </span>
+                        <div ng-if="mctrl.isLoggedIn">
+                            <a data-toggle="dropdown" class="dropdown-toggle">
+                                <span class="text-muted text-xs block">My Profile<b class="caret"></b></span>
+                            </a>  <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li>Profile</li>
                             <li class="divider"></li>
-                            <li><a href="login.html">Logout</a></li>
+                            <li>Logout</li>
                         </ul>
+
+                        </div>
                     </div>
+
                     <div class="logo-element">
                         IBSYS2
                     </div>
+                </li>
+                <li>
+                    <a href="#/home"><i class="fa fa-picture-o"></i> <span class="nav-label">Dashboard</span></a>
                 </li>
 				<li>
 					<a href="#/produktionsprogramm"><i class="fa fa-picture-o"></i> <span class="nav-label">Produktionsprogramm</span></a>
@@ -72,7 +83,7 @@
         <div class="row border-bottom">
 		<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
-            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary"><i class="fa fa-bars"></i> </a>
             <form role="search" class="navbar-form-custom" action="search_results.html">
                 <div class="form-group">
                     <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
@@ -98,21 +109,16 @@
                 </ul>
             </div>
         </nav>
-                <div class="footer">
-                    <div class="pull-right">
-                        <strong>Copyright</strong> Sven, Marius und Max; Hochschule Karlsruhe – Technik und Wirtschaft &copy; WS2015/2016
-                    </div>            
-                </div><!--/footer -->
+        <div class="footer">
+           <div class="pull-right">
+              <strong>Copyright</strong> Sven, Marius und Max; Hochschule Karlsruhe – Technik und Wirtschaft &copy; WS2015/2016
+           </div>
+        </div><!--/footer -->
         </div><!--/row border-bottom -->
         <div ng-view></div>
         </div><!--/page-wrapper -->
     </div><!--/wrapper -->
-    
-    
-    
-    
-    
-    
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="assets/js/jquery-ui.min.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
