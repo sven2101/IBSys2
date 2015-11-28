@@ -12,33 +12,39 @@
 	</div>
 </div>
 <div class="container">
-	<div class="jumbotron">
-		<div class="row">
-			<form>
-				<div class="form-group">
-					<label for="dateiInput">Datei hier hochladen</label>
-					<input type="file" id="dateiInput" onchange="verarbeiteDatei(this.files)">
+	<div class="wrapper-content animated fadeInRight">
+		<div class="ibox">
+			<div class="jumbotron">
+				<div class="row">
+					<form>
+						<div class="form-group">
+							<label for="dateiInput">Datei hier hochladen</label>
+							<input type="file" id="dateiInput" onchange="verarbeiteDatei(this.files)">
+						</div>
+					</form>
+				</div><!-- /row -->
+			</div><!-- /jumbotron -->
+		</div><!-- /ibox -->
+		<div class="ibox">
+			<div class="jumbotron">
+				<div class="row">
+					<div class="col-md-12"><h3>Fertig mit der Eingabe? Dann erstellen Sie hier eine Datei.</h3></div>
 				</div>
-			</form>
-		</div>
-	</div>
-	<div class="jumbotron">
-		<div class="row">
-			<div class="col-md-12"><h3>Fertig mit der Eingabe? Dann erstellen Sie hier eine Datei.</h3></div>
-		</div>
-		<div class="row">
-			<div class="col-md-12"><button class="btn btn-success btn-lg btn-block" ng-click="fc.sendPostRequest()">Datei erstellen</button></div>
-		</div>
-		<div class="row">
-			<div ng-if="fc.dateiService.dateiErzeugt" class="col-md-12">
-				<a ng-href="/download?dateiName={{fc.dateiService.dateiName}}" target="_blank">
-				<button class="btn btn-warning btn-lg btn-block">
-				{{fc.result}} downloaden.
-				</button></a>
-			</div>
-		</div>
-	</div>
-</div>
+				<div class="row">
+					<div class="col-md-12"><button class="btn btn-success btn-lg btn-block" ng-click="fc.sendPostRequest()">Datei erstellen</button></div>
+				</div>
+				<div class="row">
+					<div ng-if="fc.dateiService.dateiErzeugt" class="col-md-12">
+						<a ng-href="/download?dateiName={{fc.dateiService.dateiName}}" target="_blank">
+						<button class="btn btn-warning btn-lg btn-block">
+						{{fc.result}} downloaden.
+						</button></a>
+					</div>
+				</div><!-- /row -->
+			</div><!-- /jumbotron -->
+		</div> <!-- /ibox -->
+	</div><!-- /wrapper -->
+</div><!-- /container -->
 <script>
 		var verarbeiteDatei= function(dateien) {
     		
