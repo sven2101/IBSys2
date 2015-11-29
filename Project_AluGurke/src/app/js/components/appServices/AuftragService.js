@@ -77,15 +77,17 @@ var AuftragService = (function () {
     AuftragService.prototype.updateAuftraegeInWarteschlange = function (arbeitsplaetze) {
         this.auftraegeInWarteschlange = [];
         for (var i = 0; i < arbeitsplaetze.length; i++) {
-            if (arbeitsplaetze[i]._timeneed != 0) {
+            if (arbeitsplaetze[i].hasOwnProperty("waitinglist")) {
                 if (Array.isArray(arbeitsplaetze[i].waitinglist)) {
                     for (var j = 0; j < arbeitsplaetze[i].waitinglist.length; j++) {
-                        var x_1 = arbeitsplaetze[i].waitinglist[j];
-                        this.auftraegeInWarteschlange.push(new Auftrag(x_1._item, x_1._amount, x_1._period));
+                        var x = arbeitsplaetze[i].waitinglist[j];
+                        this.auftraegeInWarteschlange.push(new Auftrag(Number(x._item), Number(x._amount), Number(x._period)));
                     }
                 }
-                var x = arbeitsplaetze[i].waitinglist;
-                this.auftraegeInWarteschlange.push(new Auftrag(Number(x._item), Number(x._amount), Number(x._period)));
+                else {
+                    var x = arbeitsplaetze[i].waitinglist;
+                    this.auftraegeInWarteschlange.push(new Auftrag(Number(x._item), Number(x._amount), Number(x._period)));
+                }
             }
         }
     };

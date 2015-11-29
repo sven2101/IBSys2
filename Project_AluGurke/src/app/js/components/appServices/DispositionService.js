@@ -153,6 +153,7 @@ var DispositionService = (function () {
         this.auftragService.auftraegeTemp = auftraege2;
         this.arbeitsplatzService.reset();
         for (var i = 0; i < this.auftragService.auftraege.length; i++) {
+            //console.log(this.auftragService.auftraege[i].erzeugnis_id);
             this.arbeitsplatzService.map[this.auftragService.auftraege[i].erzeugnis_id].auftragSetzten(this.auftragService.auftraege[i]);
         }
         this.auftragService.altLastenVerteilen(this.models);
@@ -163,7 +164,7 @@ var DispositionService = (function () {
         for (var i = 0; i < this.auftragService.auftraege.length; i++) {
             this.arbeitsplatzService.map[this.auftragService.auftraege[i].erzeugnis_id].auftragSetzten(this.auftragService.auftraege[i]);
         }
-        this.altLastenVerteilen(this.models);
+        this.auftragService.altLastenVerteilen(this.models);
     };
     DispositionService.prototype.altLastenVerteilen = function (models) {
         for (var i = 0; i < this.auftragService.auftraegeAufMaschine.length; i++) {

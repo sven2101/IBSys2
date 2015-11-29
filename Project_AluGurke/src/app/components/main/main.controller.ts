@@ -22,7 +22,7 @@ class MainController {
         $rootScope.$on('refreshAfterLogin', function(event) { vm.checkSession(); });
         
         this.moveableRoutes = [];
-        console.log($route.routes);
+   
         this.setMoveableRoutes($route.routes);
     }
     checkSession() {

@@ -46,12 +46,6 @@ class BestellService {
 		this.laufendeBestellungen = [];
 		this.zugangBestellungen = [];
 		this.neuBestellungen = new BsNeuBestellungenMap();
-		
-		this.neuBestellungen['k21'].push(new NeuBestellung(false,21,100,99,1));
-		var b = new NeuBestellung(true,21,199,177,1);
-		b.timestamp = 44;
-		this.neuBestellungen['k21'].push(b);
-
 		$rootScope.$on('fileController.neueDatei', (event, dateiInhalt) => {
 			this.updateLaufendeBestellungen(dateiInhalt.results.futureinwardstockmovement.order);
 			this.updateZugangBestellungen(dateiInhalt.results.inwardstockmovement.order);
@@ -109,13 +103,13 @@ class BestellService {
 		}
 	}
 
-	neuBestellungErstellen(eil: boolean, teil:NewKaufTeil, menge: number, periode: number): void {
-		var kosten = this.getBestellungsKosten(menge, eil,teil);
+	neuBestellungErstellen(eil: boolean, teil: NewKaufTeil, menge: number, periode: number): void {
+		var kosten = this.getBestellungsKosten(menge, eil, teil);
 		var bestellung = new NeuBestellung(eil, teil.id, menge, kosten, periode);
 		this.neuBestellungen['k' + bestellung.teil_id].push(bestellung);
 	}
 
-	getBestellungsKosten(menge: number, eil: boolean,kaufTeil:NewKaufTeil): number {
+	getBestellungsKosten(menge: number, eil: boolean, kaufTeil: NewKaufTeil): number {
 		var materialKosten = 0;
 		var bestellKosten = 0;
 
@@ -132,8 +126,8 @@ class BestellService {
 
 		return bestellKosten + materialKosten;
 	}
-	
-	getLaufendeBestellungen(teil_id:number):Array<Bestellung>{
+
+	getLaufendeBestellungen(teil_id: number): Array<Bestellung> {
 		var bestellungen = new Array<Bestellung>();
 		for (var i = 0; i < this.laufendeBestellungen.length; i++) {
 			if (this.laufendeBestellungen[i].teil_id == teil_id) {
@@ -142,18 +136,18 @@ class BestellService {
 		}
 		return bestellungen;
 	}
-	
-	getZugangBestellungen(teil_id:number):Array<ZugangBestellung>{
+
+	getZugangBestellungen(teil_id: number): Array<ZugangBestellung> {
 		var aktuellerZugang = new Array<ZugangBestellung>();
-		
+
 		for (var i = 0; i < this.zugangBestellungen.length; i++) {
 			if (this.zugangBestellungen[i].teil_id == teil_id) {
 				aktuellerZugang.push(this.zugangBestellungen[i]);
 			}
 		}
-		
+
 		return aktuellerZugang;
 	}
 }
 
-angular.module('app').factory('BestellService', ['$rootScope',($rootScope) => new BestellService($rootScope)]);
+angular.module('app').factory('BestellService', ['$rootScope', ($rootScope) => new BestellService($rootScope)]);

@@ -72,11 +72,10 @@ class FertigungsAuftraegeService {
 		let x=new Array<Auftrag>()
 		for (let i = 0; i < this.models.length; i++) {
 			for (let j = 0; j< this.models[i].auftraege.length; j++) {
-				x.push(this.models[i].auftraege[j]);
+				x.push(this.models[i].auftraege[j]);				
 			}
-		}
-		this.dispositionService.auftraegeAktualisieren(x);
-		
+		}	
+		this.dispositionService.auftraegeAktualisieren(x);		
 	}
 	splitEvaluieren(split: String, anzahl: number): Array<number> {
 
