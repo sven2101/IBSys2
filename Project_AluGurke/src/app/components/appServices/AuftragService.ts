@@ -97,26 +97,30 @@ class AuftragService {
     
 
     onNeueDatei(dateiInhalt) {
+        
+   
         this.updateAuftraegeInWarteschlange(dateiInhalt.results.waitinglistworkstations.workplace);
 
         this.updateAuftraegeAufMaschine(dateiInhalt.results.ordersinwork.workplace)
 
     }
 
-    updateAuftraegeInWarteschlange(arbeitsplaetze: Array<any>) {
+    updateAuftraegeInWarteschlange(arbeitsplaetze: Array<any>) { 
         this.auftraegeInWarteschlange = [];
         for (let i = 0; i < arbeitsplaetze.length; i++) {
-            if (arbeitsplaetze[i]._timeneed != 0) {
-                if (Array.isArray(arbeitsplaetze[i].waitinglist)) {
-                    for (let j = 0; j < arbeitsplaetze[i].waitinglist.length; j++) {
-                        let x = arbeitsplaetze[i].waitinglist[j];
-                        this.auftraegeInWarteschlange.push(new Auftrag(x._item, x._amount, x._period));
+            if(arbeitsplaetze[i].hasOwnProperty("waitinglist")){
+                if(Array.isArray(arbeitsplaetze[i].waitinglist)){
+                    for(let j=0;j<arbeitsplaetze[i].waitinglist.length;j++){
+                        let x=arbeitsplaetze[i].waitinglist[j];
+                        this.auftraegeInWarteschlange.push(new Auftrag(Number(x._item), Number(x._amount), Number(x._period)));
                     }
                 }
-                let x = arbeitsplaetze[i].waitinglist;
-                this.auftraegeInWarteschlange.push(new Auftrag(Number(x._item), Number(x._amount), Number(x._period)));
+                else{
+                    let x=arbeitsplaetze[i].waitinglist;
+                    this.auftraegeInWarteschlange.push(new Auftrag(Number(x._item), Number(x._amount), Number(x._period)))
+                }
             }
-        }
+        }        
     }
 
     updateAuftraegeAufMaschine(arbeitsplaetze: Array<any>) {
@@ -125,6 +129,7 @@ class AuftragService {
             let x = arbeitsplaetze[i];
             this.auftraegeAufMaschine.push(new Auftrag(Number(x._item), Number(x._amount), Number(x._period)));
         }
+     
     }
 
 
@@ -132,10 +137,12 @@ class AuftragService {
 
         //let x=this.mergeAuftraege(auftraege);
         this.auftraege = [];
+       
         this.auftraegeExport = auftraege;
         this.auftraege = this.auftraege.concat(this.auftraegeAufMaschine);
         this.auftraege = this.auftraege.concat(this.auftraegeInWarteschlange);
         this.auftraege = this.auftraege.concat(auftraege);
+      
     }
     mergeAuftraege(auftraege: Array<Auftrag>) {
         let temp: Array<Auftrag> = new Array<Auftrag>();

@@ -106,7 +106,8 @@ class KapazitaetsplanungService {
     mergeArbeitsplaetze(){
         this.arbeitsplatzService.reset();
         for(let i=0;i<this.auftragService.auftraege.length;i++){
-            this.arbeitsplatzService.map[this.auftragService.auftraege[i].erzeugnis_id].auftragSetzten(this.auftragService.auftraege[i]);
+           
+              this.arbeitsplatzService.map[this.auftragService.auftraege[i].erzeugnis_id].auftragSetzten(this.auftragService.auftraege[i]);
         }
         let liste =this.arbeitsplatzService.fertigungsreihen;
         let ergebnisListe=new Array<Arbeitsplatz>();
