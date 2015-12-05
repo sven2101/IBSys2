@@ -15,7 +15,7 @@ class DispositionService {
     dispositionP3: Array<DispositionModel>;
     models: Array<DispositionModel>;
     programmService: ProgrammService;
-    
+
     newTeileService: NewTeileService;
     newBaumService: NewBaumService;
     auftragService: AuftragService;
@@ -126,8 +126,8 @@ class DispositionService {
             teile.push(knoten);
         }
     }
-    
-    aendern():void {
+
+    aendern(): void {
         let auftraege = new Array<Auftrag>();
         let auftraegeMFV = new Array<Auftrag>();
         let map: { [key: number]: number; }
@@ -149,6 +149,7 @@ class DispositionService {
                 }
                 for (let j = 0; j < Number(this.models[i].split); j++) {
                     let auftrag = new Auftrag(this.models[i].eTeil.id, y + x / Number(this.models[i].split), this.models[i].periode);
+
                     auftrag.setPriortaet(this.models[i].prioritaet);
                     y = 0;
                     this.models[i].auftraege.push(auftrag);
@@ -173,21 +174,29 @@ class DispositionService {
             }
 
         }
+       
         this.auftragService.auftraegeSetzen(auftraege2);
-        this.auftragService.auftraegeTemp=auftraege2;
+        
+        this.auftragService.auftraegeTemp = auftraege2;
+
+        
+
         this.arbeitsplatzService.reset();
         for (let i = 0; i < this.auftragService.auftraege.length; i++) {
+               
+            //console.log(this.auftragService.auftraege[i].erzeugnis_id);
             this.arbeitsplatzService.map[this.auftragService.auftraege[i].erzeugnis_id].auftragSetzten(this.auftragService.auftraege[i]);
         }
         this.auftragService.altLastenVerteilen(this.models);
     }
-    auftraegeAktualisieren(auftraege:Array<Auftrag>){
+    auftraegeAktualisieren(auftraege: Array<Auftrag>) {
         this.auftragService.auftraegeSetzen(auftraege);
         this.arbeitsplatzService.reset();
         for (let i = 0; i < this.auftragService.auftraege.length; i++) {
+
             this.arbeitsplatzService.map[this.auftragService.auftraege[i].erzeugnis_id].auftragSetzten(this.auftragService.auftraege[i]);
         }
-        this.altLastenVerteilen(this.models);
+        this.auftragService.altLastenVerteilen(this.models);
     }
     altLastenVerteilen(models: Array<DispositionModel>) {
         for (let i = 0; i < this.auftragService.auftraegeAufMaschine.length; i++) {

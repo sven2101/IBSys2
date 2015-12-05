@@ -24,9 +24,6 @@ angular.module('app')
                 }).when('/produktionsprogramm', {
                     templateUrl: '/components/produktionsprogramm/produktionsprogramm.html',
                     controller: 'ProduktionsprogrammController as pc'
-                }).when('/bestellverwaltung/erweitert', {
-                    templateUrl: '/components/bestellverwaltung/erweitert.html',
-                    controller: 'ErweitertController as ec'
                 }).when('/kapazitaetsplanung', {
                     templateUrl: '/components/kapazitaetsplanung/kapazitaetsplanung.html',
                     controller: 'KapazitaetsplanungController as kpc'
