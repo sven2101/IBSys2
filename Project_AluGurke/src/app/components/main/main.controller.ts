@@ -52,7 +52,7 @@ class MainController {
     keyUp(event) {
         
         var index = this.getActualRouteIndex();
-        console.log(index + ' ' + this.moveableRoutes[index]);
+        
         if (event.which === this.arrowRight) {
             this.location.url(this.moveableRoutes[index +1]);
         } else if (event.which === this.arrowLeft) {

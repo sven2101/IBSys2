@@ -11,7 +11,7 @@ class ZugangBestellung {
 	materialKosten: number;
 	bestellKosten: number;
 	gesamtKosten: number;
-	stückKosten: number;
+	stueckKosten: number;
 
 
 	constructor(id: number, eil: boolean, teil_id: number, menge: number, bestellPeriode: number, zeit: {periode:number;tag:number}, materialKosten: number, bestellKosten: number, gesamtKosten: number, stückKosten: number) {
@@ -24,6 +24,6 @@ class ZugangBestellung {
 		this.materialKosten = materialKosten;
 		this.bestellKosten = bestellKosten;
 		this.gesamtKosten = gesamtKosten;
-		this.stückKosten = stückKosten;
+		this.stueckKosten = stückKosten;
 	}
 }

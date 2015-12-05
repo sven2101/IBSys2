@@ -36,25 +36,24 @@ class FileController {
 			vm.dateiService.dateiErzeugt = true;
 		});
 	}
-	
-	startTest() {
-		this.anzahl = 0;
-		this.testBaum(this.baum, this.id);
-	}
-
-	testBaum(baum: NewTeilKnoten, id: number) {
-		if (baum.teil_id === id) {
-			this.anzahl += baum.anzahl;
-		}
-		if (baum.hatBauteile()) {
-			for (var i = 0; i < baum.bauteile.length; i++) {
-				this.testBaum(baum.bauteile[i], id);
-			}
-		}
-	}
 
 	change(json) {
 		var vm = this;
+		var aktuellePeriode=Number(json.results._period);
+		this.resource.createSimulationFile({ dateiInhalt: json,periode: aktuellePeriode}, function(result, headers) {
+			if(result.erg == '200') {
+				console.log('Ihre datei wurde hochgeladen');
+			}else if(result.erg == '300') {
+
+				alert("Die Periode "+aktuellePeriode+" wurde in der Datenbank ersetzt! ");
+			}
+			else if(result.erg == '404') {
+				alert("Benutzer nicht gefunden");
+			}else if(result.erg == '500') {
+				alert("Internal Server Error!");
+			}
+		});
+
 		this.$scope.$apply(function() {
 			vm.dateiInhalt = json;
 		});

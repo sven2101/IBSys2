@@ -19,7 +19,7 @@ angular.module('app')
                     templateUrl: '/components/bestellverwaltung/detail.html',
                     controller: 'DetailBestellVerwaltungController as dbvc'
                 }).when('/bestellverwaltung/ueberblick', {
-                    templateUrl: '/components/bestellverwaltung/bestellueberblick.html',
+                    templateUrl: '/components/bestellueberblick/bestellueberblick.html',
                     controller: 'BestellUeberblickController as buc'
                 }).when('/produktionsprogramm', {
                     templateUrl: '/components/produktionsprogramm/produktionsprogramm.html',

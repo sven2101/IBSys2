@@ -60,6 +60,7 @@ class BestellverwaltungUtilService {
 		}
 		
 		var reichweite = 0;
+		
 		for (var i = 1; i <= 10; i++) {
 			if (lagerMenge - this.getVerbrauch(teil_id, i) >= 0) {
 				reichweite += 1;
@@ -69,7 +70,7 @@ class BestellverwaltungUtilService {
 				break;
 			}
 		}
-		return reichweite;
+		return Math.round(reichweite*100)/100;
 	}
 
 }
