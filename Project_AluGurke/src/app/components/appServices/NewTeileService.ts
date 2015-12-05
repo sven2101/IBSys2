@@ -93,7 +93,7 @@ class NewTeileService {
 			new NewKaufTeil(22, 'Kette(D)', 6.50, 0, false, 300, 50, 1.7, 0.4),
 			new NewKaufTeil(23, 'Kette(H)', 6.50, 0, false, 300, 50, 1.2, 0.2),
 			new NewKaufTeil(24, 'Mutter 3/8', 0.06, 0, true, 6100, 100, 3.2, 0.3),
-			new NewKaufTeil(25, 'Schaibe 3/8', 0.06, 0, true, 3600, 50, 0.9, 0.2),
+			new NewKaufTeil(25, 'Scheibe 3/8', 0.06, 0, true, 3600, 50, 0.9, 0.2),
 			new NewKaufTeil(27, 'Schraube 3/8', 0.10, 0, true, 1800, 75, 0.9, 0.2),
 			new NewKaufTeil(28, 'Rohr 3/4', 1.20, 0, true, 4500, 50, 1.7, 0.4),
 			new NewKaufTeil(32, 'Farbe', 0.75, 0, true, 2700, 50, 2.1, 0.5),

@@ -178,5 +178,6 @@ class BestellungBerechnenService{
         }
         return null;
     }
+    
 }
 angular.module('app').factory('BestellungBerechnenService', ['BestellService','NewTeileService','$rootScope','BestellverwaltungUtilService', (BestellService,NewTeileService,$rootScope,BestellverwaltungUtilService) => new BestellungBerechnenService(BestellService,NewTeileService,$rootScope,BestellverwaltungUtilService)]);
