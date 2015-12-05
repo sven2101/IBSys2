@@ -50,10 +50,12 @@ class BestellService {
 		$rootScope.$on('fileController.neueDatei', (event, dateiInhalt) => {
 			this.updateLaufendeBestellungen(dateiInhalt.results.futureinwardstockmovement.order);
 			this.updateZugangBestellungen(dateiInhalt.results.inwardstockmovement.order);
+			this.neuBestellungen = new BsNeuBestellungenMap();
 		});
 	}
 
 	updateLaufendeBestellungen(bestellungen) {
+		this.laufendeBestellungen = [];
 		
 		if(!angular.isArray(bestellungen)||bestellungen.length === 0){
 			return;
@@ -72,6 +74,9 @@ class BestellService {
 	}
 
 	updateZugangBestellungen(bestellungen) {
+		
+		this.zugangBestellungen = [];
+		
 		if(!angular.isArray(bestellungen)||bestellungen.length === 0){
 			return;
 		}
