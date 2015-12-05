@@ -42,7 +42,8 @@ class BestellService {
 	neuBestellungen: BsNeuBestellungenMap;
 	teileServicee: NewTeileService;
 
-	constructor($rootScope) {
+	constructor($rootScope,teileService:NewTeileService) {
+		this.teileServicee = teileService;
 		this.laufendeBestellungen = [];
 		this.zugangBestellungen = [];
 		this.neuBestellungen = new BsNeuBestellungenMap();
@@ -53,13 +54,27 @@ class BestellService {
 	}
 
 	updateLaufendeBestellungen(bestellungen) {
+		
+		if(!angular.isArray(bestellungen)||bestellungen.length === 0){
+			return;
+		}
+		
 		for (var i = 0; i < bestellungen.length; i++) {
 			var b = bestellungen[i];
-			this.laufendeBestellungen.push(new Bestellung(Number(b._id), this.isEilBestellung(b._mode), Number(b._article), Number(b._amount), Number(b._orderperiod)));
+			var kaufTeil = this.teileServicee.getKaufTeil(Number(b._article));
+			var gesamtKosten = this.getBestellungsKosten(Number(b._amount), this.isEilBestellung(b._mode), kaufTeil);
+			var bestellKosten = kaufTeil.bestellKosten;
+			var materialKosten = gesamtKosten - bestellKosten;
+			var stueckKosten = Math.round(gesamtKosten/Number(b._amount) * 100)/100;
+			this.laufendeBestellungen.push(new Bestellung(Number(b._id), this.isEilBestellung(b._mode), Number(b._article), Number(b._amount), Number(b._orderperiod),
+															gesamtKosten,materialKosten,bestellKosten,stueckKosten));
 		}
 	}
 
 	updateZugangBestellungen(bestellungen) {
+		if(!angular.isArray(bestellungen)||bestellungen.length === 0){
+			return;
+		}
 		var ersteBestellungEndet = bestellungen[0]._time * 1;
 		var startPeriode = bestellungen[0]._orderperiod * 1;
 		for (var i = 0; i < bestellungen.length; i++) {
@@ -150,4 +165,4 @@ class BestellService {
 	}
 }
 
-angular.module('app').factory('BestellService', ['$rootScope', ($rootScope) => new BestellService($rootScope)]);
+angular.module('app').factory('BestellService', ['$rootScope','NewTeileService', ($rootScope,teileServicee) => new BestellService($rootScope,teileServicee)]);

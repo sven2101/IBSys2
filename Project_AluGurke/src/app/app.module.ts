@@ -7,6 +7,7 @@ angular.module('app', [
 	'FileModule',
 	'ProduktionsprogrammModule',
 	'BestellverwaltungModule',
+	'BestellueberblickModule',
 	'pascalprecht.translate',
 	'TranslationModule',
 	'KapazitaetsplanungModule',

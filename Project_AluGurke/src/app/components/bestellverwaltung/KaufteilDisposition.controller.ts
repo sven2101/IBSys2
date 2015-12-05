@@ -158,9 +158,6 @@ class KaufteilDispositionController {
 		//this.berechneteBestellungAktualisieren();
 	}
 
-	getNeuenTeileWert(viewModel: ViewModel):number {
-		return this.teileService.getKaufTeilTeileWertNeu(viewModel.kaufTeil.lagerMenge, viewModel.kaufTeil.teileWert, viewModel.kaufTeil.id);
-	}
 	//Max was here
 	/*bestellung = null;
 	timeLine = null;
