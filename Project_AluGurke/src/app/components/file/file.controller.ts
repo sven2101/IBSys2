@@ -36,22 +36,6 @@ class FileController {
 			vm.dateiService.dateiErzeugt = true;
 		});
 	}
-	
-	startTest() {
-		this.anzahl = 0;
-		this.testBaum(this.baum, this.id);
-	}
-
-	testBaum(baum: NewTeilKnoten, id: number) {
-		if (baum.teil_id === id) {
-			this.anzahl += baum.anzahl;
-		}
-		if (baum.hatBauteile()) {
-			for (var i = 0; i < baum.bauteile.length; i++) {
-				this.testBaum(baum.bauteile[i], id);
-			}
-		}
-	}
 
 	change(json) {
 		var vm = this;
