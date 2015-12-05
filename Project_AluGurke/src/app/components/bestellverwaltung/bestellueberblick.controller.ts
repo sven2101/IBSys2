@@ -44,7 +44,7 @@ class BestellUeberblickController {
 		this.bestellService = bestellService;
 		this.teileService = teileService;
 		this.setNeueBestellungen();
-		this.analysiere(this.neueBestellungen);
+		this.analysiereBestellungen(this.neueBestellungen);
 	}
 
 	setNeueBestellungen(): void {
@@ -57,7 +57,7 @@ class BestellUeberblickController {
 		}
 	}
 
-	analysiere(neueBestellungen: Array<NeuBestellung>): void {
+	analysiereBestellungen(neueBestellungen: Array<NeuBestellung>): void {
 		this.anzahlNeuBestellungen = neueBestellungen.length;
 		for (var i = 0; i < neueBestellungen.length; i++) {
 			this.erhoeheEilOderNormalAnzahl(neueBestellungen[i]);
@@ -66,7 +66,6 @@ class BestellUeberblickController {
 	}
 
 	analysiereKosten(bestellung: NeuBestellung): void {
-
 
 		this.gesamtKosten += bestellung.kosten;
 		this.erhoeheEilOderNormalKosten(bestellung);

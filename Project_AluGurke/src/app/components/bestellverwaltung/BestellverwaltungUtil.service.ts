@@ -69,7 +69,7 @@ class BestellverwaltungUtilService {
 				break;
 			}
 		}
-		return reichweite;
+		return Math.round(reichweite*100)/100;
 	}
 
 }
