@@ -8,7 +8,7 @@ class LagerColumn {
 	}
 
 	link(scope, el, attrs, controller) {
-		
+
 		el.highcharts({
 			chart: {
 				type: 'column'
@@ -24,6 +24,16 @@ class LagerColumn {
 				min: 0,
 				title: {
 					text: 'Wert in Euro'
+				}
+			},
+			plotOptions: {
+				column: {
+					color: attrs.color
+				}
+			},
+			tooltip: {
+				formatter: function() {
+					return this.y + ' €';
 				}
 			},
 			series: [JSON.parse(attrs.series)]

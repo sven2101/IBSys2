@@ -51,10 +51,10 @@ class LagerStatistikService {
 		var data = [];
 		for (var i = 0; i < this.teileService.alleErzeugnisse.length; i++) {
 			var erzeugnis = this.teileService.alleErzeugnisse[i];
-			data.push(Math.round(erzeugnis.teileWert * erzeugnis.lagerMenge * 100) / 100);
+			data.push({y:Math.round(erzeugnis.teileWert * erzeugnis.lagerMenge * 100) / 100,color: '#ffcc00'});
 		}
 
-		return { name: 'Erzeugnisse', data: data };
+		return { name: 'Erzeugnis', data: data };
 	}
 
 	getKaufTeileSeries() {
@@ -64,7 +64,7 @@ class LagerStatistikService {
 			data.push(Math.round(kaufTeil.teileWert * kaufTeil.lagerMenge * 100) / 100);
 		}
 
-		return { name: 'Kaufteile', data: data };
+		return { name: 'Kaufteil', data: data};
 	}
 }
 
