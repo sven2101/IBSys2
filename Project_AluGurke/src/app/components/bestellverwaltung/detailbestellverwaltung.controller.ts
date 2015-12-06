@@ -82,14 +82,14 @@ class DetailBestellVerwaltungController {
 	test(data: Array<number>, linienName: string) {
 		let categories = new Array<string>();
 
-		let periode = this.bestellungBerechnenService.aktuellePeriode;
-		let j = 0;
+		let periode = this.periode;
+		
 		for (let i = 0; i < 20; i++) {
-			if (i % 5 == 0) {
-				j++;
+			if (i % 5 === 0) {
+				periode++;
 			}
-
-			categories.push('Periode' + j + ' Tag' + ((i % 5) + 1));
+			
+			categories.push('Periode' + periode + ' Tag' + ((i % 5) + 1));
 		}
 		$('#timelineChart').highcharts({
 			chart: {

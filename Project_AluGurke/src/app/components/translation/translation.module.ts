@@ -11,6 +11,7 @@ angular.module('app').config(function ($translateProvider) {
         NAV_Home:'Startseite',
         NAV_File:'Datei hochladen',
         NAV_OrderManagment:'Bestellverwaltung',
+        
         //Bestellverwaltung
         orderManagment_headline:'Bestellverwaltung',
         orderManagment_product:'Produkt',
