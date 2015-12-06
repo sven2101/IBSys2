@@ -10,7 +10,7 @@ class LagerStatistikService {
 	}
 
 	getLagerWertErzeugnisse(): number {
-		var erzeugnisseWert = 1;
+		var erzeugnisseWert = 0;
 		for (var i = 0; i < this.teileService.alleErzeugnisse.length; i++) {
 			var erzeugnis = this.teileService.alleErzeugnisse[i];
 
@@ -21,7 +21,7 @@ class LagerStatistikService {
 	}
 
 	getLagerWertKaufTeile(): number {
-		var kaufTeileWert = 1;
+		var kaufTeileWert = 0;
 		for (var i = 0; i < this.teileService.alleKaufteile.length; i++) {
 			var kaufTeil = this.teileService.alleKaufteile[i];
 

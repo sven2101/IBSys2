@@ -32,8 +32,17 @@
 					<div class="tabs-container">
 						<div ng-if="lc.showTab.statistik">
 							<div class="row">
-								<div class="col-lg-12">
+								<div class="col-lg-6">
 									<div lagerpie ng-attr-erzeugnisse="{{lc.statistikService.getLagerWertErzeugnisse()}}" ng-attr-kaufteile="{{lc.statistikService.getLagerWertKaufTeile()}}">
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="widget p-xl">
+										<h2><b>Gesamter Lagerwert:  {{lc.getGesamtenLagerWert() | currency:'€'}}</b></h2>
+										<ul>
+											<li><h3>Erzeugnisse:  {{lc.statistikService.getLagerWertErzeugnisse() | currency:'€'}}</h3></li>
+											<li><h3>Kaufteile:  {{lc.statistikService.getLagerWertKaufTeile() | currency:'€'}}</h3></li>
+										</ul>
 									</div>
 								</div>
 							</div> <!-- /row -->

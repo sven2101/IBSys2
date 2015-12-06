@@ -31,11 +31,11 @@ class LagerPie {
 				data: [
 					{
 						name: "Erzeugnisse",
-						y: attrs.erzeugnisse * 1,
+						y: attrs.erzeugnisse * 1 === 0 ? 1 : attrs.erzeugnisse * 1,
 						color: '#ffcc00'
 					}, {
 						name: "Kaufteile",
-						y: attrs.kaufteile * 1,
+						y: attrs.kaufteile * 1=== 0 ? 1 : attrs.kaufteile * 1,
 						color: '#3399ff'
 					}]
 			}]

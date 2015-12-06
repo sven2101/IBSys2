@@ -43,7 +43,7 @@ class LagerController {
 	sortiereKaufTeile(kriterium: string) {
 		this.sortiere(this.alleKaufTeile, kriterium);
 	}
-	
+
 	tabOnClick(contentToShow: string): void {
 		for (var property in this.showTab) {
 			if (this.showTab.hasOwnProperty(property)) {
@@ -83,6 +83,10 @@ class LagerController {
 			}
 			return differenz;
 		});
+	}
+
+	getGesamtenLagerWert(): number {
+		return this.statistikService.getLagerWertErzeugnisse()+ this.statistikService.getLagerWertKaufTeile();
 	}
 }
 
