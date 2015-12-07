@@ -47,24 +47,43 @@ class LagerStatistikService {
 		return categories;
 	}
 
-	getErzeugnisseSeries() {
+	getErzeugnisseLagerWertSeries() {
 		var data = [];
 		for (var i = 0; i < this.teileService.alleErzeugnisse.length; i++) {
 			var erzeugnis = this.teileService.alleErzeugnisse[i];
-			data.push({y:Math.round(erzeugnis.teileWert * erzeugnis.lagerMenge * 100) / 100,color: '#ffcc00'});
+			data.push({ y: Math.round(erzeugnis.teileWert * erzeugnis.lagerMenge * 100) / 100, color: '#ffcc00' });
 		}
 
-		return { name: 'Erzeugnis', data: data };
+		return { name: 'Lagerwert Erzeugnis', data: data, yAxis: 0, color: '#ffcc00',tooltip:{pointFormat: "{point.y}  €"} };
+	}
+	
+	getErzeugnisseLagerMengeSeries() {
+		var data = [];
+		for (var i = 0; i < this.teileService.alleErzeugnisse.length; i++) {
+			data.push( this.teileService.alleErzeugnisse[i].lagerMenge*1);
+		}
+		
+		return { name: 'Lagermenge Erzeugnis', data: data, yAxis: 1, color: 'red',tooltip:{pointFormat: "{point.y}  ME"} };
 	}
 
-	getKaufTeileSeries() {
+	getKaufTeileLagerWertSeries() {
 		var data = [];
 		for (var i = 0; i < this.teileService.alleKaufteile.length; i++) {
 			var kaufTeil = this.teileService.alleKaufteile[i];
 			data.push(Math.round(kaufTeil.teileWert * kaufTeil.lagerMenge * 100) / 100);
 		}
 
-		return { name: 'Kaufteil', data: data};
+		return { name: 'Lagerwert Kaufteil', data: data, yAxis: 0, color: '#3399ff',tooltip:{pointFormat: "{point.y}  €"} };
+	}
+	
+	getKaufTeileLagerMengeSeries(){
+		var data = [];
+		for (var i = 0; i < this.teileService.alleKaufteile.length; i++) {
+			var kaufTeil = this.teileService.alleKaufteile[i];
+			data.push(kaufTeil.lagerMenge);
+		}
+
+		return { name: 'Lagermenge Kaufteil', data: data, yAxis: 1, color: 'green' ,tooltip:{pointFormat: "{point.y}  ME"}};
 	}
 }
 

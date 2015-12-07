@@ -48,15 +48,17 @@
 							</div> <!-- /row -->
 							<div class="row">
 								<div class="col-lg-12">
-									<div lagercolumn ng-attr-title="Lagerwerte Erzeugnisse" ng-attr-categories="{{lc.statistikService.getErzeugnisseCategories()}}"
-										ng-attr-series="{{lc.statistikService.getErzeugnisseSeries()}}" ng-attr-color="#ffcc00">
+									<div lagercolumn ng-attr-title="Lagerwerte/Lagermenge Erzeugnisse" ng-attr-categories="{{lc.statistikService.getErzeugnisseCategories()}}"
+										ng-attr-wertseries="{{lc.statistikService.getErzeugnisseLagerWertSeries()}}" 
+										ng-attr-mengeseries="{{lc.statistikService.getErzeugnisseLagerMengeSeries()}}" ng-attr-color="#ffcc00">
 									</div>
 								</div>
 							</div> <!-- /row -->
 							<div class="row">
 								<div class="col-lg-12">
-									<div lagercolumn ng-attr-title="Lagerwerte Kaufteile" ng-attr-categories="{{lc.statistikService.getKaufTeileCategories()}}"
-										ng-attr-series="{{lc.statistikService.getKaufTeileSeries()}}" ng-attr-color="#3399ff">
+									<div lagercolumn ng-attr-title="Lagerwerte/Lagermenge Kaufteile" ng-attr-categories="{{lc.statistikService.getKaufTeileCategories()}}"
+										ng-attr-wertseries="{{lc.statistikService.getKaufTeileLagerWertSeries()}}" 
+										ng-attr-mengeseries="{{lc.statistikService.getKaufTeileLagerMengeSeries()}}" ng-attr-color="#3399ff">
 									</div>
 								</div>
 							</div> <!-- /row -->

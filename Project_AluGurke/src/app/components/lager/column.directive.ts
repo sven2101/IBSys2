@@ -9,6 +9,8 @@ class LagerColumn {
 
 	link(scope, el, attrs, controller) {
 
+		console.log(attrs.mengeseries);
+
 		el.highcharts({
 			chart: {
 				type: 'column'
@@ -20,23 +22,28 @@ class LagerColumn {
 				categories: JSON.parse(attrs.categories),
 				crosshair: true
 			},
-			yAxis: {
-				min: 0,
-				title: {
-					text: 'Wert in Euro'
-				}
-			},
+			yAxis: [
+				{
+					title: {
+						text: 'Wert in Euro'
+					}
+				}, {
+					title: {
+						text: 'Stück'
+					},
+					opposite:true,
+				}],
 			plotOptions: {
 				column: {
 					color: attrs.color
 				}
 			},
-			tooltip: {
+			/*tooltip: {
 				formatter: function() {
 					return this.y + ' €';
 				}
-			},
-			series: [JSON.parse(attrs.series)]
+			},*/
+			series: [JSON.parse(attrs.wertseries), JSON.parse(attrs.mengeseries)]
 		});
 	}
 }
