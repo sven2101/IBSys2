@@ -2,15 +2,24 @@
 /// <reference path="../../model/NewKaufTeil.ts" />
 /// <reference path="../../model/NewErzeugnis.ts" />
 /// <reference path="../appServices/NewTeileService.ts" />
+/// <reference path="./lagerStatistik.service.ts" />
 
 class LagerController {
 	alleErzeugnisse: Array<NewErzeugnis>;
 	alleKaufTeile: Array<NewKaufTeil>;
 
+	showTab = {
+		statistik: true,
+		erzeugnisse: false,
+		kaufTeile: false
+	}
 	showErzeugnisse: boolean;
 	showKaufTeile: boolean;
 
-	constructor(teileService: NewTeileService) {
+	statistikService: LagerStatistikService;
+
+	constructor(teileService: NewTeileService, statistikService: LagerStatistikService) {
+		this.statistikService = statistikService;
 		this.alleErzeugnisse = teileService.alleErzeugnisse;
 		this.alleKaufTeile = teileService.alleKaufteile;
 		this.showErzeugnisse = true;
@@ -33,6 +42,15 @@ class LagerController {
 
 	sortiereKaufTeile(kriterium: string) {
 		this.sortiere(this.alleKaufTeile, kriterium);
+	}
+
+	tabOnClick(contentToShow: string): void {
+		for (var property in this.showTab) {
+			if (this.showTab.hasOwnProperty(property)) {
+				this.showTab[property] = false;
+			}
+		}
+		this.showTab[contentToShow] = true;
 	}
 
 	sortiere(array: Array<any>, kriterium: string): void {
@@ -66,6 +84,10 @@ class LagerController {
 			return differenz;
 		});
 	}
+
+	getGesamtenLagerWert(): number {
+		return this.statistikService.getLagerWertErzeugnisse()+ this.statistikService.getLagerWertKaufTeile();
+	}
 }
 
-angular.module('LagerModule').controller('LagerController', ['NewTeileService', LagerController]);
+angular.module('LagerModule').controller('LagerController', ['NewTeileService', 'LagerStatistikService', LagerController]);
