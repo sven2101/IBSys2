@@ -34,7 +34,7 @@
 <div class="container">
 	<div class="wrapper-content animated fadeInRight">
 		<div class="ibox">
-			<div class="jumbotron">
+			<div class="ibox-content">
 				<div class="row">
 					<form>
 						<div class="form-group">
@@ -48,15 +48,16 @@
 						</div>
 					</form>
 				</div><!-- /row -->
-			</div><!-- /jumbotron -->
+			</div><!--/ibox-content -->
 		</div><!-- /ibox -->
 		<div class="ibox">
-			<div class="jumbotron">
+			<div class="ibox-content">
+			<!--<div class="jumbotron">-->
 				<div class="row">
-					<div class="col-md-12"><h3>Fertig mit der Eingabe? Dann erstellen Sie hier eine Datei für die Simulation</h3></div>
+					<div class="col-md-12"><h3>Fertig mit der Eingabe? Dann erstellen Sie hier eine Datei für die Simulation!</h3></div>
 				</div>
 				<div class="row">
-					<div class="col-md-12"><button class="btn btn-success  btn-lg btn-block" ng-click="fc.sendPostRequest()">Datei erstellen</button></div>
+					<div class="col-md-12"><button class="btn btn-success" ng-click="fc.sendPostRequest()"><i class="fa fa-file-code-o"></i>&nbsp;&nbsp;<span class="bold">Datei erstellen</span></button></div>
 				</div>
 				<div class="row">
 					<div ng-if="fc.dateiService.dateiErzeugt" class="col-md-12">
@@ -66,7 +67,7 @@
 						</button></a>
 					</div>
 				</div><!-- /row -->
-			</div><!-- /jumbotron -->
+			</div><!--/ibox-content -->
 		</div> <!-- /ibox -->
 	</div><!-- /wrapper -->
 </div><!-- /container -->

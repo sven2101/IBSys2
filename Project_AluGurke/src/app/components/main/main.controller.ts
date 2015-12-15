@@ -12,6 +12,7 @@ class MainController {
     moveableRoutes: Array<string>;
     arrowLeft = 37;
     arrowRight = 39;
+    strgPressed:boolean = false;
 
     constructor(resourceService: ResourceService, $rootScope, $location, $route) {
         this.resource = resourceService.resource;
@@ -48,14 +49,25 @@ class MainController {
             }
         });
     }
+    
+    keyDown(event):void{
+        if(event.which === 17){
+            this.strgPressed = true;
+        }
+    }
 
-    keyUp(event) {
+    keyUp(event):void {
+        
+        if(event.which === 17){
+            this.strgPressed = false;
+            return;
+        }
         
         var index = this.getActualRouteIndex();
         
-        if (event.which === this.arrowRight) {
+        if (event.which === this.arrowRight && this.strgPressed) {
             this.location.url(this.moveableRoutes[index +1]);
-        } else if (event.which === this.arrowLeft) {
+        } else if (event.which === this.arrowLeft && this.strgPressed) {
             this.location.url(this.moveableRoutes[index-1]);
         }
     }
@@ -72,7 +84,7 @@ class MainController {
         return index;
     }
 
-    setMoveableRoutes(routes) {
+    setMoveableRoutes(routes):void {
         for (var property in routes) {
             if (routes.hasOwnProperty(property)) {
                if(this.isValidRoute(routes[property])){

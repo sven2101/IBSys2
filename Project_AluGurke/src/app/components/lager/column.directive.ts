@@ -33,16 +33,6 @@ class LagerColumn {
 					},
 					opposite:true,
 				}],
-			plotOptions: {
-				column: {
-					color: attrs.color
-				}
-			},
-			/*tooltip: {
-				formatter: function() {
-					return this.y + ' €';
-				}
-			},*/
 			series: [JSON.parse(attrs.wertseries), JSON.parse(attrs.mengeseries)]
 		});
 	}
