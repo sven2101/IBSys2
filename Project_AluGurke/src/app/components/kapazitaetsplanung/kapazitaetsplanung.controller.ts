@@ -18,10 +18,7 @@ class KapazitaetsplanungController{
         this.settingsService=settingsService;
         
         this.ergebnis=this.kapazitaetsplanungService.ergebnis;
-        this.bestellungBerechnenService=bestellungBerechnenService;
-        if(this.settingsService.model.arbeitszeitGenerieren){
-            this.kapazitaetsplanungService.zeitSetzten();
-        }
+        this.bestellungBerechnenService=bestellungBerechnenService;        
         this.aendern();
 
     }
@@ -32,6 +29,9 @@ class KapazitaetsplanungController{
     }
     berechnen(){
         this.kapazitaetsplanungService.zeitSetzten();
+    }
+    reset(){
+        this.kapazitaetsplanungService.reset();
     }
 
 

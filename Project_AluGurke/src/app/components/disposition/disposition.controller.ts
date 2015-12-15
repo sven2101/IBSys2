@@ -22,7 +22,13 @@ class DispositionController{
     knoten:Array<NewTeilKnoten>;
     kapazitaetsplanungService:KapazitaetsplanungService;
     
-    verbrauch:number;
+    showTab = {
+		P1: true,
+		P2: false,
+		P3: false	
+	};
+    
+
 
     constructor(auftragsService,newTeileService,dispositionService,newBaumService,kapazitaetsplanungService){
         this.dispositionService=dispositionService;
@@ -33,13 +39,21 @@ class DispositionController{
         this.modelsP3=this.dispositionService.dispositionP3;
         this.auftragsService=auftragsService;
         this.aendern();        
-        this.verbrauch = this.auftragsService.getAktuellenKaufTeilVerbrauch(44); //TODO entfernen
+        
         
     }
     aendern(){
         this.dispositionService.aendern();
         this.kapazitaetsplanungService.aendern();
     }
+    tabOnClick(contentToShow: string): void {
+		for (var property in this.showTab) {
+			if (this.showTab.hasOwnProperty(property)) {
+				this.showTab[property] = false;
+			}
+		}
+		this.showTab[contentToShow] = true;
+	}
 }
 
 

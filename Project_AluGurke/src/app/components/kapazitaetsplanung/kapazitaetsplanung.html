@@ -4,12 +4,12 @@
         <ol class="breadcrumb">
             <li>
                 <a href="/#/">Home</a>
-            </li>            
+            </li>
             <li class="active">
                 <strong>Kapazitätsplanung</strong>
             </li>
         </ol>
-    </div>   
+    </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
@@ -39,7 +39,7 @@
                                 <td>{{model.arbeitsplatz.auftraege.length}}</td>
                                 <td>{{model.arbeitsplatz.arbeitsplatzFremdeAuftraege.length}}</td>
                                 <td>
-                                    <select class="form-control" ng-model="model.anzahlSchichten" ng-click="kpc.aendern()" style="width:70px;">
+                                    <select class="form-control" ng-model="model.anzahlSchichten" ng-selected="kpc.aendern()" style="width:70px;">
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -51,9 +51,24 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
-                <h5>{{kpc.kapazitaetsplanungService.arbeitsplatzService.fertigungsreihen}}</h5>
+                </div>                
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Automatische Berechnung</h5>
+                </div>
+                <div class="ibox-content">
+                    <div>
+                        <button class="btn btn-primary" type="submit" ng-click="kpc.reset()">Arbeitszeiten löschen</button>
+                        <button class="btn btn-primary" type="submit" ng-click="kpc.berechnen()">Arbeitszeiten automatisch berechnen</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h5>{{kpc.kapazitaetsplanungService.arbeitsplatzService.fertigungsreihen}}</h5>
 </div>

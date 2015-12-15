@@ -43,6 +43,14 @@ var KapazitaetsplanungService = (function () {
         this.models.sort(function (a, b) { return Number(a.name.split("_")[0]) - Number(b.name.split("_")[0]); });
         return this.models;
     };
+    KapazitaetsplanungService.prototype.reset = function () {
+        for (var i = 0; i < this.models.length; i++) {
+            var x = this.models[i];
+            x.anzahlSchichten = '1';
+            x.ueberstunden = 0;
+            x.zeitVerfuegung = 2400;
+        }
+    };
     KapazitaetsplanungService.prototype.zeitSetzten = function () {
         for (var i = 0; i < this.models.length; i++) {
             var model = this.models[i];

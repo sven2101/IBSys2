@@ -52,12 +52,12 @@ class DetailBestellVerwaltungController {
 		this.verbrauch3 = utilService.getVerbrauch(this.kaufTeil.id, 4);
 
 		this.setTimeLine();
-		this.test(this.timeLine, 'K' + this.kaufTeil.id + ' ' + this.kaufTeil.bezeichnung);
+		this.chart(this.timeLine, 'K' + this.kaufTeil.id + ' ' + this.kaufTeil.bezeichnung);
 	}
 
 	setTimeLine() { /*TODO MULTIPLIKATOR*/
-		this.timeLine = this.bestellungBerechnenService.timeLineGenerieren(this.teil_id, this.periode, 50, [this.verbrauchAktuell, this.verbrauch1, this.verbrauch2, this.verbrauch3]);
-		this.test(this.timeLine, this.kaufTeil.bezeichnung);
+		this.timeLine = this.bestellungBerechnenService.timeLineGenerieren(this.teil_id, this.periode, 0, [this.verbrauchAktuell, this.verbrauch1, this.verbrauch2, this.verbrauch3]);
+		this.chart(this.timeLine, this.kaufTeil.bezeichnung);
 	}
 
 	zeileRot(): boolean {
@@ -79,7 +79,7 @@ class DetailBestellVerwaltungController {
 		}
 		this.setTimeLine();
 	}
-	test(data: Array<number>, linienName: string) {
+	chart(data: Array<number>, linienName: string) {
 		let categories = new Array<string>();
 
 		let periode = this.bestellungBerechnenService.aktuellePeriode;

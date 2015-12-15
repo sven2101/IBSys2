@@ -53,6 +53,14 @@ class KapazitaetsplanungService {
         return this.models;
 
     }
+    reset(){
+        for(let i=0;i<this.models.length;i++){
+            let x=this.models[i];
+            x.anzahlSchichten='1';
+            x.ueberstunden=0;
+            x.zeitVerfuegung=2400;
+        }
+    }
     zeitSetzten(){
         for(let i=0;i<this.models.length;i++){            
             let model=this.models[i];

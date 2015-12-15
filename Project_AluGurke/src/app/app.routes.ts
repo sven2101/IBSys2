@@ -27,15 +27,9 @@ angular.module('app')
                 }).when('/kapazitaetsplanung', {
                     templateUrl: '/components/kapazitaetsplanung/kapazitaetsplanung.html',
                     controller: 'KapazitaetsplanungController as kpc'
-                }).when('/dispositionP1', {
-                    templateUrl: '/components/disposition/dispositionP1.html',
-                    controller: 'DispositionController as dc',
-                }).when('/dispositionP2', {
-                    templateUrl: '/components/disposition/dispositionP2.html',
-                    controller: 'DispositionController as dc',
-                }).when('/dispositionP3', {
-                    templateUrl: '/components/disposition/dispositionP3.html',
-                    controller: 'DispositionController as dc',
+                }).when('/disposition', {
+                    templateUrl: '/components/disposition/disposition.html',
+                    controller: 'DispositionController as dc',        
                 }).when('/lager', {
                     templateUrl: '/components/lager/lager.html',
                     controller: 'LagerController as lc'

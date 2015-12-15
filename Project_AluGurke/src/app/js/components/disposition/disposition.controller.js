@@ -9,6 +9,11 @@
 /// <reference path="../appServices/KapazitaetsplanungService.ts" />
 var DispositionController = (function () {
     function DispositionController(auftragsService, newTeileService, dispositionService, newBaumService, kapazitaetsplanungService) {
+        this.showTab = {
+            P1: true,
+            P2: false,
+            P3: false
+        };
         this.dispositionService = dispositionService;
         this.kapazitaetsplanungService = kapazitaetsplanungService;
         this.models = this.dispositionService.models;
@@ -17,11 +22,18 @@ var DispositionController = (function () {
         this.modelsP3 = this.dispositionService.dispositionP3;
         this.auftragsService = auftragsService;
         this.aendern();
-        this.verbrauch = this.auftragsService.getAktuellenKaufTeilVerbrauch(44); //TODO entfernen
     }
     DispositionController.prototype.aendern = function () {
         this.dispositionService.aendern();
         this.kapazitaetsplanungService.aendern();
+    };
+    DispositionController.prototype.tabOnClick = function (contentToShow) {
+        for (var property in this.showTab) {
+            if (this.showTab.hasOwnProperty(property)) {
+                this.showTab[property] = false;
+            }
+        }
+        this.showTab[contentToShow] = true;
     };
     return DispositionController;
 })();

@@ -11,9 +11,6 @@ var KapazitaetsplanungController = (function () {
         this.settingsService = settingsService;
         this.ergebnis = this.kapazitaetsplanungService.ergebnis;
         this.bestellungBerechnenService = bestellungBerechnenService;
-        if (this.settingsService.model.arbeitszeitGenerieren) {
-            this.kapazitaetsplanungService.zeitSetzten();
-        }
         this.aendern();
     }
     KapazitaetsplanungController.prototype.aendern = function () {
@@ -22,6 +19,9 @@ var KapazitaetsplanungController = (function () {
     };
     KapazitaetsplanungController.prototype.berechnen = function () {
         this.kapazitaetsplanungService.zeitSetzten();
+    };
+    KapazitaetsplanungController.prototype.reset = function () {
+        this.kapazitaetsplanungService.reset();
     };
     return KapazitaetsplanungController;
 })();
