@@ -1,16 +1,13 @@
 <div class="row wrapper border-bottom white-bg page-heading">
 	<div class="col-lg-10">
-		<h2>Disposition P1</h2>
+		<h2>{{'disposition_Headline'|translate}}</h2>
 		<ol class="breadcrumb">
 			<li>
 				<a href="/#/">Home</a>
 			</li>
 			<li>
-				<a>Disposition</a>
-			</li>
-			<li class="active">
-				<strong>Disposition P1/Kinderfahrräder</strong>
-			</li>
+				<a>{{'disposition_Headline'|translate}}</a>
+			</li>			
 		</ol>
 	</div>
 </div>
@@ -22,13 +19,13 @@
 					<h2>Bestellungen</h2>
 					<ul class="nav nav-tabs">
 						<li class="active" ng-click="dc.tabOnClick('P1')">
-							<a data-toggle="tab" href="" aria-expanded="true">Disposition P1</a>
+							<a data-toggle="tab" href="" aria-expanded="true">{{'disposition_Headline'|translate}} P1</a>
 						</li>
 						<li ng-click="dc.tabOnClick('P2')">
-							<a data-toggle="tab" href="" aria-expanded="true">Disposition P2</a>
+							<a data-toggle="tab" href="" aria-expanded="true">{{'disposition_Headline'|translate}} P2</a>
 						</li>
 						<li ng-click="dc.tabOnClick('P3')">
-							<a data-toggle="tab" href="" aria-expanded="true">Disposition P3</a>
+							<a data-toggle="tab" href="" aria-expanded="true">{{'disposition_Headline'|translate}} P3</a>
 						</li>						
 					</ul>
 				</div>
@@ -36,13 +33,13 @@
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th>id</th>
-								<th>ProdProg</th>
-								<th>geplanter Lagerstand</th>
-								<th>Lagerstand</th>
-								<th>Aufträge in Warteschlange</th>
-								<th>Material auf Maschine</th>
-								<th>Fertigungsauftrag</th>
+								<th>{{'disposition_Id'|translate}}</th>
+								<th>{{'disposition_SalesOrder'|translate}}</th>
+								<th>{{'disposition_planedStock'|translate}}</th>
+								<th>{{'disposition_stock'|translate}}</th>
+								<th>{{'disposition_OrderWaitingQueue'|translate}}</th>
+								<th>{{'disposition_WorkInProgress'|translate}}</th>
+								<th>{{'disposition_productionProgram'|translate}}</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -74,14 +71,14 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>id</th>
-                                <th>ProdProg</th>
-                                <th>geplanter Lagerstand</th>
-                                <th>Lagerstand</th>
-                                <th>Aufträge in Warteschlange</th>
-                                <th>Material auf Maschine</th>
-                                <th>Fertigungsauftrag</th>                           
-                            </tr>
+								<th>{{'disposition_Id'|translate}}</th>
+								<th>{{'disposition_SalesOrder'|translate}}</th>
+								<th>{{'disposition_planedStock'|translate}}</th>
+								<th>{{'disposition_stock'|translate}}</th>
+								<th>{{'disposition_OrderWaitingQueue'|translate}}</th>
+								<th>{{'disposition_WorkInProgress'|translate}}</th>
+								<th>{{'disposition_productionProgram'|translate}}</th>
+							</tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="model in dc.modelsP2">
@@ -111,15 +108,15 @@
 				<div class="ibox-content" ng-if="dc.showTab.P3">
                     <table class="table table-hover">
                         <thead>
-                            <tr>
-                                <th>id</th>
-                                <th>ProdProg</th>
-                                <th>geplanter Lagerstand</th>
-                                <th>Lagerstand</th>
-                                <th>Aufträge in Warteschlange</th>
-                                <th>Material auf Maschine</th>
-                                <th>Fertigungsauftrag</th>
-                            </tr>
+                           <tr>
+								<th>{{'disposition_Id'|translate}}</th>
+								<th>{{'disposition_SalesOrder'|translate}}</th>
+								<th>{{'disposition_planedStock'|translate}}</th>
+								<th>{{'disposition_stock'|translate}}</th>
+								<th>{{'disposition_OrderWaitingQueue'|translate}}</th>
+								<th>{{'disposition_WorkInProgress'|translate}}</th>
+								<th>{{'disposition_productionProgram'|translate}}</th>
+							</tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="model in dc.modelsP3">

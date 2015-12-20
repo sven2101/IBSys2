@@ -1,12 +1,12 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Kapazitätsplanung</h2>
+        <h2>{{'capacityPlanning_headline'|translate}}</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="/#/">Home</a>
             </li>
             <li class="active">
-                <strong>Kapazitätsplanung</strong>
+                <strong>{{'capacityPlanning_headline'|translate}}</strong>
             </li>
         </ol>
     </div>
@@ -16,19 +16,19 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Kapazitätsplanung</h5>
+                    <h5>{{'capacityPlanning_headline'|translate}}</h5>
                 </div>
                 <div class="ibox-content">
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Arbeitszeit</th>
-                                <th>Verfügbare Zeit</th>
-                                <th>Anzahl Aufträge</th>
-                                <th>Anzahl arbeitsplatzfremder Aufträge</th>
-                                <th>Anzahl Schichten</th>
-                                <th>Überstunden</th>
+                                <th>{{'capacityPlanning_Workplace'|translate}}</th>
+                                <th>{{'capacityPlanning_WorkingHours'|translate}}</th>
+                                <th>{{'capacityPlanning_timeAvailable'|translate}}</th>
+                                <th>{{'capacityPlanning_amountOrders'|translate}}</th>
+                                <th>{{'capacityPlanning_Shifts'|translate}}</th>
+                                <th>{{'capacityPlanning_overtime'|translate}}</th>
+                         
                             </tr>
                         </thead>
                         <tbody>
@@ -36,8 +36,7 @@
                                 <td>{{model.name.split("_")[0]}}</td>
                                 <td>{{model.arbeitsplatz.arbeitszeit}}</td>
                                 <td>{{model.zeitVerfuegung}}</td>
-                                <td>{{model.arbeitsplatz.auftraege.length}}</td>
-                                <td>{{model.arbeitsplatz.arbeitsplatzFremdeAuftraege.length}}</td>
+                                <td>{{model.arbeitsplatz.auftraege.length+model.arbeitsplatz.arbeitsplatzFremdeAuftraege.length}}</td>
                                 <td>
                                     <select class="form-control" ng-model="model.anzahlSchichten" ng-selected="kpc.aendern()" style="width:70px;">
                                         <option>1</option>
