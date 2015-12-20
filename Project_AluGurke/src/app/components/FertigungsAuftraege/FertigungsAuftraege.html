@@ -1,36 +1,35 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Fertigungsaufträge</h2>
+        <h2>{{'productionOrders_headline'|translate}}</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="/#/">Home</a>
             </li>
             <li>
-                <a>Disposition</a>
+                <a href="#/disposition">{{'disposition_Headline'|translate}}</a>
             </li>
             <li class="active">
-                <strong>Fertigungsaufträge</strong>
+                <strong>{{'productionOrders_headline'|translate}}</strong>
             </li>
         </ol>
     </div>
 </div>
-<h5>{{fac.fertigungsAuftraegeService.auftragService.auftraegeExport}}</h5>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Fertigungsaufträge</h5>
+                    <h5>{{'productionOrders_headline'|translate}}</h5>
                 </div>
                 <div class="ibox-content">
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Erzeugnis</th>
-                                <th>Anzahl</th>
-                                <th>Priorität</th>
-                                <th>Auftragspositionen, mit Komma getrennt</th>
-                                <th>Details</th>
+                                <th>{{'productionOrders_Id'|translate}}</th>
+                                <th>{{'productionOrders_amount'|translate}}</th>
+                                <th>{{'productionOrders_priority'|translate}}</th>
+                                <th>{{'productionOrders_productionPosition'|translate}}</th>
+                                <th>{{'productionOrders_details'|translate}}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,9 +38,9 @@
                                 <td>{{model.auftrag.anzahl}}</td>
                                 <td>
                                     <select class="form-control" ng-model="model.auftrag.prioritaetString" ng-click="fac.prioAendern()" style="width:110px;">
-                                        <option>normal</option>
-                                        <option>hoch</option>
-                                        <option>kritisch</option>
+                                        <option>{{'productionOrders_normal'|translate}}</option>
+                                        <option>{{'productionOrders_high'|translate}}</option>
+                                        <option>{{'productionOrders_critical'|translate}}</option>
                                     </select>
                                 </td>
                                 <td>
@@ -67,9 +66,9 @@
                                                         <td>{{auftrag.anzahl}}</td>
                                                         <td>
                                                             <select class="form-control" ng-model="auftrag.prioritaetString" ng-click="fac.prioAendern()" style="width:110px;">
-                                                                <option>normal</option>
-                                                                <option>hoch</option>
-                                                                <option>kritisch</option>
+                                                                <option>{{'productionOrders_normal'|translate}}</option>
+                                                                <option>{{'productionOrders_high'|translate}}</option>
+                                                                <option>{{'productionOrders_critical'|translate}}</option>
                                                             </select>
                                                         </td>
                                                     </tr>
@@ -77,7 +76,7 @@
                                             </table>
                                         </div>
                                     </div>
-                                    </td>
+                                </td>
 
                             </tr>
                         </tbody>

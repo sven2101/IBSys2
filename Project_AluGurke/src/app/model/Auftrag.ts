@@ -24,11 +24,11 @@ class Auftrag{
             this.prioritaet=3;
             return;
         }
-        if(prio==="hoch"){
+        if(prio==="hoch"||prio==="high"){
             this.prioritaet=2;
             return;
         }
-        if(prio==="kritisch"){
+        if(prio==="kritisch"||prio==="critical"){
             this.prioritaet=1;
             return;
         }

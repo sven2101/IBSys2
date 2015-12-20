@@ -33,8 +33,7 @@ class FertigungsAuftraegeModel{
     split:String;
     split2:String;
     show:boolean=true;
-    prioritaet:Array<string>;
-    
+    prioritaet:Array<string>;    
     
     constructor(auftrag:Auftrag){
         this.auftrag=auftrag;

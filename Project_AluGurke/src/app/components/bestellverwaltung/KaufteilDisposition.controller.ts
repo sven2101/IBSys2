@@ -37,14 +37,13 @@ class KaufteilDispositionController {
 	bestellService: BestellService;
 	teileService: NewTeileService;
 	programmService: ProgrammService;
-	selectedViewModel: ViewModel;
-	//neuBestellung: NeuBestellung;
 	bestellungBerechnenService: BestellungBerechnenService;
 	auftragService: AuftragService;
 	utilService: BestellverwaltungUtilService;
 
 	constructor(teileService: NewTeileService, baumService: NewBaumService, bestellService: BestellService,
 		programmService: ProgrammService, bestellungBerechnenService: BestellungBerechnenService, auftragService: AuftragService,utilService:BestellverwaltungUtilService) {
+		this.bestellungBerechnenService = bestellungBerechnenService;
 		this.auftragService = auftragService;
 		this.utilService = utilService;
 		this.kaufTeileVM = [];
@@ -53,11 +52,6 @@ class KaufteilDispositionController {
 		this.teileService = teileService;
 		this.programmService = programmService;
 		this.createViewModel(teileService.alleKaufteile);
-		this.selectedViewModel = this.kaufTeileVM[3];
-		//this.neuBestellung = new NeuBestellung(false, 0, 0, 0, 1);
-		this.bestellungBerechnenService = bestellungBerechnenService;
-		
-		//this.berechneteBestellungAktualisieren();
 	}
     onSelected(){
         this.bestellungBerechnenService.onSelected();
@@ -109,7 +103,8 @@ class KaufteilDispositionController {
 	}
 
 	getReichweite(lagerMenge: number, teil_id: number):number {
-		return this.utilService.getReichweite(lagerMenge,teil_id);
+        return this.utilService.getReichweite(lagerMenge,teil_id);
+        //return this.bestellungBerechnenService.getReichweite(teil_id,[1,1,1,1]);
 	}
 
 	getAnzahlInBaum(baum: NewTeilKnoten, id: number): number {
@@ -144,64 +139,10 @@ class KaufteilDispositionController {
 		});
 	}
 
-	select(model: ViewModel):void {
-		this.selectedViewModel = model;
-		//this.neuBestellung.teil_id = model.kaufTeil.id;
-		//this.berechneteBestellungAktualisieren();
-	}
-
-	/*neueBestellungErstellen() {
-		if (this.neuBestellung.menge <= 0) {
-			return;
-		}
-		this.bestellService.neuBestellungErstellen(this.neuBestellung.eil, this.neuBestellung.teil_id, this.neuBestellung.menge, 1);
-		this.neuBestellung.menge = 0;
-		this.neuBestellung.eil = false;
-		//this.berechneteBestellungAktualisieren();
-	}*/
-
 	deleteNeueBestellung(bestellung: NeuBestellung):void {
 		this.bestellService.deleteNeuBetellung(bestellung.teil_id, bestellung.timestamp);
 		//this.berechneteBestellungAktualisieren();
 	}
-
-	//Max was here
-	/*bestellung = null;
-	timeLine = null;
-	reichweite = null;
-	
-	//Max was here
-	berechneteBestellungAktualisieren() {
-		this.bestellung = this.getBerechneteBestellung();
-		this.timeLine = this.getTimeLine();
-		this.reichweite = this.getBerechneteReichweite();
-	}
-	
-	//Max was here
-	getBerechneteBestellung() {
-		let x = this.selectedViewModel;
-		return this.bestellungBerechnenService.getBestellung(x.kaufTeil.id, this.getGambleFaktor(), [x.verbrauch1, x.verbrauch2, x.verbrauch3, x.verbrauch4]);
-	}
-	//Max was here
-	getTimeLine() {
-		let x = this.selectedViewModel;
-		return this.bestellungBerechnenService.getTimeLine(x.kaufTeil.id, this.getGambleFaktor(), [x.verbrauch1, x.verbrauch2, x.verbrauch3, x.verbrauch4]);
-	}
-	//Max was here
-	getBerechneteReichweite() {
-		let x = this.selectedViewModel;
-		return this.bestellungBerechnenService.getReichweite(x.kaufTeil.id, this.getGambleFaktor(), [x.verbrauch1, x.verbrauch2, x.verbrauch3, x.verbrauch4]);
-	}
-	//Max was here
-	gambleFaktor = 0;	
-
-	//Max was here
-	getGambleFaktor() {
-		if (this.gambleFaktor < -100 || this.gambleFaktor > 100 || isNaN(this.gambleFaktor)) {
-			this.gambleFaktor = 0;
-		}
-		return this.gambleFaktor / 100;
-	}*/
 }
 
 angular.module('BestellverwaltungModule').controller('KaufteilDispositionController', ['NewTeileService', 'NewBaumService', 'BestellService', 'ProgrammService', 

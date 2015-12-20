@@ -49,6 +49,10 @@ class DispositionService {
         this.dispoP3rekursuiv(this.newBaumService.herrenBaum);
         this.altLastenVerteilen(this.models);
         this.aendern();
+        
+        $rootScope.$on('pc.programmaenderung', (event) => {
+           this.aendern();
+        });
     }
     dispoP1rekursuiv(wurzel: NewTeilKnoten, oberModel: DispositionModel = null) {
         let x = new DispositionModel(this.filter(wurzel.teil_id), this.programmService.getProgrammposition(1), this.programmService.getDirectsalesPosition(1));

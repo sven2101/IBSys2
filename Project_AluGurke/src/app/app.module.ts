@@ -1,6 +1,7 @@
 /// <reference path="typeDefinitions/angular.d.ts" />#
 "use strict";
 angular.module('app', [
+    'pascalprecht.translate',
 	'ngRoute',
 	'ngResource',
 	'ngAnimate',
@@ -8,7 +9,6 @@ angular.module('app', [
 	'ProduktionsprogrammModule',
 	'BestellverwaltungModule',
 	'BestellueberblickModule',
-	'pascalprecht.translate',
 	'TranslationModule',
 	'KapazitaetsplanungModule',
 	'DispositionModule',
