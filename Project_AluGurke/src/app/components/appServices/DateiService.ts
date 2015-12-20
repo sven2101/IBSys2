@@ -50,6 +50,7 @@ class DateiService {
 				}
 			}
 		};
+        json.input.productionlist=json.input.productionlist.production.length==0?null:json.input.productionlist;
 		var x2js = new X2JS();
 
 		var xml = x2js.json2xml_str(json);
