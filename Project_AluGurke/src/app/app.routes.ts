@@ -14,6 +14,15 @@ angular.module('app')
                 }).when('/file', {
                     templateUrl: '/components/file/file.html',
                     controller: 'FileController as fc'
+                }).when('/produktionsprogramm', {
+                    templateUrl: '/components/produktionsprogramm/produktionsprogramm.html',
+                    controller: 'ProduktionsprogrammController as pc'
+                }).when('/disposition', {
+                    templateUrl: '/components/disposition/disposition.html',
+                    controller: 'DispositionController as dc',        
+                }).when('/fertigungsAuftraege', {
+                    templateUrl: '/components/FertigungsAuftraege/FertigungsAuftraege.html',
+                    controller: 'FertigungsAuftraegeController as fac'
                 }).when('/bestellverwaltung/kaufteildisposition', {
                     templateUrl: '/components/bestellverwaltung/kaufteilDisposition.html',
                     controller: 'KaufteilDispositionController as ktdc'
@@ -23,21 +32,12 @@ angular.module('app')
                 }).when('/bestellverwaltung/ueberblick', {
                     templateUrl: '/components/bestellueberblick/bestellueberblick.html',
                     controller: 'BestellUeberblickController as buc'
-                }).when('/produktionsprogramm', {
-                    templateUrl: '/components/produktionsprogramm/produktionsprogramm.html',
-                    controller: 'ProduktionsprogrammController as pc'
                 }).when('/kapazitaetsplanung', {
                     templateUrl: '/components/kapazitaetsplanung/kapazitaetsplanung.html',
                     controller: 'KapazitaetsplanungController as kpc'
-                }).when('/disposition', {
-                    templateUrl: '/components/disposition/disposition.html',
-                    controller: 'DispositionController as dc',        
                 }).when('/lager', {
                     templateUrl: '/components/lager/lager.html',
                     controller: 'LagerController as lc'
-                }).when('/fertigungsAuftraege', {
-                    templateUrl: '/components/FertigungsAuftraege/FertigungsAuftraege.html',
-                    controller: 'FertigungsAuftraegeController as fac'
                 }).when('/settings', {
                     templateUrl: '/components/settings/settings.html',
                     controller: 'SettingsController as sc'

@@ -135,7 +135,11 @@ class KaufteilDispositionController {
 			}
 			if (differenz === 0) {
 				return a.kaufTeil['id'] - b.kaufTeil['id'];
-			}
+			} else if(differenz <= 0){
+                differenz = -1;
+            } else {
+                differenz = 1;
+            }
 			return differenz;
 		});
 	}

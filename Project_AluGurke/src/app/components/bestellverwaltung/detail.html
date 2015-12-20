@@ -1,185 +1,216 @@
 <section>
-	<div class="row wrapper border-bottom white-bg page-heading">
-		<div class="col-lg-10">
-			<h2>Detailansicht</h2>
-			<ol class="breadcrumb">
-				<li>
-					<a href="/#/">Home</a>
-				</li>
-				<li>
-					<a>Bestellverwaltung</a>
-				</li>
-				<li>
-					<a href="/#/bestellverwaltung/kaufteildisposition">Kaufteildisposition</a>
-				</li>
-				<li class="active">
-					<strong>Detailansicht</strong>
-				</li>
-                <li>
-                    <select ng-selected="dbvc.onSelected()" ng-model="dbvc.bestellungBerechnenService.multiplikatorString" class="form-control">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+        <div class="row ">
+            <div class="col-lg-10">
+                <h2>Detailansicht</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="/#/">Home</a>
+                    </li>
+                    <li>
+                        <a>Bestellverwaltung</a>
+                    </li>
+                    <li>
+                        <a href="/#/bestellverwaltung/kaufteildisposition">Kaufteildisposition</a>
+                    </li>
+                    <li class="active">
+                        <strong>Detailansicht</strong>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-2">
+                <div class="row">
+                    <h3></h3>
+                </div>
+                <div class="row">
+                    <h3>Wähle eine Strategie:</h3>
+                </div>
+                <div class="row">
+                    <select style="width:150" ng-selected="dbvc.onSelected()" ng-model="dbvc.bestellungBerechnenService.multiplikatorString" class="form-control">
                         <option>sehr riskant</option>
                         <option>riskant</option>
                         <option>normal</option>
                         <option>sicher</option>
-                        <option>sehr sicher</option>                        
-                    </select>             
-                </li>
-			</ol>
-		</div>
-	</div>
-	<div class="container">
-		<div class="wrapper-content animated fadeInRight">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="ibox">
-						<div class="ibox-title">
-							<h2>Detailainsicht für Kaufteil {{dbvc.teil_id}} {{dbvc.kaufTeil.bezeichnung}}</h2>
-						</div>
-						<div class="ibox-content">
-							<table class="table table-bordered text-center table-condensed">
-								<tr>
-									<th>MFW</th>
-									<th class="text-center">Preis</th>
-									<th class="text-center">Teile-<br>wert</th>
-									<th class="text-center">Lager-<br>menge</th>
-									<th class="text-center">Discont-<br>menge</th>
-									<th class="text-center">WBZ &plusmn<br>Abweichung</th>
-									<th class="text-center">Bestell-<br>kosten</th>
-									<th class="text-center">Verbrauch <br> aktuell</th>
-									<th class="text-center">Verbrauch <br> Periode {{dbvc.periode+1}}</th>
-									<th class="text-center">Verbrauch <br> Periode {{dbvc.periode+2}}</th>
-									<th class="text-center">Verbrauch <br> Periode {{dbvc.periode+3}}</th>
-									<th class="text-center">Reichweite</th>
-								</tr>
-								<tr  ng-class="{danger: dbvc.zeileRot(), warning: dbvc.zeileGelb()}">
-									<td>
-										<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="dbvc.kaufTeil.mfw"></span>
-										<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!dbvc.kaufTeil.mfw"></span>
-									</td>
-									<td>{{dbvc.kaufTeil.preis | currency:"€"}}</td>
-									<td>{{dbvc.kaufTeil.teileWert | currency:"€"}}</td>
-									<td>{{dbvc.kaufTeil.lagerMenge}}</td>
-									<td>{{dbvc.kaufTeil.discontMenge}}</td>
-									<td>{{dbvc.kaufTeil.wbz}} &plusmn ({{dbvc.kaufTeil.wbzAbw}})</td>
-									<td>{{dbvc.kaufTeil.bestellKosten | currency:"€"}}</td>
-									<td>{{dbvc.verbrauchAktuell}}</td>
-									<td>{{dbvc.verbrauch1}}</td>
-									<td>{{dbvc.verbrauch2}}</td>
-									<td>{{dbvc.verbrauch3}}</td>
-									<td>{{dbvc.reichweite}}</td>
-								</tr>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-6">
-					<div class="ibox">
-						<div class="ibox-title"><h2>Neue Bestellungen</h2></div>
-						<div class="ibox-content">
-							<table class="table table-bordered text-center table-hover table-condensed">
-								<tr>
-									<th class="text-center">Eil</th>
-									<th class="text-center">Menge</th>
-									<th class="text-center">Kosten</th>
-									<th class="text-center"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></th>
-								</tr>
-								<tr ng-repeat="bestellung in dbvc.neueBestellungen">
-									<td>
-										<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="bestellung.eil"></span>
-										<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!bestellung.eil"></span>
-									</td>
-									<td>{{bestellung.menge}}</td>
-									<td>{{bestellung.kosten | currency:"€"}}</td>
-									<td>
-										<button type="button" class="btn btn-danger btn-sm btn-circle" ng-click="dbvc.deleteNeueBestellung(bestellung)">
-											<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-										</button>
-									</td>
-								</tr>
-							</table>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<div class="ibox">
-						<div class="ibox-title"><h2>Neue Bestellung anlegen</h2></div>
-						<div class="ibox-content">
-							<form>
-								<div class="form-group">
-									<label for="mengeInput" class="sr-only">Menge</label>
-									<input type="number" placeholder="Menge" class="form-control" id="mengeInput" min="1" ng-model="dbvc.neueBestellung.menge">
-								</div>
-								<div class="checkbox">
-									<label>
-										<input type="checkbox" ng-model="dbvc.neueBestellung.eil">Eilbestellung
-									</label>
-								</div>
-								<button class="btn btn-primary" type="submit" ng-click="dbvc.createNeueBestellung()">Anlegen</button>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-6">
-					<div class="ibox">
-						<div class="ibox-title"><h2>Aktueller Lagerzugang</h2></div>
-						<div class="ibox-content">
-							<table class="table table-bordered text-center table-condensed">
-								<tr>
-									<th class="text-center">Eil</th>
-									<th class="text-center">Menge</th>
-									<th class="text-center">Gesamt-<br>kosten</th>
-									<th class="text-center">Bestell-<br>periode</th>
-									<th class="text-center">Zeit</th>
-								</tr>
-								<tr ng-repeat="zugang in dbvc.aktuellerLagerzugang">
-									<td>
-										<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="zugang.eil"></span>
-										<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!zugang.eil"></span>
-									</td>
-									<td>{{zugang.menge}}</td>
-									<td>{{zugang.gesamtKosten | currency:"€"}}</td>
-									<td>{{zugang.bestellPeriode}}</td>
-									<td>{{zugang.zeit.periode}}-{{zugang.zeit.tag}}-0-0</td>
-								</tr>
-							</table>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<div class="ibox">
-						<div class="ibox-title"><h2>Zukünftiger Lagerzugang</h2></div>
-						<div class="ibox-content">
-							<table class="table table-bordered text-center table-condensed">
-								<tr>
-									<th class="text-center">Eil</th>
-									<th class="text-center">Menge</th>
-									<th class="text-center">Bestell-<br>periode</th>
-								</tr>
-								<tr ng-repeat="bestellung in dbvc.laufendeBestellungen">
-									<td>
-										<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="bestellung.eil"></span>
-										<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!bestellung.eil"></span>
-									</td>
-									<td>{{bestellung.menge}}</td>
-									<td>{{bestellung.periode}}</td>
-								</tr>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="ibox">
-						<div class="ibox-title"><h2><u>Prognose:</u>&nbsp Entwicklung durchschnittlicher Lagerbestand</h2></div>
-						<div id="timelineChart"class="ibox-content"></div>						
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                        <option>sehr sicher</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!--/row -->
+        </div>
+    </div>
+    </div>
+    <div class="container">
+        <div class="wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h2>Detailainsicht für Kaufteil {{dbvc.teil_id}} {{dbvc.kaufTeil.bezeichnung}}</h2>
+                        </div>
+                        <div class="ibox-content">
+                            <table class="table table-bordered text-center table-condensed">
+                                <tr>
+                                    <th>MFW</th>
+                                    <th class="text-center">Preis</th>
+                                    <th class="text-center">Teile-
+                                        <br>wert</th>
+                                    <th class="text-center">Lager-
+                                        <br>menge</th>
+                                    <th class="text-center">Discont-
+                                        <br>menge</th>
+                                    <th class="text-center">WBZ &plusmn
+                                        <br>Abweichung</th>
+                                    <th class="text-center">Bestell-
+                                        <br>kosten</th>
+                                    <th class="text-center">Verbrauch
+                                        <br> aktuell</th>
+                                    <th class="text-center">Verbrauch
+                                        <br> Periode {{dbvc.periode+1}}</th>
+                                    <th class="text-center">Verbrauch
+                                        <br> Periode {{dbvc.periode+2}}</th>
+                                    <th class="text-center">Verbrauch
+                                        <br> Periode {{dbvc.periode+3}}</th>
+                                    <th class="text-center">Reichweite</th>
+                                </tr>
+                                <tr ng-class="{danger: dbvc.zeileRot(), warning: dbvc.zeileGelb()}">
+                                    <td>
+                                        <span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="dbvc.kaufTeil.mfw"></span>
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!dbvc.kaufTeil.mfw"></span>
+                                    </td>
+                                    <td>{{dbvc.kaufTeil.preis | currency:"€"}}</td>
+                                    <td>{{dbvc.kaufTeil.teileWert | currency:"€"}}</td>
+                                    <td>{{dbvc.kaufTeil.lagerMenge}}</td>
+                                    <td>{{dbvc.kaufTeil.discontMenge}}</td>
+                                    <td>{{dbvc.kaufTeil.wbz}} &plusmn ({{dbvc.kaufTeil.wbzAbw}})</td>
+                                    <td>{{dbvc.kaufTeil.bestellKosten | currency:"€"}}</td>
+                                    <td>{{dbvc.verbrauchAktuell}}</td>
+                                    <td>{{dbvc.verbrauch1}}</td>
+                                    <td>{{dbvc.verbrauch2}}</td>
+                                    <td>{{dbvc.verbrauch3}}</td>
+                                    <td>{{dbvc.reichweite}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h2>Neue Bestellungen</h2></div>
+                        <div class="ibox-content">
+                            <table class="table table-bordered text-center table-hover table-condensed">
+                                <tr>
+                                    <th class="text-center">Eil</th>
+                                    <th class="text-center">Menge</th>
+                                    <th class="text-center">Kosten</th>
+                                    <th class="text-center"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></th>
+                                </tr>
+                                <tr ng-repeat="bestellung in dbvc.neueBestellungen">
+                                    <td>
+                                        <span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="bestellung.eil"></span>
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!bestellung.eil"></span>
+                                    </td>
+                                    <td>{{bestellung.menge}}</td>
+                                    <td>{{bestellung.kosten | currency:"€"}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-sm btn-circle" ng-click="dbvc.deleteNeueBestellung(bestellung)">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h2>Neue Bestellung anlegen</h2></div>
+                        <div class="ibox-content">
+                            <form>
+                                <div class="form-group">
+                                    <label for="mengeInput" class="sr-only">Menge</label>
+                                    <input type="number" placeholder="Menge" class="form-control" id="mengeInput" min="1" ng-model="dbvc.neueBestellung.menge">
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="dbvc.neueBestellung.eil">Eilbestellung
+                                    </label>
+                                </div>
+                                <button class="btn btn-primary" type="submit" ng-click="dbvc.createNeueBestellung()">Anlegen</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h2>Aktueller Lagerzugang</h2></div>
+                        <div class="ibox-content">
+                            <table class="table table-bordered text-center table-condensed">
+                                <tr>
+                                    <th class="text-center">Eil</th>
+                                    <th class="text-center">Menge</th>
+                                    <th class="text-center">Gesamt-
+                                        <br>kosten</th>
+                                    <th class="text-center">Bestell-
+                                        <br>periode</th>
+                                    <th class="text-center">Zeit</th>
+                                </tr>
+                                <tr ng-repeat="zugang in dbvc.aktuellerLagerzugang">
+                                    <td>
+                                        <span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="zugang.eil"></span>
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!zugang.eil"></span>
+                                    </td>
+                                    <td>{{zugang.menge}}</td>
+                                    <td>{{zugang.gesamtKosten | currency:"€"}}</td>
+                                    <td>{{zugang.bestellPeriode}}</td>
+                                    <td>{{zugang.zeit.periode}}-{{zugang.zeit.tag}}-0-0</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h2>Zukünftiger Lagerzugang</h2></div>
+                        <div class="ibox-content">
+                            <table class="table table-bordered text-center table-condensed">
+                                <tr>
+                                    <th class="text-center">Eil</th>
+                                    <th class="text-center">Menge</th>
+                                    <th class="text-center">Bestell-
+                                        <br>periode</th>
+                                </tr>
+                                <tr ng-repeat="bestellung in dbvc.laufendeBestellungen">
+                                    <td>
+                                        <span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="bestellung.eil"></span>
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!bestellung.eil"></span>
+                                    </td>
+                                    <td>{{bestellung.menge}}</td>
+                                    <td>{{bestellung.periode}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h2><u>Prognose:</u>&nbsp Entwicklung durchschnittlicher Lagerbestand</h2></div>
+                        <div id="timelineChart" class="ibox-content"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
