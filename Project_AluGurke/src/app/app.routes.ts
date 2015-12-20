@@ -6,9 +6,11 @@ angular.module('app')
         function($routeProvider) {
             $routeProvider.
                 when('/', {
-                    templateUrl: '/components/home/home.html'
+                    templateUrl: '/components/home/home.html',
+                    controller: 'HomeController as hc'
                 }).when('/home', {
-                    templateUrl: '/components/home/home.html'
+                    templateUrl: '/components/home/home.html',
+                    controller: 'HomeController as hc'
                 }).when('/file', {
                     templateUrl: '/components/file/file.html',
                     controller: 'FileController as fc'

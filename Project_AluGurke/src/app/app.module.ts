@@ -16,6 +16,7 @@ angular.module('app', [
 	'FertigungsAuftraegeModule',
 	'SettingsModule',
 	'LoginModule',
+	'HomeModule',
 	'RegisterModule',
 	'MainModule'
 ]);

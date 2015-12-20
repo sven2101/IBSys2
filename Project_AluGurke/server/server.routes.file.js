@@ -195,26 +195,27 @@ module.exports = function (app) {
 				}
 			})
 		}else{
+			res.send({erg: '502'});
 			console.log('No Databaseconnection or Rights!');
 		}
 	});
 
 	app.get('/getSimulationFile', function (req, res) {
 		if(req.session.name && mongoose.connection.readyState == 1) {
-
 			mongoose.model('benutzer').findOne({name: req.session.name}, function (err, benutzer) {
 				if(!benutzer)
 					res.send({erg: '404'});
 				else
 				{
 					var objectId = benutzer._id;
-					mongoose.model('datei').find({benutzerId: objectId,periode:req.body.periode}, function (err, simulationFile) {
+					mongoose.model('datei').find({benutzerId: objectId,periode:req.query.periode}, function (err, simulationFile) {
 						res.json({ simulationFile: simulationFile });
 					})
 
 				}
 			})
 		}else{
+			res.send({erg: '502'});
 			console.log('No Databaseconnection or Rights!');
 		}
 	});

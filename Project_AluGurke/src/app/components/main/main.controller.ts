@@ -23,7 +23,6 @@ class MainController {
         $rootScope.$on('refreshAfterLogin', function(event) { vm.checkSession(); });
         
         this.moveableRoutes = [];
-   
         this.setMoveableRoutes($route.routes);
     }
     checkSession() {
@@ -103,5 +102,6 @@ class MainController {
         }
         return true;
     }
+
 }
 angular.module('MainModule').controller('MainController', ['ResourceService', '$rootScope', '$location', '$route', MainController]);
