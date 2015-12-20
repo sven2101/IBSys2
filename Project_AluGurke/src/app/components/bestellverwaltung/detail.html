@@ -15,6 +15,15 @@
 				<li class="active">
 					<strong>Detailansicht</strong>
 				</li>
+                <li>
+                    <select ng-selected="dbvc.onSelected()" ng-model="dbvc.bestellungBerechnenService.multiplikatorString" class="form-control">
+                        <option>sehr riskant</option>
+                        <option>riskant</option>
+                        <option>normal</option>
+                        <option>sicher</option>
+                        <option>sehr sicher</option>                        
+                    </select>             
+                </li>
 			</ol>
 		</div>
 	</div>
@@ -167,12 +176,7 @@
 				<div class="col-lg-12">
 					<div class="ibox">
 						<div class="ibox-title"><h2><u>Prognose:</u>&nbsp Entwicklung durchschnittlicher Lagerbestand</h2></div>
-						<div id="timelineChart"class="ibox-content">
-							{{dbvc.timeLine}}
-						</div>
-						<div id="timelineChart">
-							{{dbvc.timeLine}}
-						</div>
+						<div id="timelineChart"class="ibox-content"></div>						
 					</div>
 				</div>
 			</div>

@@ -54,9 +54,13 @@ class DetailBestellVerwaltungController {
 		this.setTimeLine();
 		this.chart(this.timeLine, 'K' + this.kaufTeil.id + ' ' + this.kaufTeil.bezeichnung);
 	}
+    onSelected(){
+        this.bestellungBerechnenService.onSelected();
+        this.setTimeLine();
+    }
 
-	setTimeLine() { /*TODO MULTIPLIKATOR*/
-		this.timeLine = this.bestellungBerechnenService.timeLineGenerieren(this.teil_id, this.periode, 0, [this.verbrauchAktuell, this.verbrauch1, this.verbrauch2, this.verbrauch3]);
+	setTimeLine() {
+		this.timeLine = this.bestellungBerechnenService.getTimeLine(this.teil_id, [this.verbrauchAktuell, this.verbrauch1, this.verbrauch2, this.verbrauch3]);
 		this.chart(this.timeLine, this.kaufTeil.bezeichnung);
 	}
 

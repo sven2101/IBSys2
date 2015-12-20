@@ -59,6 +59,9 @@ class KaufteilDispositionController {
 		
 		//this.berechneteBestellungAktualisieren();
 	}
+    onSelected(){
+        this.bestellungBerechnenService.onSelected();
+    }
 
 	createViewModel(kaufTeile: Array<NewKaufTeil>) {
 		for (var i = 0; i < kaufTeile.length; i++) {
