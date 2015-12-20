@@ -10,6 +10,7 @@
 /// <reference path="../appServices/SettingsService.ts" />
 var DispositionService = (function () {
     function DispositionService(bestellungBerechnenService, $rootScope, ProgrammService, NewTeileService, NewBaumService, AuftragService, ArbeitsplatzService, BestellService, settingsService) {
+        var _this = this;
         this.programmService = ProgrammService;
         this.newTeileService = NewTeileService;
         this.newBaumService = NewBaumService;
@@ -28,6 +29,9 @@ var DispositionService = (function () {
         this.dispoP3rekursuiv(this.newBaumService.herrenBaum);
         this.altLastenVerteilen(this.models);
         this.aendern();
+        $rootScope.$on('pc.programmaenderung', function (event) {
+            _this.aendern();
+        });
     }
     DispositionService.prototype.dispoP1rekursuiv = function (wurzel, oberModel) {
         if (oberModel === void 0) { oberModel = null; }
