@@ -10,6 +10,8 @@ class BestellungBerechnenService{
     newTeileService:NewTeileService;
     bestellverwaltungUtilService:BestellverwaltungUtilService;
     $rootScope;
+    multiplikator:number;
+    multiplikatorString:String;
     aktuellePeriode;
 
     constructor(BestellService:BestellService, NewTeileService:NewTeileService,$rootScope,bestellverwaltungUtilService) {
@@ -18,6 +20,8 @@ class BestellungBerechnenService{
         this.bestellverwaltungUtilService=bestellverwaltungUtilService;
         this.$rootScope=$rootScope;
         this.aktuellePeriode=1;
+        this.multiplikator=0.5;  
+        this.multiplikatorString="sicher";  
         this.$rootScope.$on('fileController.neueDatei', (event, dateiInhalt) => {
 			this.onNeueDatei(dateiInhalt);
 		});
@@ -25,16 +29,17 @@ class BestellungBerechnenService{
     onNeueDatei(dateiInhalt){
         this.aktuellePeriode=Number(dateiInhalt.results._period)+1;
     }
-
-    getReichweite(kTeilId:number,multiplikator:number,verbrauch:Array<number>){
-        return this.reichweiteBerechenen(this.timeLineGenerieren(kTeilId,this.aktuellePeriode,multiplikator,verbrauch));
+    //Marius API; für die Reichweite
+    getReichweite(kTeilId:number,verbrauch:Array<number>):number{
+        return this.reichweiteBerechenen(this.timeLineGenerieren(kTeilId,this.aktuellePeriode,this.multiplikator,verbrauch));
     }
-    getBestellung(kTeilId:number,multiplikator:number,verbrauch:Array<number>){
-
-        return this.bestellungenGenerieren(kTeilId,this.aktuellePeriode,multiplikator,verbrauch);
+    //Marius API; für anstehende Bestellungen. Liefert null wenn nicht bestellt werden soll!!!!!!!!
+    getBestellung(kTeilId:number,verbrauch:Array<number>):NeuBestellung{
+        return this.bestellungenGenerieren(kTeilId,this.aktuellePeriode,this.multiplikator,verbrauch);
     }
-    getTimeLine(kTeilId:number,multiplikator:number,verbrauch:Array<number>){
-        return this.timeLineGenerieren(kTeilId,this.aktuellePeriode,multiplikator,verbrauch);
+    //Marius API; berechnet einen Zeitstrahl auf Tagesbasis
+    getTimeLine(kTeilId:number,verbrauch:Array<number>):Array<number>{
+        return this.timeLineGenerieren(kTeilId,this.aktuellePeriode,this.multiplikator,verbrauch);
     }
 
     zugangsBestellungenSuchen(teilId:number):Array<ZugangBestellung>{
@@ -66,6 +71,20 @@ class BestellungBerechnenService{
                 
                 return temp[i];
             }
+        }
+    }
+    onSelected(){
+        switch(this.multiplikatorString){
+            case "sehr riskant":this.multiplikator=-1;
+            break;
+            case "riskant":this.multiplikator=-0.5;
+            break;
+            case "normal":this.multiplikator=0;
+            break;
+            case "sicher":this.multiplikator=0.5;
+            break;
+            case "sehr sicher":this.multiplikator=1;
+            break;
         }
     }
 
@@ -160,7 +179,7 @@ class BestellungBerechnenService{
             if(menge*2>kTeil.discontMenge&&menge<kTeil.discontMenge){
                 menge=kTeil.discontMenge;
             }
-            return new NeuBestellung(true,kTeilId,menge,0,1); //TODO PERIODE
+            return new NeuBestellung(true,kTeilId,menge,0,this.aktuellePeriode);
         }
         
         if(reichweite-1<kTeil.wbz+multiplikator*kTeil.wbzAbw){
@@ -174,7 +193,7 @@ class BestellungBerechnenService{
             if(menge*2>kTeil.discontMenge&&menge<kTeil.discontMenge){
                 menge=kTeil.discontMenge;
             }
-            return new NeuBestellung(false,kTeilId,menge,0,1); //TODO PERIODE
+            return new NeuBestellung(false,kTeilId,menge,0,this.aktuellePeriode);
         }
         return null;
     }
