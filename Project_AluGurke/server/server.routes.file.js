@@ -20,7 +20,7 @@ module.exports = function (app) {
 
 	app.post('/file', function (req, res) {
 		var timestamp = new Date().getTime();
-		var dateiName = 'input' + timestamp + '.txt';
+		var dateiName = 'input' + timestamp + '.xml';
 		fs.writeFile('files/' + dateiName, req.body.content, function (err) {
 			if (err) { console.log(err); }
 			else {
@@ -31,7 +31,7 @@ module.exports = function (app) {
 
 	});
 
-	//Test funtktion für produktivsystem bitte löschen
+	//Test funtktion fï¿½r produktivsystem bitte lï¿½schen
 
 	app.get('/benutzer/:loginName', function (req, res) {
 		if(req.session.name && mongoose.connection.readyState == 1) {
@@ -153,7 +153,7 @@ module.exports = function (app) {
 									res.send({erg: '500'});
 								} else {
 									res.send({erg: '200'});
-									console.log('Datei gespeichert für ' + objectId)
+									console.log('Datei gespeichert fï¿½r ' + objectId)
 								}
 							})
 						}
@@ -165,7 +165,7 @@ module.exports = function (app) {
 									res.send({erg: '500'});
 								} else {
 									res.send({erg: '300'});
-									console.log('Datei Aktualisiert für ' + objectId)
+									console.log('Datei Aktualisiert fï¿½r ' + objectId)
 								}
 							})
 						}
