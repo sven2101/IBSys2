@@ -17,11 +17,11 @@ class BestellungBerechnenService {
     constructor(BestellService: BestellService, NewTeileService: NewTeileService, $rootScope, bestellverwaltungUtilService) {
         this.bestellService = BestellService;
         this.newTeileService = NewTeileService;
-        this.bestellverwaltungUtilService = bestellverwaltungUtilService;
-        this.$rootScope = $rootScope;
-        this.aktuellePeriode = 1;
-        this.multiplikator = 0.5;
-        this.multiplikatorString = "sicher";
+        this.bestellverwaltungUtilService=bestellverwaltungUtilService;
+        this.$rootScope=$rootScope;
+        this.aktuellePeriode=1;
+        this.multiplikator=1;  
+        this.multiplikatorString="sehr sicher";  
         this.$rootScope.$on('fileController.neueDatei', (event, dateiInhalt) => {
             this.onNeueDatei(dateiInhalt);
         });

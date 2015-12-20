@@ -127,7 +127,7 @@ class NewTeileService {
 			new NewErzeugnis(51, 'Fahrrad o. Pedal', 137.47, 100, false),
 			new NewErzeugnis(54, 'Vorderrad cpl.', 68.09, 100, false),
 			new NewErzeugnis(55, 'Rahmen u. Räder', 125.33, 100, false),
-			new NewErzeugnis(56, 'Fahrrad o. Pedal', 119.67, 100, false)]
+			new NewErzeugnis(56, 'Fahrrad o. Pedal', 142.67, 100, false)]
 	}
 }
 
