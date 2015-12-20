@@ -182,13 +182,13 @@ module.exports = function (app) {
 	app.get('/getSimulationFiles', function (req, res) {
 		if(req.session.name && mongoose.connection.readyState == 1) {
 
-			mongoose.model('benutzer').findOne({name: req.session.name}, function (err, benutzer) {
+			mongoose.model('benutzer').findOne({name: req.session.name},function (err, benutzer) {
 				if(!benutzer)
 					res.send({erg: '404'});
 				else
 				{
 					var objectId = benutzer._id;
-					mongoose.model('datei').find({benutzerId: objectId}, function (err, simulationFiles) {
+					mongoose.model('datei').find({benutzerId: objectId}).sort({periode:'asc'}).exec( function (err, simulationFiles) {
 						res.json({ simulationFile: simulationFiles });
 					})
 

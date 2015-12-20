@@ -8,15 +8,17 @@ class MainController {
     location;
     name;
     isLoggedIn;
+    $scope;
     
     moveableRoutes: Array<string>;
     arrowLeft = 37;
     arrowRight = 39;
     strgPressed:boolean = false;
 
-    constructor(resourceService: ResourceService, $rootScope, $location, $route) {
+    constructor(resourceService: ResourceService, $rootScope, $location, $route,$scope) {
         this.resource = resourceService.resource;
         this.location = $location;
+        this.$scope = $scope;
         this.isLoggedIn = false;
         this.checkSession();
         var vm = this;
@@ -31,6 +33,15 @@ class MainController {
             if (result.session.name) {
                 vm.name = result.session.name;
                 vm.isLoggedIn = true;
+                vm.resource.getSimulationFiles('', function(result, headers) {
+                    if (result.erg != '404' && result.erg != '502') {
+                        if(result.simulationFile.length>0) {
+                            vm.$scope.$emit('fileController.neueDatei', JSON.parse(result.simulationFile[result.simulationFile.length - 1].datei));
+                        }
+                    }
+                });
+
+
             } else {
                 vm.name = 'Gast';
                 vm.isLoggedIn = false;
@@ -104,4 +115,4 @@ class MainController {
     }
 
 }
-angular.module('MainModule').controller('MainController', ['ResourceService', '$rootScope', '$location', '$route', MainController]);
+angular.module('MainModule').controller('MainController', ['ResourceService', '$rootScope', '$location', '$route','$scope', MainController]);
