@@ -2,6 +2,7 @@
  * Created by sven_ on 17.11.2015.
  */
     /// <reference path="../../typeDefinitions/angular.d.ts" />
+    /// <reference path="../../typeDefinitions/highcharts.d.ts" />
     /// <reference path="../appServices/ResourceService.ts" />
 class HomeController {
     resource;
@@ -784,6 +785,17 @@ class HomeController {
 
             categories.push('Periode ' + (i + 1));
         }
+        
+        var seriesOptions: HighchartsLineChartSeriesOptions;
+        seriesOptions = {
+                name: 'Leerzeitkosten',
+                type: 'column',
+                yAxis: 1,
+                data: idletimecosts,
+                tooltip: {
+                    valueSuffix: ' \u20AC'
+                }
+            };
 
         $('#idle').highcharts({
             chart: {
@@ -836,16 +848,7 @@ class HomeController {
                 floating: true,
                 backgroundColor:'#FFFFFF'
             },
-            series: [{
-                name: 'Leerzeitkosten',
-                type: 'column',
-                yAxis: 1,
-                data: idletimecosts,
-                tooltip: {
-                    valueSuffix: ' \u20AC'
-                }
-
-            }, {
+            series: [seriesOptions, {
                 name: 'Leerzeit',
                 type: 'spline',
                 data: idletime,
