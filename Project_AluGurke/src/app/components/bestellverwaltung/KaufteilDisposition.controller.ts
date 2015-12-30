@@ -53,8 +53,17 @@ class KaufteilDispositionController {
 		this.programmService = programmService;
 		this.createViewModel(teileService.alleKaufteile);
 	}
-    onSelected(){
+    
+    onChanged():void{
         this.bestellungBerechnenService.onSelected();
+        this.changeReichweite();
+    }
+    
+    changeReichweite():void{
+        for(var i = 0; i < this.kaufTeileVM.length;i++){
+            var vm = this.kaufTeileVM[i];
+           vm.reichweite = this.getReichweite(vm.kaufTeil.lagerMenge,vm.kaufTeil.id);
+        }
     }
 
 	createViewModel(kaufTeile: Array<NewKaufTeil>) {
@@ -103,8 +112,13 @@ class KaufteilDispositionController {
 	}
 
 	getReichweite(lagerMenge: number, teil_id: number):number {
-        return this.utilService.getReichweite(lagerMenge,teil_id);
-        //return this.bestellungBerechnenService.getReichweite(teil_id,[1,1,1,1]);
+        var verbrauch1 = this.utilService.getVerbrauch(teil_id,1);
+        var verbrauch2 = this.utilService.getVerbrauch(teil_id,2);
+        var verbrauch3 = this.utilService.getVerbrauch(teil_id,3);
+        var verbrauch4 = this.utilService.getVerbrauch(teil_id,4);
+        var verbrauchArray = [verbrauch1,verbrauch2,verbrauch3,verbrauch4];
+       
+        return this.bestellungBerechnenService.getReichweite(teil_id,verbrauchArray);
 	}
 
 	getAnzahlInBaum(baum: NewTeilKnoten, id: number): number {
@@ -112,7 +126,7 @@ class KaufteilDispositionController {
 	}
 
 	zeileRot(teil: ViewModel): boolean {
-		return this.utilService.zeileRot(teil.reichweite,teil.kaufTeil.wbz);
+		return this.utilService.zeileRot(teil.reichweite,teil.kaufTeil.wbz,teil.kaufTeil.wbzAbw,this.bestellungBerechnenService.multiplikator);
 	}
 
 	zeileGelb(teil: ViewModel): boolean {
@@ -141,7 +155,7 @@ class KaufteilDispositionController {
 
 	deleteNeueBestellung(bestellung: NeuBestellung):void {
 		this.bestellService.deleteNeuBetellung(bestellung.teil_id, bestellung.timestamp);
-		//this.berechneteBestellungAktualisieren();
+		this.changeReichweite();
 	}
 }
 

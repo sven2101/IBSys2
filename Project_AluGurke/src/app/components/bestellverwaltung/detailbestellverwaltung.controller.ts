@@ -65,7 +65,7 @@ class DetailBestellVerwaltungController {
 	}
 
 	zeileRot(): boolean {
-		return this.utilService.zeileRot(this.reichweite, this.kaufTeil.wbz);
+		return this.utilService.zeileRot(this.reichweite, this.kaufTeil.wbz,this.kaufTeil.wbzAbw,this.bestellungBerechnenService.multiplikator);
 	}
 
 	zeileGelb(): boolean {
@@ -85,16 +85,19 @@ class DetailBestellVerwaltungController {
 	}
 	chart(data: Array<number>, linienName: string) {
 		let categories = new Array<string>();
-
+       
 		let periode = this.periode;
-		
+		 categories.push('Periode' + periode + ' Tag 0');
+         
 		for (let i = 0; i < 20; i++) {
 			if (i % 5 === 0) {
 				periode++;
 			}
 			
-			categories.push('Periode' + periode + ' Tag' + ((i % 5) + 1));
+			categories.push('Periode' + periode + ' Tag ' + ((i % 5) + 1));
 		}
+        
+        data.unshift(this.kaufTeil.lagerMenge);
 		$('#timelineChart').highcharts({
 			chart: {
 				type: 'spline'

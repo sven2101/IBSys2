@@ -15,17 +15,17 @@ class BestellverwaltungUtilService {
         this.programmService = programmService;
     }
 
-    zeileRot(reichweite: number, wbz: number): boolean {
-        if ((reichweite - wbz) < 1) {
+    zeileRot(reichweite: number, wbz: number, wbzAbw: number, multiplikator:number): boolean {
+        if ((reichweite - wbz - wbzAbw * multiplikator) < 1) {
             return true;
         }
         return false;
     }
 
     zeileGelb(reichweite: number, wbz: number, wbzAbw: number): boolean {
-        if ((!this.zeileRot(reichweite, wbz) && ((reichweite - wbzAbw - wbz) < 1))) {
+        /*if ((!this.zeileRot(reichweite, wbz) && ((reichweite - wbzAbw - wbz) < 1))) {
             return true;
-        }
+        }*/
         return false;
     }
 
