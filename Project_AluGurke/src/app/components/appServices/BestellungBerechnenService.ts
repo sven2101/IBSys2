@@ -154,11 +154,12 @@ class BestellungBerechnenService {
         let reichweite = 0;
         for (let i = 0; i < timeline.length; i++) {
             if (timeline[i] < 0) {
-                if (i < timeline.length - 1) {
+                break;
+                /*if (i < timeline.length - 1) {
                     if (timeline[i + 1] < 0) {
                         break;
                     }
-                }
+                }*/
             }
             else {
                 reichweite += 0.2;

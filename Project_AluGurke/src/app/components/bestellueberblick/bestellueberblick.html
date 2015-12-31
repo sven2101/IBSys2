@@ -1,16 +1,16 @@
 <section>
 	<div class="row wrapper border-bottom white-bg page-heading">
 		<div class="col-lg-10">
-			<h2>Bestellüberblick</h2>
+			<h2>{{'orderOverview_headline'|translate}}</h2>
 			<ol class="breadcrumb">
 				<li>
 					<a href="/#/">Home</a>
 				</li>
 				<li>
-					<a>Bestellverwaltung</a>
+					<a>{{'NAV_OrderManagment'|translate}}</a>
 				</li>
 				<li class="active">
-					<strong>Bestellüberblick</strong>
+					<strong>{{'orderOverview_headline'|translate}}</strong>
 				</li>
 			</ol>
 		</div>
@@ -18,24 +18,24 @@
 	<div class="wrapper-content animated fadeInRight">
 		<div class="row">
 			<div class="ibox">
-				<div class="ibox-title"><h2>Kennzahlen neue Bestellungen</h2></div>
+				<div class="ibox-title"><h2>{{'orderOverview_keydataHeadline'|translate}}</h2></div>
 				<div class="ibox-content">
 					<div class="row">
 						<div class="col-lg-6">
 							<div class="widget lazur-bg p-xl">
-								<h2>Anzahl: {{buc.anzahlNeuBestellungen}}</h2>
+								<h2>{{'orderOverview_numberNewOrders'|translate}} {{buc.anzahlNeuBestellungen}}</h2>
 								<ul>
-									<li>Normalbestellungen: {{buc.anzahlNormalBestellungen}}</li>
-									<li>Eilbestellungen: {{buc.anzahlEilBestellungen}}</li>
+									<li>{{'orderOverview_numberNormalOrders'|translate}} {{buc.anzahlNormalBestellungen}}</li>
+									<li>{{'orderOverview_numberFastOrders'|translate}} {{buc.anzahlEilBestellungen}}</li>
 								</ul>
 							</div>
 						</div><!-- /col-->
 						<div class="col-lg-6">
 							<div class="widget lazur-bg p-xl">
-								<h2>Gesamtkosten: {{buc.gesamtKosten | currency:"€"}}</h2>
+								<h2>{{'orderOverview_totalCosts'|translate}} {{buc.gesamtKosten | currency:"€"}}</h2>
 								<ul>
-									<li>Normalbestellungen: {{buc.normalKosten | currency:"€"}}</li>
-									<li>Eilbestellungen: {{buc.eilKosten | currency:"€"}}</li>
+									<li>{{'orderOverview_numberNormalOrders'|translate}} {{buc.normalKosten | currency:"€"}}</li>
+									<li>{{'orderOverview_numberFastOrders'|translate}} {{buc.eilKosten | currency:"€"}}</li>
 								</ul>
 							</div>
 						</div><!-- /col-->
@@ -45,32 +45,32 @@
 		</div><!-- /row-->
 		<div class="row">
 			<div class="ibox">
-				<div class="ibox-title"><h2>Bestellungen</h2>
+				<div class="ibox-title"><h2>{{'orderOverview_Orders'|translate}}</h2>
 					<ul class="nav nav-tabs">
 						<li class="active" ng-click="buc.tabOnClick('neueBestellungen')">
-							<a data-toggle="tab" href="" aria-expanded="true">Neue Bestellungen</a>
+							<a data-toggle="tab" href="" aria-expanded="true">{{'orderOverview_newOrdersTab'|translate}}</a>
 						</li>
 						<li ng-click="buc.tabOnClick('laufendeBestellungen')">
-							<a data-toggle="tab" href="" aria-expanded="true">Laufende Bestellungen</a>
+							<a data-toggle="tab" href="" aria-expanded="true">{{'orderOverview_ongoingOrdersTab'|translate}}</a>
 						</li>
 						<li ng-click="buc.tabOnClick('lagerZugang')">
-							<a data-toggle="tab" href="" aria-expanded="true">Lagerzugang</a>
+							<a data-toggle="tab" href="" aria-expanded="true">{{'orderOverview_inwardStockMovementTab'|translate}}</a>
 						</li>
 						<li ng-click="buc.tabOnClick('teileWertEntwicklung')">
-							<a data-toggle="tab" href="" aria-expanded="true">Teilewertentwicklung</a>
+							<a data-toggle="tab" href="" aria-expanded="true">{{'orderOverview_partialValueTab'|translate}}</a>
 						</li>
 					</ul>
 				</div>
 				<div class="ibox-content" ng-if="buc.showTab.neueBestellungen">
 					<table class="table table-bordered table-hover text-center table-condensed">
 						<tr>
-							<th class="text-center">Teil ID</th>
-							<th class="text-center">Eil</th>
-							<th class="text-center">Menge</th>
-							<th class="text-center">Bestellkosten</th>
-							<th class="text-center">Materialkosten</th>
-							<th class="text-center">Gesamtkosten</th>
-							<th class="text-center">Stückkosten</th>
+							<th class="text-center">{{'orderOverview_partID'|translate}}</th>
+							<th class="text-center">{{'orderOverview_fast'|translate}}</th>
+							<th class="text-center">{{' orderOverview_amount'|translate}}</th>
+							<th class="text-center">{{'orderOverview_orderCosts'|translate}}</th>
+							<th class="text-center">{{'orderOverview_materialCosts'|translate}}</th>
+							<th class="text-center">{{'orderOverview_totalCosts'|translate}}</th>
+							<th class="text-center">{{'orderOverview_pieceCosts'|translate}}</th>
 						</tr>
 						<tr ng-repeat="bestellung in buc.neueBestellungen">
 							<td>{{bestellung.teil_id}}</td>
@@ -90,14 +90,14 @@
 					<table class="table table-bordered table-hover text-center table-condensed">
 						<tr>
 							<th class="text-center">ID</th>
-							<th class="text-center">Teil ID</th>
-							<th class="text-center">Bestellperiode</th>
-							<th class="text-center">Eil</th>
-							<th class="text-center">Menge</th>
-							<th class="text-center">Bestellkosten</th>
-							<th class="text-center">Materialkosten</th>
-							<th class="text-center">Gesamtkosten</th>
-							<th class="text-center">Stückkosten</th>
+							<th class="text-center">{{'orderOverview_partID'|translate}}</th>
+							<th class="text-center">{{'orderOverview_orderPeriode'|translate}}</th>
+							<th class="text-center">{{'orderOverview_fast'|translate}}</th>
+							<th class="text-center">{{'orderOverview_amount'|translate}}</th>
+							<th class="text-center">{{'orderOverview_orderCosts'|translate}}</th>
+							<th class="text-center">{{'orderOverview_materialCosts'|translate}}</th>
+							<th class="text-center">{{'orderOverview_totalCosts'|translate}}</th>
+							<th class="text-center">{{'orderOverview_pieceCosts'|translate}}</th>
 						</tr>
 						<tr ng-repeat="bestellung in buc.laufendeBestellungen">
 							<td>{{bestellung.id}}</td>
@@ -119,14 +119,14 @@
 					<table  class="table table-bordered table-hover text-center table-condensed">
 						<tr>
 							<th class="text-center">ID</th>
-							<th class="text-center">Teil ID</th>
-							<th class="text-center">Bestellperiode</th>
-							<th class="text-center">Eil</th>
-							<th class="text-center">Menge</th>
-							<th class="text-center">Bestellkosten</th>
-							<th class="text-center">Materialkosten</th>
-							<th class="text-center">Gesamtkosten</th>
-							<th class="text-center">Stückkosten</th>
+							<th class="text-center">{{'orderOverview_partID'|translate}}</th>
+							<th class="text-center">{{'orderOverview_orderPeriode'|translate}}</th>
+							<th class="text-center">{{'orderOverview_fast'|translate}}</th>
+							<th class="text-center">{{'orderOverview_amount'|translate}}</th>
+							<th class="text-center">{{'orderOverview_orderCosts'|translate}}</th>
+							<th class="text-center">{{'orderOverview_materialCosts'|translate}}</th>
+							<th class="text-center">{{'orderOverview_totalCosts'|translate}}</th>
+							<th class="text-center">{{'orderOverview_pieceCosts'|translate}}</th>
 						</tr>
 						<tr ng-repeat="bestellung in buc.lagerZugang">
 							<td>{{bestellung.id}}</td>
@@ -147,11 +147,11 @@
 				<div class="ibox-content" ng-if="buc.showTab.teileWertEntwicklung">
 					<table  class="table table-bordered table-hover text-center table-condensed">
 						<tr>
-							<th class="text-center">Teil ID</th>
-							<th class="text-center">Aktueller <br> Teilewert</th>
-							<th class="text-center">Teilewert mit <br> neuen Bestellungen</th>
-							<th class="text-center">Teilewert mit <br> laufenden Bestellungen</th>
-							<th class="text-center">Teilewert mit <br> laufenden und neuen Bestellungen</th>
+							<th class="text-center">{{'orderOverview_partID'|translate}}</th>
+							<th class="text-center">{{'orderOverview_actualPartialValue'|translate}}</th>
+							<th class="text-center">{{'orderOverview_partialValueNewOrders'|translate}}</th>
+							<th class="text-center">{{'orderOverview_partialValueOngoingOrders'|translate}}</th>
+							<th class="text-center">{{'orderOverview_partialValueNewAndOngoingOrders'|translate}}</th>
 						</tr>
 						<tr ng-repeat="teil in buc.kaufTeile">
 							<td>{{teil.id}}</td>
