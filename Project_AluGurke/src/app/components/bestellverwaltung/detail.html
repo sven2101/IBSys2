@@ -27,7 +27,7 @@
                     <h3>Wähle eine Strategie:</h3>
                 </div>
                 <div class="row">
-                    <select style="width:150" ng-selected="dbvc.onSelected()" ng-model="dbvc.bestellungBerechnenService.multiplikatorString" class="form-control">
+                    <select style="width:150" ng-change="dbvc.onChanged()" ng-model="dbvc.bestellungBerechnenService.multiplikatorString" class="form-control">
                         <option>sehr sicher</option>
                         <option>sicher</option>
                         <option>normal</option>
@@ -92,6 +92,38 @@
                                     <td>{{dbvc.reichweite}}</td>
                                 </tr>
                             </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h2>Vorschlag für eine neue Bestellung</h2>
+                        </div>
+                        <div class="ibox-content">
+                             <table class="table table-bordered text-center table-condensed">
+                                 <tr>
+                                    <th class="text-center">Eil</th>
+                                    <th class="text-center">Menge</th>
+                                    <th class="text-center">Kosten</th>
+                                    <th class="text-center">Übernehmen</th>
+                                 </tr>
+                                 <tr ng-if="dbvc.generierteBestellung">
+                                    <td>
+                                        <span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="dbvc.generierteBestellung.eil"></span>
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!dbvc.generierteBestellung.eil"></span>
+                                    </td>
+                                     <td>{{dbvc.generierteBestellung.menge}}</td>
+                                     <td>{{dbvc.generierteBestellung.kosten | currency:"€"}}</td>
+                                      <td>
+                                        <button type="button" class="btn btn-success btn-sm btn-circle" ng-click="dbvc.generierteBestellungUebernehmen()">
+                                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                        </button>
+                                    </td>
+                                 </tr>
+                             </table>   
                         </div>
                     </div>
                 </div>

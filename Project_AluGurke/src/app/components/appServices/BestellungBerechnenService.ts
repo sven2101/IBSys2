@@ -31,9 +31,6 @@ class BestellungBerechnenService {
     }
     //Marius API; für die Reichweite
     getReichweite(kTeilId: number, verbrauch: Array<number>, timeinterval = 50): number {
-        if(kTeilId === 39){
-           console.log(this.timeLineGenerieren(kTeilId, this.aktuellePeriode, this.multiplikator, verbrauch, timeinterval));
-        }
         return this.reichweiteBerechenen(this.timeLineGenerieren(kTeilId, this.aktuellePeriode, this.multiplikator, verbrauch, timeinterval));
     }
     //Marius API; für anstehende Bestellungen. Liefert null wenn nicht bestellt werden soll!!!!!!!!
