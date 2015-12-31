@@ -12,6 +12,7 @@ angular.module('app').config(function($translateProvider) {
         NAV_File: 'Datei hochladen',
         NAV_OrderManagment: 'Bestellverwaltung',
         NAV_orderOverview:'Bestellüberblick',
+        NAV_warehouse:'Lager',
 
         NAV_disposition: 'Disposition',
         NAV_productionOrders: 'Fertigungsaufträge',
@@ -91,8 +92,16 @@ angular.module('app').config(function($translateProvider) {
         capacityPlanning_Shifts: 'Anzahl der Schichten',
         capacityPlanning_overtime: 'Überstunden',
 
-
-
+        //Lager
+        warehous_headline: 'Lager',
+        warehous_statistics: 'Statistik',
+        warehous_parts: 'Kaufteile',
+        warehous_manufacturedProducts: 'Erzeugnisse',
+        warehous_totalStockValue: 'Gesamter Lagerwert',
+        warehous_stockQuantity: 'Lagermenge',
+        warehous_stockValue: 'Lagerwert',
+        warehous_partialValue: 'Teilewert',
+        warehouse_multipleUsage: 'MFW',
 
     });
 
@@ -103,6 +112,7 @@ angular.module('app').config(function($translateProvider) {
         NAV_File: 'File Upload',
         NAV_OrderManagment: 'Order Managment',
         NAV_orderOverview:'Order Overview',
+        NAV_warehouse:'Warehouse',
 
         NAV_disposition: 'Material Planning',
         NAV_productionOrders: 'Production orders',
@@ -181,7 +191,17 @@ angular.module('app').config(function($translateProvider) {
         capacityPlanning_amountOrders: 'Amount of production orders',
         capacityPlanning_Shifts: 'Number of shifts',
         capacityPlanning_overtime: 'Overtime',
-
+        
+        //Lager
+        warehous_headline: 'Warehouse',
+        warehous_statistics: 'Statistics',
+        warehous_parts: 'Purchased Parts',
+        warehous_manufacturedProducts: 'Manufactured Products',
+        warehous_totalStockValue: 'Total Stock Value',
+        warehous_stockQuantity: 'Stock Quantity',
+        warehous_stockValue: 'Stock Value',
+        warehous_partialValue: 'Partial Value',
+        warehouse_multipleUsage: 'Multiple Usage',
 
     });
     $translateProvider.preferredLanguage('de_DE');

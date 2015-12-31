@@ -1,13 +1,13 @@
 <section>
 	<div class="row wrapper border-bottom white-bg page-heading">
 		<div class="col-lg-10">
-			<h2>Lager</h2>
+			<h2>{{'warehous_headline'|translate}}</h2>
 			<ol class="breadcrumb">
 				<li>
 					<a href="/#/">Home</a>
 				</li>
 				<li class="active">
-					<strong>Lager</strong>
+					<strong>{{'warehous_headline'|translate}}</strong>
 				</li>
 			</ol>
 		</div>
@@ -18,13 +18,13 @@
 				<div class="ibox-title">
 					<ul class="nav nav-tabs">
 						<li class="active" ng-click="lc.tabOnClick('statistik')">
-							<a data-toggle="tab" href="" aria-expanded="true">Statistik</a>
+							<a data-toggle="tab" href="" aria-expanded="true">{{'warehous_statistics'|translate}}</a>
 						</li>
 						<li ng-click="lc.tabOnClick('erzeugnisse')">
-							<a data-toggle="tab" href="" aria-expanded="true">Erzeugnisse</a>
+							<a data-toggle="tab" href="" aria-expanded="true">{{'warehous_manufacturedProducts'|translate}}</a>
 						</li>
 						<li ng-click="lc.tabOnClick('kaufTeile')">
-							<a data-toggle="tab" href="" aria-expanded="true">Kaufteile</a>
+							<a data-toggle="tab" href="" aria-expanded="true">{{'warehous_parts'|translate}}</a>
 						</li>
 					</ul>
 				</div>
@@ -38,10 +38,10 @@
 								</div>
 								<div class="col-lg-6">
 									<div class="widget p-xl">
-										<h2><b>Gesamter Lagerwert:  {{lc.getGesamtenLagerWert() | currency:'€'}}</b></h2>
+										<h2><b>{{'warehous_totalStockValue'|translate}}:  {{lc.getGesamtenLagerWert() | currency:'€'}}</b></h2>
 										<ul>
-											<li><h3>Erzeugnisse:  {{lc.statistikService.getLagerWertErzeugnisse() | currency:'€'}}</h3></li>
-											<li><h3>Kaufteile:  {{lc.statistikService.getLagerWertKaufTeile() | currency:'€'}}</h3></li>
+											<li><h3>{{'warehous_manufacturedProducts'|translate}}:  {{lc.statistikService.getLagerWertErzeugnisse() | currency:'€'}}</h3></li>
+											<li><h3>{{'warehous_parts'|translate}}:  {{lc.statistikService.getLagerWertKaufTeile() | currency:'€'}}</h3></li>
 										</ul>
 									</div>
 								</div>
@@ -66,11 +66,11 @@
 						<div ng-if="lc.showTab.erzeugnisse">
 							<table class="table table-bordered text-center table-hover table-condensed">
 								<tr>
-									<th class="text-center curs" ng-click="lc.sortiereErzeugnisse('id')">Id</th>
-									<th class="text-center curs" ng-click="lc.sortiereErzeugnisse('mehrfachVerwendung')">MFW</th>
-									<th class="text-center curs" ng-click="lc.sortiereErzeugnisse('teileWert')">Teilewert</th>
-									<th class="text-center curs" ng-click="lc.sortiereErzeugnisse('lagerMenge')">Lagermenge</th>
-									<th class="text-center curs" ng-click="lc.sortiereErzeugnisse('summe')">Summe</th>
+									<th class="text-center curs" ng-click="lc.sortiereErzeugnisse('id')">ID</th>
+									<th class="text-center curs" ng-click="lc.sortiereErzeugnisse('mehrfachVerwendung')">{{'warehouse_multipleUsage'|translate}}</th>
+									<th class="text-center curs" ng-click="lc.sortiereErzeugnisse('teileWert')">{{'warehous_partialValue'|translate}}</th>
+									<th class="text-center curs" ng-click="lc.sortiereErzeugnisse('lagerMenge')">{{'warehous_stockQuantity'|translate}}</th>
+									<th class="text-center curs" ng-click="lc.sortiereErzeugnisse('summe')">{{'warehous_stockValue'|translate}}</th>
 								</tr>
 								<tr ng-repeat="teil in lc.alleErzeugnisse">
 									<td>{{::teil.id}}</td>
@@ -88,11 +88,11 @@
 							<div ng-if="lc.showTab.kaufTeile">
 								<table class="table table-bordered text-center table-hover table-condensed">
 									<tr>
-										<th class="text-center curs" ng-click="lc.sortiereKaufTeile('id')">Id</th>
-										<th class="text-center curs" ng-click="lc.sortiereKaufTeile('mfw')">MFW</th>
-										<th class="text-center curs" ng-click="lc.sortiereKaufTeile('teileWert')">Teilewert</th>
-										<th class="text-center curs" ng-click="lc.sortiereKaufTeile('lagerMenge')">Lagermenge</th>
-										<th class="text-center curs" ng-click="lc.sortiereKaufTeile('summe')">Summe</th>
+										<th class="text-center curs" ng-click="lc.sortiereKaufTeile('id')">ID</th>
+										<th class="text-center curs" ng-click="lc.sortiereKaufTeile('mfw')">{{'warehouse_multipleUsage'|translate}}</th>
+										<th class="text-center curs" ng-click="lc.sortiereKaufTeile('teileWert')">{{'warehous_partialValue'|translate}}</th>
+										<th class="text-center curs" ng-click="lc.sortiereKaufTeile('lagerMenge')">{{'warehous_stockQuantity'|translate}}</th>
+										<th class="text-center curs" ng-click="lc.sortiereKaufTeile('summe')">{{'warehous_stockValue'|translate}}</th>
 									</tr>
 									<tr ng-repeat="teil in lc.alleKaufTeile">
 										<td>{{::teil.id}}</td>
