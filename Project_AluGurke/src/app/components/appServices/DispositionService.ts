@@ -95,7 +95,7 @@ class DispositionService {
         }
         x.geplanterLagerstand = this.map[x.eTeil.id];
         this.dispositionP3.push(x);
-        //if(this.filter2(x.eTeil.id)==null){
+        //if(this.filter2(x.eTeil.id)==on null){
         this.models.push(x);
         //}
         for (let i = 0; i < wurzel.bauteile.length; i++) {
@@ -137,7 +137,7 @@ class DispositionService {
         let map: { [key: number]: number; }
         for (let i = 0; i < this.models.length; i++) {
             this.models[i].auftraege = [];
-            if (isNaN(this.models[i].geplanterLagerstand)) {
+            if (isNaN(this.models[i].geplanterLagerstand)||this.models[i].geplanterLagerstand<0) {
                 this.models[i].geplanterLagerstand = 0;
             }
             this.models[i].anzahl = Number(this.models[i].getProdProg()) + Number(this.models[i].getGeplanteLagermenge()) - (Number(this.models[i].getLagerMenge()) + Number(this.models[i].getMaterialAufMaschine() + Number(this.models[i].getWarteschlange())));
