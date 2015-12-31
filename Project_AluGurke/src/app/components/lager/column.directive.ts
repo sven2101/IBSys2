@@ -9,8 +9,6 @@ class LagerColumn {
 
 	link(scope, el, attrs, controller) {
 
-		console.log(attrs.mengeseries);
-
 		el.highcharts({
 			chart: {
 				type: 'column'
