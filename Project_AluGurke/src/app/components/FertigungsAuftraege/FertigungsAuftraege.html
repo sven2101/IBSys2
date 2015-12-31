@@ -34,24 +34,23 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat-start="model in fac.models">
-                                <td>{{model.auftrag.erzeugnis_id}}</td>
-                                <td>{{model.auftrag.anzahl}}</td>
+                                <td style="cursor:hand;" ng-click="fac.oeffnen(model.auftrag.erzeugnis_id)">{{model.auftrag.erzeugnis_id}}</td>
+                                <td style="cursor:hand;" ng-click="fac.oeffnen(model.auftrag.erzeugnis_id)">{{model.auftrag.anzahl}}</td>
                                 <td>
                                     <select class="form-control" ng-model="model.auftrag.prioritaetString" ng-click="fac.prioAendern()" style="width:110px;">
                                         <option>{{'productionOrders_normal'|translate}}</option>
-                                        <option>{{'productionOrders_high'|translate}}</option>
-                                        <option>{{'productionOrders_critical'|translate}}</option>
+                                        <option >{{'productionOrders_high'|translate}}</option>
+                                        <option >{{'productionOrders_critical'|translate}}</option>
                                     </select>
                                 </td>
                                 <td>
-                                    <input class="form-control" ng-model="model.split" ng-keyup="fac.aendern();">
+                                    <input class="form-control" ng-model="model.split" ng-keyup="fac.aendern();"min="0">
                                 </td>
-                                <td>
-                                    <button class="form-control" ng-click="fac.oeffnen(model.auftrag.erzeugnis_id)" style="width:40px;"><i class="fa fa-plus"></i></button>
+                                <td  style="cursor:hand;"ng-click="fac.oeffnen(model.auftrag.erzeugnis_id)">
+                                    <i class="fa fa-cog fa-2x" style="width:40px"></i>
                                 </td>
                             </tr>
                             <tr id="fac_{{model.auftrag.erzeugnis_id}}" hidden="true" tr ng-repeat-end>
-
                                 <td colspan="12">
                                     <div class="row">
                                         <div class="ibox-content">

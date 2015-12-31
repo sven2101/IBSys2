@@ -123,6 +123,7 @@ class MainController {
         }
         return true;
     }
+    
     changeLanguage() {
         if (this.language != this.languageOld) {
             this.translate.use(this.language).then(function(key) {
@@ -131,6 +132,7 @@ class MainController {
                 console.log("Irgendwas lief schief.");
             });
             this.languageOld = this.language;
+            this.$scope.$emit('mainController.neueSprache',this.language);
         }
     }
 
