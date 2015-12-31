@@ -188,9 +188,6 @@ class BestellUeberblickController {
             wert = kaufTeil.teileWert;
         }
         
-        console.log(kaufTeil.id + ": " + divisor);
-        console.log(kaufTeil.id + ": "+ wert);
-        
         teileWert = Math.round(wert / divisor * 100) / 100;
         return teileWert;
     }
