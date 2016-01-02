@@ -58,7 +58,7 @@
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
 					<span class="label label-primary pull-right">Periode {{hc.getLatestPeriod()}}</span>
-					<h5>Umsatz</h5>
+					<h5>Profit</h5>
 				</div>
 				<div class="ibox-content">
 					<h1 class="no-margins">{{hc.getProfitValue() | currency:'\u20AC'}}</h1>
@@ -109,21 +109,10 @@
 		<div class="col-lg-4" style="width: 50%">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
-					<h2>Umsatzentwicklung</h2>
+					<h2>Profitentwicklung</h2>
 				</div>
 				<div class="ibox-content">
 					<div id="sales">
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-4" style="width: 50%">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<h2>Auslastung, Liefertreue und Normalkapazit&auml;t</h2>
-				</div>
-				<div class="ibox-content">
-					<div id="effiency">
 					</div>
 				</div>
 			</div>
@@ -135,6 +124,17 @@
 				</div>
 				<div class="ibox-content">
 					<div id="idle">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4" style="width: 50%">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h2>Auslastung, Liefertreue und Normalkapazit&auml;t</h2>
+				</div>
+				<div class="ibox-content">
+					<div id="effiency">
 					</div>
 				</div>
 			</div>

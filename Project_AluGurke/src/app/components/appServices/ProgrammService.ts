@@ -44,6 +44,10 @@ class ProgrammService {
     getProgrammposition(id: number,periode: number=1) {
         for (var i = 0; i < this.produktionsprogramm.length; i++) {
             if ( this.produktionsprogramm[i].id === id && this.produktionsprogramm[i].periode === periode) {
+                if(this.produktionsprogramm[i].menge<0 || angular.isUndefined(this.produktionsprogramm[i].menge) || this.produktionsprogramm[i].menge == null)
+                {
+                    this.produktionsprogramm[i].menge = 0;
+                }
                 return this.produktionsprogramm[i];
             }
         }
@@ -51,6 +55,19 @@ class ProgrammService {
 
     getDirectsalesPosition(id:number)
     {
+        if(this.directsales[id].menge<0 || angular.isUndefined(this.directsales[id].menge) || this.directsales[id].menge == null)
+        {
+            this.directsales[id].menge = 0;
+        }
+        if(this.directsales[id].preis<0)
+        {
+            this.directsales[id].preis = 0;
+        }
+        if(this.directsales[id].konventionalstrafe<0)
+        {
+            this.directsales[id].konventionalstrafe = 0;
+        }
+
       return this.directsales[id];
     }
 }
