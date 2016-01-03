@@ -9,7 +9,8 @@ angular.module('app').config(function($translateProvider) {
     $translateProvider.translations('de_DE', {
         //Navigationsleiste
         NAV_Home: 'Startseite',
-        NAV_File: 'Datei hochladen',
+        NAV_File: 'Dateiverwaltung',
+        NAV_productionPlan: 'Produktionsprogramm',
         NAV_OrderManagment: 'Bestellverwaltung',
         NAV_orderOverview:'Bestellüberblick',
         NAV_warehouse:'Lager',
@@ -123,13 +124,62 @@ angular.module('app').config(function($translateProvider) {
         warehous_partialValue: 'Teilewert',
         warehouse_multipleUsage: 'MFW',
 
+        //Produktionsproramm
+        production_plan_headline: 'Produktionsprogramm',
+        production_plan_sellWish: 'Vertriebswunsch',
+        production_plan_product: 'Produkt',
+        production_plan_count: 'Anzahl',
+        production_plan_forecast: 'Prognose',
+        production_plan_period: 'Periode',
+        production_plan_amount: 'Menge',
+        production_plan_price: 'Preis',
+        production_plan_penalty: 'Konventionalstrafe',
+
+        //Dashboard
+        dashboard_login:'Melde dich an um alle Erweiterungen zu nutzen!',
+        dashboard_stockMovement:'Lagerentwicklung',
+        dashboard_stockValue:'Lagerwert',
+        dashboard_period:'Periode',
+        dashboard_currentOrders:'Laufende Bestellungen',
+        dashboard_standardPurchaseOrder:'Normalbestellungen',
+        dashboard_rushOrder:'Eilbestellungen',
+        dashboard_stockCostMovement:'Lagerkostenentwicklung',
+        dashboard_profitMovement:'Profitentwicklung',
+        dashboard_idleTime:'Leerzeiten und Kosten',
+        dashboard_efficiency:'Auslastung, Liefertreue und Normalkapazit\u00E4t',
+        dashboard_sellingWish:'Vertriebswunsch und Verkaufte Einheiten',
+        dashboard_sales:'Einnahmen aus Verk\u00E4ufe',
+
+        //login
+        login_welcome:'Willkommen bei SCManager.de',
+        login_welcome_sub:'Nutze alle Funktionen für deine Produktionsplanung',
+        login_username:'Benutzername',
+        login_password:'Passwort',
+        login_noAcc:'Noch keinen Account?',
+        login_register:'Registrieren',
+
+        //Registrieren
+        register_welcome:'Registriere dich f\u00fcr deinen SC Manager',
+        register_agbs:'AGB\'s akzeptieren',
+        register_register:'Registrieren',
+        register_alreadyRegistred:'Schon registriert?',
+
+        //Datei
+        file_upload_head:'Simulationsdatei hochladen',
+        file_upload_button:'Datei hochladen',
+        file_download_head:'Fertig mit der Eingabe? Dann erstellen Sie hier eine Datei für die Simulation!',
+        file_download_button:'Datei erstellen',
+
+
+
     });
 
     // englische Sprache
     $translateProvider.translations('en_US', {
         //Navigationsleiste
         NAV_Home: 'Home',
-        NAV_File: 'File Upload',
+        NAV_File: 'File management',
+        NAV_productionPlan: 'Production plan',
         NAV_OrderManagment: 'Order Managment',
         NAV_orderOverview:'Order Overview',
         NAV_warehouse:'Warehouse',
@@ -242,6 +292,52 @@ angular.module('app').config(function($translateProvider) {
         warehous_stockValue: 'Stock Value',
         warehous_partialValue: 'Partial Value',
         warehouse_multipleUsage: 'Multiple Usage',
+
+        //Produktionsproramm
+        production_plan_headline: 'Production plan',
+        production_plan_sellWish: 'Sales wish',
+        production_plan_product: 'Product',
+        production_plan_count: 'Quantity',
+        production_plan_forecast: 'Forecast',
+        production_plan_period: 'Period',
+        production_plan_amount: 'Amount',
+        production_plan_price: 'Price',
+        production_plan_penalty: 'Penalty',
+
+        //Dashboard
+        dashboard_login:'Login to use all features!',
+        dashboard_stockMovement:'Stock movement',
+        dashboard_stockValue:'Stock value',
+        dashboard_period:'Period',
+        dashboard_currentOrders:'Current orders',
+        dashboard_standardPurchaseOrder:'Standard purchase Orders',
+        dashboard_rushOrder:'Rush orders',
+        dashboard_stockCostMovement:'Stock cost movement',
+        dashboard_profitMovement:'Profit movement',
+        dashboard_idleTime:'Idle time and costs',
+        dashboard_efficiency:'Capacity, delivery reliability and normal capacity',
+        dashboard_sellingWish:'Sales wish and sold units',
+        dashboard_sales:'Income from sales',
+
+        //login
+        login_welcome:'Welcome to SCManager.de',
+        login_welcome_sub:'Use all features for your production planning',
+        login_username:'Username',
+        login_password:'Password',
+        login_noAcc:'No account?',
+        login_register:'Register',
+
+        //Registrieren
+        register_welcome:'Register for your SC Manager',
+        register_agbs:'Accept AGB\'s',
+        register_register:'Register',
+        register_alreadyRegistred:'Already registered ?',
+
+        //Datei
+        file_upload_head:'Upload simulation file',
+        file_upload_button:'Upload file',
+        file_download_head:'Input complete? Then create a new file for the simulation!',
+        file_download_button:'Create file',
 
     });
     $translateProvider.preferredLanguage('de_DE');

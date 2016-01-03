@@ -20,13 +20,13 @@
 </head>
 <div class="row wrapper border-bottom white-bg page-heading">
 	<div class="col-lg-10">
-		<h2>Datei</h2>
+		<h2>{{'NAV_File'|translate}}</h2>
 		<ol class="breadcrumb">
 			<li>
 				<a href="/#/">Home</a>
 			</li>
 			<li class="active">
-				<strong>Datei</strong>
+				<strong>{{'NAV_File'|translate}}</strong>
 			</li>
 		</ol>
 	</div>
@@ -38,10 +38,10 @@
 				<div class="row">
 					<form>
 						<div class="form-group">
-							<div class="col-md-12"><h3>Simulationsdatei hochladen</h3></div>
+							<div class="col-md-12"><h3>{{'file_upload_head'|translate}}</h3></div>
 							<div class="fileUpload btn btn-success " style="width: 200px;">
 								<div class="col-md-12">
-									<i class="fa fa-upload"></i>&nbsp;&nbsp;<span class="bold">Datei hochladen</span>
+									<i class="fa fa-upload"></i>&nbsp;&nbsp;<span class="bold">{{'file_upload_button'|translate}}</span>
 									<input type="file" id="dateiInput" onchange="verarbeiteDatei(this.files)" class="upload">
 								</div>
 							</div>
@@ -54,16 +54,16 @@
 			<div class="ibox-content">
 			<!--<div class="jumbotron">-->
 				<div class="row">
-					<div class="col-md-12"><h3>Fertig mit der Eingabe? Dann erstellen Sie hier eine Datei für die Simulation!</h3></div>
+					<div class="col-md-12"><h3>{{'file_download_head'|translate}}</h3></div>
 				</div>
 				<div class="row">
-					<div class="col-md-12"><button style="width: 200px;" class="btn btn-success" ng-click="fc.sendPostRequest()"><i class="fa fa-download"></i>&nbsp;&nbsp;<span class="bold">Datei erstellen</span></button></div>
+					<div class="col-md-12"><button style="width: 200px;" class="btn btn-success" ng-click="fc.sendPostRequest()"><i class="fa fa-download"></i>&nbsp;&nbsp;<span class="bold">{{'file_download_button'|translate}}</span></button></div>
 				</div>
 				<div class="row">
 					<div ng-if="fc.dateiService.dateiErzeugt" class="col-md-12">
 						<a ng-href="/download?dateiName={{fc.dateiService.dateiName}}" target="_blank">
 						<button class="btn btn-warning btn-lg btn-block">
-						{{fc.result}} downloaden.
+						{{fc.result}} download.
 						</button></a>
 					</div>
 				</div><!-- /row -->

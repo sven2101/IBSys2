@@ -8,7 +8,7 @@ var gulp = require('gulp'),
 gulp.task('angular', function () {
     gulp.src(path.angular.src)
         .pipe(concat('angular.js'))
-        .pipe(uglify())
+       //.pipe(uglify())
         .pipe(gulp.dest(path.angular.dst));
 });
 
