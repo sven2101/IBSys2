@@ -130,8 +130,28 @@
                 <div class="col-lg-6">
                     <div class="ibox">
                         <div class="ibox-title">
-                            <h2>{{'details_newOrders'|translate}}</h2></div>
+                            <h2>{{'details_createNewOrder'|translate}}</h2></div>
                         <div class="ibox-content">
+                            <form>
+                                <div class="form-group">
+                                    <label for="mengeInput" class="sr-only">{{'orderOverview_amount'|translate}}</label>
+                                    <input type="number" placeholder="Menge" class="form-control" id="mengeInput" min="1" ng-model="dbvc.neueBestellung.menge">
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="dbvc.neueBestellung.eil">{{'details_fastOrder'|translate}}
+                                    </label>
+                                </div>
+                                <button class="btn btn-primary" type="submit" ng-click="dbvc.createNeueBestellung()">{{'details_create'|translate}}</button>
+                            </form>
+                        </div>
+                    </div>
+            </div>
+                <div class="col-lg-6">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h2>{{'details_newOrders'|translate}}</h2></div>
+                        <div class="ibox-content" style="min-height: 162px;">
                             <table class="table table-bordered text-center table-hover table-condensed">
                                 <tr>
                                     <th class="text-center">{{'orderOverview_fast'|translate}}</th>
@@ -156,26 +176,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h2>{{'details_createNewOrder'|translate}}</h2></div>
-                        <div class="ibox-content">
-                            <form>
-                                <div class="form-group">
-                                    <label for="mengeInput" class="sr-only">{{'orderOverview_amount'|translate}}</label>
-                                    <input type="number" placeholder="Menge" class="form-control" id="mengeInput" min="1" ng-model="dbvc.neueBestellung.menge">
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" ng-model="dbvc.neueBestellung.eil">{{'details_fastOrder'|translate}}
-                                    </label>
-                                </div>
-                                <button class="btn btn-primary" type="submit" ng-click="dbvc.createNeueBestellung()">{{'details_create'|translate}}</button>
-                            </form>
-                        </div>
-                    </div>
-            </div>
             <div class="row">
                 <div class="col-lg-6">
                     <div class="ibox">
