@@ -20,22 +20,20 @@ class MainController {
     scope;
     translate;
 
-    constructor(resourceService: ResourceService, $rootScope, $location, $route, $translate,$scope) {
+    constructor(resourceService: ResourceService, $rootScope, $location, $route, $translate,$scope, service, NewTeileService, bestellService, dateiService:DateiService, kennzahlenService:KennzahlenService) {
         this.resource = resourceService.resource;
         this.location = $location;
         this.$scope = $scope;
         this.isLoggedIn = false;
         this.checkSession();
-        var vm = this;
-        $rootScope.$on('refreshAfterLogin', function(event) { vm.checkSession(); });
         this.scope = $rootScope;
         this.translate = $translate;
         this.moveableRoutes = [];
         this.setMoveableRoutes($route.routes);
         this.language = "de_DE";
         this.languageOld=this.language;
-
-
+        var vm = this;
+        $rootScope.$on('refreshAfterLogin', function(event) { vm.checkSession(); });
     }
     checkSession() {
         var vm = this;
@@ -43,20 +41,20 @@ class MainController {
             if (result.session.name) {
                 vm.name = result.session.name;
                 vm.isLoggedIn = true;
-                vm.resource.getSimulationFiles('', function(result, headers) {
-                    if (result.erg != '404' && result.erg != '502') {
-                        if(result.simulationFile.length>0) {
-                            vm.$scope.$emit('fileController.neueDatei', JSON.parse(result.simulationFile[result.simulationFile.length - 1].datei));
+                vm.resource.getSimulationFiles('', function(res, headers) {
+                    if (res.erg != '404' && res.erg != '502') {
+                        if(res.simulationFile.length>0) {
+                            vm.$scope.$emit('fileController.neueDatei', (JSON.parse(res.simulationFile[res.simulationFile.length - 1].datei)));
                         }
                     }
                 });
-
-
             } else {
                 vm.name = 'Gast';
                 vm.isLoggedIn = false;
             }
         });
+
+
     }
 
     performLogout() {
@@ -137,5 +135,5 @@ class MainController {
     }
 
 }
-angular.module('MainModule').controller('MainController', ['ResourceService', '$rootScope', '$location', '$route', '$translate','$scope', MainController]);
+angular.module('MainModule').controller('MainController', ['ResourceService', '$rootScope', '$location', '$route', '$translate','$scope','NewBaumService', 'NewTeileService', 'BestellService', 'DateiService','KennzahlenService', MainController]);
 
