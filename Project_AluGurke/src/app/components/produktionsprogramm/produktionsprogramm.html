@@ -28,7 +28,7 @@
                                         <td>
                                             <table class="table table-bordered text-center table-hover table-condensed" style="width:20%;">
                                                 <tr>
-                                                    <th class="text-center" colspan="2">{{'production_plan_sellWish'|translate}}</th>
+                                                    <th class="text-center" colspan="2">{{'production_plan_sellWish'|translate}} in  {{'production_plan_period'|translate}} {{pc.periode}}</th>
                                                 </tr>
                                                 <tr>
                                                     <th class="text-center">{{'production_plan_product'|translate}}</th>
@@ -54,10 +54,10 @@
                                                 <th class="text-center" colspan="4">{{'production_plan_forecast'|translate}}</th>
                                             </tr>
                                             <tr>
-                                                <th class="text-center">{{'production_plan_period'|translate}}</th>
-                                                <th class="text-center">n+1</th>
-                                                <th class="text-center">n+2</th>
-                                                <th class="text-center">n+3</th>
+                                                <th class="text-center">{{'production_plan_product'|translate}}</th>
+                                                <th class="text-center">{{'production_plan_period'|translate}} {{pc.periode+1}} </th>
+                                                <th class="text-center">{{'production_plan_period'|translate}} {{pc.periode+2}}</th>
+                                                <th class="text-center">{{'production_plan_period'|translate}} {{pc.periode+3}}</th>
                                             </tr>
                                             <tr>
                                                 <td>P1</td>
@@ -88,7 +88,7 @@
                         <div class="panel-body">
                             <table class="table table-bordered text-center table-hover table-condensed"   align="center" style="width:50%;">
                                 <tr>
-                                    <th class="text-center" colspan="4">Direct Sales</th>
+                                    <th class="text-center" colspan="4">Direct Sales in {{'production_plan_period'|translate}} {{pc.periode}}</th>
                                 </tr>
                                 <tr>
                                     <th class="text-center">{{'production_plan_product'|translate}}</th>
