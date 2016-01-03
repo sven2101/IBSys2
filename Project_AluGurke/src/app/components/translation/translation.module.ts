@@ -37,7 +37,16 @@ angular.module('app').config(function($translateProvider) {
         pruchasing_proculeadTime: 'WBZ [Per.]',
         purchasing_deviation: 'Abweichung[%]',
         purchasing_thisPeriode: 'aktuell',
-        
+
+        //Kaufteildisposition detailtabelle
+        purchasing_detail_newOrders:'Neue Bestellungen',
+        purchasing_detail_fastOrder:'Eil',
+        purchasing_detail_amount:'Menge',
+        purchasing_detail_costs:'Kosten',
+        purchasing_detail_keyData:'Kennzahlen',
+        purchasing_detail_amountOfCurretInwardStock:'Menge an aktuellem Lagerzugang',
+        purchasing_detail_amountOfFutureInwardStock:'Menge an zukünftigem Lagerzugang',
+
         //Detailansicht
         details_headline: 'Detailansicht',
         details_scndHeadline: 'Detailainsicht für Kaufteil',
@@ -205,6 +214,15 @@ angular.module('app').config(function($translateProvider) {
         pruchasing_proculeadTime: 'Proculeadtime [Per.]',
         purchasing_deviation: 'Deviation[%]',
         purchasing_thisPeriode: 'this Period',
+
+        //Kaufteildisposition detailtabelle
+        purchasing_detail_newOrders:'New Orders',
+        purchasing_detail_fastOrder:'Fast',
+        purchasing_detail_amount:'Amount',
+        purchasing_detail_costs:'Costs',
+        purchasing_detail_keyData:'Key data',
+        purchasing_detail_amountOfCurretInwardStock:'Amount of current inwardstockmovement',
+        purchasing_detail_amountOfFutureInwardStock:'Amount of future inwardstockmovement',
         
         //Detailansicht
         details_headline: 'Details',
