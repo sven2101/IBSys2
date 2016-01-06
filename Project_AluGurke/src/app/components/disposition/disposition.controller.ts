@@ -21,6 +21,7 @@ class DispositionController{
     modelsP3:Array<DispositionModel>;
     knoten:Array<NewTeilKnoten>;
     kapazitaetsplanungService:KapazitaetsplanungService;
+    fertigungsAuftraegeService:FertigungsAuftraegeService
     
     showTab = {
 		P1: true,
@@ -30,7 +31,7 @@ class DispositionController{
     
 
 
-    constructor(auftragsService,newTeileService,dispositionService,newBaumService,kapazitaetsplanungService){
+    constructor(auftragsService,newTeileService,dispositionService,newBaumService,kapazitaetsplanungService,fertigungsAuftraegeService){
         this.dispositionService=dispositionService;
         this.kapazitaetsplanungService=kapazitaetsplanungService;
         this.models=this.dispositionService.models;
@@ -38,6 +39,7 @@ class DispositionController{
         this.modelsP2=this.dispositionService.dispositionP2;
         this.modelsP3=this.dispositionService.dispositionP3;
         this.auftragsService=auftragsService;
+        this.fertigungsAuftraegeService=fertigungsAuftraegeService;
         this.aendern();        
         
         
@@ -45,6 +47,7 @@ class DispositionController{
     aendern(){
         this.dispositionService.aendern();
         this.kapazitaetsplanungService.aendern();
+        this.fertigungsAuftraegeService.onDispoAendern();
     }
     tabOnClick(contentToShow: string): void {
 		for (var property in this.showTab) {
@@ -57,5 +60,5 @@ class DispositionController{
 }
 
 
-angular.module("DispositionModule").controller("DispositionController",["AuftragService","NewTeileService","DispositionService","NewBaumService","KapazitaetsplanungService",DispositionController]);
+angular.module("DispositionModule").controller("DispositionController",["AuftragService","NewTeileService","DispositionService","NewBaumService","KapazitaetsplanungService","FertigungsAuftraegeService",DispositionController]);
 

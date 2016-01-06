@@ -8,7 +8,7 @@
 /// <reference path="../appServices/DispositionService.ts" />
 /// <reference path="../appServices/KapazitaetsplanungService.ts" />
 var DispositionController = (function () {
-    function DispositionController(auftragsService, newTeileService, dispositionService, newBaumService, kapazitaetsplanungService) {
+    function DispositionController(auftragsService, newTeileService, dispositionService, newBaumService, kapazitaetsplanungService, fertigungsAuftraegeService) {
         this.showTab = {
             P1: true,
             P2: false,
@@ -21,11 +21,13 @@ var DispositionController = (function () {
         this.modelsP2 = this.dispositionService.dispositionP2;
         this.modelsP3 = this.dispositionService.dispositionP3;
         this.auftragsService = auftragsService;
+        this.fertigungsAuftraegeService = fertigungsAuftraegeService;
         this.aendern();
     }
     DispositionController.prototype.aendern = function () {
         this.dispositionService.aendern();
         this.kapazitaetsplanungService.aendern();
+        this.fertigungsAuftraegeService.onDispoAendern();
     };
     DispositionController.prototype.tabOnClick = function (contentToShow) {
         for (var property in this.showTab) {
@@ -37,4 +39,4 @@ var DispositionController = (function () {
     };
     return DispositionController;
 })();
-angular.module("DispositionModule").controller("DispositionController", ["AuftragService", "NewTeileService", "DispositionService", "NewBaumService", "KapazitaetsplanungService", DispositionController]);
+angular.module("DispositionModule").controller("DispositionController", ["AuftragService", "NewTeileService", "DispositionService", "NewBaumService", "KapazitaetsplanungService", "FertigungsAuftraegeService", DispositionController]);
