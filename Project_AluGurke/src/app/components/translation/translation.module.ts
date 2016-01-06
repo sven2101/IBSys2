@@ -121,6 +121,9 @@ angular.module('app').config(function($translateProvider) {
         capacityPlanning_amountOrders: 'Anzahl der Produktionsaufträge',
         capacityPlanning_Shifts: 'Anzahl der Schichten',
         capacityPlanning_overtime: 'Überstunden',
+        capacityPlanning_automaticCalculation:'Automatische Berechnung',
+        capacityPlanning_deleteWorkingHours:'Arbeitszeiten löschen',
+        capacityPlanning_calculateWorkingHours:'Arbeitszeiten automatisch berechnen',
 
         //Lager
         warehous_headline: 'Lager',
@@ -299,6 +302,9 @@ angular.module('app').config(function($translateProvider) {
         capacityPlanning_amountOrders: 'Amount of production orders',
         capacityPlanning_Shifts: 'Number of shifts',
         capacityPlanning_overtime: 'Overtime',
+        capacityPlanning_automaticCalculation:'Automatic calculation',
+        capacityPlanning_deleteWorkingHours:'Delete Working hours',
+        capacityPlanning_calculateWorkingHours:'Calculate working hours',
         
         //Lager
         warehous_headline: 'Warehouse',

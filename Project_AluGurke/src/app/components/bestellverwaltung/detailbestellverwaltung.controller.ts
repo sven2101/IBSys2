@@ -111,18 +111,15 @@ class DetailBestellVerwaltungController {
     chart(data: Array<number>, linienName: string) {
         let categories = new Array<string>();
 
-        let periode = this.periode;
-        categories.push('Periode' + periode + ' Tag 0');
+        let periode = this.periode;        
 
         for (let i = 0; i < 20; i++) {
             if (i % 5 === 0) {
                 periode++;
             }
 
-            categories.push('Periode' + periode + ' Tag ' + ((i % 5) + 1));
-        }
-
-        data.unshift(this.kaufTeil.lagerMenge);
+            categories.push('Periode ' + periode + '<br>Tag ' + ((i % 5) + 1));
+        }      
         $('#timelineChart').highcharts({
             chart: {
                 type: 'spline'
