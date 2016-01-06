@@ -41,7 +41,7 @@ class SettingsService {
     }
 
     defaultWerteSetzten() {
-        /*this.dispositionDefaultWerte[1]=20;
+        this.dispositionDefaultWerte[1]=20;
         this.dispositionDefaultWerte[26]=70;
         this.dispositionDefaultWerte[51]=30;
         this.dispositionDefaultWerte[16]=70;
@@ -70,8 +70,9 @@ class SettingsService {
         this.dispositionDefaultWerte[29]=30;
         this.dispositionDefaultWerte[9]=70;
         this.dispositionDefaultWerte[15]=100;
-        this.dispositionDefaultWerte[20]=100;*/
+        this.dispositionDefaultWerte[20]=100;
 
+        /*
         this.dispositionDefaultWerte[1] = 100;
         this.dispositionDefaultWerte[26] = 300;
         this.dispositionDefaultWerte[51] = 100;
@@ -102,6 +103,7 @@ class SettingsService {
         this.dispositionDefaultWerte[9] = 100;
         this.dispositionDefaultWerte[15] = 100;
         this.dispositionDefaultWerte[20] = 100;
+        */
     }
     setDefaultWert() {
         for (let i = 0; i < this.newTeileService.alleErzeugnisse.length; i++) {
