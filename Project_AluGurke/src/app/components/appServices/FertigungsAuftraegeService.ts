@@ -50,6 +50,51 @@ class FertigungsAuftraegeService {
         }
         this.auftraegeSetzten();
     }
+    onDispoAendern() {
+        let temp: Array<FertigungsAuftraegeModel> = [];
+        for (let i = 0; i < this.models.length; i++) {
+            let test = false;
+            for (let j = 0; j < this.auftragService.auftraegeTemp.length; j++) {
+                let x = this.auftragService.auftraegeTemp[j];
+                let y = this.models[i];
+                if (y.auftrag.erzeugnis_id == x.erzeugnis_id) {
+                    test = true;
+                }
+            }
+            if (test) {
+                temp.push(this.models[i]);
+            }
+        }
+        this.models = temp;
+        for (let j = 0; j < this.auftragService.auftraegeTemp.length; j++) {
+            let test = false;
+            for (let i = 0; i < this.models.length; i++) {
+                let x = this.auftragService.auftraegeTemp[j];
+                let y = this.models[i].auftrag;
+                if (y.erzeugnis_id == x.erzeugnis_id) {
+                    test = true;
+                }
+            }
+            if (test == false) {
+                this.models.push(new FertigungsAuftraegeModel(this.auftragService.auftraegeTemp[j]));
+            }
+        }
+
+
+        for (let i = 0; i < this.models.length; i++) {
+            for (let j = 0; j < this.auftragService.auftraegeTemp.length; j++) {
+                let x = this.auftragService.auftraegeTemp[j];
+                let y = this.models[i];
+                if (y.auftrag.erzeugnis_id == x.erzeugnis_id) {
+                    y.auftrag.anzahl = x.anzahl;
+                    if (y.auftrag.anzahl != Number(y.split) && !isNaN(Number(y.split))) {
+                        y.split = y.auftrag.anzahl.toString();
+                    }
+                }
+            }
+
+        }
+    }
     aendern() {
         if (this.models === undefined) {
             this.models = new Array<FertigungsAuftraegeModel>();
@@ -63,25 +108,26 @@ class FertigungsAuftraegeService {
                     let x = this.auftragService.auftraegeTemp[j];
                     let y = this.models[i];
                     if (y.auftrag.erzeugnis_id == x.erzeugnis_id) {
-                        y.auftrag.anzahl = x.anzahl;                        
+                        y.auftrag.anzahl = x.anzahl;
+
                     }
                 }
-                let temp:Array<FertigungsAuftraegeModel>=[];
+                let temp: Array<FertigungsAuftraegeModel> = [];
                 for (let j = 0; j < this.auftragService.auftraegeTemp.length; j++) {
                     let test = false;
                     for (let i = 0; i < this.models.length; i++) {
                         let x = this.auftragService.auftraegeTemp[j];
                         let y = this.models[i].auftrag;
                         if (y.erzeugnis_id == x.erzeugnis_id) {
-                            test=true;
+                            test = true;
                         }
                     }
-                    if(test==false){
+                    if (test == false) {
                         this.models.push(new FertigungsAuftraegeModel(this.auftragService.auftraegeTemp[j]));
                     }
                 }
-                
-                this.models=this.models.concat(temp);
+
+                this.models = this.models.concat(temp);
             }
             for (let i = 0; i < this.models.length; i++) {
                 this.models[i].auftrag.setPriortaet(this.models[i].auftrag.prioritaetString);
@@ -141,8 +187,7 @@ class FertigungsAuftraegeService {
             }
         }
         if (summe < anzahl) {
-            ergebnis=[];            
-            ergebnis.push(anzahl);
+            ergebnis.push(Math.round((anzahl - summe)));
         }
         return ergebnis;//.sort(function(a,b){return a-b;});
     }
