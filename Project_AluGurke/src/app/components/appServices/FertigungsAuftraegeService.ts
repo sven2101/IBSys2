@@ -61,11 +61,27 @@ class FertigungsAuftraegeService {
             for (let i = 0; i < this.models.length; i++) {
                 for (let j = 0; j < this.auftragService.auftraegeTemp.length; j++) {
                     let x = this.auftragService.auftraegeTemp[j];
-                    let y = this.models[i].auftrag;
-                    if (y.erzeugnis_id == x.erzeugnis_id) {
-                        y.anzahl = x.anzahl;
+                    let y = this.models[i];
+                    if (y.auftrag.erzeugnis_id == x.erzeugnis_id) {
+                        y.auftrag.anzahl = x.anzahl;                        
                     }
                 }
+                let temp:Array<FertigungsAuftraegeModel>=[];
+                for (let j = 0; j < this.auftragService.auftraegeTemp.length; j++) {
+                    let test = false;
+                    for (let i = 0; i < this.models.length; i++) {
+                        let x = this.auftragService.auftraegeTemp[j];
+                        let y = this.models[i].auftrag;
+                        if (y.erzeugnis_id == x.erzeugnis_id) {
+                            test=true;
+                        }
+                    }
+                    if(test==false){
+                        this.models.push(new FertigungsAuftraegeModel(this.auftragService.auftraegeTemp[j]));
+                    }
+                }
+                
+                this.models=this.models.concat(temp);
             }
             for (let i = 0; i < this.models.length; i++) {
                 this.models[i].auftrag.setPriortaet(this.models[i].auftrag.prioritaetString);
@@ -125,7 +141,8 @@ class FertigungsAuftraegeService {
             }
         }
         if (summe < anzahl) {
-            ergebnis.push(Math.round((anzahl - summe)));
+            ergebnis=[];            
+            ergebnis.push(anzahl);
         }
         return ergebnis;//.sort(function(a,b){return a-b;});
     }

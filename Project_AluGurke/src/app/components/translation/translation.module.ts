@@ -16,7 +16,7 @@ angular.module('app').config(function($translateProvider) {
         NAV_warehouse:'Lager',
         NAV_purchasing:'Kaufteildisposition',
         NAV_disposition: 'Disposition',
-        NAV_productionOrders: 'Fertigungsaufträge',
+        NAV_productionOrders: 'Disposition Details',
         NAV_CapacityPlanning: 'Kapazitätsplanung',
         
         NAV_footer:'Sven, Marius und Max; Hochschule Karlsruhe – Technik und Wirtschaft',
@@ -103,7 +103,7 @@ angular.module('app').config(function($translateProvider) {
         disposition_productionProgram: 'Produktionsauftrag für kommende Periode',
         
         //Fertigungsaufträge
-        productionOrders_headline: 'Fertigungsaufträge',
+        productionOrders_headline: 'Disposition Details',
         productionOrders_Id: 'Id',
         productionOrders_amount: 'Menge',
         productionOrders_priority: 'Priorität',
@@ -196,8 +196,8 @@ angular.module('app').config(function($translateProvider) {
         NAV_orderOverview:'Order Overview',
         NAV_warehouse:'Warehouse',
         NAV_purchasing:'Purchasing',
-        NAV_disposition: 'Material Planning',
-        NAV_productionOrders: 'Production orders',
+        NAV_disposition: 'Material planning',
+        NAV_productionOrders: 'Material planing details',
         NAV_CapacityPlanning: 'Capacity planning',
         NAV_footer:'Sven, Marius und Max; Karlsruhe University of Applied Sciences',
         
@@ -273,7 +273,7 @@ angular.module('app').config(function($translateProvider) {
         orderOverview_orderPeriode: 'Order Period',
         
         //Disposition
-        disposition_Headline: 'Material Planning',
+        disposition_Headline: 'Material planning',
         dispostion_ChildrensBicycles: 'Children´s bicycles',
         disposition_Id: 'Id',
         disposition_SalesOrder: 'Sales orders',
@@ -284,7 +284,7 @@ angular.module('app').config(function($translateProvider) {
         disposition_productionProgram: 'Production order',
         
         //Fertigungsaufträge
-        productionOrders_headline: 'Production orders',
+        productionOrders_headline: 'Material planing details',
         productionOrders_Id: 'Id',
         productionOrders_amount: 'Amount',
         productionOrders_priority: 'Priority',
