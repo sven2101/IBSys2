@@ -734,16 +734,6 @@ class HomeController {
             title: {
                 text: ''
             },
-            legend: {
-                layout: 'vertical',
-                align: 'left',
-                verticalAlign: 'top',
-                x: 150,
-                y: 30,
-                floating: true,
-                borderWidth: 1,
-                backgroundColor: '#FFFFFF'
-            },
             xAxis: {
                 categories: categories
             },
@@ -838,15 +828,6 @@ class HomeController {
             }],
             tooltip: {
                 shared: true
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'left',
-                x: 120,
-                verticalAlign: 'top',
-                y: 50,
-                floating: true,
-                backgroundColor:'#FFFFFF'
             },
             series: [seriesOptions, {
                 name: 'Leerzeit',
@@ -952,13 +933,13 @@ class HomeController {
                 }
             },
             series: [{
-                name: 'Gesamt Umsatz',
+                name: 'Gesamt Profit',
                 data: totalSale
             }, {
-                name: 'Umsatz in der Periode',
+                name: 'Profit in der Periode',
                 data: currentSale
             }, {
-                name: 'Durchschnittlicher Umsatz',
+                name: 'Durchschnittlicher Profit',
                 data: averageSale
             }]
         });
@@ -1007,17 +988,6 @@ class HomeController {
                         enabled: true
                     }
                 }
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'top',
-                x: -40,
-                y: 20,
-                floating: true,
-                borderWidth: 1,
-                backgroundColor: ('#FFFFFF'),
-                shadow: true
             },
             credits: {
                 enabled: false

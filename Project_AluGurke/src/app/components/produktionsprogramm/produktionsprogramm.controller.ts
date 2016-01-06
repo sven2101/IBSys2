@@ -8,9 +8,11 @@ class ProduktionsprogrammController {
 
     programmService: ProgrammService;
     resource;
-    constructor(programmService: ProgrammService, resourceService: ResourceService, $scope) {
+    periode:number;
+    constructor(programmService: ProgrammService, resourceService: ResourceService, $scope,kennzahlenService: KennzahlenService) {
         this.programmService = programmService;
         this.resource = resourceService.resource;
+        this.periode = kennzahlenService.periode;
         var vm = this;
         $scope.$watch(
             function() {
@@ -53,4 +55,4 @@ class ProduktionsprogrammController {
 }
 
 
-angular.module('ProduktionsprogrammModule').controller('ProduktionsprogrammController', ['ProgrammService', 'ResourceService', '$scope', ProduktionsprogrammController]);
+angular.module('ProduktionsprogrammModule').controller('ProduktionsprogrammController', ['ProgrammService', 'ResourceService', '$scope','KennzahlenService', ProduktionsprogrammController]);

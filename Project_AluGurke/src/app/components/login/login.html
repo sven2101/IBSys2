@@ -1,20 +1,20 @@
 <div class="middle-box text-center loginscreen animated fadeInDown">
     <div>
-        <h3>Willkommen bei SCManager.de</h3>
-        <p>Nutze alle Funktionen f&uuml;r deine Produktionsplanung
+        <h3>{{'login_welcome'|translate}}</h3>
+        <p>{{'login_welcome_sub'|translate}}
         </p>
         <form class="m-t" role="form">
             <div class="form-group">
-                <input type="text" class="form-control" ng-model="lgc.user" placeholder="Benutzername" required="">
+                <input type="text" class="form-control" ng-model="lgc.user" placeholder="{{'login_username'|translate}}" required="">
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" ng-model="lgc.password" placeholder="Passwort" required="">
+                <input type="password" class="form-control" ng-model="lgc.password" placeholder="{{'login_password'|translate}}" required="">
             </div>
             <button type="submit" class="btn btn-primary block full-width m-b" ng-click="lgc.checkLogin()">Login</button>
 
-            <a href="/#/login"><small>Passwort vergessen</small></a>
-            <p class="text-muted text-center"><small>Noch keinen Account?</small></p>
-            <a class="btn btn-sm btn-white btn-block" href="/#/register">Registrieren</a>
+            <!--<a href="/#/login"><small>Passwort vergessen</small></a>-->
+            <p class="text-muted text-center"><small>{{'login_noAcc'|translate}}</small></p>
+            <a class="btn btn-sm btn-white btn-block" href="/#/register">{{'login_register'|translate}}</a>
         </form>
     </div>
 </div>

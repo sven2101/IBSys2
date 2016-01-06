@@ -18,7 +18,7 @@
 			<div class="col-lg-4">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
-						<h5>Melde dich an um alle Erweiterungen zu nutzen!</h5>
+						<h5>{{'dashboard_login'|translate}}</h5>
 					</div>
 					<div class="ibox-content">
 						<div class="text-center">
@@ -33,7 +33,7 @@
 			<div class="col-lg-4" style="width: 50%">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
-						<h2>Lagerentwicklung</h2>
+						<h2>{{'dashboard_stockMovement'|translate}}</h2>
 					</div>
 					<div class="ibox-content">
 						<div id="stockMovement">
@@ -44,8 +44,8 @@
 		<div class="col-lg-3" style="width: 25%;">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
-					<span class="label label-primary pull-right">Periode {{hc.getLatestPeriod()}}</span>
-					<h5>Lagerwert</h5>
+					<span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.getLatestPeriod()}}</span>
+					<h5>{{'dashboard_stockValue'|translate}}</h5>
 				</div>
 				<div class="ibox-content">
 					<h1 class="no-margins">{{hc.getStockValue() | currency:'\u20AC'}}</h1>
@@ -57,8 +57,8 @@
 		<div class="col-lg-3"  style="width: 25%;">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
-					<span class="label label-primary pull-right">Periode {{hc.getLatestPeriod()}}</span>
-					<h5>Umsatz</h5>
+					<span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.getLatestPeriod()}}</span>
+					<h5>Profit</h5>
 				</div>
 				<div class="ibox-content">
 					<h1 class="no-margins">{{hc.getProfitValue() | currency:'\u20AC'}}</h1>
@@ -70,21 +70,21 @@
 		<div class="col-md-4" style="width: 50%;">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
-					<span class="label label-success pull-right">Periode {{hc.getLatestPeriod()}}</span>
-					<h5>Laufende Bestellungen</h5>
+					<span class="label label-success pull-right">{{'dashboard_period'|translate}} {{hc.getLatestPeriod()}}</span>
+					<h5>{{'dashboard_currentOrders'|translate}}</h5>
 				</div>
 				<div class="ibox-content">
 					<ul class="stat-list m-t-lg">
 						<li>
 							<h2 class="no-margins">{{hc.getNormalOrders()}}</h2>
-							<small>Normalbestellungen</small>
+							<small>{{'dashboard_standardPurchaseOrder'|translate}}</small>
 							<div class="progress progress-mini">
 								<div ng-style="{'width':hc.getNormalOrdersPercentage()+'%'}" class="progress-bar"></div>
 							</div>
 						</li>
 						<li>
 							<h2 class="no-margins ">{{hc.getFastOrders()}}</h2>
-							<small>Eilbestellungen</small>
+							<small>{{'dashboard_rushOrder'|translate}}</small>
 							<div class="progress progress-mini">
 								<div ng-style="{'width':hc.getFastOrdersPercentage()+'%'}" class="progress-bar"></div>
 							</div>
@@ -98,7 +98,7 @@
 		<div class="col-lg-4" style="width: 50%">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
-					<h2>Lagerkostenentwicklung</h2>
+					<h2>{{'dashboard_stockCostMovement'|translate}}</h2>
 				</div>
 				<div class="ibox-content">
 					<div id="storeCosts">
@@ -109,7 +109,7 @@
 		<div class="col-lg-4" style="width: 50%">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
-					<h2>Umsatzentwicklung</h2>
+					<h2>{{'dashboard_profitMovement'|translate}}</h2>
 				</div>
 				<div class="ibox-content">
 					<div id="sales">
@@ -120,18 +120,7 @@
 		<div class="col-lg-4" style="width: 50%">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
-					<h2>Auslastung, Liefertreue und Normalkapazit&auml;t</h2>
-				</div>
-				<div class="ibox-content">
-					<div id="effiency">
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-4" style="width: 50%">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<h2>Leerzeiten und Kosten</h2>
+					<h2>{{'dashboard_idleTime'|translate}}</h2>
 				</div>
 				<div class="ibox-content">
 					<div id="idle">
@@ -142,7 +131,18 @@
 		<div class="col-lg-4" style="width: 50%">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
-					<h2>Vertriebswunsch und Verkaufte Einheiten</h2>
+					<h2>{{'dashboard_efficiency'|translate}}</h2>
+				</div>
+				<div class="ibox-content">
+					<div id="effiency">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4" style="width: 50%">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h2>{{'dashboard_sellingWish'|translate}}</h2>
 				</div>
 				<div class="ibox-content">
 					<div id="sellingUnit">
@@ -153,7 +153,7 @@
 		<div class="col-lg-4" style="width: 50%">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
-					<h2>Einnahmen aus Verk&aumlufen</h2>
+					<h2>{{'dashboard_sales'|translate}}</h2>
 				</div>
 				<div class="ibox-content">
 					<div id="sellingSource">
