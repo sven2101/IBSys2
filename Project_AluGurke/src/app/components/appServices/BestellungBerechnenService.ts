@@ -85,7 +85,7 @@ class BestellungBerechnenService {
                 break;
             case "sehr sicher": this.multiplikator = 1;
                 break;
-        }
+        }      
     }
 
     timeLineGenerieren(kTeilId: number, aktuellePeriode: number, multiplikator: number, verbrauch: Array<number>, timeinterval: number): Array<number> {
@@ -169,7 +169,7 @@ class BestellungBerechnenService {
         return reichweite;
     }
 
-    bestellungenGenerieren(kTeilId: number, aktuellePeriode: number, multiplikator: number, verbrauch: Array<number>, timeinterval = 20) {
+    bestellungenGenerieren(kTeilId: number, aktuellePeriode: number, multiplikator: number, verbrauch: Array<number>, timeinterval = 40) {
         let kTeil = this.kaufTeilSuchen(kTeilId);
         let timeline = this.timeLineGenerieren(kTeilId, aktuellePeriode, multiplikator, verbrauch, timeinterval);
         let reichweite = this.reichweiteBerechenen(timeline);
@@ -180,6 +180,9 @@ class BestellungBerechnenService {
                 if (timeline[Math.round(i)] < 0) {
                     menge += timeline[Math.round(i)] * -1;
                 }
+                if(timeline[Math.round(i)] < 0&&i!=reichweite * 5){
+                    menge-=timeline[Math.round(i-1)] * -1
+                }
             }
             if (menge * 2 > kTeil.discontMenge && menge < kTeil.discontMenge) {
                 menge = kTeil.discontMenge;
@@ -189,10 +192,13 @@ class BestellungBerechnenService {
 
         if (reichweite - 1 < kTeil.wbz + multiplikator * kTeil.wbzAbw) {
             //Normal
-            let menge = 0;
+            let menge = 0;        
             for (let i = reichweite * 5; i < timeline.length && i < (reichweite + kTeil.wbz + multiplikator * kTeil.wbzAbw) * 5; i++) {
                 if (timeline[Math.round(i)] < 0) {
                     menge += timeline[Math.round(i)] * -1;
+                }
+                if(timeline[Math.round(i)] < 0&&i!=reichweite * 5){
+                    menge-=timeline[Math.round(i-1)] * -1
                 }
             }
             if (menge * 2 > kTeil.discontMenge && menge < kTeil.discontMenge) {
