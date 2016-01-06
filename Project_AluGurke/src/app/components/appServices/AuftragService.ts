@@ -34,16 +34,32 @@ class AuftragService {
 
     getAktuellenKaufTeilVerbrauch(kaufTeilId: number): number {
         var gesamtVerbrauch = 0;
-        var verwendendeErzeugnisse: Array<NewTeilKnoten> = this.getErzeugnisseDieKaufTeilVerwenden(kaufTeilId);
+        /*var verwendendeErzeugnisse: Array<NewTeilKnoten> = this.getErzeugnisseDieKaufTeilVerwenden(kaufTeilId);
 
         for (var i = 0; i < verwendendeErzeugnisse.length; i++) {
             gesamtVerbrauch += this.getVerbrauchFürErzeugnis(verwendendeErzeugnisse[i], kaufTeilId);
+        }*/
+
+        for (var i = 0; i < this.auftraegeExport.length; i++) {
+            var erzeugnis = this.auftraegeExport[i].erzeugnis_id;
+            var erzeugnisKnoten = this.baumService.getKnoten(erzeugnis);
+
+            if (erzeugnisKnoten.hatBestimmtesBauteil(kaufTeilId)) {
+                var anzahlVerwendet = 0;
+                for (var x = 0; x < erzeugnisKnoten.bauteile.length; x++) {
+                    if (erzeugnisKnoten.bauteile[x].teil_id === kaufTeilId) {
+                        anzahlVerwendet = erzeugnisKnoten.bauteile[x].anzahl;
+                    }
+                }
+                
+                gesamtVerbrauch += anzahlVerwendet * this.auftraegeExport[i].anzahl;
+            }
         }
-       
+
         return gesamtVerbrauch;
     }
 
-    getErzeugnisseDieKaufTeilVerwenden(kaufTeilId: number): Array<NewTeilKnoten> {
+    /*getErzeugnisseDieKaufTeilVerwenden(kaufTeilId: number): Array<NewTeilKnoten> {
         var erzeugnisse: Array<NewTeilKnoten> = [];
 
         for (var i = 0; i < this.teileService.alleErzeugnisse.length; i++) {
@@ -54,9 +70,9 @@ class AuftragService {
         }
 
         return erzeugnisse;
-    }
+    }*/
 
-    getVerbrauchFürErzeugnis(erzeugnisKnoten: NewTeilKnoten, kaufTeilId: number): number {
+    /*getVerbrauchFürErzeugnis(erzeugnisKnoten: NewTeilKnoten, kaufTeilId: number): number {
         var verbrauch = 0;
         var produktionsAufträge = this.getProduktionsAufträgeFürErzeugnis(erzeugnisKnoten.teil_id);
         var anzahlVerwendet;
@@ -72,9 +88,9 @@ class AuftragService {
         }
 
         return verbrauch;
-    }
+    }*/
 
-    getProduktionsAufträgeFürErzeugnis(erzeugnisId: number): Array<Auftrag> {
+    /*getProduktionsAufträgeFürErzeugnis(erzeugnisId: number): Array<Auftrag> {
         var produktionsAufträge: Array<Auftrag> = [];
         for (var i = 0; i < this.auftraegeExport.length; i++) {
             var auftrag = this.auftraegeExport[i];
@@ -83,44 +99,44 @@ class AuftragService {
             }
         }
         return produktionsAufträge;
-    }
-    
-    getVerbrauchEteil(eTeil_id:number){
-        let verbrauch=0;
-        for(let i=0;i<this.auftraegeExport.length;i++){
-            if(this.auftraegeExport[i].erzeugnis_id==eTeil_id){
-                verbrauch+=this.auftraegeExport[i].anzahl;
+    }*/
+
+    getVerbrauchEteil(eTeil_id: number) {
+        let verbrauch = 0;
+        for (let i = 0; i < this.auftraegeExport.length; i++) {
+            if (this.auftraegeExport[i].erzeugnis_id == eTeil_id) {
+                verbrauch += this.auftraegeExport[i].anzahl;
             }
         }
         return verbrauch;
     }
-    
+
 
     onNeueDatei(dateiInhalt) {
-        
-   
+
+
         this.updateAuftraegeInWarteschlange(dateiInhalt.results.waitinglistworkstations.workplace);
 
         this.updateAuftraegeAufMaschine(dateiInhalt.results.ordersinwork.workplace)
 
     }
 
-    updateAuftraegeInWarteschlange(arbeitsplaetze: Array<any>) { 
+    updateAuftraegeInWarteschlange(arbeitsplaetze: Array<any>) {
         this.auftraegeInWarteschlange = [];
         for (let i = 0; i < arbeitsplaetze.length; i++) {
-            if(arbeitsplaetze[i].hasOwnProperty("waitinglist")){
-                if(Array.isArray(arbeitsplaetze[i].waitinglist)){
-                    for(let j=0;j<arbeitsplaetze[i].waitinglist.length;j++){
-                        let x=arbeitsplaetze[i].waitinglist[j];
+            if (arbeitsplaetze[i].hasOwnProperty("waitinglist")) {
+                if (Array.isArray(arbeitsplaetze[i].waitinglist)) {
+                    for (let j = 0; j < arbeitsplaetze[i].waitinglist.length; j++) {
+                        let x = arbeitsplaetze[i].waitinglist[j];
                         this.auftraegeInWarteschlange.push(new Auftrag(Number(x._item), Number(x._amount), Number(x._period)));
                     }
                 }
-                else{
-                    let x=arbeitsplaetze[i].waitinglist;
+                else {
+                    let x = arbeitsplaetze[i].waitinglist;
                     this.auftraegeInWarteschlange.push(new Auftrag(Number(x._item), Number(x._amount), Number(x._period)))
                 }
             }
-        }        
+        }
     }
 
     updateAuftraegeAufMaschine(arbeitsplaetze: Array<any>) {
@@ -129,7 +145,7 @@ class AuftragService {
             let x = arbeitsplaetze[i];
             this.auftraegeAufMaschine.push(new Auftrag(Number(x._item), Number(x._amount), Number(x._period)));
         }
-     
+
     }
 
 
@@ -137,12 +153,12 @@ class AuftragService {
 
         //let x=this.mergeAuftraege(auftraege);
         this.auftraege = [];
-       
+
         this.auftraegeExport = auftraege;
         this.auftraege = this.auftraege.concat(this.auftraegeAufMaschine);
         this.auftraege = this.auftraege.concat(this.auftraegeInWarteschlange);
         this.auftraege = this.auftraege.concat(auftraege);
-      
+
     }
     mergeAuftraege(auftraege: Array<Auftrag>) {
         let temp: Array<Auftrag> = new Array<Auftrag>();
