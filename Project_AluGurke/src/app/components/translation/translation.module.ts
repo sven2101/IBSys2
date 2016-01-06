@@ -35,7 +35,7 @@ angular.module('app').config(function($translateProvider) {
         purchasing_stockQuantity: 'Lagermenge',
         purchasing_stockRange: 'Reichweite [Per.]',
         pruchasing_proculeadTime: 'WBZ [Per.]',
-        purchasing_deviation: 'Abweichung[%]',
+        purchasing_deviation: 'Abweichung[Per.]',
         purchasing_thisPeriode: 'aktuell',
 
         //Kaufteildisposition detailtabelle
@@ -212,7 +212,7 @@ angular.module('app').config(function($translateProvider) {
         purchasing_stockQuantity: 'Stock Quantity',
         purchasing_stockRange: 'Stock Range [Per.]',
         pruchasing_proculeadTime: 'Proculeadtime [Per.]',
-        purchasing_deviation: 'Deviation[%]',
+        purchasing_deviation: 'Deviation[Per.]',
         purchasing_thisPeriode: 'this Period',
 
         //Kaufteildisposition detailtabelle
