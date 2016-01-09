@@ -116,7 +116,13 @@ class MainController {
         if (routeObject.keys.length !== 0) {
             return false;
         }
+        //Internet Explorer fix
+        /*
         if (!routeObject.originalPath || routeObject.originalPath.endsWith('/')) {
+            return false;
+        }
+        */
+         if (!routeObject.originalPath || routeObject.originalPath[routeObject.originalPath.length-1]=='/') {
             return false;
         }
         return true;
@@ -125,9 +131,9 @@ class MainController {
     changeLanguage() {
         if (this.language != this.languageOld) {
             this.translate.use(this.language).then(function(key) {
-                console.log("Sprache zu " + key + " gewechselt.");
+                //console.log("Sprache zu " + key + " gewechselt.");
             }, function(key) {
-                console.log("Irgendwas lief schief.");
+                //console.log("Irgendwas lief schief.");
             });
             this.languageOld = this.language;
             this.$scope.$emit('mainController.neueSprache',this.language);

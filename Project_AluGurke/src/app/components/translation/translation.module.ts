@@ -365,4 +365,5 @@ angular.module('app').config(function($translateProvider) {
 
     });
     $translateProvider.preferredLanguage('de_DE');
+    $translateProvider.useSanitizeValueStrategy(null);
 });

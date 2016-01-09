@@ -133,7 +133,7 @@ class BestellService {
 		var materialKosten = 0;
 		var bestellKosten = 0;
         
-        console.log(eil);
+        
 
 		if (menge >= kaufTeil.discontMenge && !eil) {
 			materialKosten += menge * kaufTeil.preis * 0.9;
