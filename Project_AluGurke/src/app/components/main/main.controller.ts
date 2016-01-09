@@ -137,6 +137,7 @@ class MainController {
             });
             this.languageOld = this.language;
             this.$scope.$emit('mainController.neueSprache',this.language);
+            
         }
     }
 
