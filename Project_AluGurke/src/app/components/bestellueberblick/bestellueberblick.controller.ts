@@ -96,7 +96,7 @@ class BestellUeberblickController {
         var kaufTeil = this.teileService.getKaufTeil(bestellung.teil_id);
         var materialKosten = kaufTeil.preis * bestellung.menge;
 
-        if (bestellung.menge >= kaufTeil.discontMenge) {
+        if (bestellung.menge >= kaufTeil.discontMenge && !bestellung.eil) {
             materialKosten = materialKosten * 0.9;
         }
         return materialKosten;

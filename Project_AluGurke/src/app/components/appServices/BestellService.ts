@@ -132,6 +132,8 @@ class BestellService {
 	getBestellungsKosten(menge: number, eil: boolean, kaufTeil: NewKaufTeil): number {
 		var materialKosten = 0;
 		var bestellKosten = 0;
+        
+        console.log(eil);
 
 		if (menge >= kaufTeil.discontMenge && !eil) {
 			materialKosten += menge * kaufTeil.preis * 0.9;

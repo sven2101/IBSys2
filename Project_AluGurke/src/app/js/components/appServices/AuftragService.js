@@ -21,9 +21,7 @@ var AuftragService = (function () {
     }
     AuftragService.prototype.getAktuellenKaufTeilVerbrauch = function (kaufTeilId) {
         var gesamtVerbrauch = 0;
-        //console.log("KAUFTEIL " + kaufTeilId + "-----------------------------------------");
         for (var i = 0; i < this.auftraegeExport.length; i++) {
-            //console.log(this.auftraegeExport[i]);
             var erzeugnis = this.auftraegeExport[i].erzeugnis_id;
             var erzeugnisKnoten = this.baumService.getKnoten(erzeugnis);
             if (erzeugnisKnoten.hatBestimmtesBauteil(kaufTeilId)) {
@@ -40,7 +38,6 @@ var AuftragService = (function () {
                 anzahlVerwendet = erzeugnisKnoten.bauteile[x].anzahl;
             }
         }
-        //console.log("Kaufteil mit der ID: "+kaufTeilId + " wird in dem Erzeugnis: "+erzeugnisKnoten.teil_id + " " + anzahlVerwendet + " mal verwendet." );
         return anzahlVerwendet;
     };
     AuftragService.prototype.getVerbrauchEteil = function (eTeil_id) {
