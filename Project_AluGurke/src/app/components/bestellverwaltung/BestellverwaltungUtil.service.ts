@@ -46,31 +46,6 @@ class BestellverwaltungUtilService {
     getAnzahlInBaum(baum: NewTeilKnoten, id: number): number {
         return this.baumService.getAnzahlInBaum(baum, id);
     }
-
-    getReichweite(lagerMenge: number, teil_id: number): number {
-        if (lagerMenge === 0) {
-            return 0;
-        }
-
-        var gesamtVerbrauch = this.getVerbrauch(teil_id, 1) + this.getVerbrauch(teil_id, 2) + this.getVerbrauch(teil_id, 3) + this.getVerbrauch(teil_id, 4);
-        if (gesamtVerbrauch === 0) {
-            return Number.POSITIVE_INFINITY;
-        }
-
-        var reichweite = 0;
-
-        for (var i = 1; i <= 10; i++) {
-            if (lagerMenge - this.getVerbrauch(teil_id, i) >= 0) {
-                reichweite += 1;
-                lagerMenge -= this.getVerbrauch(teil_id, i);
-            } else {
-                reichweite += lagerMenge / this.getVerbrauch(teil_id, i);
-                break;
-            }
-        }
-        return Math.round(reichweite * 100) / 100;
-    }
-
 }
 
 angular.module('BestellverwaltungModule').factory('BestellverwaltungUtilService', ['AuftragService', 'NewBaumService', 'ProgrammService',

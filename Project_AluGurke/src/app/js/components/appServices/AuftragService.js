@@ -21,45 +21,27 @@ var AuftragService = (function () {
     }
     AuftragService.prototype.getAktuellenKaufTeilVerbrauch = function (kaufTeilId) {
         var gesamtVerbrauch = 0;
-        var verwendendeErzeugnisse = this.getErzeugnisseDieKaufTeilVerwenden(kaufTeilId);
-        for (var i = 0; i < verwendendeErzeugnisse.length; i++) {
-            gesamtVerbrauch += this.getVerbrauchFürErzeugnis(verwendendeErzeugnisse[i], kaufTeilId);
+        //console.log("KAUFTEIL " + kaufTeilId + "-----------------------------------------");
+        for (var i = 0; i < this.auftraegeExport.length; i++) {
+            //console.log(this.auftraegeExport[i]);
+            var erzeugnis = this.auftraegeExport[i].erzeugnis_id;
+            var erzeugnisKnoten = this.baumService.getKnoten(erzeugnis);
+            if (erzeugnisKnoten.hatBestimmtesBauteil(kaufTeilId)) {
+                var anzahlVerwendet = this.getAnzahlVonKaufTeilInErzeugnis(erzeugnisKnoten, kaufTeilId);
+                gesamtVerbrauch += anzahlVerwendet * this.auftraegeExport[i].anzahl;
+            }
         }
         return gesamtVerbrauch;
     };
-    AuftragService.prototype.getErzeugnisseDieKaufTeilVerwenden = function (kaufTeilId) {
-        var erzeugnisse = [];
-        for (var i = 0; i < this.teileService.alleErzeugnisse.length; i++) {
-            var erzeugnisKnoten = this.baumService.getKnoten(this.teileService.alleErzeugnisse[i].id);
-            if (erzeugnisKnoten.hatBestimmtesBauteil(kaufTeilId)) {
-                erzeugnisse.push(erzeugnisKnoten);
+    AuftragService.prototype.getAnzahlVonKaufTeilInErzeugnis = function (erzeugnisKnoten, kaufTeilId) {
+        var anzahlVerwendet = 0;
+        for (var x = 0; x < erzeugnisKnoten.bauteile.length; x++) {
+            if (erzeugnisKnoten.bauteile[x].teil_id === kaufTeilId) {
+                anzahlVerwendet = erzeugnisKnoten.bauteile[x].anzahl;
             }
         }
-        return erzeugnisse;
-    };
-    AuftragService.prototype.getVerbrauchFürErzeugnis = function (erzeugnisKnoten, kaufTeilId) {
-        var verbrauch = 0;
-        var produktionsAufträge = this.getProduktionsAufträgeFürErzeugnis(erzeugnisKnoten.teil_id);
-        var anzahlVerwendet;
-        for (var i = 0; i < erzeugnisKnoten.bauteile.length; i++) {
-            if (erzeugnisKnoten.bauteile[i].teil_id === kaufTeilId) {
-                anzahlVerwendet = erzeugnisKnoten.bauteile[i].anzahl;
-            }
-        }
-        for (var j = 0; j < produktionsAufträge.length; j++) {
-            verbrauch += anzahlVerwendet * produktionsAufträge[j].anzahl;
-        }
-        return verbrauch;
-    };
-    AuftragService.prototype.getProduktionsAufträgeFürErzeugnis = function (erzeugnisId) {
-        var produktionsAufträge = [];
-        for (var i = 0; i < this.auftraegeExport.length; i++) {
-            var auftrag = this.auftraegeExport[i];
-            if (auftrag.erzeugnis_id === erzeugnisId) {
-                produktionsAufträge.push(auftrag);
-            }
-        }
-        return produktionsAufträge;
+        //console.log("Kaufteil mit der ID: "+kaufTeilId + " wird in dem Erzeugnis: "+erzeugnisKnoten.teil_id + " " + anzahlVerwendet + " mal verwendet." );
+        return anzahlVerwendet;
     };
     AuftragService.prototype.getVerbrauchEteil = function (eTeil_id) {
         var verbrauch = 0;

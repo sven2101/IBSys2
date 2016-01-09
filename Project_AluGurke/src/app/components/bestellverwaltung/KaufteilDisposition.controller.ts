@@ -44,7 +44,7 @@ class KaufteilDispositionController {
 	constructor(teileService: NewTeileService, baumService: NewBaumService, bestellService: BestellService,
 		programmService: ProgrammService, bestellungBerechnenService: BestellungBerechnenService, auftragService: AuftragService,utilService:BestellverwaltungUtilService) {
 		this.bestellungBerechnenService = bestellungBerechnenService;
-		this.auftragService = auftragService;
+		//this.auftragService = auftragService;
 		this.utilService = utilService;
 		this.kaufTeileVM = [];
 		this.baumService = baumService;

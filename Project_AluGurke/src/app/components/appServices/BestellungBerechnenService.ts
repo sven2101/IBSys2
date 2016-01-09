@@ -17,11 +17,11 @@ class BestellungBerechnenService {
     constructor(BestellService: BestellService, NewTeileService: NewTeileService, $rootScope, bestellverwaltungUtilService) {
         this.bestellService = BestellService;
         this.newTeileService = NewTeileService;
-        this.bestellverwaltungUtilService=bestellverwaltungUtilService;
-        this.$rootScope=$rootScope;
-        this.aktuellePeriode=1;
-        this.multiplikator=1;  
-        this.multiplikatorString="sehr sicher";  
+        this.bestellverwaltungUtilService = bestellverwaltungUtilService;
+        this.$rootScope = $rootScope;
+        this.aktuellePeriode = 1;
+        this.multiplikator = 1;
+        this.multiplikatorString = "sehr sicher";
         this.$rootScope.$on('fileController.neueDatei', (event, dateiInhalt) => {
             this.onNeueDatei(dateiInhalt);
         });
@@ -85,7 +85,7 @@ class BestellungBerechnenService {
                 break;
             case "sehr sicher": this.multiplikator = 1;
                 break;
-        }      
+        }
     }
 
     timeLineGenerieren(kTeilId: number, aktuellePeriode: number, multiplikator: number, verbrauch: Array<number>, timeinterval: number): Array<number> {
@@ -145,7 +145,7 @@ class BestellungBerechnenService {
         }
         for (let i = 20; i < timeinterval; i++) {
             lagerstand = lagerstand - Math.round(verbrauch[3] / 5);
-            timeline.push(lagerstand);    
+            timeline.push(lagerstand);
         }
         return timeline;
     }
@@ -180,8 +180,8 @@ class BestellungBerechnenService {
                 if (timeline[Math.round(i)] < 0) {
                     menge += timeline[Math.round(i)] * -1;
                 }
-                if(timeline[Math.round(i)] < 0&&i!=reichweite * 5){
-                    menge-=timeline[Math.round(i-1)] * -1
+                if (timeline[Math.round(i)] < 0 && i != reichweite * 5) {
+                    menge -= timeline[Math.round(i - 1)] * -1
                 }
             }
             if (menge * 2 > kTeil.discontMenge && menge < kTeil.discontMenge) {
@@ -192,13 +192,13 @@ class BestellungBerechnenService {
 
         if (reichweite - 1 < kTeil.wbz + multiplikator * kTeil.wbzAbw) {
             //Normal
-            let menge = 0;        
+            let menge = 0;
             for (let i = reichweite * 5; i < timeline.length && i < (reichweite + kTeil.wbz + multiplikator * kTeil.wbzAbw) * 5; i++) {
                 if (timeline[Math.round(i)] < 0) {
                     menge += timeline[Math.round(i)] * -1;
                 }
-                if(timeline[Math.round(i)] < 0&&i!=reichweite * 5){
-                    menge-=timeline[Math.round(i-1)] * -1
+                if (timeline[Math.round(i)] < 0 && i != reichweite * 5) {
+                    menge -= timeline[Math.round(i - 1)] * -1
                 }
             }
             if (menge * 2 > kTeil.discontMenge && menge < kTeil.discontMenge) {

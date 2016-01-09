@@ -34,24 +34,14 @@ class AuftragService {
 
     getAktuellenKaufTeilVerbrauch(kaufTeilId: number): number {
         var gesamtVerbrauch = 0;
-        /*var verwendendeErzeugnisse: Array<NewTeilKnoten> = this.getErzeugnisseDieKaufTeilVerwenden(kaufTeilId);
-
-        for (var i = 0; i < verwendendeErzeugnisse.length; i++) {
-            gesamtVerbrauch += this.getVerbrauchFürErzeugnis(verwendendeErzeugnisse[i], kaufTeilId);
-        }*/
-
+       
         for (var i = 0; i < this.auftraegeExport.length; i++) {
+           
             var erzeugnis = this.auftraegeExport[i].erzeugnis_id;
             var erzeugnisKnoten = this.baumService.getKnoten(erzeugnis);
 
             if (erzeugnisKnoten.hatBestimmtesBauteil(kaufTeilId)) {
-                var anzahlVerwendet = 0;
-                for (var x = 0; x < erzeugnisKnoten.bauteile.length; x++) {
-                    if (erzeugnisKnoten.bauteile[x].teil_id === kaufTeilId) {
-                        anzahlVerwendet = erzeugnisKnoten.bauteile[x].anzahl;
-                    }
-                }
-                
+                var anzahlVerwendet = this.getAnzahlVonKaufTeilInErzeugnis(erzeugnisKnoten,kaufTeilId);
                 gesamtVerbrauch += anzahlVerwendet * this.auftraegeExport[i].anzahl;
             }
         }
@@ -59,47 +49,16 @@ class AuftragService {
         return gesamtVerbrauch;
     }
 
-    /*getErzeugnisseDieKaufTeilVerwenden(kaufTeilId: number): Array<NewTeilKnoten> {
-        var erzeugnisse: Array<NewTeilKnoten> = [];
-
-        for (var i = 0; i < this.teileService.alleErzeugnisse.length; i++) {
-            var erzeugnisKnoten = this.baumService.getKnoten(this.teileService.alleErzeugnisse[i].id);
-            if (erzeugnisKnoten.hatBestimmtesBauteil(kaufTeilId)) {
-                erzeugnisse.push(erzeugnisKnoten);
+    getAnzahlVonKaufTeilInErzeugnis(erzeugnisKnoten: NewTeilKnoten, kaufTeilId: number): number {
+        var anzahlVerwendet = 0;
+        for (var x = 0; x < erzeugnisKnoten.bauteile.length; x++) {
+            if (erzeugnisKnoten.bauteile[x].teil_id === kaufTeilId) {
+                anzahlVerwendet = erzeugnisKnoten.bauteile[x].anzahl;
             }
         }
-
-        return erzeugnisse;
-    }*/
-
-    /*getVerbrauchFürErzeugnis(erzeugnisKnoten: NewTeilKnoten, kaufTeilId: number): number {
-        var verbrauch = 0;
-        var produktionsAufträge = this.getProduktionsAufträgeFürErzeugnis(erzeugnisKnoten.teil_id);
-        var anzahlVerwendet;
-
-        for (var i = 0; i < erzeugnisKnoten.bauteile.length; i++) {
-            if (erzeugnisKnoten.bauteile[i].teil_id === kaufTeilId) {
-                anzahlVerwendet = erzeugnisKnoten.bauteile[i].anzahl;
-            }
-        }
-
-        for (var j = 0; j < produktionsAufträge.length; j++) {
-            verbrauch += anzahlVerwendet * produktionsAufträge[j].anzahl;
-        }
-
-        return verbrauch;
-    }*/
-
-    /*getProduktionsAufträgeFürErzeugnis(erzeugnisId: number): Array<Auftrag> {
-        var produktionsAufträge: Array<Auftrag> = [];
-        for (var i = 0; i < this.auftraegeExport.length; i++) {
-            var auftrag = this.auftraegeExport[i];
-            if (auftrag.erzeugnis_id === erzeugnisId) {
-                produktionsAufträge.push(auftrag);
-            }
-        }
-        return produktionsAufträge;
-    }*/
+        
+        return anzahlVerwendet;
+    }
 
     getVerbrauchEteil(eTeil_id: number) {
         let verbrauch = 0;
