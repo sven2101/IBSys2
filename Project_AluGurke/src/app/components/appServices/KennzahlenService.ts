@@ -78,7 +78,7 @@ class KennzahlenService {
 	onNeueDatei(dateiInhalt) {
 		this.game = dateiInhalt.results._game;
 		this.group = dateiInhalt.results._group;
-		this.periode = Number(dateiInhalt.results._period);
+		this.periode = Number(dateiInhalt.results._period)+1;
 		
 		this.genutzteKapazität.aktuell = Number(dateiInhalt.results.result.general.capacity._current);
 		this.genutzteKapazität.durchschnitt = Number(dateiInhalt.results.result.general.capacity._average);
