@@ -67,13 +67,28 @@ class DetailBestellVerwaltungController {
 
     setGenerierteBestellung(): void {
         this.generierteBestellung = this.bestellungBerechnenService.getBestellung(this.kaufTeil.id, [this.verbrauchAktuell, this.verbrauch1, this.verbrauch2, this.verbrauch3]);
-        if(this.generierteBestellung.menge < 1){
-            this.generierteBestellung = null;
+
+        if (this.generierteBestellung) {
+
+            if (this.generierteBestellung.menge < 1 || this.neueBestellungenBeinhaltenSchonEilBestellung(this.generierteBestellung.menge)) {
+                this.generierteBestellung = null;
+            }
         }
         if (this.generierteBestellung) {
             this.generierteBestellung.kosten = this.bestellService.getBestellungsKosten(this.generierteBestellung.menge, this.generierteBestellung.eil, this.kaufTeil);
 
         }
+    }
+
+    neueBestellungenBeinhaltenSchonEilBestellung(menge: number): boolean {
+
+        for (var i = 0; i < this.neueBestellungen.length; i++) {
+            if (this.neueBestellungen[i].eil && this.neueBestellungen[i].menge >= menge) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     generierteBestellungUebernehmen() {
@@ -104,7 +119,7 @@ class DetailBestellVerwaltungController {
     }
 
     createNeueBestellung() {
-        if (this.neueBestellung.menge > 1) {
+        if (this.neueBestellung.menge > 0) {
             this.bestellService.neuBestellungErstellen(this.neueBestellung.eil, this.kaufTeil, this.neueBestellung.menge, this.bestellungBerechnenService.aktuellePeriode);
         }
         this.setTimeLine();
@@ -114,7 +129,7 @@ class DetailBestellVerwaltungController {
     chart(data: Array<number>, linienName: string) {
         let categories = new Array<string>();
 
-        let periode = this.periode;        
+        let periode = this.periode;
 
         for (let i = 0; i < 20; i++) {
             if (i % 5 === 0) {
@@ -122,7 +137,7 @@ class DetailBestellVerwaltungController {
             }
 
             categories.push('Periode ' + periode + '<br>Tag ' + ((i % 5) + 1));
-        }      
+        }
         $('#timelineChart').highcharts({
             chart: {
                 type: 'spline'
