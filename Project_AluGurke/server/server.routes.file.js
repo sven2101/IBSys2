@@ -20,7 +20,10 @@ module.exports = function (app) {
 
 	app.post('/file', function (req, res) {
 		var timestamp = new Date().getTime();
-		var dateiName = 'input' + timestamp + '.xml';
+        if(req.body.periode != 1){
+            req.body.periode++;
+        }
+		var dateiName = 'input_periode_'+ req.body.periode +"_"+ timestamp + '.xml';
 		fs.writeFile('files/' + dateiName, req.body.content, function (err) {
 			if (err) { console.log(err); }
 			else {

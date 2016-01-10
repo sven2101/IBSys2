@@ -17,6 +17,7 @@ class FileController {
 	result: string;
 	dateiService: DateiService;
 	zugangBestellungen: Array<ZugangBestellung>;
+    kennzahlenService:KennzahlenService
 
 	constructor($scope, service, NewTeileService, bestellService, resourceService: ResourceService, dateiService:DateiService,kennzahlenService:KennzahlenService) {
 		this.teileService = NewTeileService;
@@ -26,11 +27,12 @@ class FileController {
 		this.resource = resourceService.resource;
 		this.zugangBestellungen = bestellService.zugangBestellungen;
 		this.dateiService = dateiService;
+        this.kennzahlenService = kennzahlenService;
 	}
 	
 	sendPostRequest() {
 		var vm = this;
-		this.resource.createFile({ content: this.dateiService.getInhalt()}, function(result, headers) {
+		this.resource.createFile({ content: this.dateiService.getInhalt(), periode: this.kennzahlenService.periode}, function(result, headers) {
 			vm.result = result.dateiName;
 			vm.dateiService.dateiName = result.dateiName;
 			vm.dateiService.dateiErzeugt = true;
