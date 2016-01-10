@@ -13,7 +13,7 @@ class FertigungsAuftraegeController {
         this.fertigungsAuftraegeService = fertigungsAuftraegeService;
         this.aendern();
         this.models = this.fertigungsAuftraegeService.models;
-        this.models.sort(function(a: FertigungsAuftraegeModel, b: FertigungsAuftraegeModel) { return a.auftrag.erzeugnis_id - b.auftrag.erzeugnis_id });
+        this.models.sort(function(a: FertigungsAuftraegeModel, b: FertigungsAuftraegeModel) { return (a.auftrag.arbeitsplatz_id - b.auftrag.arbeitsplatz_id) });
 
 
     }
@@ -46,6 +46,7 @@ class FertigungsAuftraegeModel {
         let prio = ["kritisch", "hoch", "normal"];
         this.prioritaet = new Array<string>();
         this.prioritaet.push(prio[this.auftrag.prioritaet - 1]);
+        
     }
     triggerShow() {
         this.show = !this.show;

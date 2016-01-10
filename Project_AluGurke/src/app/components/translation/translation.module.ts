@@ -105,6 +105,7 @@ angular.module('app').config(function($translateProvider) {
         //Fertigungsaufträge
         productionOrders_headline: 'Disposition Details',
         productionOrders_Id: 'Id',
+        productionOrders_workingPlace:'Arbeitsplatz',
         productionOrders_amount: 'Menge',
         productionOrders_priority: 'Priorität',
         productionOrders_productionPosition: 'Auftragspositionen, mit Komma getrennt',
@@ -113,6 +114,7 @@ angular.module('app').config(function($translateProvider) {
         productionOrders_high: 'hoch',
         productionOrders_critical: 'kritisch',
         
+        
         //Kapazitätsplanung
         capacityPlanning_headline: 'Kapazitätsplanung',
         capacityPlanning_Workplace: 'Arbeitsplatz',
@@ -120,7 +122,7 @@ angular.module('app').config(function($translateProvider) {
         capacityPlanning_timeAvailable: 'Verfügbare Zeit',
         capacityPlanning_amountOrders: 'Anzahl der Produktionsaufträge',
         capacityPlanning_Shifts: 'Anzahl der Schichten',
-        capacityPlanning_overtime: 'Überstunden',
+        capacityPlanning_overtime: 'Überstunden in min',
         capacityPlanning_automaticCalculation:'Automatische Berechnung',
         capacityPlanning_deleteWorkingHours:'Arbeitszeiten löschen',
         capacityPlanning_calculateWorkingHours:'Arbeitszeiten automatisch berechnen',
@@ -286,6 +288,7 @@ angular.module('app').config(function($translateProvider) {
         //Fertigungsaufträge
         productionOrders_headline: 'Material planing details',
         productionOrders_Id: 'Id',
+        productionOrders_workingPlace:'Working place',
         productionOrders_amount: 'Amount',
         productionOrders_priority: 'Priority',
         productionOrders_productionPosition: 'Order position, separated by commas',
@@ -301,7 +304,7 @@ angular.module('app').config(function($translateProvider) {
         capacityPlanning_timeAvailable: 'Time available',
         capacityPlanning_amountOrders: 'Amount of production orders',
         capacityPlanning_Shifts: 'Number of shifts',
-        capacityPlanning_overtime: 'Overtime',
+        capacityPlanning_overtime: 'Overtime in min',
         capacityPlanning_automaticCalculation:'Automatic calculation',
         capacityPlanning_deleteWorkingHours:'Delete Working hours',
         capacityPlanning_calculateWorkingHours:'Calculate working hours',

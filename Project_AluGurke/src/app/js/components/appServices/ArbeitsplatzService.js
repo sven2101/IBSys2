@@ -98,6 +98,14 @@ var ArbeitsplatzService = (function () {
             this.fertigungsreihen[i].reset();
         }
     };
+    ArbeitsplatzService.prototype.getArbeitsplatzId = function (E_id) {
+        for (var i = 0; i < this.arbeitsplaetze.length; i++) {
+            if (this.arbeitsplaetze[i].erzeugnis_id == E_id) {
+                return this.arbeitsplaetze[i].id;
+            }
+        }
+        return 0;
+    };
     return ArbeitsplatzService;
 })();
 angular.module('app').factory('ArbeitsplatzService', [function () { return new ArbeitsplatzService(); }]);

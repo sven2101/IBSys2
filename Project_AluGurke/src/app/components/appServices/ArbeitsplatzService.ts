@@ -104,6 +104,14 @@ class ArbeitsplatzService {
             this.fertigungsreihen[i].reset();
         }
     }
+    getArbeitsplatzId(E_id:number):number{
+        for(let i=0;i<this.arbeitsplaetze.length;i++){
+            if(this.arbeitsplaetze[i].erzeugnis_id==E_id){
+                return this.arbeitsplaetze[i].id;
+            }
+        }
+        return 0;
+    }
 
 
 

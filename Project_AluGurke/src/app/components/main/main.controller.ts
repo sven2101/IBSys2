@@ -115,13 +115,7 @@ class MainController {
     isValidRoute(routeObject): boolean {
         if (routeObject.keys.length !== 0) {
             return false;
-        }
-        //Internet Explorer fix
-        /*
-        if (!routeObject.originalPath || routeObject.originalPath.endsWith('/')) {
-            return false;
-        }
-        */
+        }      
          if (!routeObject.originalPath || routeObject.originalPath[routeObject.originalPath.length-1]=='/') {
             return false;
         }

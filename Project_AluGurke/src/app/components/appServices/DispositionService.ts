@@ -182,6 +182,10 @@ class DispositionService {
         this.auftragService.auftraegeSetzen(auftraege2);
         
         this.auftragService.auftraegeTemp = auftraege2;
+        for(let i=0;i<this.auftragService.auftraegeTemp.length;i++){
+            let x=this.auftragService.auftraegeTemp[i];
+            x.arbeitsplatz_id=this.arbeitsplatzService.getArbeitsplatzId(x.erzeugnis_id);        
+        }
 
         
 
