@@ -67,6 +67,9 @@ class DetailBestellVerwaltungController {
 
     setGenerierteBestellung(): void {
         this.generierteBestellung = this.bestellungBerechnenService.getBestellung(this.kaufTeil.id, [this.verbrauchAktuell, this.verbrauch1, this.verbrauch2, this.verbrauch3]);
+        if(this.generierteBestellung.menge < 1){
+            this.generierteBestellung = null;
+        }
         if (this.generierteBestellung) {
             this.generierteBestellung.kosten = this.bestellService.getBestellungsKosten(this.generierteBestellung.menge, this.generierteBestellung.eil, this.kaufTeil);
 
