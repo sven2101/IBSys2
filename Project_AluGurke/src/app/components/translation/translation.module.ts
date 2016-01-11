@@ -148,6 +148,8 @@ angular.module('app').config(function($translateProvider) {
         production_plan_amount: 'Menge',
         production_plan_price: 'Preis',
         production_plan_penalty: 'Konventionalstrafe',
+        production_plan_sales:'Normalverk\u00E4ufe',
+        production_plan_direct_sales:'Direktverk\u00E4ufe',
 
         //Dashboard
         dashboard_login:'Melde dich an um alle Erweiterungen zu nutzen!',
@@ -330,6 +332,8 @@ angular.module('app').config(function($translateProvider) {
         production_plan_amount: 'Amount',
         production_plan_price: 'Price',
         production_plan_penalty: 'Penalty',
+        production_plan_sales:'Sales',
+        production_plan_direct_sales:'Direct Sales',
 
         //Dashboard
         dashboard_login:'Login to use all features!',
