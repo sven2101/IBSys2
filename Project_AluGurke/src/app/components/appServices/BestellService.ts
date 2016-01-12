@@ -96,7 +96,7 @@ class BestellService {
 		var restTage = anzahlTageErsteBestellung % 5;
 		var anzahlPerioden = (anzahlTageErsteBestellung - restTage) / 5;
 
-		var endPeriode = startPeriode - 1 + anzahlPerioden;
+		var endPeriode = /*startPeriode - 1*/ 1 + anzahlPerioden;
 		var endTag = restTage + differenz + 1;
 
 		if (endTag > 5) {
