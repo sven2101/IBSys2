@@ -90,6 +90,7 @@ angular.module('app').config(function($translateProvider) {
         orderOverview_partID: 'Teil ID',
         orderOverview_amount: 'Menge',
         orderOverview_orderPeriode: 'Bestellperiode',
+        orderOverview_orderTime:'Zeit',
         
         //Disposition
         disposition_Headline: 'Disposition',
@@ -113,6 +114,7 @@ angular.module('app').config(function($translateProvider) {
         productionOrders_normal: 'normal',
         productionOrders_high: 'hoch',
         productionOrders_critical: 'kritisch',
+        productionOrders_orderPosition: 'Auftragsposition',
         
         
         //Kapazitätsplanung
@@ -276,6 +278,7 @@ angular.module('app').config(function($translateProvider) {
         orderOverview_partialValueNewAndOngoingOrders: 'Partial Value with ongoing and new Orders',
         orderOverview_partID: 'Part ID',
         orderOverview_orderPeriode: 'Order Period',
+        orderOverview_orderTime:'Time',
         
         //Disposition
         disposition_Headline: 'Material planning',
@@ -299,6 +302,7 @@ angular.module('app').config(function($translateProvider) {
         productionOrders_normal: 'normal',
         productionOrders_high: 'high',
         productionOrders_critical: 'critical',
+        productionOrders_orderPosition: 'Order position',
         
         //Kapazitätsplanung
         capacityPlanning_headline: 'Capacity planning',
