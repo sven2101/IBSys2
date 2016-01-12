@@ -34,15 +34,17 @@ class AuftragService {
 
     getAktuellenKaufTeilVerbrauch(kaufTeilId: number): number {
         var gesamtVerbrauch = 0;
+        
+        var alleAuftraege = this.auftraegeExport.concat(this.auftraegeInWarteschlange);
        
-        for (var i = 0; i < this.auftraegeExport.length; i++) {
+        for (var i = 0; i < /*this.auftraegeExport.length*/ alleAuftraege.length; i++) {
            
-            var erzeugnis = this.auftraegeExport[i].erzeugnis_id;
+            var erzeugnis = /*this.auftraegeExport[i]*/alleAuftraege[i].erzeugnis_id;
             var erzeugnisKnoten = this.baumService.getKnoten(erzeugnis);
 
             if (erzeugnisKnoten.hatBestimmtesBauteil(kaufTeilId)) {
                 var anzahlVerwendet = this.getAnzahlVonKaufTeilInErzeugnis(erzeugnisKnoten,kaufTeilId);
-                gesamtVerbrauch += anzahlVerwendet * this.auftraegeExport[i].anzahl;
+                gesamtVerbrauch += anzahlVerwendet * /*this.auftraegeExport[i]*/alleAuftraege[i].anzahl;
             }
         }
 
