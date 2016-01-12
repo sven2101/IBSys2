@@ -79,15 +79,19 @@ class HomeController {
                 var ordersCount=0;
                 var obj = JSON.parse(this.allSimulationFiles[this.allSimulationFiles.length - 1].datei);
                 var normalOrders = obj.results.inwardstockmovement.order;
-                for(var i=0; i <normalOrders.length;i++){
-                    if((JSON.stringify(normalOrders[i]._mode).slice(0, -1).substr(1))=="5"){
-                        ordersCount++;
+                    if(!angular.isUndefined(normalOrders)) {
+                    for (var i = 0; i < normalOrders.length; i++) {
+                        if ((JSON.stringify(normalOrders[i]._mode).slice(0, -1).substr(1)) == "5") {
+                            ordersCount++;
+                        }
                     }
                 }
                 var futureOrders = obj.results.futureinwardstockmovement.order;
-                for(var i=0; i <futureOrders.length;i++){
-                    if((JSON.stringify(futureOrders[i]._mode).slice(0, -1).substr(1))=="5"){
-                        ordersCount++;
+                if(!angular.isUndefined(futureOrders)) {
+                    for (var i = 0; i < futureOrders.length; i++) {
+                        if ((JSON.stringify(futureOrders[i]._mode).slice(0, -1).substr(1)) == "5") {
+                            ordersCount++;
+                        }
                     }
                 }
                this.normalOrders=ordersCount;
@@ -106,15 +110,19 @@ class HomeController {
                 var ordersCount=0;
                 var obj = JSON.parse(this.allSimulationFiles[this.allSimulationFiles.length - 1].datei);
                 var fastOrders = obj.results.inwardstockmovement.order;
-                for(var i=0; i <fastOrders.length;i++){
-                    if((JSON.stringify(fastOrders[i]._mode).slice(0, -1).substr(1))=="4"){
-                        ordersCount++;
+                if(!angular.isUndefined(fastOrders)) {
+                    for (var i = 0; i < fastOrders.length; i++) {
+                        if ((JSON.stringify(fastOrders[i]._mode).slice(0, -1).substr(1)) == "4") {
+                            ordersCount++;
+                        }
                     }
                 }
                 var futureOrders = obj.results.futureinwardstockmovement.order;
-                for(var i=0; i <futureOrders.length;i++){
-                    if((JSON.stringify(futureOrders[i]._mode).slice(0, -1).substr(1))=="4"){
-                        ordersCount++;
+                if(!angular.isUndefined(futureOrders)) {
+                    for (var i = 0; i < futureOrders.length; i++) {
+                        if ((JSON.stringify(futureOrders[i]._mode).slice(0, -1).substr(1)) == "4") {
+                            ordersCount++;
+                        }
                     }
                 }
                 this.fastOrders=ordersCount;
@@ -179,7 +187,6 @@ class HomeController {
         var stockMovement=[];
         stockMovement.push(291355.00);
         var isAvailable = false;
-
         for(var i=0; i < json[json.length-1].periode; i++){
             isAvailable = false;
             for(var j = 0; j<json.length;j++)
