@@ -34,7 +34,7 @@ class LagerStatistikService {
 	getKaufTeileCategories(): Array<string> {
 		var categories = [];
 		for (var i = 0; i < this.teileService.alleKaufteile.length; i++) {
-			categories.push(this.teileService.alleKaufteile[i].id);
+			categories.push(this.teileService.alleKaufteile[i].bezeichnung+"("+this.teileService.alleKaufteile[i].id+")");
 		}
 		return categories;
 	}
@@ -42,7 +42,7 @@ class LagerStatistikService {
 	getErzeugnisseCategories(): Array<string> {
 		var categories = [];
 		for (var i = 0; i < this.teileService.alleErzeugnisse.length; i++) {
-			categories.push(this.teileService.alleErzeugnisse[i].id);
+			categories.push(this.teileService.alleErzeugnisse[i].bezeichnung+"("+this.teileService.alleErzeugnisse[i].id+")");
 		}
 		return categories;
 	}

@@ -137,6 +137,7 @@ angular.module('app').config(function($translateProvider) {
         warehous_stockValue: 'Lagerwert',
         warehous_partialValue: 'Teilewert',
         warehouse_multipleUsage: 'MFW',
+        warehouse_description: 'Bezeichnung',
 
         //Produktionsproramm
         production_plan_headline: 'Produktionsprogramm',
@@ -321,6 +322,7 @@ angular.module('app').config(function($translateProvider) {
         warehous_stockValue: 'Stock Value',
         warehous_partialValue: 'Partial Value',
         warehouse_multipleUsage: 'Multiple Usage',
+        warehouse_description: 'Description',
 
         //Produktionsproramm
         production_plan_headline: 'Production plan',

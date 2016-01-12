@@ -66,6 +66,7 @@
 							<table class="table table-bordered text-center table-hover table-condensed">
 								<tr>
 									<th class="text-center curs" ng-click="lc.sortiereErzeugnisse('id')">ID</th>
+									<th class="text-center curs" ng-click="lc.sortiereErzeugnisse('bezeichnung')">{{'warehouse_description'|translate}}</th>
 									<th class="text-center curs" ng-click="lc.sortiereErzeugnisse('mehrfachVerwendung')">{{'warehouse_multipleUsage'|translate}}</th>
 									<th class="text-center curs" ng-click="lc.sortiereErzeugnisse('teileWert')">{{'warehous_partialValue'|translate}}</th>
 									<th class="text-center curs" ng-click="lc.sortiereErzeugnisse('lagerMenge')">{{'warehous_stockQuantity'|translate}}</th>
@@ -73,6 +74,7 @@
 								</tr>
 								<tr ng-repeat="teil in lc.alleErzeugnisse">
 									<td>{{::teil.id}}</td>
+									<td>{{::teil.bezeichnung}}</td>
 									<td>
 										<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="teil.mehrfachVerwendung"></span>
 										<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!teil.mehrfachVerwendung"></span>
@@ -88,6 +90,7 @@
 								<table class="table table-bordered text-center table-hover table-condensed">
 									<tr>
 										<th class="text-center curs" ng-click="lc.sortiereKaufTeile('id')">ID</th>
+										<th class="text-center curs" ng-click="lc.sortiereKaufTeile('bezeichnung')">{{'warehouse_description'|translate}}</th>
 										<th class="text-center curs" ng-click="lc.sortiereKaufTeile('mfw')">{{'warehouse_multipleUsage'|translate}}</th>
 										<th class="text-center curs" ng-click="lc.sortiereKaufTeile('teileWert')">{{'warehous_partialValue'|translate}}</th>
 										<th class="text-center curs" ng-click="lc.sortiereKaufTeile('lagerMenge')">{{'warehous_stockQuantity'|translate}}</th>
@@ -95,6 +98,7 @@
 									</tr>
 									<tr ng-repeat="teil in lc.alleKaufTeile">
 										<td>{{::teil.id}}</td>
+										<td>{{::teil.bezeichnung}}</td>
 										<td>
 											<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="teil.mfw"></span>
 											<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-if="!teil.mfw"></span>
