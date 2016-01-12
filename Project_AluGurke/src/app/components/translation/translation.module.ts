@@ -113,6 +113,7 @@ angular.module('app').config(function($translateProvider) {
         productionOrders_normal: 'normal',
         productionOrders_high: 'hoch',
         productionOrders_critical: 'kritisch',
+        productionOrders_orderPosition: 'Auftragsposition',
         
         
         //Kapazitätsplanung
@@ -299,6 +300,7 @@ angular.module('app').config(function($translateProvider) {
         productionOrders_normal: 'normal',
         productionOrders_high: 'high',
         productionOrders_critical: 'critical',
+        productionOrders_orderPosition: 'Order position',
         
         //Kapazitätsplanung
         capacityPlanning_headline: 'Capacity planning',
