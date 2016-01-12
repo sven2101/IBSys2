@@ -28,6 +28,41 @@ class HomeController {
         }
     }
 
+    getStorageFee()
+    {
+        if (typeof this.allSimulationFiles !== "undefined") {
+            var obj = JSON.parse(this.allSimulationFiles[this.allSimulationFiles.length - 1].datei);
+            var averageStorecosts = Number(JSON.stringify(obj.results.result.general.storagecosts._average).slice(0,-1).substr(1));
+            var percentage = 1500/averageStorecosts;
+            if(percentage>=1)
+            {
+                return (0.6/percentage)*52;
+            }
+            else
+            {
+                return ((percentage*0.6)+(1-percentage)*1.2)*52;
+            }
+        }
+    }
+
+    getStoragecosts()
+    {
+        if (typeof this.allSimulationFiles !== "undefined") {
+            var obj = JSON.parse(this.allSimulationFiles[this.allSimulationFiles.length - 1].datei);
+            var number = Number(JSON.stringify(obj.results.result.general.storagecosts._current).slice(0,-1).substr(1));
+            return number;
+        }
+    }
+
+    getAverageStorevalue()
+    {
+        if (typeof this.allSimulationFiles !== "undefined") {
+            var obj = JSON.parse(this.allSimulationFiles[this.allSimulationFiles.length - 1].datei);
+            var number = Number(JSON.stringify(obj.results.result.general.storevalue._average).slice(0,-1).substr(1));
+            return number;
+        }
+    }
+
     getProfitValue()
     {
         if (typeof this.allSimulationFiles !== "undefined") {
@@ -36,6 +71,7 @@ class HomeController {
             return number;
         }
     }
+
     getLatestPeriod(){
        if (typeof this.allSimulationFiles !== "undefined") {
            return Number(this.allSimulationFiles[this.allSimulationFiles.length - 1].periode);
@@ -67,6 +103,52 @@ class HomeController {
                 }
 
                 return ((currentProfit/lastProfit)-1)*100
+            }
+            else
+                return 0;
+        }
+    }
+
+    getPercentageStoragecostsChange(){
+        if (typeof this.allSimulationFiles !== "undefined") {
+            if(this.allSimulationFiles.length>1){
+                var obj = JSON.parse(this.allSimulationFiles[this.allSimulationFiles.length - 2].datei);
+                var lastStoragecosts = Number(JSON.stringify(obj.results.result.general.storagecosts._current).slice(0,-1).substr(1));
+                var currentStoragecosts = this.getStoragecosts();
+                return ((currentStoragecosts/lastStoragecosts)-1)*100
+            }
+            else
+                return 0;
+        }
+    }
+
+    getPercentageAverageStockvalueChange(){
+        if (typeof this.allSimulationFiles !== "undefined") {
+            if(this.allSimulationFiles.length>1){
+                var obj = JSON.parse(this.allSimulationFiles[this.allSimulationFiles.length - 2].datei);
+                var lastAverageStockvalue = Number(JSON.stringify(obj.results.result.general.storevalue._average).slice(0,-1).substr(1));
+                var currentAverageStockvalue = this.getAverageStorevalue();
+                return ((currentAverageStockvalue/lastAverageStockvalue)-1)*100
+            }
+            else
+                return 0;
+        }
+    }
+
+    getPercentageStorageFeeChange(){
+        if (typeof this.allSimulationFiles !== "undefined") {
+            if(this.allSimulationFiles.length>1){
+                var obj = JSON.parse(this.allSimulationFiles[this.allSimulationFiles.length - 2].datei);
+                var lastAverageStorecosts = Number(JSON.stringify(obj.results.result.general.storagecosts._average).slice(0,-1).substr(1));
+                var lastPercentage = 1500/lastAverageStorecosts;
+                var lastStorageFee = 0;
+                if(lastPercentage>=1) {
+                    lastStorageFee = (0.6/lastPercentage)*52;
+                }
+                else {
+                    lastStorageFee = ((lastPercentage*0.6)+(1-lastPercentage)*1.2)*52;
+                }
+                return this.getStorageFee()-lastStorageFee;
             }
             else
                 return 0;
@@ -136,7 +218,6 @@ class HomeController {
         }
 
     }
-
 
     getNormalOrdersPercentage(){
         if(this.normalOrders != 0){

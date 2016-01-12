@@ -30,17 +30,6 @@
 		</div>
 	</div>
 	<div class="row" ng-if="mctrl.isLoggedIn">
-			<div class="col-lg-4" style="width: 50%">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<h2>{{'dashboard_stockMovement'|translate}}</h2>
-					</div>
-					<div class="ibox-content">
-						<div id="stockMovement">
-						</div>
-					</div>
-				</div>
-		</div>
 		<div class="col-lg-3" style="width: 25%;">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
@@ -67,10 +56,23 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-lg-3" style="width: 50%;">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.getLatestPeriod()}}</span>
+					<h5>{{'dashboard_storageFee'|translate}}</h5>
+				</div>
+				<div class="ibox-content">
+					<h1 class="no-margins">{{hc.getStorageFee()| number:2}}% p.a.</h1>
+					<div  ng-if="hc.getPercentageStockChange()>=0" class="stat-percent font-bold text-navy">{{hc.getPercentageStorageFeeChange() | number:2}}%<i class="fa fa-level-up"></i></div>
+					<div  ng-if="hc.getPercentageStockChange()<0" class="stat-percent font-bold text-danger">{{hc.getPercentageStorageFeeChange() | number:2}}%<i class="fa fa-level-down"></i></div>
+				</div>
+			</div>
+		</div>
 		<div class="col-md-4" style="width: 50%;">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
-					<span class="label label-success pull-right">{{'dashboard_period'|translate}} {{hc.getLatestPeriod()}}</span>
+					<span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.getLatestPeriod()}}</span>
 					<h5>{{'dashboard_currentOrders'|translate}}</h5>
 				</div>
 				<div class="ibox-content">
@@ -93,8 +95,45 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-lg-3" style="width: 25%;">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.getLatestPeriod()}}</span>
+					<h5>{{'dashboard_storagecosts'|translate}}</h5>
+				</div>
+				<div class="ibox-content">
+					<h1 class="no-margins">{{hc.getStoragecosts() | currency:'\u20AC'}}</h1>
+					<div  ng-if="hc.getPercentageStockChange()>=0" class="stat-percent font-bold text-navy">{{hc.getPercentageStoragecostsChange() | number:2}}%<i class="fa fa-level-up"></i></div>
+					<div  ng-if="hc.getPercentageStockChange()<0" class="stat-percent font-bold text-danger">{{hc.getPercentageStoragecostsChange() | number:2}}%<i class="fa fa-level-down"></i></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3" style="width: 25%;">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.getLatestPeriod()}}</span>
+					<h5>{{'dashboard_averageStorevalue'|translate}}</h5>
+				</div>
+				<div class="ibox-content">
+					<h1 class="no-margins">{{hc.getAverageStorevalue() | currency:'\u20AC'}}</h1>
+					<div  ng-if="hc.getPercentageStockChange()>=0" class="stat-percent font-bold text-navy">{{hc.getPercentageAverageStockvalueChange() | number:2}}%<i class="fa fa-level-up"></i></div>
+					<div  ng-if="hc.getPercentageStockChange()<0" class="stat-percent font-bold text-danger">{{hc.getPercentageAverageStockvalueChange() | number:2}}%<i class="fa fa-level-down"></i></div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<div class="row" ng-if="mctrl.isLoggedIn">
+		<div class="col-lg-4" style="width: 50%">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h2>{{'dashboard_stockMovement'|translate}}</h2>
+				</div>
+				<div class="ibox-content">
+					<div id="stockMovement">
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="col-lg-4" style="width: 50%">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">

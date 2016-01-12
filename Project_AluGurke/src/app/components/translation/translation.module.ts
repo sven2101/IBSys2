@@ -168,6 +168,9 @@ angular.module('app').config(function($translateProvider) {
         dashboard_efficiency:'Auslastung, Liefertreue und Normalkapazit\u00E4t',
         dashboard_sellingWish:'Vertriebswunsch und Verkaufte Einheiten',
         dashboard_sales:'Einnahmen aus Verk\u00E4ufe',
+        dashboard_averageStorevalue:'Durchschnittlicher Lagerwert',
+        dashboard_storagecosts:'Lagerkosten',
+        dashboard_storageFee:'Lagerkostensatz',
 
         //login
         login_welcome:'Willkommen bei SCManager.de',
@@ -344,7 +347,7 @@ angular.module('app').config(function($translateProvider) {
         //Dashboard
         dashboard_login:'Login to use all features!',
         dashboard_stockMovement:'Stock movement',
-        dashboard_stockValue:'Stock value',
+        dashboard_stockValue:'Stockvalue',
         dashboard_period:'Period',
         dashboard_currentOrders:'Current orders',
         dashboard_standardPurchaseOrder:'Standard purchase Orders',
@@ -355,6 +358,9 @@ angular.module('app').config(function($translateProvider) {
         dashboard_efficiency:'Capacity, delivery reliability and normal capacity',
         dashboard_sellingWish:'Sales wish and sold units',
         dashboard_sales:'Income from sales',
+        dashboard_averageStorevalue:'Average Stockvalue',
+        dashboard_storagecosts:'Storagecosts',
+        dashboard_storageFee:'Storage fee',
 
         //login
         login_welcome:'Welcome to SCManager.de',
