@@ -31,6 +31,9 @@ class LagerColumn {
 					},
 					opposite:true,
 				}],
+			tooltip: {
+				shared: true
+			},
 			series: [JSON.parse(attrs.wertseries), JSON.parse(attrs.mengeseries)]
 		});
 	}
