@@ -90,6 +90,7 @@ angular.module('app').config(function($translateProvider) {
         orderOverview_partID: 'Teil ID',
         orderOverview_amount: 'Menge',
         orderOverview_orderPeriode: 'Bestellperiode',
+        orderOverview_orderTime:'Zeit',
         
         //Disposition
         disposition_Headline: 'Disposition',
@@ -277,6 +278,7 @@ angular.module('app').config(function($translateProvider) {
         orderOverview_partialValueNewAndOngoingOrders: 'Partial Value with ongoing and new Orders',
         orderOverview_partID: 'Part ID',
         orderOverview_orderPeriode: 'Order Period',
+        orderOverview_orderTime:'Time',
         
         //Disposition
         disposition_Headline: 'Material planning',
