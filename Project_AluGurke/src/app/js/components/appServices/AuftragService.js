@@ -21,12 +21,13 @@ var AuftragService = (function () {
     }
     AuftragService.prototype.getAktuellenKaufTeilVerbrauch = function (kaufTeilId) {
         var gesamtVerbrauch = 0;
-        for (var i = 0; i < this.auftraegeExport.length; i++) {
-            var erzeugnis = this.auftraegeExport[i].erzeugnis_id;
+        var alleAuftraege = this.auftraegeExport.concat(this.auftraegeInWarteschlange);
+        for (var i = 0; i < alleAuftraege.length; i++) {
+            var erzeugnis = alleAuftraege[i].erzeugnis_id;
             var erzeugnisKnoten = this.baumService.getKnoten(erzeugnis);
             if (erzeugnisKnoten.hatBestimmtesBauteil(kaufTeilId)) {
                 var anzahlVerwendet = this.getAnzahlVonKaufTeilInErzeugnis(erzeugnisKnoten, kaufTeilId);
-                gesamtVerbrauch += anzahlVerwendet * this.auftraegeExport[i].anzahl;
+                gesamtVerbrauch += anzahlVerwendet * alleAuftraege[i].anzahl;
             }
         }
         return gesamtVerbrauch;
