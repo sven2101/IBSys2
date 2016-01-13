@@ -17,6 +17,7 @@ class DetailBestellVerwaltungController {
     bestellService: BestellService;
     neueBestellung: NeuBestellung;
     generierteBestellung: NeuBestellung;
+    teileService: NewTeileService;
 
     aktuellerLagerzugang: Array<ZugangBestellung>;
     laufendeBestellungen: Array<Bestellung>;
@@ -34,6 +35,7 @@ class DetailBestellVerwaltungController {
     constructor($routeParams, teileService: NewTeileService, utilService: BestellverwaltungUtilService,
         kennzahlenService: KennzahlenService, bestellService: BestellService, bestellungBerechnenService: BestellungBerechnenService,
         settingsService: SettingsService) {
+        this.teileService = teileService;
         this.utilService = utilService;
         this.bestellungBerechnenService = bestellungBerechnenService;
         this.bestellService = bestellService;
@@ -61,6 +63,12 @@ class DetailBestellVerwaltungController {
     onChanged() {
         this.bestellungBerechnenService.onSelected();
         this.setTimeLine();
+
+        if (this.utilService.generierteBestellungen) {
+            this.utilService.deleteGenerierteBestellungen();
+            this.utilService.bestellungenGenerieren();
+        }
+
         this.reichweite = this.bestellungBerechnenService.getReichweite(this.kaufTeil.id, [this.verbrauchAktuell, this.verbrauch1, this.verbrauch2, this.verbrauch3]);
         this.setGenerierteBestellung();
     }
@@ -92,7 +100,8 @@ class DetailBestellVerwaltungController {
     }
 
     generierteBestellungUebernehmen() {
-        this.bestellService.neuBestellungErstellen(this.generierteBestellung.eil, this.kaufTeil, this.generierteBestellung.menge, this.periode);
+        this.utilService.generierteBestellungen = true;
+        this.bestellService.neuBestellungErstellen(this.generierteBestellung.eil, this.kaufTeil, this.generierteBestellung.menge, this.periode, true);
         this.reichweite = this.bestellungBerechnenService.getReichweite(this.kaufTeil.id, [this.verbrauchAktuell, this.verbrauch1, this.verbrauch2, this.verbrauch3]);
         this.setTimeLine();
         this.setGenerierteBestellung();
@@ -112,7 +121,11 @@ class DetailBestellVerwaltungController {
     }
 
     deleteNeueBestellung(bestellung: NeuBestellung): void {
+        
         this.bestellService.deleteNeuBetellung(bestellung.teil_id, bestellung.timestamp);
+
+        this.utilService.generierteBestellungenExist();
+        
         this.setTimeLine();
         this.reichweite = this.bestellungBerechnenService.getReichweite(this.kaufTeil.id, [this.verbrauchAktuell, this.verbrauch1, this.verbrauch2, this.verbrauch3]);
         this.setGenerierteBestellung();

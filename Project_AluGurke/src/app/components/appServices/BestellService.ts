@@ -123,9 +123,14 @@ class BestellService {
 		}
 	}
 
-	neuBestellungErstellen(eil: boolean, teil: NewKaufTeil, menge: number, periode: number): void {
+	neuBestellungErstellen(eil: boolean, teil: NewKaufTeil, menge: number, periode: number, generiert?:boolean): void {
+        
 		var kosten = this.getBestellungsKosten(menge, eil, teil);
-		var bestellung = new NeuBestellung(eil, teil.id, menge, kosten, periode);
+        if(!generiert){
+            generiert = false;
+        }
+        
+		var bestellung = new NeuBestellung(eil, teil.id, menge, kosten, periode,generiert);
 		this.neuBestellungen['k' + bestellung.teil_id].push(bestellung);
 	}
 
