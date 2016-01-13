@@ -61,6 +61,7 @@ class BestellungBerechnenService {
         return result;
     }
     ausgehendeBestellungSuchen(teilId: number): Array<NeuBestellung> {
+       
         return this.bestellService.neuBestellungen['k' + teilId];
     }
 
@@ -93,6 +94,7 @@ class BestellungBerechnenService {
         let zugangBestellungen = this.zugangsBestellungenSuchen(kTeilId);
         let laufendeBestellungen = this.laufendeBestellungenSuchen(kTeilId);
         let ausgehendeBestellungen = this.ausgehendeBestellungSuchen(kTeilId);
+
         let timeline = Array<number>();
         timeline = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         let lagerstand = kTeil.lagerMenge;
@@ -171,7 +173,7 @@ class BestellungBerechnenService {
 
     bestellungenGenerieren(kTeilId: number, aktuellePeriode: number, multiplikator: number, verbrauch: Array<number>, timeinterval = 40) {
         let kTeil = this.kaufTeilSuchen(kTeilId);
-        let timeline = this.timeLineGenerieren(kTeilId, aktuellePeriode, multiplikator, verbrauch, timeinterval);
+        let timeline = this.timeLineGenerieren(kTeilId, aktuellePeriode, multiplikator, verbrauch, 40);
         let reichweite = this.reichweiteBerechenen(timeline);
         if (reichweite < kTeil.wbz + multiplikator * kTeil.wbzAbw) {
             //Eil
@@ -185,7 +187,7 @@ class BestellungBerechnenService {
                 }
 
             }
-           
+
             return new NeuBestellung(true, kTeilId, menge, 0, this.aktuellePeriode);
         }
 
@@ -205,10 +207,13 @@ class BestellungBerechnenService {
                 menge = kTeil.discontMenge;
             }
 
-            return new NeuBestellung(false, kTeilId, menge, 0, this.aktuellePeriode);
+            var bestellung: NeuBestellung = new NeuBestellung(false, kTeilId, menge, 0, this.aktuellePeriode);
+            
+            return bestellung;
         }
         return null;
     }
 
+
 }
-angular.module('app').factory('BestellungBerechnenService', ['BestellService', 'NewTeileService', '$rootScope', (BestellService, NewTeileService, $rootScope/*, BestellverwaltungUtilService*/) => new BestellungBerechnenService(BestellService, NewTeileService, $rootScope/*, BestellverwaltungUtilService*/)]);
+angular.module('app').factory('BestellungBerechnenService', ['BestellService', 'NewTeileService', '$rootScope', (BestellService, NewTeileService, $rootScope) => new BestellungBerechnenService(BestellService, NewTeileService, $rootScope/*, BestellverwaltungUtilService*/)]);
