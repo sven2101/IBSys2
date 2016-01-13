@@ -25,10 +25,10 @@
                 <div class="ibox-title">             
                     <ul class="nav nav-tabs">
                         <li class="active" ng-click="fac.tab=1">
-                            <a data-toggle="tab" href="" aria-expanded="true">{{'productionOrders_headline'|translate}}</a>
+                            <a data-toggle="tab" href="" aria-expanded="true">Splitten</a>
                         </li>
                         <li ng-click="fac.tab=2">
-                            <a data-toggle="tab" href="" aria-expanded="true">{{'productionOrders_priority'|translate}}</a>
+                            <a data-toggle="tab" href="" aria-expanded="true">Priorisieren</a>
                         </li>
                     </ul>
                 </div>
@@ -40,7 +40,7 @@
                                 <th>{{'productionOrders_workingPlace'|translate}}</th>
                                 <th>{{'productionOrders_Id'|translate}}</th>
                                 <th>{{'productionOrders_amount'|translate}}</th>
-                                <th>{{'productionOrders_priority'|translate}}</th>
+                            
                                 <th>{{'productionOrders_productionPosition'|translate}}</th>
                                 <th>{{'productionOrders_details'|translate}}</th>
                             </tr>
@@ -49,14 +49,7 @@
                             <tr ng-repeat-start="model in fac.models">
                                 <td style="cursor:pointer;" ng-click="fac.oeffnen(model.auftrag.erzeugnis_id)">{{model.auftrag.arbeitsplatz_id}}</td>
                                 <td style="cursor:pointer;" ng-click="fac.oeffnen(model.auftrag.erzeugnis_id)">{{model.auftrag.erzeugnis_id}}</td>
-                                <td style="cursor:pointer;" ng-click="fac.oeffnen(model.auftrag.erzeugnis_id)">{{model.auftrag.anzahl}}</td>
-                                <td>
-                                    <select class="form-control" ng-model="model.auftrag.prioritaetString" ng-click="fac.prioAendern()" style="width:110px;">
-                                        <option>{{'productionOrders_normal'|translate}}</option>
-                                        <option>{{'productionOrders_high'|translate}}</option>
-                                        <option>{{'productionOrders_critical'|translate}}</option>
-                                    </select>
-                                </td>
+                                <td style="cursor:pointer;" ng-click="fac.oeffnen(model.auftrag.erzeugnis_id)">{{model.auftrag.anzahl}}</td>                                
                                 <td>
                                     <input class="form-control" ng-model="model.split" ng-keyup="fac.aendern();" min="0">
                                 </td>
@@ -72,18 +65,12 @@
                                             <table class="table table-hover" style="background-color:#F5F5F5">
                                                 <thead>
                                                     <th>{{'productionOrders_amount'|translate}}</th>
-                                                    <th>{{'productionOrders_priority'|translate}}</th>
+                                                   
                                                 </thead>
                                                 <tbody>
                                                     <tr ng-repeat="auftrag in model.auftraege">
                                                         <td>{{auftrag.anzahl}}</td>
-                                                        <td>
-                                                            <select class="form-control" ng-model="auftrag.prioritaetString" ng-click="fac.prioAendern()" style="width:110px;">
-                                                                <option>{{'productionOrders_normal'|translate}}</option>
-                                                                <option>{{'productionOrders_high'|translate}}</option>
-                                                                <option>{{'productionOrders_critical'|translate}}</option>
-                                                            </select>
-                                                        </td>
+                                                        
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -95,8 +82,27 @@
                     </table>
                 </div>
                 <div class="ibox-content" ng-if="fac.tab==2">
-                    <h5>das ist Content</h5>
-                </div>
+                    <div class="dd" >
+                        <table class="table">
+                            <thead>
+                                <th style="width:20%">{{'productionOrders_Id'|translate}}</th>
+                                <th style="width:20%">{{'productionOrders_workingPlace'|translate}}</th>
+                                <th style="width:20%">{{'productionOrders_amount'|translate}}</th>
+                            </thead>
+                        </table>
+                        <ul style="margin-top:-21px" class="dd-list" ui-sortable ng-model="fac.auftragService.auftraegeExport">                           
+                        <li style="cursor:pointer;" class="dd-item" ng-repeat="item in fac.auftragService.auftraegeExport">
+                            <table class="table table-hover">
+                                <tr>
+                                    <td style="width:20%">{{item.erzeugnis_id}}</td>
+                                    <td style="width:20%">{{item.arbeitsplatz_id}}</td>
+                                    <td style="width:20%">{{item.anzahl}}</td>
+                                </tr>                                                             
+                            </table> 
+                        </li>
+                        </ul>                    
+                    </div>
+                </div>   
             </div>
         </div> 
     </div>
