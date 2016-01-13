@@ -8,16 +8,16 @@ class BestellungBerechnenService {
 
     bestellService: BestellService;
     newTeileService: NewTeileService;
-    bestellverwaltungUtilService: BestellverwaltungUtilService;
+    //bestellverwaltungUtilService: BestellverwaltungUtilService;
     $rootScope;
     multiplikator: number;
     multiplikatorString: String;
     aktuellePeriode;
 
-    constructor(BestellService: BestellService, NewTeileService: NewTeileService, $rootScope, bestellverwaltungUtilService) {
+    constructor(BestellService: BestellService, NewTeileService: NewTeileService, $rootScope/*, bestellverwaltungUtilService*/) {
         this.bestellService = BestellService;
         this.newTeileService = NewTeileService;
-        this.bestellverwaltungUtilService = bestellverwaltungUtilService;
+        //this.bestellverwaltungUtilService = bestellverwaltungUtilService;
         this.$rootScope = $rootScope;
         this.aktuellePeriode = 1;
         this.multiplikator = 1;
@@ -183,10 +183,9 @@ class BestellungBerechnenService {
                 if (timeline[Math.round(i)] < 0 && i != reichweite * 5) {
                     menge -= timeline[Math.round(i - 1)] * -1
                 }
+
             }
-            if (menge * 2 > kTeil.discontMenge && menge < kTeil.discontMenge) {
-                menge = kTeil.discontMenge;
-            }
+           
             return new NeuBestellung(true, kTeilId, menge, 0, this.aktuellePeriode);
         }
 
@@ -201,13 +200,15 @@ class BestellungBerechnenService {
                     menge -= timeline[Math.round(i - 1)] * -1
                 }
             }
-            if (menge * 2 > kTeil.discontMenge && menge < kTeil.discontMenge) {
+
+            if (this.bestellService.getBestellungsKosten(kTeil.discontMenge, false, kTeil) < this.bestellService.getBestellungsKosten(menge, false, kTeil)) {
                 menge = kTeil.discontMenge;
             }
+
             return new NeuBestellung(false, kTeilId, menge, 0, this.aktuellePeriode);
         }
         return null;
     }
 
 }
-angular.module('app').factory('BestellungBerechnenService', ['BestellService', 'NewTeileService', '$rootScope', 'BestellverwaltungUtilService', (BestellService, NewTeileService, $rootScope, BestellverwaltungUtilService) => new BestellungBerechnenService(BestellService, NewTeileService, $rootScope, BestellverwaltungUtilService)]);
+angular.module('app').factory('BestellungBerechnenService', ['BestellService', 'NewTeileService', '$rootScope', (BestellService, NewTeileService, $rootScope/*, BestellverwaltungUtilService*/) => new BestellungBerechnenService(BestellService, NewTeileService, $rootScope/*, BestellverwaltungUtilService*/)]);
