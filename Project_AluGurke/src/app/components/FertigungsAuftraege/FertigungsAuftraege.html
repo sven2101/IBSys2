@@ -21,7 +21,20 @@
                 <div class="ibox-title">
                     <h5>{{'productionOrders_headline'|translate}}</h5>
                 </div>
-                <div class="ibox-content">
+
+                <div class="ibox-title">
+                    <h2>{{'disposition_Headline'|translate}}</h2>
+                    <ul class="nav nav-tabs">
+                        <li class="active" ng-click="fac.tab=1">
+                            <a data-toggle="tab" href="" aria-expanded="true">{{'productionOrders_headline'|translate}}</a>
+                        </li>
+                        <li ng-click="fac.tab=2">
+                            <a data-toggle="tab" href="" aria-expanded="true">Zeugs</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="ibox-content" ng-if="fac.tab==1">
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -41,21 +54,21 @@
                                 <td>
                                     <select class="form-control" ng-model="model.auftrag.prioritaetString" ng-click="fac.prioAendern()" style="width:110px;">
                                         <option>{{'productionOrders_normal'|translate}}</option>
-                                        <option >{{'productionOrders_high'|translate}}</option>
-                                        <option >{{'productionOrders_critical'|translate}}</option>
+                                        <option>{{'productionOrders_high'|translate}}</option>
+                                        <option>{{'productionOrders_critical'|translate}}</option>
                                     </select>
                                 </td>
                                 <td>
-                                    <input class="form-control" ng-model="model.split" ng-keyup="fac.aendern();"min="0">
+                                    <input class="form-control" ng-model="model.split" ng-keyup="fac.aendern();" min="0">
                                 </td>
-                                <td  style="cursor:pointer;"ng-click="fac.oeffnen(model.auftrag.erzeugnis_id)">
+                                <td style="cursor:pointer;" ng-click="fac.oeffnen(model.auftrag.erzeugnis_id)">
                                     <i class="fa fa-cog fa-2x" style="width:40px"></i>
                                 </td>
                             </tr>
                             <tr id="fac_{{model.auftrag.erzeugnis_id}}" hidden="true" tr ng-repeat-end>
                                 <td colspan="12">
                                     <div class="row">
-                                        <div class="ibox-content"style="background-color:#F5F5F5">
+                                        <div class="ibox-content" style="background-color:#F5F5F5">
                                             <h3>{{'productionOrders_orderPosition'|translate}}</h3>
                                             <table class="table table-hover" style="background-color:#F5F5F5">
                                                 <thead>
@@ -84,9 +97,98 @@
                     </table>
 
                 </div>
+
+                <div class="ibox-content" ng-if="fac.tab==2">
+                    <p  class="m-b-lg">
+                                <strong>Nestable</strong> is an interactive hierarchical list. You can drag and drop to rearrange the order. It works well on touch-screens.
+                            </p>
+
+                            <div class="dd" id="nestable">
+                                <ol class="dd-list">
+                                    <li class="dd-item" data-id="1">
+                                        <div class="dd-handle">1 - Lorem ipsum</div>
+                                    </li>
+                                    <li class="dd-item" data-id="2">
+                                        <div class="dd-handle">2 - Dolor sit</div>
+                                        <ol class="dd-list">
+                                            <li class="dd-item" data-id="3">
+                                                <div class="dd-handle">3 - Adipiscing elit</div>
+                                            </li>
+                                            <li class="dd-item" data-id="4">
+                                                <div class="dd-handle">4 - Nonummy nibh</div>
+                                            </li>
+                                        </ol>
+                                    </li>
+                                    <li class="dd-item" data-id="5">
+                                        <div class="dd-handle">5 - Consectetuer</div>
+                                        <ol class="dd-list">
+                                            <li class="dd-item" data-id="6">
+                                                <div class="dd-handle">6 - Aliquam erat</div>
+                                            </li>
+                                            <li class="dd-item" data-id="7">
+                                                <div class="dd-handle">7 - Veniam quis</div>
+                                            </li>
+                                        </ol>
+                                    </li>
+                                    <li class="dd-item" data-id="8">
+                                        <div class="dd-handle">8 - Tation ullamcorper</div>
+                                    </li>
+                                    <li class="dd-item" data-id="9">
+                                        <div class="dd-handle">9 - Ea commodo</div>
+                                    </li>
+                                </ol>
+                            </div>
+                            <div class="m-t-md">
+                                <h5>Serialised Output</h5>
+                            </div>
+                            <textarea id="nestable-output" class="form-control"></textarea>
+
+                </div>
+
+
+
+
+
             </div>
         </div>
 
     </div>
 
 </div>
+<script>
+         $(document).ready(function(){
+
+             var updateOutput = function (e) {
+                 var list = e.length ? e : $(e.target),
+                         output = list.data('output');
+                 if (window.JSON) {
+                     output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
+                 } else {
+                     output.val('JSON browser support required for this demo.');
+                 }
+             };
+             // activate Nestable for list 1
+             $('#nestable').nestable({
+                 group: 1
+             }).on('change', updateOutput);
+
+            
+
+             // output initial serialised data
+             updateOutput($('#nestable').data('output', $('#nestable-output')));
+            
+
+             $('#nestable-menu').on('click', function (e) {
+                 var target = $(e.target),
+                         action = target.data('action');
+                 if (action === 'expand-all') {
+                     $('.dd').nestable('expandAll');
+                 }
+                 if (action === 'collapse-all') {
+                     $('.dd').nestable('collapseAll');
+                 }
+             });
+         });
+
+    </script>
+

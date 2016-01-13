@@ -5,6 +5,7 @@ class FertigungsAuftraegeController {
 
     models: Array<FertigungsAuftraegeModel>;
     fertigungsAuftraegeService: FertigungsAuftraegeService;
+    tab:number;
 
 
 
@@ -14,7 +15,7 @@ class FertigungsAuftraegeController {
         this.aendern();
         this.models = this.fertigungsAuftraegeService.models;
         this.models.sort(function(a: FertigungsAuftraegeModel, b: FertigungsAuftraegeModel) { return (a.auftrag.arbeitsplatz_id - b.auftrag.arbeitsplatz_id) });
-
+        this.tab=1;
 
     }
     oeffnen(id: number) {
