@@ -35,15 +35,7 @@ class HomeController {
         if (typeof this.allSimulationFiles !== "undefined") {
             var obj = JSON.parse(this.allSimulationFiles[this.allSimulationFiles.length - 1].datei);
             var averageStorecosts = Number(JSON.stringify(obj.results.result.general.storagecosts._average).slice(0,-1).substr(1));
-            var percentage = 1500/averageStorecosts;
-            if(percentage>=1)
-            {
-                return (0.6/percentage)*52;
-            }
-            else
-            {
-                return ((percentage*0.6)+(1-percentage)*1.2)*52;
-            }
+            return ((averageStorecosts/this.getAverageStorevalue())*100)*52;
         }
     }
 
@@ -154,18 +146,12 @@ class HomeController {
             if(this.allSimulationFiles.length>1){
                 var obj = JSON.parse(this.allSimulationFiles[this.allSimulationFiles.length - 2].datei);
                 var lastAverageStorecosts = Number(JSON.stringify(obj.results.result.general.storagecosts._average).slice(0,-1).substr(1));
-                var lastPercentage = 1500/lastAverageStorecosts;
-                var lastStorageFee = 0;
-                if(lastPercentage>=1) {
-                    lastStorageFee = (0.6/lastPercentage)*52;
-                }
-                else {
-                    lastStorageFee = ((lastPercentage*0.6)+(1-lastPercentage)*1.2)*52;
-                }
+                var lastAverageStoreValue = Number(JSON.stringify(obj.results.result.general.storevalue._average).slice(0,-1).substr(1));
+                var lastStorageFee = ((lastAverageStorecosts/lastAverageStoreValue)*100)*52;
                 return this.getStorageFee()-lastStorageFee;
             }
             else if(this.allSimulationFiles.length==1){
-                return this.getStorageFee() - 55.98;
+                return this.getStorageFee() - 117.95;
             }
             else
                 return 0;
