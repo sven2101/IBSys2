@@ -133,10 +133,6 @@ class KaufteilDispositionController {
         return this.utilService.zeileRot(teil.reichweite, teil.kaufTeil.wbz, teil.kaufTeil.wbzAbw, this.bestellungBerechnenService.multiplikator);
     }
 
-    zeileGelb(teil: ViewModel): boolean {
-        return this.utilService.zeileGelb(teil.reichweite, teil.kaufTeil.wbz, teil.kaufTeil.wbzAbw);
-    }
-
     sortieren(kriterium: string): void {
         this.kaufTeileVM.sort(function(a: ViewModel, b: ViewModel) {
             var differenz;

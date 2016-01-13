@@ -37,6 +37,8 @@ angular.module('app').config(function($translateProvider) {
         pruchasing_proculeadTime: 'WBZ [Per.]',
         purchasing_deviation: 'Abweichung[Per.]',
         purchasing_thisPeriode: 'aktuell',
+        purchasing_generateOrders: 'Bestellungen generieren',
+        purchasing_deleteGenerateOrders: 'Generierte Bestellungen löschen',
 
         //Kaufteildisposition detailtabelle
         purchasing_detail_newOrders:'Neue Bestellungen',
@@ -232,6 +234,8 @@ angular.module('app').config(function($translateProvider) {
         pruchasing_proculeadTime: 'Proculeadtime [Per.]',
         purchasing_deviation: 'Deviation[Per.]',
         purchasing_thisPeriode: 'this Period',
+        purchasing_generateOrders: 'Generate Orders',
+        purchasing_deleteGenerateOrders: 'Delete Generated Orders',
 
         //Kaufteildisposition detailtabelle
         purchasing_detail_newOrders:'New Orders',

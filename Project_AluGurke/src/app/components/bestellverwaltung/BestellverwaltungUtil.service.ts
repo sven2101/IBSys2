@@ -25,16 +25,12 @@ class BestellverwaltungUtilService {
     }
 
     zeileRot(reichweite: number, wbz: number, wbzAbw: number, multiplikator:number): boolean {
-        if ((reichweite - wbz - wbzAbw * multiplikator) < 1) {
+
+        var differenz = (reichweite - wbz - wbzAbw * multiplikator);
+
+        if (Math.round(differenz) < 1) {
             return true;
         }
-        return false;
-    }
-
-    zeileGelb(reichweite: number, wbz: number, wbzAbw: number): boolean {
-        /*if ((!this.zeileRot(reichweite, wbz) && ((reichweite - wbzAbw - wbz) < 1))) {
-            return true;
-        }*/
         return false;
     }
 

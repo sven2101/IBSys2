@@ -18,7 +18,8 @@ angular.module('app', [
 	'LoginModule',
 	'HomeModule',
 	'RegisterModule',
-	'MainModule'
+	'MainModule',
+    'ui.sortable'
 ]);
 
 
