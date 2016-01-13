@@ -105,7 +105,7 @@ angular.module('app').config(function($translateProvider) {
         
         //Fertigungsaufträge
         productionOrders_headline: 'Disposition Details',
-        productionOrders_Id: 'Id',
+        productionOrders_Id: 'Erzeugnis-Id',
         productionOrders_workingPlace:'Arbeitsplatz',
         productionOrders_amount: 'Menge',
         productionOrders_priority: 'Priorität',
@@ -301,7 +301,7 @@ angular.module('app').config(function($translateProvider) {
         
         //Fertigungsaufträge
         productionOrders_headline: 'Material planing details',
-        productionOrders_Id: 'Id',
+        productionOrders_Id: 'Manufactured Product Id',
         productionOrders_workingPlace:'Working place',
         productionOrders_amount: 'Amount',
         productionOrders_priority: 'Priority',
@@ -311,6 +311,7 @@ angular.module('app').config(function($translateProvider) {
         productionOrders_high: 'high',
         productionOrders_critical: 'critical',
         productionOrders_orderPosition: 'Order positions',
+        
         
         //Kapazitätsplanung
         capacityPlanning_headline: 'Capacity planning',

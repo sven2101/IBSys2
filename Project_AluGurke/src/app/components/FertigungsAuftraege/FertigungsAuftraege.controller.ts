@@ -1,21 +1,24 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
 /// <reference path="../appServices/FertigungsAuftraegeService.ts" />
+/// <reference path="../appServices/AuftragService.ts" />
 
 class FertigungsAuftraegeController {
 
     models: Array<FertigungsAuftraegeModel>;
     fertigungsAuftraegeService: FertigungsAuftraegeService;
-    tab:number;
+    tab: number;
+    auftragService: AuftragService;
+    
 
 
-
-    constructor(fertigungsAuftraegeService: FertigungsAuftraegeService) {
+    constructor(fertigungsAuftraegeService: FertigungsAuftraegeService, auftragService) {
 
         this.fertigungsAuftraegeService = fertigungsAuftraegeService;
         this.aendern();
         this.models = this.fertigungsAuftraegeService.models;
         this.models.sort(function(a: FertigungsAuftraegeModel, b: FertigungsAuftraegeModel) { return (a.auftrag.arbeitsplatz_id - b.auftrag.arbeitsplatz_id) });
-        this.tab=1;
+        this.tab = 1;
+        this.auftragService = auftragService;
 
     }
     oeffnen(id: number) {
@@ -47,7 +50,7 @@ class FertigungsAuftraegeModel {
         let prio = ["kritisch", "hoch", "normal"];
         this.prioritaet = new Array<string>();
         this.prioritaet.push(prio[this.auftrag.prioritaet - 1]);
-        
+
     }
     triggerShow() {
         this.show = !this.show;
@@ -56,6 +59,6 @@ class FertigungsAuftraegeModel {
 
 }
 
-angular.module("FertigungsAuftraegeModule").controller("FertigungsAuftraegeController", ["FertigungsAuftraegeService", FertigungsAuftraegeController]);
+angular.module("FertigungsAuftraegeModule").controller("FertigungsAuftraegeController", ["FertigungsAuftraegeService", "AuftragService", FertigungsAuftraegeController]);
 
 
