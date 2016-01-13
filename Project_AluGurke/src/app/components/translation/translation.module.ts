@@ -171,6 +171,11 @@ angular.module('app').config(function($translateProvider) {
         dashboard_averageStorevalue:'Durchschnittlicher Lagerwert',
         dashboard_storagecosts:'Lagerkosten',
         dashboard_storageFee:'Lagerkostensatz',
+        dashboard_allPeriods:'Alle Perioden',
+        dashboard_periodsPerAnno:'Perioden pro Jahr',
+        dashboard_loadFile:'Herzlich Wilkommen bei SCManager.de!',
+        dashboard_loadFileText:'Um das Dashboard und alle Funktionen zu verwenden, laden Sie bitte Ihre erste Datei hoch',
+        dashboard_loadFileButton:'>> Hier geht\'s zum Datei Upload',
 
         //login
         login_welcome:'Willkommen bei SCManager.de',
@@ -347,7 +352,7 @@ angular.module('app').config(function($translateProvider) {
         //Dashboard
         dashboard_login:'Login to use all features!',
         dashboard_stockMovement:'Stock movement',
-        dashboard_stockValue:'Stockvalue',
+        dashboard_stockValue:'Stock value',
         dashboard_period:'Period',
         dashboard_currentOrders:'Current orders',
         dashboard_standardPurchaseOrder:'Standard purchase Orders',
@@ -358,9 +363,14 @@ angular.module('app').config(function($translateProvider) {
         dashboard_efficiency:'Capacity, delivery reliability and normal capacity',
         dashboard_sellingWish:'Sales wish and sold units',
         dashboard_sales:'Income from sales',
-        dashboard_averageStorevalue:'Average Stockvalue',
-        dashboard_storagecosts:'Storagecosts',
+        dashboard_averageStorevalue:'Average stock value',
+        dashboard_storagecosts:'Storage costs',
         dashboard_storageFee:'Storage fee',
+        dashboard_allPeriods:'All periods',
+        dashboard_periodsPerAnno:'Periods p.a.',
+        dashboard_loadFile:'Welcome to SCManager.de!',
+        dashboard_loadFileText:'If you want to use all features you should upload your first file',
+        dashboard_loadFileButton:'>> Uploady your file now',
 
         //login
         login_welcome:'Welcome to SCManager.de',

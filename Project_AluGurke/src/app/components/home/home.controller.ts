@@ -8,12 +8,14 @@ class HomeController {
     resource;
     allSimulationFiles;
     selectedSimulationFile;
+    hasSimulationFiles;
 
     fastOrders:number;
     normalOrders:number;
 
     constructor(resourceService: ResourceService) {
         this.resource = resourceService.resource;
+        this.hasSimulationFiles = true;
         this.saveSimulationFiles();
         this.getSimulationFileByPeriod(1);
 
@@ -86,6 +88,10 @@ class HomeController {
                 var currentStock = this.getStockValue();
                 return ((currentStock/lastStock)-1)*100
             }
+            else if(this.allSimulationFiles.length==1){
+                var currentStock = this.getStockValue();
+                return ((currentStock/291355)-1)*100
+            }
             else
                 return 0;
         }
@@ -117,6 +123,10 @@ class HomeController {
                 var currentStoragecosts = this.getStoragecosts();
                 return ((currentStoragecosts/lastStoragecosts)-1)*100
             }
+            else if(this.allSimulationFiles.length==1){
+                var currentStoragecosts = this.getStoragecosts();
+                return ((currentStoragecosts/7296.26)-1)*100
+            }
             else
                 return 0;
         }
@@ -129,6 +139,10 @@ class HomeController {
                 var lastAverageStockvalue = Number(JSON.stringify(obj.results.result.general.storevalue._average).slice(0,-1).substr(1));
                 var currentAverageStockvalue = this.getAverageStorevalue();
                 return ((currentAverageStockvalue/lastAverageStockvalue)-1)*100
+            }
+            else if(this.allSimulationFiles.length==1){
+                var currentAverageStockvalue = this.getAverageStorevalue();
+                return ((currentAverageStockvalue/291355)-1)*100
             }
             else
                 return 0;
@@ -149,6 +163,9 @@ class HomeController {
                     lastStorageFee = ((lastPercentage*0.6)+(1-lastPercentage)*1.2)*52;
                 }
                 return this.getStorageFee()-lastStorageFee;
+            }
+            else if(this.allSimulationFiles.length==1){
+                return this.getStorageFee() - 55.98;
             }
             else
                 return 0;
@@ -242,14 +259,20 @@ class HomeController {
         this.resource.getSimulationFiles('', function(result, headers) {
             if (result.erg != '404' && result.erg != '502')
             {
-                vm.allSimulationFiles=result.simulationFile;
-                vm.chartStockMovement(vm.getStockMovement(result.simulationFile));
-                vm.chartEffiency(vm.getEffiency(result.simulationFile),vm.getDeliveryreliability(result.simulationFile),vm.getRelpossiblenormalcapacity(result.simulationFile));
-                vm.chartSellingUnit(vm.getSellwish(result.simulationFile),vm.getSalesquantity(result.simulationFile));
-                vm.chartIdle(vm.getIdletime(result.simulationFile),vm.getIdletimecosts(result.simulationFile));
-                vm.chartSellingSource(vm.getNormalsales(result.simulationFile),vm.getDirectsale(result.simulationFile),vm.getMarketplacesale(result.simulationFile));
-                vm.chartSales(vm.getTotalProfit(result.simulationFile),vm.getCurrentProfit(result.simulationFile),vm.getAverageProfit(result.simulationFile));
-                vm.chartStoreCosts(vm.getTotalCosts(result.simulationFile),vm.getCurrentCosts(result.simulationFile),vm.getAverageCosts(result.simulationFile));
+                if(result.simulationFile.length==0){
+                    vm.hasSimulationFiles = false;
+                }
+                else {
+                    vm.hasSimulationFiles = true;
+                    vm.allSimulationFiles = result.simulationFile;
+                    vm.chartStockMovement(vm.getStockMovement(result.simulationFile));
+                    vm.chartEffiency(vm.getEffiency(result.simulationFile), vm.getDeliveryreliability(result.simulationFile), vm.getRelpossiblenormalcapacity(result.simulationFile));
+                    vm.chartSellingUnit(vm.getSellwish(result.simulationFile), vm.getSalesquantity(result.simulationFile));
+                    vm.chartIdle(vm.getIdletime(result.simulationFile), vm.getIdletimecosts(result.simulationFile));
+                    vm.chartSellingSource(vm.getNormalsales(result.simulationFile), vm.getDirectsale(result.simulationFile), vm.getMarketplacesale(result.simulationFile));
+                    vm.chartSales(vm.getTotalProfit(result.simulationFile), vm.getCurrentProfit(result.simulationFile), vm.getAverageProfit(result.simulationFile));
+                    vm.chartStoreCosts(vm.getTotalCosts(result.simulationFile), vm.getCurrentCosts(result.simulationFile), vm.getAverageCosts(result.simulationFile));
+                }
             }
         });
     }
@@ -268,24 +291,23 @@ class HomeController {
         var stockMovement=[];
         stockMovement.push(291355.00);
         var isAvailable = false;
-        for(var i=0; i < json[json.length-1].periode; i++){
-            isAvailable = false;
-            for(var j = 0; j<json.length;j++)
-            {
-                if(Number(json[j].periode) == (i+1)){
-                    var obj = JSON.parse(json[j].datei);
-                    var number = Number(obj.results.warehousestock.totalstockvalue);
-                    stockMovement.push(number);
-                    isAvailable = true;
-                    break;
+            for (var i = 0; i < json[json.length - 1].periode; i++) {
+                isAvailable = false;
+                for (var j = 0; j < json.length; j++) {
+                    if (Number(json[j].periode) == (i + 1)) {
+                        var obj = JSON.parse(json[j].datei);
+                        var number = Number(obj.results.warehousestock.totalstockvalue);
+                        stockMovement.push(number);
+                        isAvailable = true;
+                        break;
+                    }
                 }
-            }
-            if(isAvailable == false){
-                stockMovement.push(null);
-            }
+                if (isAvailable == false) {
+                    stockMovement.push(null);
+                }
 
-        }
-        return stockMovement;
+            }
+            return stockMovement;
     }
 
     getEffiency(json)

@@ -29,7 +29,27 @@
 			</div>
 		</div>
 	</div>
-	<div class="row" ng-if="mctrl.isLoggedIn">
+	<div class="row">
+		<div ng-if="mctrl.isLoggedIn && !hc.hasSimulationFiles">
+			<div class="col-lg-4">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>{{'dashboard_loadFile'|translate}}</h5>
+					</div>
+					<div class="ibox-content">
+						<div class="text-center">
+							<th>{{'dashboard_loadFileText'|translate}}</th>
+						</div>
+						<br>
+						<div class="text-center">
+							<a data-toggle="modal" class="btn btn-primary" href="/#/file">{{'dashboard_loadFileButton'|translate}}</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" ng-if="mctrl.isLoggedIn && hc.hasSimulationFiles">
 		<div class="col-lg-3" style="width: 25%;">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
@@ -59,13 +79,13 @@
 		<div class="col-lg-3" style="width: 50%;">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
-					<span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.getLatestPeriod()}}</span>
+					<span class="label label-primary pull-right">{{'dashboard_periodsPerAnno'|translate}}</span>
 					<h5>{{'dashboard_storageFee'|translate}}</h5>
 				</div>
 				<div class="ibox-content">
 					<h1 class="no-margins">{{hc.getStorageFee()| number:2}}% p.a.</h1>
-					<div  ng-if="hc.getPercentageStockChange()>=0" class="stat-percent font-bold text-navy">{{hc.getPercentageStorageFeeChange() | number:2}}%<i class="fa fa-level-up"></i></div>
-					<div  ng-if="hc.getPercentageStockChange()<0" class="stat-percent font-bold text-danger">{{hc.getPercentageStorageFeeChange() | number:2}}%<i class="fa fa-level-down"></i></div>
+					<div  ng-if="hc.getPercentageStorageFeeChange()>=0" class="stat-percent font-bold text-navy">{{hc.getPercentageStorageFeeChange() | number:2}}%<i class="fa fa-level-up"></i></div>
+					<div  ng-if="hc.getPercentageStorageFeeChange()<0" class="stat-percent font-bold text-danger">{{hc.getPercentageStorageFeeChange() | number:2}}%<i class="fa fa-level-down"></i></div>
 				</div>
 			</div>
 		</div>
@@ -103,26 +123,26 @@
 				</div>
 				<div class="ibox-content">
 					<h1 class="no-margins">{{hc.getStoragecosts() | currency:'\u20AC'}}</h1>
-					<div  ng-if="hc.getPercentageStockChange()>=0" class="stat-percent font-bold text-navy">{{hc.getPercentageStoragecostsChange() | number:2}}%<i class="fa fa-level-up"></i></div>
-					<div  ng-if="hc.getPercentageStockChange()<0" class="stat-percent font-bold text-danger">{{hc.getPercentageStoragecostsChange() | number:2}}%<i class="fa fa-level-down"></i></div>
+					<div  ng-if="hc.getPercentageStoragecostsChange()>=0" class="stat-percent font-bold text-navy">{{hc.getPercentageStoragecostsChange() | number:2}}%<i class="fa fa-level-up"></i></div>
+					<div  ng-if="hc.getPercentageStoragecostsChange()<0" class="stat-percent font-bold text-danger">{{hc.getPercentageStoragecostsChange() | number:2}}%<i class="fa fa-level-down"></i></div>
 				</div>
 			</div>
 		</div>
 		<div class="col-lg-3" style="width: 25%;">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
-					<span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.getLatestPeriod()}}</span>
+					<span class="label label-primary pull-right">{{'dashboard_allPeriods'|translate}}</span>
 					<h5>{{'dashboard_averageStorevalue'|translate}}</h5>
 				</div>
 				<div class="ibox-content">
 					<h1 class="no-margins">{{hc.getAverageStorevalue() | currency:'\u20AC'}}</h1>
-					<div  ng-if="hc.getPercentageStockChange()>=0" class="stat-percent font-bold text-navy">{{hc.getPercentageAverageStockvalueChange() | number:2}}%<i class="fa fa-level-up"></i></div>
-					<div  ng-if="hc.getPercentageStockChange()<0" class="stat-percent font-bold text-danger">{{hc.getPercentageAverageStockvalueChange() | number:2}}%<i class="fa fa-level-down"></i></div>
+					<div  ng-if="hc.getPercentageAverageStockvalueChange()>=0" class="stat-percent font-bold text-navy">{{hc.getPercentageAverageStockvalueChange() | number:2}}%<i class="fa fa-level-up"></i></div>
+					<div  ng-if="hc.getPercentageAverageStockvalueChange()<0" class="stat-percent font-bold text-danger">{{hc.getPercentageAverageStockvalueChange() | number:2}}%<i class="fa fa-level-down"></i></div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="row" ng-if="mctrl.isLoggedIn">
+	<div class="row" ng-if="mctrl.isLoggedIn && hc.hasSimulationFiles">
 		<div class="col-lg-4" style="width: 50%">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
