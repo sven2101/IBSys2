@@ -17,20 +17,20 @@ class ProgrammService {
 
     erzeugeProgrammPositionen() {
         this.produktionsprogramm = [
-            new ProgrammPosition(1,1,100),
-            new ProgrammPosition(1,2,100),
-            new ProgrammPosition(1,3,100),
-            new ProgrammPosition(1,4,100),
+            new ProgrammPosition(1,1,150),
+            new ProgrammPosition(1,2,150),
+            new ProgrammPosition(1,3,150),
+            new ProgrammPosition(1,4,150),
 
-            new ProgrammPosition(2,1,100),
-            new ProgrammPosition(2,2,100),
-            new ProgrammPosition(2,3,100),
-            new ProgrammPosition(2,4,100),
+            new ProgrammPosition(2,1,150),
+            new ProgrammPosition(2,2,150),
+            new ProgrammPosition(2,3,150),
+            new ProgrammPosition(2,4,150),
 
-            new ProgrammPosition(3,1,100),
-            new ProgrammPosition(3,2,100),
-            new ProgrammPosition(3,3,100),
-            new ProgrammPosition(3,4,100),
+            new ProgrammPosition(3,1,150),
+            new ProgrammPosition(3,2,150),
+            new ProgrammPosition(3,3,150),
+            new ProgrammPosition(3,4,150),
         ];
     }
 
