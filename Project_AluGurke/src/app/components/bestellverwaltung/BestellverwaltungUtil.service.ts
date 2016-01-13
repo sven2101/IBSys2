@@ -34,13 +34,6 @@ class BestellverwaltungUtilService {
         return false;
     }
 
-    zeileGelb(reichweite: number, wbz: number, wbzAbw: number): boolean {
-        /*if ((!this.zeileRot(reichweite, wbz) && ((reichweite - wbzAbw - wbz) < 1))) {
-            return true;
-        }*/
-        return false;
-    }
-
     getVerbrauch(teil_id: number, periode: number): number {
         if (periode === 1) {
             var verbrauch = this.auftragService.getAktuellenKaufTeilVerbrauch(teil_id);

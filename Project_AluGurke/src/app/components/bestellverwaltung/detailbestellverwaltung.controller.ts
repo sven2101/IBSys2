@@ -116,10 +116,6 @@ class DetailBestellVerwaltungController {
         return this.utilService.zeileRot(this.reichweite, this.kaufTeil.wbz, this.kaufTeil.wbzAbw, this.bestellungBerechnenService.multiplikator);
     }
 
-    zeileGelb(): boolean {
-        return this.utilService.zeileGelb(this.reichweite, this.kaufTeil.wbz, this.kaufTeil.wbzAbw);
-    }
-
     deleteNeueBestellung(bestellung: NeuBestellung): void {
         
         this.bestellService.deleteNeuBetellung(bestellung.teil_id, bestellung.timestamp);
