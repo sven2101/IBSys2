@@ -117,6 +117,8 @@ angular.module('app').config(function($translateProvider) {
         productionOrders_high: 'hoch',
         productionOrders_critical: 'kritisch',
         productionOrders_orderPosition: 'Auftragspositionen',
+        productionOrders_split: 'Splitten',
+        productionOrders_prioritise: 'Priorisieren',
         
         
         //Kapazitätsplanung
@@ -238,7 +240,7 @@ angular.module('app').config(function($translateProvider) {
         NAV_warehouse:'Warehouse',
         NAV_purchasing:'Purchasing',
         NAV_disposition: 'Material planning',
-        NAV_productionOrders: 'Material planing details',
+        NAV_productionOrders: 'Material planning details',
         NAV_CapacityPlanning: 'Capacity planning',
         NAV_footer:'Sven, Marius und Max; Karlsruhe University of Applied Sciences',
         
@@ -328,7 +330,7 @@ angular.module('app').config(function($translateProvider) {
         disposition_productionProgram: 'Production order',
         
         //Fertigungsaufträge
-        productionOrders_headline: 'Material planing details',
+        productionOrders_headline: 'Material planning details',
         productionOrders_Id: 'Manufactured Product Id',
         productionOrders_workingPlace:'Working place',
         productionOrders_amount: 'Amount',
@@ -339,6 +341,8 @@ angular.module('app').config(function($translateProvider) {
         productionOrders_high: 'high',
         productionOrders_critical: 'critical',
         productionOrders_orderPosition: 'Order positions',
+        productionOrders_split: 'Split',
+        productionOrders_prioritise: 'Prioritise',
         
         
         //Kapazitätsplanung
