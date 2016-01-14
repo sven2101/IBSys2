@@ -27,7 +27,7 @@
                         <li class="active" ng-click="fac.tab=1">
                             <a data-toggle="tab" href="" aria-expanded="true">Splitten</a>
                         </li>
-                        <li ng-click="fac.tab=2">
+                        <li ng-click="fac.tab=2;fac.onDrag()">
                             <a data-toggle="tab" href="" aria-expanded="true">Priorisieren</a>
                         </li>
                     </ul>
@@ -64,12 +64,15 @@
                                             <h3>{{'productionOrders_orderPosition'|translate}}</h3>
                                             <table class="table table-hover" style="background-color:#F5F5F5">
                                                 <thead>
+                                                    <th>#</th>
                                                     <th>{{'productionOrders_amount'|translate}}</th>
                                                    
                                                 </thead>
                                                 <tbody>
                                                     <tr ng-repeat="auftrag in model.auftraege">
-                                                        <td>{{auftrag.anzahl}}</td>                                                        
+                                                        <td style="width:10%">{{$index+1}}</td>  
+                                                        <td>{{auftrag.anzahl}}</td>
+                                                                                                              
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -80,22 +83,24 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="ibox-content" ng-if="fac.tab==2" ">
+                <div class="ibox-content" ng-if="fac.tab==2" >
                     <div class="dd" >
                         <table class="table">
                             <thead>
-                                <th style="width:20%">{{'productionOrders_Id'|translate}}</th>
-                                <th style="width:20%">{{'productionOrders_workingPlace'|translate}}</th>
-                                <th style="width:20%">{{'productionOrders_amount'|translate}}</th>
+                                <th style="width:10%">#</th>
+                                <th style="width:30%">{{'productionOrders_Id'|translate}}</th>
+                                <th style="width:30%">{{'productionOrders_workingPlace'|translate}}</th>
+                                <th style="width:30%">{{'productionOrders_amount'|translate}}</th>
                             </thead>
                         </table>
                         <ul style="margin-top:-21px" class="dd-list" ui-sortable ng-model="fac.auftragService.auftraegeExport" >                           
                         <li style="cursor:pointer;" class="dd-item"  ng-repeat="item in fac.getAE()" >
                             <table class="table table-hover">
                                 <tr ng-mouseleave="fac.onDrag()">
-                                    <td style="width:20%">{{item.erzeugnis_id}}</td>
-                                    <td style="width:20%">{{item.arbeitsplatz_id}}</td>
-                                    <td style="width:20%">{{item.anzahl}}</td>
+                                    <td style="width:10%">{{$index+1}}</td>
+                                    <td style="width:30%">{{item.erzeugnis_id}}</td>
+                                    <td style="width:30%">{{item.arbeitsplatz_id}}</td>
+                                    <td style="width:30%">{{item.anzahl}}</td>
                                 </tr>                                                             
                             </table> 
                         </li>
