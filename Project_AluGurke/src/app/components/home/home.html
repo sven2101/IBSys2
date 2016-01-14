@@ -23,7 +23,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-6">
+			<div class="col-lg-8">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
 						<h5>Erste Schritte</h5>
@@ -117,7 +117,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-6" ng-if="!mctrl.isLoggedIn">
+			<div class="col-lg-4" ng-if="!mctrl.isLoggedIn">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
 						<h5>{{'dashboard_login'|translate}}</h5>
@@ -129,7 +129,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-6" ng-if="mctrl.isLoggedIn && !hc.hasSimulationFiles">
+			<div class="col-lg-4" ng-if="mctrl.isLoggedIn && !hc.hasSimulationFiles">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
 						<h5>{{'dashboard_loadFile'|translate}}</h5>
@@ -186,7 +186,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-6">
+		<div class="col-lg-6">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
 					<span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.getLatestPeriod()}}</span>
