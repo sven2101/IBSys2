@@ -157,14 +157,7 @@ class FertigungsAuftraegeService {
                 x.push(this.models[i].auftraege[j]);
             }
         }
-        x.sort(function(a,b)
-		{
-			let i=Number(a.prioritaet)-Number(b.prioritaet);
-			if(i==0){
-				return a.erzeugnis_id-b.erzeugnis_id;
-			}
-			return i;
-		});
+       
         this.dispositionService.auftraegeAktualisieren(x);
     }
     splitEvaluieren(split: String, anzahl: number): Array<number> {

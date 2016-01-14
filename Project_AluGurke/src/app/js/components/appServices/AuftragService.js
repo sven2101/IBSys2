@@ -10,12 +10,14 @@ var AuftragService = (function () {
         this.auftraegeAufMaschine = new Array();
         this.auftraegeInWarteschlange = new Array();
         this.auftraegeExport = new Array();
+        this.auftraegeUltraExport = new Array();
         this.auftraegeTemp = new Array();
         this.$rootScope = $rootScope;
         this.$rootScope.$on('fileController.neueDatei', function (event, dateiInhalt) {
             _this.onNeueDatei(dateiInhalt);
         });
         this.auftraegeSetzen([]);
+        this.map = {};
         this.teileService = teileService;
         this.baumService = baumService;
     }
@@ -82,6 +84,16 @@ var AuftragService = (function () {
         //let x=this.mergeAuftraege(auftraege);
         this.auftraege = [];
         this.auftraegeExport = auftraege;
+        for (var i = 0; i < this.auftraegeExport.length; i++) {
+            var y = this.map[this.auftraegeExport[i].erzeugnis_id + this.auftraegeExport[i].arbeitsplatz_id + this.auftraegeExport[i].anzahl];
+            if (y == undefined) {
+                this.auftraegeExport[i].prioritaet = 0;
+            }
+            else {
+                this.auftraegeExport[i].prioritaet = y;
+            }
+        }
+        this.auftraegeExport = this.auftraegeExport.sort(function (a, b) { return (a.prioritaet - b.prioritaet); });
         this.auftraege = this.auftraege.concat(this.auftraegeAufMaschine);
         this.auftraege = this.auftraege.concat(this.auftraegeInWarteschlange);
         this.auftraege = this.auftraege.concat(auftraege);

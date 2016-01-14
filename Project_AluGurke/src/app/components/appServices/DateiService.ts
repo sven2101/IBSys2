@@ -129,14 +129,7 @@ class DateiService {
 	
 	getProductionList(){
 		let list=[];
-		let auftrageExport=this.auftragService.auftraegeExport.sort(function(a,b)
-		{
-			let i=Number(a.prioritaet)-Number(b.prioritaet);
-			if(i==0){
-				return a.erzeugnis_id-b.erzeugnis_id;
-			}
-			return i;
-		});
+		let auftrageExport=this.auftragService.auftraegeExport;
 		for(let i=0;i< auftrageExport.length;i++){
 			list.push({
 				_article:auftrageExport[i].erzeugnis_id,

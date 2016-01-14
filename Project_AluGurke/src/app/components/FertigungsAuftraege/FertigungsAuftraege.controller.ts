@@ -9,6 +9,7 @@ class FertigungsAuftraegeController {
     tab: number;
     auftragService: AuftragService;
     
+    
 
 
     constructor(fertigungsAuftraegeService: FertigungsAuftraegeService, auftragService) {
@@ -19,6 +20,7 @@ class FertigungsAuftraegeController {
         this.models.sort(function(a: FertigungsAuftraegeModel, b: FertigungsAuftraegeModel) { return (a.auftrag.arbeitsplatz_id - b.auftrag.arbeitsplatz_id) });
         this.tab = 1;
         this.auftragService = auftragService;
+        
 
     }
     oeffnen(id: number) {
@@ -31,6 +33,19 @@ class FertigungsAuftraegeController {
     }
     prioAendern() {
         this.fertigungsAuftraegeService.prioAendern();
+    }
+    onDrag(){
+          for(let i=0;i<this.auftragService.auftraegeExport.length;i++){
+              this.auftragService.map[this.auftragService.auftraegeExport[i].erzeugnis_id+this.auftragService.auftraegeExport[i].arbeitsplatz_id+this.auftragService.auftraegeExport[i].anzahl]=i;
+            
+              this.auftragService.auftraegeExport[i].prioritaet=i;
+             
+          }
+           console.log(1);
+    }
+    getAE(){
+        //this.auftragService.auftraegeExport =  this.auftragService.auftraegeExport.sort(function(a:Auftrag,b:Auftrag){return (a.prioritaet+b.prioritaet)});  
+        return this.auftragService.auftraegeExport;
     }
 }
 class FertigungsAuftraegeModel {
@@ -56,6 +71,7 @@ class FertigungsAuftraegeModel {
         this.show = !this.show;
         console.log(this.show);
     }
+    
 
 }
 

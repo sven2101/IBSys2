@@ -10,10 +10,11 @@ class AuftragService {
     auftraegeTemp: Array<Auftrag>;
     auftraegeInWarteschlange: Array<Auftrag>;
     auftraegeAufMaschine: Array<Auftrag>;
-
+    auftraegeUltraExport : Array<Auftrag>;
     teileService: NewTeileService;
     baumService: NewBaumService;
     $rootScope;
+    map:{[key:string]:number;}
 
 
     constructor($rootScope, teileService, baumService) {
@@ -21,13 +22,14 @@ class AuftragService {
         this.auftraegeAufMaschine = new Array<Auftrag>();
         this.auftraegeInWarteschlange = new Array<Auftrag>();
         this.auftraegeExport = new Array<Auftrag>();
+        this.auftraegeUltraExport=new Array<Auftrag>();
         this.auftraegeTemp = new Array<Auftrag>();
         this.$rootScope = $rootScope;
         this.$rootScope.$on('fileController.neueDatei', (event, dateiInhalt) => {
             this.onNeueDatei(dateiInhalt);
         });
         this.auftraegeSetzen([]);
-
+        this.map={};
         this.teileService = teileService;
         this.baumService = baumService;
     }
@@ -116,6 +118,17 @@ class AuftragService {
         this.auftraege = [];
 
         this.auftraegeExport = auftraege;
+        for(let i=0;i<this.auftraegeExport.length;i++){
+            let y=this.map[this.auftraegeExport[i].erzeugnis_id+this.auftraegeExport[i].arbeitsplatz_id+this.auftraegeExport[i].anzahl];
+            if(y==undefined){
+               this.auftraegeExport[i].prioritaet=0; 
+            }
+            else{
+                this.auftraegeExport[i].prioritaet=y;
+            }
+            
+        }
+        this.auftraegeExport =  this.auftraegeExport.sort(function(a:Auftrag,b:Auftrag){return (a.prioritaet-b.prioritaet)}); 
         this.auftraege = this.auftraege.concat(this.auftraegeAufMaschine);
         this.auftraege = this.auftraege.concat(this.auftraegeInWarteschlange);
         this.auftraege = this.auftraege.concat(auftraege);

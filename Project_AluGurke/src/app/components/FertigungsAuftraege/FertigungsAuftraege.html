@@ -69,8 +69,7 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr ng-repeat="auftrag in model.auftraege">
-                                                        <td>{{auftrag.anzahl}}</td>
-                                                        
+                                                        <td>{{auftrag.anzahl}}</td>                                                        
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -81,7 +80,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="ibox-content" ng-if="fac.tab==2">
+                <div class="ibox-content" ng-if="fac.tab==2" ">
                     <div class="dd" >
                         <table class="table">
                             <thead>
@@ -90,10 +89,10 @@
                                 <th style="width:20%">{{'productionOrders_amount'|translate}}</th>
                             </thead>
                         </table>
-                        <ul style="margin-top:-21px" class="dd-list" ui-sortable ng-model="fac.auftragService.auftraegeExport">                           
-                        <li style="cursor:pointer;" class="dd-item" ng-repeat="item in fac.auftragService.auftraegeExport">
+                        <ul style="margin-top:-21px" class="dd-list" ui-sortable ng-model="fac.auftragService.auftraegeExport" >                           
+                        <li style="cursor:pointer;" class="dd-item"  ng-repeat="item in fac.getAE()" >
                             <table class="table table-hover">
-                                <tr>
+                                <tr ng-mouseleave="fac.onDrag()">
                                     <td style="width:20%">{{item.erzeugnis_id}}</td>
                                     <td style="width:20%">{{item.arbeitsplatz_id}}</td>
                                     <td style="width:20%">{{item.anzahl}}</td>
@@ -103,7 +102,7 @@
                         </ul>                    
                     </div>
                 </div>   
-            </div>
+              </div>
         </div> 
     </div>
 </div>
