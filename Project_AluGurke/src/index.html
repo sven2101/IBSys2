@@ -19,9 +19,9 @@
     }
 </style>
 
-<body class="md-skin fixed-sidebar" ng-controller="MainController as mctrl" ng-keyup="mctrl.keyUp($event)" ng-keydown="mctrl.keyDown($event)">
-    <div id="wrapper">
-        <nav class="navbar-default navbar-static-side" role="navigation">
+<body ng-controller="MainController as mctrl" class="md-skin" ng-keyup="mctrl.keyUp($event)" ng-keydown="mctrl.keyDown($event)">
+    <div id="wrapper" style="height: 100%;">
+        <nav class="navbar-default navbar-static-side" role="navigation" style="height: 100%;">
             <div class="sidebar-collapse">
                 <ul class="nav metismenu" id="side-menu">
                     <li class="nav-header">
@@ -50,7 +50,7 @@
                         </div>
 
                         <div class="logo-element">
-                            IBSYS2
+                            SCM
                         </div>
                     </li>
                     <li>
@@ -162,13 +162,11 @@
     <script src="assets/js/angular-resource.min.js"></script>
     <script src="assets/js/angular-animate.min.js"></script>
     <script src="assets/js/angular-route.min.js"></script>
-
     
     <script src="assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <script src="assets/js/plugins/nestable/jquery.nestable.js"></script>
     <script src="assets/js/angular-drag-and-drop.js"></script>
     <script src="javaScript/angular.js"></script>
-    
 
 </body>
 
