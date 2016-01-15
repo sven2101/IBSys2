@@ -3,6 +3,7 @@
  */
 /// <reference path="../appServices/ArbeitsplatzService.ts" />
 /// <reference path="../appServices/DispositionService.ts"/>
+/// <reference path="../../typeDefinitions/sweetalert.d.ts"/>
 /// <reference path="../kapazitaetsplanung/kapazitaetsplanung.controller.ts" />
 class KapazitaetsplanungService {
 
@@ -36,11 +37,16 @@ class KapazitaetsplanungService {
     aendern(){
         for(let i=0;i<this.models.length;i++){
             if(this.models[i].name[0]!="5"){
-                if(isNaN(this.models[i].ueberstunden)||this.models[i].ueberstunden<0||this.models[i].anzahlSchichten=="3"){
+                if(isNaN(this.models[i].ueberstunden)||this.models[i].ueberstunden<0){
                     this.models[i].ueberstunden=0;
+                    sweetAlert("Ungültige Eingabe","Es dürfen nur ganze Zahlen eingegeben werden!", "error");
                 }else if(this.models[i].ueberstunden>240){
                     this.models[i].ueberstunden=240;
-                }                
+                    sweetAlert("Ungültige Eingabe","Es sind nur 240 Überstunden zulässig!", "error");
+                }else if(this.models[i].anzahlSchichten=="3"&&this.models[i].ueberstunden>0){
+                   this.models[i].ueberstunden=0; 
+                   sweetAlert("Ungültige Eingabe","In der 3. Schicht dürfen keine Überstunden gemacht werden!", "error");
+                }           
                 this.models[i].zeitVerfuegung=Number(this.models[i].anzahlSchichten)*2400+(Math.round(Number(this.models[i].ueberstunden*5)));
             }
             else

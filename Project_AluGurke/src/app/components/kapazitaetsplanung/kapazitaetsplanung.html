@@ -45,7 +45,7 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <input class="form-control" ng-model="model.ueberstunden" ng-keyup="kpc.aendern()" style="width:50px;">
+                                    <input min="0" type="number"  style="width:80px;" class="form-control" ng-model="model.ueberstunden" ng-keyup="kpc.aendern()">
                                 </td>
                             </tr>
                         </tbody>

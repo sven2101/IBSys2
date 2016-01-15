@@ -3,6 +3,7 @@
  */
     /// <reference path="../../typeDefinitions/angular.d.ts" />
     /// <reference path="../appServices/ResourceService.ts" />
+    /// <reference path="../../typeDefinitions/sweetalert.d.ts"/>
 class LoginController {
     resource;
     location;
@@ -23,7 +24,7 @@ class LoginController {
                 vm.location.path('/');
                 vm.$scope.$emit('refreshAfterLogin');
             }else if(result.erg == '400') {
-                alert("Bad Request!");
+                sweetAlert("Fehler beim Login", "Username oder Passwort ungültig!", "error");               
             }else if(result.erg == '502'){
                 alert("No Database Connection!");
             }

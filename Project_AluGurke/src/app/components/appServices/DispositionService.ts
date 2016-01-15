@@ -8,6 +8,7 @@
 /// <reference path="../appServices/NewBaumService.ts" />
 /// <reference path="../appServices/AuftragService.ts" />
 /// <reference path="../appServices/SettingsService.ts" />
+/// <reference path="../../typeDefinitions/sweetalert.d.ts"/>
 class DispositionService {
 
     dispositionP1: Array<DispositionModel>;
@@ -137,8 +138,9 @@ class DispositionService {
         let map: { [key: number]: number; }
         for (let i = 0; i < this.models.length; i++) {
             this.models[i].auftraege = [];
-            if (isNaN(this.models[i].geplanterLagerstand)||this.models[i].geplanterLagerstand<0) {
+            if (isNaN(this.models[i].geplanterLagerstand)||this.models[i].geplanterLagerstand<0) {                
                 this.models[i].geplanterLagerstand = 0;
+                sweetAlert("Ungültige Eingabe","Es dürfen nur ganze Zahlen eingegeben werden!", "error");
             }
             this.models[i].anzahl = Number(this.models[i].getProdProg()) + Number(this.models[i].getGeplanteLagermenge()) - (Number(this.models[i].getLagerMenge()) + Number(this.models[i].getMaterialAufMaschine() + Number(this.models[i].getWarteschlange())));
             if (this.models[i].anzahl <= 0 || isNaN(this.models[i].anzahl)) {

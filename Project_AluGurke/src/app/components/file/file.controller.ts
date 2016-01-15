@@ -3,6 +3,7 @@
 /// <reference path="../appServices/ResourceService.ts" />
 /// <reference path="../appServices/KennzahlenService.ts" />
 /// <reference path="../appServices/DateiService.ts" />
+/// <reference path="../../typeDefinitions/sweetalert.d.ts"/>
 
 class FileController {
 
@@ -44,10 +45,11 @@ class FileController {
 		var aktuellePeriode=Number(json.results._period);
 		this.resource.createSimulationFile({ dateiInhalt: json,periode: aktuellePeriode}, function(result, headers) {
 			if(result.erg == '200') {
-				console.log('Ihre datei wurde hochgeladen');
+				swal({   title: "Die Datei wurde erfolgreich importiert", timer: 1500,type:"success" });
 			}else if(result.erg == '300') {
 
-				alert("Die Periode "+aktuellePeriode+" wurde in der Datenbank ersetzt! ");
+                swal({   title: "Die Datei wurde erfolgreich importiert",text:"Die Periode "+aktuellePeriode+" wurde in der Datenbank ersetzt! ", timer: 2500,type:"success" });
+				
 			}
 			else if(result.erg == '404') {
 				alert("Benutzer nicht gefunden");
@@ -55,12 +57,15 @@ class FileController {
 				alert("Internal Server Error!");
 			}
 		});
-
+        swal({   title: "Die Datei wurde erfolgreich importiert", timer: 1500,type:"success" });
 		this.$scope.$apply(function() {
 			vm.dateiInhalt = json;
 		});
+       
+        
 		this.$scope.$emit('fileController.neueDatei', this.dateiInhalt);
-	}
+        
+	}    
 }
 
 
