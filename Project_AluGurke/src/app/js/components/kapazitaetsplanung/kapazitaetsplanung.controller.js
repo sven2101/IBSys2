@@ -1,7 +1,7 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
 /// <reference path="../appServices/BestellungBerechnenService.ts" />
 /// <reference path="../appServices/SettingsService.ts" />
-/// <reference path="../../typeDefinitions/toastr.d.ts"/>toastr.success("Die Arbeitszeiten wurden berechnet");
+/// <reference path="../../typeDefinitions/toastr.d.ts"/>
 var KapazitaetsplanungController = (function () {
     function KapazitaetsplanungController(KapazitaetsplanungService, dispositionService, bestellungBerechnenService, settingsService) {
         this.models = new Array();
