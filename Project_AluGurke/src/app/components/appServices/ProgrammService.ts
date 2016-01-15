@@ -3,7 +3,8 @@
  */
 /// <reference path="../../typeDefinitions/angular.d.ts" />
     /// <reference path="../../model/ProgrammPosition.ts" />
-    /// <reference path="../../model/DirectSalesPosition.ts" />
+    /// <reference path="../../model/DirectSalesPosition.ts"/>
+    /// <reference path="../../typeDefinitions/toastr.d.ts"/>
 
 class ProgrammService {
     produktionsprogramm: Array<ProgrammPosition>;
@@ -47,6 +48,7 @@ class ProgrammService {
                 if(this.produktionsprogramm[i].menge<0 || angular.isUndefined(this.produktionsprogramm[i].menge))
                 {
                   this.produktionsprogramm[i].menge = 0;
+                  toastr.error( "Es d\u00fcrfen nur positive Ganzzahlen eingegeben werden","Ung\u00fcltige Eingabe!");
                 }
                 return this.produktionsprogramm[i];
             }
@@ -58,14 +60,17 @@ class ProgrammService {
         if(this.directsales[id].menge<0 || angular.isUndefined(this.directsales[id].menge))
         {
             this.directsales[id].menge = 0;
+            toastr.error( "Es d\u00fcrfen nur positive Ganzzahlen eingegeben werden","Ung\u00fcltige Eingabe!");
         }
         if(this.directsales[id].preis<0)
         {
             this.directsales[id].preis = 0;
+            toastr.error( "Es d\u00fcrfen nur positive Zahlen eingegeben werden","Ung\u00fcltige Eingabe!");
         }
         if(this.directsales[id].konventionalstrafe<0)
         {
             this.directsales[id].konventionalstrafe = 0;
+            toastr.error( "Es d\u00fcrfen nur positive Zahlen eingegeben werden","Ung\u00fcltige Eingabe!");
         }
 
       return this.directsales[id];

@@ -161,18 +161,13 @@ class KaufteilDispositionController {
     }
 
     deleteGenerierteBestellungen() {
-
-
         this.utilService.deleteGenerierteBestellungen();
-
         this.changeReichweite();
         toastr.success("Die Bestellungen wurden gelöscht");
     }
 
     bestellungenGenerieren() {
-        
         this.utilService.bestellungenGenerieren();
-
         this.changeReichweite();
         toastr.success("Die Bestellungen wurden generiert");
     }
