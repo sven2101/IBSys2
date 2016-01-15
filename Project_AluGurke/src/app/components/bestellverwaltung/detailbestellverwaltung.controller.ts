@@ -67,7 +67,7 @@ class DetailBestellVerwaltungController {
         if (this.utilService.generierteBestellungen && this.utilService.bestellungenBeiStrategieWecheselNeuBerechnen) {
             this.utilService.deleteGenerierteBestellungen();
             this.utilService.bestellungenGenerieren();
-            
+
         }
 
         this.reichweite = this.bestellungBerechnenService.getReichweite(this.kaufTeil.id, [this.verbrauchAktuell, this.verbrauch1, this.verbrauch2, this.verbrauch3]);
@@ -118,23 +118,23 @@ class DetailBestellVerwaltungController {
     }
 
     deleteNeueBestellung(bestellung: NeuBestellung): void {
-        
+
         this.bestellService.deleteNeuBetellung(bestellung.teil_id, bestellung.timestamp);
 
         this.utilService.generierteBestellungenExist();
-        
+
         this.setTimeLine();
         this.reichweite = this.bestellungBerechnenService.getReichweite(this.kaufTeil.id, [this.verbrauchAktuell, this.verbrauch1, this.verbrauch2, this.verbrauch3]);
         this.setGenerierteBestellung();
     }
 
     createNeueBestellung() {
-        if (this.neueBestellung.menge > 0) {
+        if (this.neueBestellung.menge > 0 && this.neueBestellung.menge % 1 == 0) {
             this.bestellService.neuBestellungErstellen(this.neueBestellung.eil, this.kaufTeil, this.neueBestellung.menge, this.bestellungBerechnenService.aktuellePeriode);
+            this.setTimeLine();
+            this.reichweite = this.bestellungBerechnenService.getReichweite(this.kaufTeil.id, [this.verbrauchAktuell, this.verbrauch1, this.verbrauch2, this.verbrauch3]);
+            this.setGenerierteBestellung();
         }
-        this.setTimeLine();
-        this.reichweite = this.bestellungBerechnenService.getReichweite(this.kaufTeil.id, [this.verbrauchAktuell, this.verbrauch1, this.verbrauch2, this.verbrauch3]);
-        this.setGenerierteBestellung();
     }
     chart(data: Array<number>, linienName: string) {
         let categories = new Array<string>();

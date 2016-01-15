@@ -39,6 +39,7 @@ angular.module('app').config(function($translateProvider) {
         purchasing_thisPeriode: 'aktuell',
         purchasing_generateOrders: 'Bestellungen generieren',
         purchasing_deleteGenerateOrders: 'Generierte Bestellungen löschen',
+         purchasing_generate_order_strategy:'Generierte Bestellungen bei Strategiewechsel aktualisieren',
 
         //Kaufteildisposition detailtabelle
         purchasing_detail_newOrders:'Neue Bestellungen',
@@ -262,7 +263,8 @@ angular.module('app').config(function($translateProvider) {
         purchasing_thisPeriode: 'this Period',
         purchasing_generateOrders: 'Generate Orders',
         purchasing_deleteGenerateOrders: 'Delete Generated Orders',
-
+        purchasing_generate_order_strategy: 'Update orders on strategy change',
+        
         //Kaufteildisposition detailtabelle
         purchasing_detail_newOrders:'New Orders',
         purchasing_detail_fastOrder:'Fast',
