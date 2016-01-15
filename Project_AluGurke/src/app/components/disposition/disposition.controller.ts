@@ -31,14 +31,13 @@ class DispositionController{
     
 
 
-    constructor(auftragsService,newTeileService,dispositionService,newBaumService,kapazitaetsplanungService,fertigungsAuftraegeService){
+    constructor(dispositionService,kapazitaetsplanungService,fertigungsAuftraegeService){
         this.dispositionService=dispositionService;
         this.kapazitaetsplanungService=kapazitaetsplanungService;
         this.models=this.dispositionService.models;
         this.modelsP1=this.dispositionService.dispositionP1;
         this.modelsP2=this.dispositionService.dispositionP2;
-        this.modelsP3=this.dispositionService.dispositionP3;
-        this.auftragsService=auftragsService;
+        this.modelsP3=this.dispositionService.dispositionP3;   
         this.fertigungsAuftraegeService=fertigungsAuftraegeService;
         this.aendern();        
         
@@ -60,5 +59,5 @@ class DispositionController{
 }
 
 
-angular.module("DispositionModule").controller("DispositionController",["AuftragService","NewTeileService","DispositionService","NewBaumService","KapazitaetsplanungService","FertigungsAuftraegeService",DispositionController]);
+angular.module("DispositionModule").controller("DispositionController",["DispositionService","KapazitaetsplanungService","FertigungsAuftraegeService",DispositionController]);
 

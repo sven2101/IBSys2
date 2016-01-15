@@ -6,20 +6,26 @@ class FertigungsAuftraegeController {
 
     models: Array<FertigungsAuftraegeModel>;
     fertigungsAuftraegeService: FertigungsAuftraegeService;
+    dispositionService:DispositionService;
+    kapazitaetsplanungService:KapazitaetsplanungService;
     tab: number;
     auftragService: AuftragService;
 
 
 
 
-    constructor(fertigungsAuftraegeService: FertigungsAuftraegeService, auftragService) {
+    constructor(fertigungsAuftraegeService: FertigungsAuftraegeService, auftragService,dispositionService,kapazitaetsplanungService) {
 
         this.fertigungsAuftraegeService = fertigungsAuftraegeService;
+        this.auftragService = auftragService;
+        this.dispositionService=dispositionService;
+        this.kapazitaetsplanungService=kapazitaetsplanungService;  
         this.aendern();
         this.models = this.fertigungsAuftraegeService.models;
         this.models.sort(function(a: FertigungsAuftraegeModel, b: FertigungsAuftraegeModel) { return (a.auftrag.arbeitsplatz_id - b.auftrag.arbeitsplatz_id) });
         this.tab = 1;
-        this.auftragService = auftragService;
+        
+
 
 
     }
@@ -29,7 +35,9 @@ class FertigungsAuftraegeController {
     }
 
     aendern() {
+        this.fertigungsAuftraegeService.dispositionService.aendern();
         this.fertigungsAuftraegeService.aendern();
+        this.fertigungsAuftraegeService.onDispoAendern();
     }
     prioAendern() {
         this.fertigungsAuftraegeService.prioAendern();
@@ -39,9 +47,9 @@ class FertigungsAuftraegeController {
             this.auftragService.map[this.auftragService.auftraegeExport[i].erzeugnis_id + this.auftragService.auftraegeExport[i].arbeitsplatz_id + this.auftragService.auftraegeExport[i].anzahl] = i;
 
             this.auftragService.auftraegeExport[i].prioritaet = i;
-           
+
         }
-   
+
     }
     getAE() {
         //this.auftragService.auftraegeExport =  this.auftragService.auftraegeExport.sort(function(a:Auftrag,b:Auftrag){return (a.prioritaet+b.prioritaet)});  
@@ -75,6 +83,6 @@ class FertigungsAuftraegeModel {
 
 }
 
-angular.module("FertigungsAuftraegeModule").controller("FertigungsAuftraegeController", ["FertigungsAuftraegeService", "AuftragService", FertigungsAuftraegeController]);
+angular.module("FertigungsAuftraegeModule").controller("FertigungsAuftraegeController", ["FertigungsAuftraegeService", "AuftragService","DispositionService","KapazitaetsplanungService", FertigungsAuftraegeController]);
 
 

@@ -1,6 +1,7 @@
 /// <reference path="../appServices/AuftragService.ts" />
 /// <reference path="../appServices/DispositionService.ts" />
 /// <reference path="../FertigungsAuftraege/FertigungsAuftraege.controller.ts" />
+/// <reference path="../../typeDefinitions/sweetalert.d.ts"/>
 
 
 class FertigungsAuftraegeService {
@@ -13,6 +14,8 @@ class FertigungsAuftraegeService {
         this.auftragService = auftragService;
         this.arbeitsplatzService = arbeitsplatzService
         this.dispositionService = dispositionService
+        this.dispositionService.aendern();
+        this.auftragService.auftraegeTemp = this.auftragService.auftraegeExport;
         this.aendern();
         $rootScope.$on('mainController.neueSprache', (event, language) => {
             this.onTranslate(language);
@@ -51,6 +54,7 @@ class FertigungsAuftraegeService {
         this.auftraegeSetzten();
     }
     onDispoAendern() {
+
         let temp: Array<FertigungsAuftraegeModel> = [];
         for (let i = 0; i < this.models.length; i++) {
             let test = false;
@@ -118,11 +122,16 @@ class FertigungsAuftraegeService {
                     for (let i = 0; i < this.models.length; i++) {
                         let x = this.auftragService.auftraegeTemp[j];
                         let y = this.models[i].auftrag;
+
                         if (y.erzeugnis_id == x.erzeugnis_id) {
                             test = true;
+                            continue;
                         }
                     }
+
                     if (test == false) {
+
+                        console.log(test);
                         this.models.push(new FertigungsAuftraegeModel(this.auftragService.auftraegeTemp[j]));
                     }
                 }
@@ -157,18 +166,31 @@ class FertigungsAuftraegeService {
                 x.push(this.models[i].auftraege[j]);
             }
         }
-       
+
         this.dispositionService.auftraegeAktualisieren(x);
     }
     splitEvaluieren(split: String, anzahl: number): Array<number> {
 
+        let erlaubteZeichen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, ","];
+        for (let i = 0; i < split.length; i++) {
+            let test = false;
+            for (let j = 0; j < erlaubteZeichen.length; j++) {
+                if (split[i] == erlaubteZeichen[j]) {
+                    test = true;
+                    continue;
+                }
+            }
+            if (!test) {
+                sweetAlert("Ungültige Eingabe", "Es dürfen nur ganze Zahlen oder Kommata eingegeben werden!", "error");
+            }
+        }
         let liste: Array<string> = split.split(',');
 
         let ergebnis = new Array<number>();
         let summe = 0;
         for (let i = 0; i < liste.length; i++) {
-            if (!isNaN(Number(liste[i])) && Number(liste[i]) > 0) {
-                if (Number(liste[i]) < 10) {
+            if (!isNaN(Number(liste[i]))&&Number(liste[i])>0) {
+                if (Number(liste[i]) < 10) {                
                     ergebnis.push(10);
                     summe += 10;
                 } else {
@@ -181,7 +203,7 @@ class FertigungsAuftraegeService {
                 x.push(anzahl);
                 return x;
             }
-            if (summe > anzahl) {
+            if (summe > anzahl) {           
                 let x: Array<number> = new Array<number>();
                 x.push(anzahl);
                 return x;

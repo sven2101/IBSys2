@@ -4,6 +4,7 @@
 /// <reference path="BestellService.ts" />
 /// <reference path="NewTeileService.ts" />
 /// <reference path="../bestellverwaltung/bestellverwaltungUtil.service.ts" />
+/// <reference path="../../typeDefinitions/sweetalert.d.ts"/>
 class BestellungBerechnenService {
 
     bestellService: BestellService;
@@ -28,6 +29,7 @@ class BestellungBerechnenService {
     }
     onNeueDatei(dateiInhalt) {
         this.aktuellePeriode = Number(dateiInhalt.results._period) + 1;
+        
     }
     //Marius API; für die Reichweite
     getReichweite(kTeilId: number, verbrauch: Array<number>, timeinterval = 50): number {
