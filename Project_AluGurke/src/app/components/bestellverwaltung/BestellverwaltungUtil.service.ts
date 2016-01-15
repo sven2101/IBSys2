@@ -9,13 +9,14 @@ class BestellverwaltungUtilService {
     auftragService: AuftragService;
     baumService: NewBaumService;
     programmService: ProgrammService;
-    generierteBestellungen:boolean = false;
-    teileService:NewTeileService;
-    bestellService:BestellService;
-    bestellungBerechnenService:BestellungBerechnenService;
+    generierteBestellungen: boolean = false;
+    teileService: NewTeileService;
+    bestellService: BestellService;
+    bestellungBerechnenService: BestellungBerechnenService;
+    bestellungenBeiStrategieWecheselNeuBerechnen:boolean = true;
 
     constructor(auftragService: AuftragService, baumService: NewBaumService, programmService: ProgrammService,
-    teileService:NewTeileService,bestellService:BestellService,bestellBerechnenService:BestellungBerechnenService) {
+        teileService: NewTeileService, bestellService: BestellService, bestellBerechnenService: BestellungBerechnenService) {
         this.auftragService = auftragService;
         this.baumService = baumService;
         this.programmService = programmService;
@@ -24,7 +25,7 @@ class BestellverwaltungUtilService {
         this.bestellungBerechnenService = bestellBerechnenService;
     }
 
-    zeileRot(reichweite: number, wbz: number, wbzAbw: number, multiplikator:number): boolean {
+    zeileRot(reichweite: number, wbz: number, wbzAbw: number, multiplikator: number): boolean {
 
         var differenz = (reichweite - wbz - wbzAbw * multiplikator);
 
@@ -51,32 +52,32 @@ class BestellverwaltungUtilService {
     getAnzahlInBaum(baum: NewTeilKnoten, id: number): number {
         return this.baumService.getAnzahlInBaum(baum, id);
     }
-    
-    bestellungenGenerieren(){
+
+    bestellungenGenerieren() {
         this.generierteBestellungen = true;
+        
         for (var i = 0; i < this.teileService.alleKaufteile.length; i++) {
-            
-            var kTeil:NewKaufTeil = this.teileService.alleKaufteile[i];
-            
+
+            var kTeil: NewKaufTeil = this.teileService.alleKaufteile[i];
+
             var verbrauchAktuell = this.getVerbrauch(kTeil.id, 1);
             var verbrauch1 = this.getVerbrauch(kTeil.id, 2);
             var verbrauch2 = this.getVerbrauch(kTeil.id, 3);
             var verbrauch3 = this.getVerbrauch(kTeil.id, 4);
 
 
-            var bestellung = this.bestellungBerechnenService.getBestellung(kTeil.id, 
-            [verbrauchAktuell,verbrauch1, verbrauch2, verbrauch3]);
-            //console.log(66);
-            if(bestellung){
-                
+            var bestellung = this.bestellungBerechnenService.getBestellung(kTeil.id,
+                [verbrauchAktuell, verbrauch1, verbrauch2, verbrauch3]);
+
+            if (bestellung) {
                 this.bestellService.neuBestellungErstellen(bestellung.eil,
-                kTeil,bestellung.menge,bestellung.periode,true);
+                    kTeil, bestellung.menge, bestellung.periode, true);
             }
         }
     }
-    
-    deleteGenerierteBestellungen(){
-         this.generierteBestellungen = false;
+
+    deleteGenerierteBestellungen() {
+        this.generierteBestellungen = false;
         for (var i = 0; i < this.teileService.alleKaufteile.length; i++) {
             var bestellungen: Array<NeuBestellung> = this.bestellService.neuBestellungen['k' + this.teileService.alleKaufteile[i].id];
 
@@ -87,26 +88,36 @@ class BestellverwaltungUtilService {
             }
         }
     }
-    
-    generierteBestellungenExist():boolean{
+
+    generierteBestellungenExist(): boolean {
 
         var gibtGenerierteBestellung: boolean = false;
         for (var i = 0; i < this.teileService.alleKaufteile.length; i++) {
 
             var bestellungen: Array<NeuBestellung> = this.bestellService.neuBestellungen['k' + this.teileService.alleKaufteile[i].id];
 
-            for (var j = 0; j < bestellungen.length; j++) {
-                if (bestellungen[j].generiert && !gibtGenerierteBestellung) {
-                    gibtGenerierteBestellung = true;
-                }
+            if(this.containsGenerierteBestellung(bestellungen)){
+                gibtGenerierteBestellung = true;
+                break;
             }
         }
-        
+
         this.generierteBestellungen = gibtGenerierteBestellung;
-        
+
         return gibtGenerierteBestellung;
+    }
+    
+    containsGenerierteBestellung(bestellungen:Array<NeuBestellung>):boolean{
+        
+         for (var i = 0; i <bestellungen.length; i++) {
+             if(bestellungen[i].generiert){
+                 return true;
+             }
+         }
+        
+        return false;
     }
 }
 
-angular.module('BestellverwaltungModule').factory('BestellverwaltungUtilService', ['AuftragService', 'NewBaumService', 'ProgrammService','NewTeileService','BestellService','BestellungBerechnenService',
-    (auftragService, baumService, programmService,teileService,bestellservice,BestellungBerechnenService) => new BestellverwaltungUtilService(auftragService, baumService, programmService,teileService,bestellservice,BestellungBerechnenService)]);
+angular.module('BestellverwaltungModule').factory('BestellverwaltungUtilService', ['AuftragService', 'NewBaumService', 'ProgrammService', 'NewTeileService', 'BestellService', 'BestellungBerechnenService',
+    (auftragService, baumService, programmService, teileService, bestellservice, BestellungBerechnenService) => new BestellverwaltungUtilService(auftragService, baumService, programmService, teileService, bestellservice, BestellungBerechnenService)]);

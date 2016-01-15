@@ -55,7 +55,7 @@ class KaufteilDispositionController {
 
     onChanged(): void {
         this.bestellungBerechnenService.onSelected();
-        if (this.utilService.generierteBestellungen) {
+        if (this.utilService.generierteBestellungen && this.utilService.bestellungenBeiStrategieWecheselNeuBerechnen) {
             this.deleteGenerierteBestellungen();
             this.bestellungenGenerieren();
 
