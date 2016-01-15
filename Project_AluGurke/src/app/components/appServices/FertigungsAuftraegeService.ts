@@ -183,7 +183,8 @@ class FertigungsAuftraegeService {
             }
             if (!test) {
                 toastr.error( "Es dürfen nur ganze Zahlen oder Kommas eingegeben werden","Ungültige Eingabe");
-                return;
+                
+                return [anzahl];
             }
         }
         let liste: Array<string> = split.split(',');
