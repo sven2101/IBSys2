@@ -144,7 +144,7 @@
                     <div class="ibox-content">
                         <button class="btn btn-primary" ng-click="ktdc.bestellungenGenerieren()">{{'purchasing_generateOrders'|translate}}</button>
                         <button class="btn btn-primary" ng-click="ktdc.deleteGenerierteBestellungen()">{{'purchasing_deleteGenerateOrders'|translate}}</button>
-                        <input ng-if="ktdc.utilService.generierteBestellungen" type="checkbox" ng-model="ktdc.utilService.bestellungenBeiStrategieWecheselNeuBerechnen"><span ng-if="ktdc.utilService.generierteBestellungen">Bestellungen bei Strategiewechsel neu Generieren</span>
+                        <input ng-if="ktdc.utilService.generierteBestellungen" type="checkbox" ng-model="ktdc.utilService.bestellungenBeiStrategieWecheselNeuBerechnen"><span ng-if="ktdc.utilService.generierteBestellungen">{{'purchasing_generate_order_strategy'|translate}}</span>
                     </div>
                 </div>
             </div>
