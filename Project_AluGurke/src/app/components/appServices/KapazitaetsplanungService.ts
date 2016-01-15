@@ -5,6 +5,7 @@
 /// <reference path="../appServices/DispositionService.ts"/>
 /// <reference path="../../typeDefinitions/sweetalert.d.ts"/>
 /// <reference path="../kapazitaetsplanung/kapazitaetsplanung.controller.ts" />
+/// <reference path="../../typeDefinitions/toastr.d.ts"/>
 class KapazitaetsplanungService {
 
     arbeitsplatzService:ArbeitsplatzService;
@@ -37,15 +38,16 @@ class KapazitaetsplanungService {
     aendern(){
         for(let i=0;i<this.models.length;i++){
             if(this.models[i].name[0]!="5"){
-                if(isNaN(this.models[i].ueberstunden)||this.models[i].ueberstunden<0){
+                if(isNaN(this.models[i].ueberstunden)||this.models[i].ueberstunden<0||angular.isUndefined(this.models[i].ueberstunden)){
                     this.models[i].ueberstunden=0;
-                    sweetAlert("Ungültige Eingabe","Es dürfen nur ganze Zahlen eingegeben werden!", "error");
+                    toastr.error("Es dürfen nur ganze Zahlen eingegeben werden","Ungültige Eingabe!");
                 }else if(this.models[i].ueberstunden>240){
                     this.models[i].ueberstunden=240;
-                    sweetAlert("Ungültige Eingabe","Es sind nur 240 min zulässig!", "error");
+                    toastr.error("Es sind nur 240 min zulässig","Ungültige Eingabe!");             
                 }else if(this.models[i].anzahlSchichten=="3"&&this.models[i].ueberstunden>0){
                    this.models[i].ueberstunden=0; 
-                   sweetAlert("Ungültige Eingabe","In der 3. Schicht dürfen keine Überstunden gemacht werden!", "error");
+                     toastr.error("In der 3. Schicht dürfen keine Überstunden gemacht werden","Ungültige Eingabe!"); 
+                   
                 }           
                 this.models[i].zeitVerfuegung=Number(this.models[i].anzahlSchichten)*2400+(Math.round(Number(this.models[i].ueberstunden*5)));
             }

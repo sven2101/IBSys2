@@ -35,9 +35,9 @@ class FertigungsAuftraegeController {
     }
 
     aendern() {
-        this.fertigungsAuftraegeService.dispositionService.aendern();
+       
         this.fertigungsAuftraegeService.aendern();
-        this.fertigungsAuftraegeService.onDispoAendern();
+       
     }
     prioAendern() {
         this.fertigungsAuftraegeService.prioAendern();

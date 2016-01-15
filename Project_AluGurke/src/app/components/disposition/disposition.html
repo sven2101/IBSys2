@@ -51,7 +51,7 @@
 									<label>{{model.getProdProg()}}</label>
 								</td>
 								<td>
-									<input min="0" type="number"  style="width:80px;" class="form-control" id="input_{{model.eTeil.id}}" ng-model="model.geplanterLagerstand" ng-keyup="dc.aendern()" >
+									<input ng-pattern="/^([0-9]*)$/" min="0" type="number"  style="width:80px;" class="form-control" id="input_{{model.eTeil.id}}" ng-model="model.geplanterLagerstand" ng-keyup="dc.aendern()" >
 								</td>
 								<td>
 									<label>{{model.getLagerMenge()}}</label>
@@ -89,7 +89,7 @@
                                     <label>{{model.getProdProg()}}</label>
                                 </td>
                                 <td>
-                                    <input min="0" type="number"  style="width:80px;" class="form-control" id="input_{{model.eTeil.id}}" ng-model="model.geplanterLagerstand" ng-keyup="dc.aendern()">
+                                    <input ng-pattern="/^([0-9]*)$/" min="0" type="number"  style="width:80px;" class="form-control" id="input_{{model.eTeil.id}}" ng-model="model.geplanterLagerstand" ng-keyup="dc.aendern()">
                                 </td>
                                 <td>
                                     <label>{{model.getLagerMenge()}}</label>
@@ -127,7 +127,7 @@
                                     <label>{{model.getProdProg()}}</label>
                                 </td>
                                 <td>
-                                    <input min="0" type="number"  style="width:80px;" class="form-control" id="input_{{model.eTeil.id}}" ng-model="model.geplanterLagerstand" ng-keyup="dc.aendern()" style="width:50px;">
+                                    <input ng-pattern="/^([0-9]*)$/" min="0" type="number"  style="width:80px;" class="form-control" id="input_{{model.eTeil.id}}" ng-model="model.geplanterLagerstand" ng-keyup="dc.aendern()" style="width:50px;">
                                 </td>
                                 <td>
                                     <label>{{model.getLagerMenge()}}</label>

@@ -9,6 +9,7 @@
 /// <reference path="../appServices/AuftragService.ts" />
 /// <reference path="../appServices/SettingsService.ts" />
 /// <reference path="../../typeDefinitions/sweetalert.d.ts"/>
+/// <reference path="../../typeDefinitions/toastr.d.ts"/>
 class DispositionService {
 
     dispositionP1: Array<DispositionModel>;
@@ -50,9 +51,9 @@ class DispositionService {
         this.dispoP3rekursuiv(this.newBaumService.herrenBaum);
         this.altLastenVerteilen(this.models);
         this.aendern();
-        
+
         $rootScope.$on('pc.programmaenderung', (event) => {
-           this.aendern();
+            this.aendern();
         });
     }
     dispoP1rekursuiv(wurzel: NewTeilKnoten, oberModel: DispositionModel = null) {
@@ -137,10 +138,11 @@ class DispositionService {
         let auftraegeMFV = new Array<Auftrag>();
         let map: { [key: number]: number; }
         for (let i = 0; i < this.models.length; i++) {
-            this.models[i].auftraege = [];
-            if (isNaN(this.models[i].geplanterLagerstand)||this.models[i].geplanterLagerstand<0) {                
+            this.models[i].auftraege = [];          
+
+            if (isNaN(this.models[i].geplanterLagerstand) || this.models[i].geplanterLagerstand < 0||angular.isUndefined(this.models[i].geplanterLagerstand)) {
                 this.models[i].geplanterLagerstand = 0;
-                sweetAlert("Ungültige Eingabe","Es dürfen nur ganze Zahlen eingegeben werden!", "error");
+                toastr.error("Es dürfen nur ganze Zahlen eingegeben werden", "Ungültige Eingabe!");
             }
             this.models[i].anzahl = Number(this.models[i].getProdProg()) + Number(this.models[i].getGeplanteLagermenge()) - (Number(this.models[i].getLagerMenge()) + Number(this.models[i].getMaterialAufMaschine() + Number(this.models[i].getWarteschlange())));
             if (this.models[i].anzahl <= 0 || isNaN(this.models[i].anzahl)) {
@@ -180,16 +182,16 @@ class DispositionService {
             }
 
         }
-       
+
         this.auftragService.auftraegeSetzen(auftraege2);
-        
+
         this.auftragService.auftraegeTemp = auftraege2;
-        for(let i=0;i<this.auftragService.auftraegeTemp.length;i++){
-            let x=this.auftragService.auftraegeTemp[i];
-            x.arbeitsplatz_id=this.arbeitsplatzService.getArbeitsplatzId(x.erzeugnis_id);        
+        for (let i = 0; i < this.auftragService.auftraegeTemp.length; i++) {
+            let x = this.auftragService.auftraegeTemp[i];
+            x.arbeitsplatz_id = this.arbeitsplatzService.getArbeitsplatzId(x.erzeugnis_id);
         }
 
-        
+
 
         this.arbeitsplatzService.reset();
         for (let i = 0; i < this.auftragService.auftraege.length; i++) {

@@ -9,6 +9,7 @@
 /// <reference path="../appServices/BestellungBerechnenService.ts" />
 /// <reference path="../../model/NewTeilKnoten.ts" />
 /// <reference path="./BestellverwaltungUtil.service.ts" />
+/// <reference path="../../typeDefinitions/toastr.d.ts"/>
 
 class ViewModel {
 
@@ -165,13 +166,15 @@ class KaufteilDispositionController {
         this.utilService.deleteGenerierteBestellungen();
 
         this.changeReichweite();
+        toastr.success("Die Bestellungen wurden gelöscht");
     }
 
     bestellungenGenerieren() {
-
+        
         this.utilService.bestellungenGenerieren();
 
         this.changeReichweite();
+        toastr.success("Die Bestellungen wurden generiert");
     }
 }
 

@@ -1,6 +1,7 @@
 /// <reference path="../../typeDefinitions/angular.d.ts" />
 /// <reference path="../appServices/BestellungBerechnenService.ts" />
 /// <reference path="../appServices/SettingsService.ts" />
+/// <reference path="../../typeDefinitions/toastr.d.ts"/>toastr.success("Die Arbeitszeiten wurden berechnet");
 var KapazitaetsplanungController = (function () {
     function KapazitaetsplanungController(KapazitaetsplanungService, dispositionService, bestellungBerechnenService, settingsService) {
         this.models = new Array();
@@ -19,9 +20,11 @@ var KapazitaetsplanungController = (function () {
     };
     KapazitaetsplanungController.prototype.berechnen = function () {
         this.kapazitaetsplanungService.zeitSetzten();
+        toastr.success("Die Arbeitszeiten wurden berechnet");
     };
     KapazitaetsplanungController.prototype.reset = function () {
         this.kapazitaetsplanungService.reset();
+        toastr.success("Die Arbeitszeiten wurden zurückgesetzt");
     };
     return KapazitaetsplanungController;
 })();

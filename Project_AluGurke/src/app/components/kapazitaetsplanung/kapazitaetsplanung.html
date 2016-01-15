@@ -45,7 +45,7 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <input min="0" type="number"  style="width:80px;" class="form-control" ng-model="model.ueberstunden" ng-keyup="kpc.aendern()">
+                                    <input ng-pattern="/^([0-9]*)$/" min="0" type="number"  style="width:80px;" class="form-control" ng-model="model.ueberstunden" ng-keyup="kpc.aendern()">
                                 </td>
                             </tr>
                         </tbody>

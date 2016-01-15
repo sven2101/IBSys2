@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="assets/css/toastr.min.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="assets/css/animate.css" rel="stylesheet">
@@ -12,6 +13,7 @@
     <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
     <link href="assets/css/simple.css" rel="stylesheet">
     <link href="assets/css/sweetalert.css" rel="stylesheet">
+    
     <title>SCManager</title>
 </head>
 <style>
@@ -168,7 +170,26 @@
     <script src="assets/js/plugins/nestable/jquery.nestable.js"></script>
     <script src="assets/js/angular-drag-and-drop.js"></script>
     <script src="assets/js/sweetalert.min.js"></script>
+    <script src="assets/js/toastr.min.js"></script>
     <script src="javaScript/angular.js"></script>
+    <script>
+        toastr.options = {
+                closeButton: true,
+                debug: false,
+                progressBar: false,
+                preventDuplicates: false,
+                positionClass: "toast-top-right",
+                onclick: null,
+                showDuration: 400,
+                hideDuration: 1000,
+                timeOut: 5000,
+                extendedTimeOut: 1000,
+                showEasing: "swing",
+                hideEasing: "linear",
+                showMethod: "fadeIn",
+                hideMethod: "fadeOut"
+            }
+    </script>
 
 </body>
 

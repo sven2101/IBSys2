@@ -2,6 +2,7 @@
 /// <reference path="../appServices/DispositionService.ts" />
 /// <reference path="../FertigungsAuftraege/FertigungsAuftraege.controller.ts" />
 /// <reference path="../../typeDefinitions/sweetalert.d.ts"/>
+/// <reference path="../../typeDefinitions/toastr.d.ts"/>
 
 
 class FertigungsAuftraegeService {
@@ -15,7 +16,7 @@ class FertigungsAuftraegeService {
         this.arbeitsplatzService = arbeitsplatzService
         this.dispositionService = dispositionService
         this.dispositionService.aendern();
-        this.auftragService.auftraegeTemp = this.auftragService.auftraegeExport;
+     
         this.aendern();
         $rootScope.$on('mainController.neueSprache', (event, language) => {
             this.onTranslate(language);
@@ -140,7 +141,7 @@ class FertigungsAuftraegeService {
             }
             for (let i = 0; i < this.models.length; i++) {
                 this.models[i].auftrag.setPriortaet(this.models[i].auftrag.prioritaetString);
-                let liste = this.splitEvaluieren(this.models[i].split, this.models[i].auftrag.anzahl);
+                let liste = this.splitEvaluieren(this.models[i].split, this.models[i].auftrag.anzahl);               
                 if (this.models[i].split != this.models[i].split2) {
                     this.models[i].auftraege = [];
                     for (let j = 0; j < liste.length; j++) {
@@ -170,18 +171,19 @@ class FertigungsAuftraegeService {
         this.dispositionService.auftraegeAktualisieren(x);
     }
     splitEvaluieren(split: String, anzahl: number): Array<number> {
-
+        
         let erlaubteZeichen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, ","];
         for (let i = 0; i < split.length; i++) {
             let test = false;
             for (let j = 0; j < erlaubteZeichen.length; j++) {
-                if (split[i] == erlaubteZeichen[j]) {
+                if (split[i] == erlaubteZeichen[j]) {                    
                     test = true;
                     continue;
                 }
             }
             if (!test) {
-                sweetAlert("Ungültige Eingabe", "Es dürfen nur ganze Zahlen oder Kommata eingegeben werden!", "error");
+                toastr.error( "Es dürfen nur ganze Zahlen oder Kommas eingegeben werden","Ungültige Eingabe");
+                return;
             }
         }
         let liste: Array<string> = split.split(',');
@@ -193,6 +195,7 @@ class FertigungsAuftraegeService {
                 if (Number(liste[i]) < 10) {                
                     ergebnis.push(10);
                     summe += 10;
+                    //toastr.error("Die minimale Losgröße beträgt 10 ME","Ungültige Eingabe");
                 } else {
                     ergebnis.push(Math.round(Number(liste[i])));
                     summe += Math.round(Number(liste[i]));
@@ -203,7 +206,8 @@ class FertigungsAuftraegeService {
                 x.push(anzahl);
                 return x;
             }
-            if (summe > anzahl) {           
+            if (summe > anzahl) { 
+                toastr.error("Die Summe der Auftragspositionen ist größer als der eigentliche Auftrag","Ungültige Eingabe");          
                 let x: Array<number> = new Array<number>();
                 x.push(anzahl);
                 return x;
