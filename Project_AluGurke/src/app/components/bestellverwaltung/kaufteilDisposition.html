@@ -44,7 +44,7 @@
                     <div class="ibox-title">
                         <h5>{{'purchasing_headline'|translate}}</h5>
                     </div>
-                    <div class="ibox-content">
+                    <div class="ibox-content table-responsive">
                         <table class="table table-bordered text-center table-hover table-condensed">
                             <tr>
                                 <th class="text-center curs" ng-click="ktdc.sortieren('id')">Id</th>
@@ -144,6 +144,7 @@
                     <div class="ibox-content">
                         <button class="btn btn-primary" ng-click="ktdc.bestellungenGenerieren()">{{'purchasing_generateOrders'|translate}}</button>
                         <button class="btn btn-primary" ng-click="ktdc.deleteGenerierteBestellungen()">{{'purchasing_deleteGenerateOrders'|translate}}</button>
+                        <input ng-if="ktdc.utilService.generierteBestellungen" type="checkbox" ng-model="ktdc.utilService.bestellungenBeiStrategieWecheselNeuBerechnen"><span ng-if="ktdc.utilService.generierteBestellungen">Bestellungen bei Strategiewechsel neu Generieren</span>
                     </div>
                 </div>
             </div>

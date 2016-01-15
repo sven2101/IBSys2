@@ -64,9 +64,10 @@ class DetailBestellVerwaltungController {
         this.bestellungBerechnenService.onSelected();
         this.setTimeLine();
 
-        if (this.utilService.generierteBestellungen) {
+        if (this.utilService.generierteBestellungen && this.utilService.bestellungenBeiStrategieWecheselNeuBerechnen) {
             this.utilService.deleteGenerierteBestellungen();
             this.utilService.bestellungenGenerieren();
+            
         }
 
         this.reichweite = this.bestellungBerechnenService.getReichweite(this.kaufTeil.id, [this.verbrauchAktuell, this.verbrauch1, this.verbrauch2, this.verbrauch3]);
@@ -100,7 +101,7 @@ class DetailBestellVerwaltungController {
     }
 
     generierteBestellungUebernehmen() {
-        this.utilService.generierteBestellungen = true;
+        //this.utilService.generierteBestellungen = true;
         this.bestellService.neuBestellungErstellen(this.generierteBestellung.eil, this.kaufTeil, this.generierteBestellung.menge, this.periode, true);
         this.reichweite = this.bestellungBerechnenService.getReichweite(this.kaufTeil.id, [this.verbrauchAktuell, this.verbrauch1, this.verbrauch2, this.verbrauch3]);
         this.setTimeLine();
