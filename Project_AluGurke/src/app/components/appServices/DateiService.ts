@@ -26,6 +26,10 @@ class DateiService {
 	}
 
 	getInhalt() {
+        if(this.auftragService.auftraegeExport.length>75){
+            sweetAlert("Ungültige Eingabe","Es dürfen nur 75 Produktionsaufträge erstellt werden!", "error");
+            return null;
+        }
 		var json = {
 			input: {
 				qualitycontrol: {

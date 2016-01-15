@@ -33,7 +33,12 @@ class FileController {
 	
 	sendPostRequest() {
 		var vm = this;
-		this.resource.createFile({ content: this.dateiService.getInhalt(), periode: this.kennzahlenService.periode}, function(result, headers) {
+        let x=this.dateiService.getInhalt();
+        if(x===null){
+           sweetAlert("Ungültige Eingabe","Es dürfen nur ganze Zahlen eingegeben werden!", "error"); 
+           return;
+        }        
+		this.resource.createFile({ content: x, periode: this.kennzahlenService.periode}, function(result, headers) {
 			vm.result = result.dateiName;
 			vm.dateiService.dateiName = result.dateiName;
 			vm.dateiService.dateiErzeugt = true;
@@ -45,10 +50,10 @@ class FileController {
 		var aktuellePeriode=Number(json.results._period);
 		this.resource.createSimulationFile({ dateiInhalt: json,periode: aktuellePeriode}, function(result, headers) {
 			if(result.erg == '200') {
-				swal({   title: "Die Datei wurde erfolgreich importiert", timer: 1500,type:"success" });
+				swal({   title: "Die Datei wurde erfolgreich importiert", type:"success" });
 			}else if(result.erg == '300') {
 
-                swal({   title: "Die Datei wurde erfolgreich importiert",text:"Die Periode "+aktuellePeriode+" wurde in der Datenbank ersetzt! ", timer: 2500,type:"success" });
+                swal({   title: "Die Datei wurde erfolgreich importiert",text:"Die Periode "+aktuellePeriode+" wurde in der Datenbank ersetzt! ", type:"success" });
 				
 			}
 			else if(result.erg == '404') {

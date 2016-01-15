@@ -42,7 +42,7 @@ class KapazitaetsplanungService {
                     sweetAlert("Ungültige Eingabe","Es dürfen nur ganze Zahlen eingegeben werden!", "error");
                 }else if(this.models[i].ueberstunden>240){
                     this.models[i].ueberstunden=240;
-                    sweetAlert("Ungültige Eingabe","Es sind nur 240 Überstunden zulässig!", "error");
+                    sweetAlert("Ungültige Eingabe","Es sind nur 240 min zulässig!", "error");
                 }else if(this.models[i].anzahlSchichten=="3"&&this.models[i].ueberstunden>0){
                    this.models[i].ueberstunden=0; 
                    sweetAlert("Ungültige Eingabe","In der 3. Schicht dürfen keine Überstunden gemacht werden!", "error");
