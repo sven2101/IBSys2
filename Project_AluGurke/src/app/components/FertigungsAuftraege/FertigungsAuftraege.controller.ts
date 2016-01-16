@@ -20,6 +20,7 @@ class FertigungsAuftraegeController {
         this.auftragService = auftragService;
         this.dispositionService=dispositionService;
         this.kapazitaetsplanungService=kapazitaetsplanungService;  
+     
         this.aendern();
         this.models = this.fertigungsAuftraegeService.models;
         this.models.sort(function(a: FertigungsAuftraegeModel, b: FertigungsAuftraegeModel) { return (a.auftrag.arbeitsplatz_id - b.auftrag.arbeitsplatz_id) });

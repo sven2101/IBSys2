@@ -16,7 +16,7 @@ class FertigungsAuftraegeService {
         this.arbeitsplatzService = arbeitsplatzService
         this.dispositionService = dispositionService
         this.dispositionService.aendern();
-     
+
         this.aendern();
         $rootScope.$on('mainController.neueSprache', (event, language) => {
             this.onTranslate(language);
@@ -132,7 +132,7 @@ class FertigungsAuftraegeService {
 
                     if (test == false) {
 
-                        console.log(test);
+
                         this.models.push(new FertigungsAuftraegeModel(this.auftragService.auftraegeTemp[j]));
                     }
                 }
@@ -141,20 +141,21 @@ class FertigungsAuftraegeService {
             }
             for (let i = 0; i < this.models.length; i++) {
                 this.models[i].auftrag.setPriortaet(this.models[i].auftrag.prioritaetString);
-                let liste = this.splitEvaluieren(this.models[i].split, this.models[i].auftrag.anzahl);               
-                if (this.models[i].split != this.models[i].split2) {
-                    this.models[i].auftraege = [];
-                    for (let j = 0; j < liste.length; j++) {
-                        let x = new Auftrag(this.models[i].auftrag.erzeugnis_id, liste[j], this.models[i].auftrag.periode, this.models[i].auftrag.arbeitsplatz_id);
-                        x.prioritaet = this.models[i].auftrag.prioritaet;
-                        x.prioritaetString = this.models[i].auftrag.prioritaetString;
-                        this.models[i].auftraege.push(x);
-                        this.models[i].split2 = this.models[i].split;
-                    }
+                let liste = this.splitEvaluieren(this.models[i].split, this.models[i].auftrag.anzahl);
+                if (liste == null) {
+                    this.models[i].auftraege = [new Auftrag(this.models[i].auftrag.erzeugnis_id, this.models[i].auftrag.anzahl, this.models[i].auftrag.periode, this.models[i].auftrag.arbeitsplatz_id)];
+                    continue;
                 }
-                else {
-                    this.models[i].auftraege[this.models[i].auftraege.length - 1].anzahl = liste[liste.length - 1];
+
+                this.models[i].auftraege = [];
+                for (let j = 0; j < liste.length; j++) {
+                    let x = new Auftrag(this.models[i].auftrag.erzeugnis_id, liste[j], this.models[i].auftrag.periode, this.models[i].auftrag.arbeitsplatz_id);
+                    x.prioritaet = this.models[i].auftrag.prioritaet;
+                    x.prioritaetString = this.models[i].auftrag.prioritaetString;
+                    this.models[i].auftraege.push(x);
+                    this.models[i].split2 = this.models[i].split;
                 }
+
             }
         }
         this.auftraegeSetzten();
@@ -171,19 +172,19 @@ class FertigungsAuftraegeService {
         this.dispositionService.auftraegeAktualisieren(x);
     }
     splitEvaluieren(split: String, anzahl: number): Array<number> {
-        
+
         let erlaubteZeichen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, ","];
         for (let i = 0; i < split.length; i++) {
             let test = false;
             for (let j = 0; j < erlaubteZeichen.length; j++) {
-                if (split[i] == erlaubteZeichen[j]) {                    
+                if (split[i] == erlaubteZeichen[j]) {
                     test = true;
                     continue;
                 }
             }
             if (!test) {
-                toastr.error( "Es dürfen nur ganze Zahlen oder Kommas eingegeben werden","Ungültige Eingabe");
-                
+                toastr.error("Es dürfen nur ganze Zahlen oder Kommas eingegeben werden", "Ungültige Eingabe");
+
                 return [anzahl];
             }
         }
@@ -192,31 +193,33 @@ class FertigungsAuftraegeService {
         let ergebnis = new Array<number>();
         let summe = 0;
         for (let i = 0; i < liste.length; i++) {
-            if (!isNaN(Number(liste[i]))&&Number(liste[i])>0) {
-                if (Number(liste[i]) < 10) {                
-                    ergebnis.push(10);
-                    summe += 10;
-                    //toastr.error("Die minimale Losgröße beträgt 10 ME","Ungültige Eingabe");
-                } else {
-                    ergebnis.push(Math.round(Number(liste[i])));
-                    summe += Math.round(Number(liste[i]));
-                }
+            if (!isNaN(Number(liste[i])) && Number(liste[i]) > 0) {
+                //if (Number(liste[i]) < 10) {                
+                //   ergebnis.push(10);
+                // summe += 10;
+                //toastr.error("Die minimale Losgröße beträgt 10 ME","Ungültige Eingabe");
+                //} else {
+                ergebnis.push(Math.round(Number(liste[i])));
+                summe += Math.round(Number(liste[i]));
+                //}
             } else {
                 let x: Array<number> = new Array<number>();
                 x.push(anzahl);
-                return x;
+                return null;
             }
-            if (summe > anzahl) { 
-                if(anzahl>=10){
-                    toastr.error("Die Summe der Auftragspositionen ist größer als der eigentliche Auftrag","Ungültige Eingabe");      
-                }    
+            if (summe > anzahl) {
+                if (anzahl >= 10) {
+                    toastr.error("Die Summe der Auftragspositionen ist größer als der eigentliche Auftrag", "Ungültige Eingabe");
+                }
                 let x: Array<number> = new Array<number>();
                 x.push(anzahl);
-                return x;
+                return null;
             }
         }
         if (summe < anzahl) {
-            ergebnis.push(Math.round((anzahl - summe)));
+            let x: Array<number> = new Array<number>();
+            x.push(anzahl);
+            return null;
         }
         return ergebnis;//.sort(function(a,b){return a-b;});
     }

@@ -83,8 +83,7 @@ class KapazitaetsplanungService {
             break;
             case 1:prozente=1.2;
             break;
-        }
-        console.log(prozente);  
+        }     
         for(let i=0;i<this.models.length;i++){            
             let model=this.models[i];
             

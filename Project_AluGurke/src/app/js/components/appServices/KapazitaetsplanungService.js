@@ -79,7 +79,6 @@ var KapazitaetsplanungService = (function () {
                 prozente = 1.2;
                 break;
         }
-        console.log(prozente);
         for (var i = 0; i < this.models.length; i++) {
             var model = this.models[i];
             var zeit = model.arbeitsplatz.arbeitszeit;

@@ -29,6 +29,12 @@ var KapazitaetsplanungController = (function () {
     KapazitaetsplanungController.prototype.onChanged = function () {
         this.bestellungBerechnenService.onSelected();
     };
+    KapazitaetsplanungController.prototype.zeileRot = function (model) {
+        if (model.arbeitsplatz.arbeitszeit > model.zeitVerfuegung) {
+            return true;
+        }
+        return false;
+    };
     return KapazitaetsplanungController;
 })();
 angular.module("KapazitaetsplanungModule").controller("KapazitaetsplanungController", ["KapazitaetsplanungService", "DispositionService", "BestellungBerechnenService", "SettingsService", KapazitaetsplanungController]);
