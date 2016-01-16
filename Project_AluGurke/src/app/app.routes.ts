@@ -38,9 +38,6 @@ angular.module('app')
                 }).when('/lager', {
                     templateUrl: '/components/lager/lager.html',
                     controller: 'LagerController as lc'
-                }).when('/settings', {
-                    templateUrl: '/components/settings/settings.html',
-                    controller: 'SettingsController as sc'
                 }).when('/login', {
                     templateUrl: '/components/login/login.html',
                     controller: 'LoginController as lgc'
