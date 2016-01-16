@@ -28,8 +28,8 @@ class BestellverwaltungUtilService {
     zeileRot(reichweite: number, wbz: number, wbzAbw: number, multiplikator: number): boolean {
 
         var differenz = (reichweite - wbz - wbzAbw * multiplikator);
-
-        if (Math.round(differenz) < 1) {
+        
+        if (Math.round(differenz*1000000)/1000000 < 1) {
             return true;
         }
         return false;
