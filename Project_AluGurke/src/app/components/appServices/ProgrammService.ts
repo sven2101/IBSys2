@@ -57,10 +57,9 @@ class ProgrammService {
 
     getDirectsalesPosition(id:number)
     {
-        if(this.directsales[id].menge<0 || angular.isUndefined(this.directsales[id].menge))
-        {
+        if(this.directsales[id].menge<0 || angular.isUndefined(this.directsales[id].menge)) {
             this.directsales[id].menge = 0;
-            toastr.error( "Es d\u00fcrfen nur positive Ganzzahlen eingegeben werden","Ung\u00fcltige Eingabe!");
+            toastr.error("Es d\u00fcrfen nur positive Ganzzahlen eingegeben werden", "Ung\u00fcltige Eingabe!");
         }
         if(this.directsales[id].preis<0)
         {
