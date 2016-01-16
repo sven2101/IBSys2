@@ -13,11 +13,13 @@ class KapazitaetsplanungService {
     auftragService:AuftragService
     ergebnis:Array<Arbeitsplatz>;
     models:Array<KapazitaetModel>;
+    bestellungBerechnenService:BestellungBerechnenService
     $rootScope;
-    constructor($rootScope,ArbeitsplatzService:ArbeitsplatzService,AuftragService:AuftragService,DispositionService:DispositionService) {
+    constructor($rootScope,ArbeitsplatzService:ArbeitsplatzService,AuftragService:AuftragService,DispositionService:DispositionService,bestellungBerechnenService) {
         this.arbeitsplatzService = ArbeitsplatzService;
         this.auftragService=AuftragService;
         this.dispositionService=DispositionService;
+        this.bestellungBerechnenService=bestellungBerechnenService;
         this.ergebnis=new Array<Arbeitsplatz>();
         this.models=new Array<KapazitaetModel>();
         this.models.push(new KapazitaetModel(new Arbeitsplatz(5,0,0,0)));
@@ -33,8 +35,7 @@ class KapazitaetsplanungService {
         this.dispositionService.aendern();
         
         this.aendern();  
-    }
-    
+    } 
     aendern(){
         for(let i=0;i<this.models.length;i++){
             if(this.models[i].name[0]!="5"){
@@ -70,13 +71,32 @@ class KapazitaetsplanungService {
         }
     }
     zeitSetzten(){
+        let prozente=0;
+        switch(this.bestellungBerechnenService.multiplikator){
+            case -1:prozente=1;
+            break;
+            case -0.5:prozente=1.05;
+            break;
+            case 0:prozente=1.1;
+            break;
+            case 0.5:prozente=1.15;
+            break;
+            case 1:prozente=1.2;
+            break;
+        }
+        console.log(prozente);  
         for(let i=0;i<this.models.length;i++){            
             let model=this.models[i];
+            
+            let zeit=model.arbeitsplatz.arbeitszeit;
+            let auftraege=model.arbeitsplatz.auftraege.length+model.arbeitsplatz.arbeitsplatzFremdeAuftraege.length;
+            zeit=zeit*(prozente+auftraege/1000);  
+            
             if(model.arbeitsplatz.id===5){
                 model.zeitVerfuegung=0;
                 continue;
             }
-            let zeit=model.arbeitsplatz.arbeitszeit;
+                    
             model.ueberstunden=0;
             if(zeit<=2400){
                 model.anzahlSchichten='1';
@@ -180,4 +200,4 @@ class KapazitaetsplanungService {
     }
 }
 
-angular.module('app').factory('KapazitaetsplanungService', ['$rootScope',"ArbeitsplatzService","AuftragService","DispositionService",($rootScope,ArbeitsplatzService,AuftragService,DispositionService) => new KapazitaetsplanungService($rootScope,ArbeitsplatzService,AuftragService,DispositionService)]);
+angular.module('app').factory('KapazitaetsplanungService', ['$rootScope',"ArbeitsplatzService","AuftragService","DispositionService","BestellungBerechnenService",($rootScope,ArbeitsplatzService,AuftragService,DispositionService,BestellungBerechnenService) => new KapazitaetsplanungService($rootScope,ArbeitsplatzService,AuftragService,DispositionService,BestellungBerechnenService)]);

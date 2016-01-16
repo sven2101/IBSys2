@@ -201,7 +201,6 @@ class FertigungsAuftraegeService {
                     ergebnis.push(Math.round(Number(liste[i])));
                     summe += Math.round(Number(liste[i]));
                 }
-
             } else {
                 let x: Array<number> = new Array<number>();
                 x.push(anzahl);

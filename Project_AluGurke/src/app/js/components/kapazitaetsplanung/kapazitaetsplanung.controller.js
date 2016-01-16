@@ -26,6 +26,9 @@ var KapazitaetsplanungController = (function () {
         this.kapazitaetsplanungService.reset();
         toastr.success("Die Arbeitszeiten wurden zurückgesetzt");
     };
+    KapazitaetsplanungController.prototype.onChanged = function () {
+        this.bestellungBerechnenService.onSelected();
+    };
     return KapazitaetsplanungController;
 })();
 angular.module("KapazitaetsplanungModule").controller("KapazitaetsplanungController", ["KapazitaetsplanungService", "DispositionService", "BestellungBerechnenService", "SettingsService", KapazitaetsplanungController]);

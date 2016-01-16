@@ -7,11 +7,12 @@
 /// <reference path="../kapazitaetsplanung/kapazitaetsplanung.controller.ts" />
 /// <reference path="../../typeDefinitions/toastr.d.ts"/>
 var KapazitaetsplanungService = (function () {
-    function KapazitaetsplanungService($rootScope, ArbeitsplatzService, AuftragService, DispositionService) {
+    function KapazitaetsplanungService($rootScope, ArbeitsplatzService, AuftragService, DispositionService, bestellungBerechnenService) {
         var _this = this;
         this.arbeitsplatzService = ArbeitsplatzService;
         this.auftragService = AuftragService;
         this.dispositionService = DispositionService;
+        this.bestellungBerechnenService = bestellungBerechnenService;
         this.ergebnis = new Array();
         this.models = new Array();
         this.models.push(new KapazitaetModel(new Arbeitsplatz(5, 0, 0, 0)));
@@ -60,13 +61,34 @@ var KapazitaetsplanungService = (function () {
         }
     };
     KapazitaetsplanungService.prototype.zeitSetzten = function () {
+        var prozente = 0;
+        switch (this.bestellungBerechnenService.multiplikator) {
+            case -1:
+                prozente = 1;
+                break;
+            case -0.5:
+                prozente = 1.05;
+                break;
+            case 0:
+                prozente = 1.1;
+                break;
+            case 0.5:
+                prozente = 1.15;
+                break;
+            case 1:
+                prozente = 1.2;
+                break;
+        }
+        console.log(prozente);
         for (var i = 0; i < this.models.length; i++) {
             var model = this.models[i];
+            var zeit = model.arbeitsplatz.arbeitszeit;
+            var auftraege = model.arbeitsplatz.auftraege.length + model.arbeitsplatz.arbeitsplatzFremdeAuftraege.length;
+            zeit = zeit * (prozente + auftraege / 1000);
             if (model.arbeitsplatz.id === 5) {
                 model.zeitVerfuegung = 0;
                 continue;
             }
-            var zeit = model.arbeitsplatz.arbeitszeit;
             model.ueberstunden = 0;
             if (zeit <= 2400) {
                 model.anzahlSchichten = '1';
@@ -171,4 +193,4 @@ var KapazitaetsplanungService = (function () {
     };
     return KapazitaetsplanungService;
 })();
-angular.module('app').factory('KapazitaetsplanungService', ['$rootScope', "ArbeitsplatzService", "AuftragService", "DispositionService", function ($rootScope, ArbeitsplatzService, AuftragService, DispositionService) { return new KapazitaetsplanungService($rootScope, ArbeitsplatzService, AuftragService, DispositionService); }]);
+angular.module('app').factory('KapazitaetsplanungService', ['$rootScope', "ArbeitsplatzService", "AuftragService", "DispositionService", "BestellungBerechnenService", function ($rootScope, ArbeitsplatzService, AuftragService, DispositionService, BestellungBerechnenService) { return new KapazitaetsplanungService($rootScope, ArbeitsplatzService, AuftragService, DispositionService, BestellungBerechnenService); }]);
