@@ -106,23 +106,47 @@ class DateiService {
 	
 	getDirectSales(){
 		var directSales = [];
+		var price = this.programmService.directsales[1].preis;
+		if(angular.isUndefined(price)){
+			price=0;
+		}
+		var penalty = this.programmService.directsales[1].konventionalstrafe;
+		if(angular.isUndefined(penalty)){
+			penalty=0;
+		}
 		var p1 = {
 			_article: 1,
 			_quantity:this.programmService.directsales[1].menge,
-			_price:this.programmService.directsales[1].preis,
-			_penalty:this.programmService.directsales[1].konventionalstrafe
+			_price:price,
+			_penalty:penalty
 		};
+		price = this.programmService.directsales[2].preis;
+		if(angular.isUndefined(price)){
+			price=0;
+		}
+		penalty = this.programmService.directsales[2].konventionalstrafe;
+		if(angular.isUndefined(penalty)){
+			penalty=0;
+		}
 		var p2 = {
 			_article: 2,
 			_quantity:this.programmService.directsales[2].menge,
-			_price:this.programmService.directsales[2].preis,
-			_penalty:this.programmService.directsales[2].konventionalstrafe
+			_price:price,
+			_penalty:penalty
 		};
+		price = this.programmService.directsales[3].preis;
+		if(angular.isUndefined(price)){
+			price=0;
+		}
+		penalty = this.programmService.directsales[3].konventionalstrafe;
+		if(angular.isUndefined(penalty)){
+			penalty=0;
+		}
 		var p3 = {
 			_article: 3,
 			_quantity:this.programmService.directsales[3].menge,
-			_price:this.programmService.directsales[3].preis,
-			_penalty:this.programmService.directsales[3].konventionalstrafe
+			_price:price,
+			_penalty:penalty
 		};
 		
 		directSales.push(p1);

@@ -49,7 +49,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="model in kpc.models">
+                            <tr ng-repeat="model in kpc.models" ng-class="{danger: kpc.zeileRot(model)}">
                                 <td>{{model.name.split("_")[0]}}</td>
                                 <td>{{model.arbeitsplatz.arbeitszeit}}</td>
                                 <td>{{model.zeitVerfuegung}}</td>

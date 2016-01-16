@@ -42,7 +42,12 @@ class KapazitaetsplanungController{
     }
    
 
-
+    zeileRot(model:KapazitaetModel):boolean{
+        if(model.arbeitsplatz.arbeitszeit > model.zeitVerfuegung){
+            return true;
+        }
+        return false;
+    }
 
 
 
