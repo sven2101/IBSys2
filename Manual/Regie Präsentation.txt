@@ -1,10 +1,12 @@
-Datei Marius
+Dasboard Sven --> ohne Login
+Datei Marius --> Periode 5
 Lager Marius
-Produktionsprogramm Sven
+Produktionsprogramm Max
 Disposition Max
-Kaufteildisposition Marius
+Strategie Marius
+Kaufteildisposition Marius --> K35
 Kapazitätsplanung Max
-Datei Marius
-Internationalisierung Sven
+Datei Sven
+Internationalisierung Sven --> Dashboard
 Login Sven
 Dashboard Sven

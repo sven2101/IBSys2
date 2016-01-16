@@ -208,7 +208,9 @@ class FertigungsAuftraegeService {
                 return x;
             }
             if (summe > anzahl) { 
-                toastr.error("Die Summe der Auftragspositionen ist größer als der eigentliche Auftrag","Ungültige Eingabe");          
+                if(anzahl>=10){
+                    toastr.error("Die Summe der Auftragspositionen ist größer als der eigentliche Auftrag","Ungültige Eingabe");      
+                }    
                 let x: Array<number> = new Array<number>();
                 x.push(anzahl);
                 return x;

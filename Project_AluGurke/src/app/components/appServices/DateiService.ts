@@ -10,16 +10,16 @@ class DateiService {
 
 	dateiName: string;
 	dateiErzeugt: boolean;
-	neuBestellungen: BsNeuBestellungenMap;
 	auftragService:AuftragService;
 	kapazitaetsplanungService:KapazitaetsplanungService;
 	programmService: ProgrammService;
+    bestellService:BestellService;
 
 	constructor(bestellService: BestellService,auftragService:AuftragService,
 	kapazitaetsplanungService:KapazitaetsplanungService,programmService:ProgrammService) {
 		this.dateiErzeugt = false;
 		this.dateiName = "none";
-		this.neuBestellungen = bestellService.neuBestellungen;
+        this.bestellService=bestellService;
 		this.auftragService=auftragService;
 		this.kapazitaetsplanungService=kapazitaetsplanungService;
 		this.programmService = programmService;
@@ -30,6 +30,7 @@ class DateiService {
             sweetAlert("Ungültige Eingabe","Es dürfen nur 75 Produktionsaufträge erstellt werden!", "error");
             return null;
         }
+       
 		var json = {
 			input: {
 				qualitycontrol: {
@@ -65,9 +66,9 @@ class DateiService {
 
 	getNewOrders() {
 		var orders = [];
-		for (var property in this.neuBestellungen) {
-			if (this.neuBestellungen.hasOwnProperty(property)) {
-				var array = this.neuBestellungen[property];
+		for (var property in this.bestellService.neuBestellungen) {
+			if (this.bestellService.neuBestellungen.hasOwnProperty(property)) {
+				var array = this.bestellService.neuBestellungen[property];
 				for (var i = 0; i < array.length; i++) {
 
 					var newOrder = {
