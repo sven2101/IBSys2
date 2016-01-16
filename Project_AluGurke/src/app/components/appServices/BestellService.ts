@@ -121,6 +121,7 @@ class BestellService {
 				neuBestellungen.splice(i, 1);
 			}
 		}
+ 
 	}
 
 	neuBestellungErstellen(eil: boolean, teil: NewKaufTeil, menge: number, periode: number, generiert?:boolean): void {
@@ -132,6 +133,7 @@ class BestellService {
         
 		var bestellung = new NeuBestellung(eil, teil.id, menge, kosten, periode,generiert);
 		this.neuBestellungen['k' + bestellung.teil_id].push(bestellung);
+    
 	}
 
 	getBestellungsKosten(menge: number, eil: boolean, kaufTeil: NewKaufTeil): number {
