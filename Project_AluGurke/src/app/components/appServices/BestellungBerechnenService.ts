@@ -205,7 +205,7 @@ class BestellungBerechnenService {
                 }
             }
 
-            if (this.bestellService.getBestellungsKosten(kTeil.discontMenge, false, kTeil) < this.bestellService.getBestellungsKosten(menge, false, kTeil)) {
+            if (this.bestellService.getBestellungsKosten(kTeil.discontMenge, false, kTeil) < this.bestellService.getBestellungsKosten(menge, false, kTeil) && menge < kTeil.discontMenge) {
                 menge = kTeil.discontMenge;
             }
 
