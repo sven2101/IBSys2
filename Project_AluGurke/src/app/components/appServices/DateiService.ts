@@ -10,16 +10,16 @@ class DateiService {
 
 	dateiName: string;
 	dateiErzeugt: boolean;
-	neuBestellungen: BsNeuBestellungenMap;
 	auftragService:AuftragService;
 	kapazitaetsplanungService:KapazitaetsplanungService;
 	programmService: ProgrammService;
+    bestellService:BestellService;
 
 	constructor(bestellService: BestellService,auftragService:AuftragService,
 	kapazitaetsplanungService:KapazitaetsplanungService,programmService:ProgrammService) {
 		this.dateiErzeugt = false;
 		this.dateiName = "none";
-		this.neuBestellungen = bestellService.neuBestellungen;
+        this.bestellService=bestellService;
 		this.auftragService=auftragService;
 		this.kapazitaetsplanungService=kapazitaetsplanungService;
 		this.programmService = programmService;
@@ -30,6 +30,7 @@ class DateiService {
             sweetAlert("Ungültige Eingabe","Es dürfen nur 75 Produktionsaufträge erstellt werden!", "error");
             return null;
         }
+       
 		var json = {
 			input: {
 				qualitycontrol: {
@@ -65,9 +66,9 @@ class DateiService {
 
 	getNewOrders() {
 		var orders = [];
-		for (var property in this.neuBestellungen) {
-			if (this.neuBestellungen.hasOwnProperty(property)) {
-				var array = this.neuBestellungen[property];
+		for (var property in this.bestellService.neuBestellungen) {
+			if (this.bestellService.neuBestellungen.hasOwnProperty(property)) {
+				var array = this.bestellService.neuBestellungen[property];
 				for (var i = 0; i < array.length; i++) {
 
 					var newOrder = {
@@ -105,23 +106,47 @@ class DateiService {
 	
 	getDirectSales(){
 		var directSales = [];
+		var price = this.programmService.directsales[1].preis;
+		if(angular.isUndefined(price)){
+			price=0;
+		}
+		var penalty = this.programmService.directsales[1].konventionalstrafe;
+		if(angular.isUndefined(penalty)){
+			penalty=0;
+		}
 		var p1 = {
 			_article: 1,
 			_quantity:this.programmService.directsales[1].menge,
-			_price:this.programmService.directsales[1].preis,
-			_penalty:this.programmService.directsales[1].konventionalstrafe
+			_price:price,
+			_penalty:penalty
 		};
+		price = this.programmService.directsales[2].preis;
+		if(angular.isUndefined(price)){
+			price=0;
+		}
+		penalty = this.programmService.directsales[2].konventionalstrafe;
+		if(angular.isUndefined(penalty)){
+			penalty=0;
+		}
 		var p2 = {
 			_article: 2,
 			_quantity:this.programmService.directsales[2].menge,
-			_price:this.programmService.directsales[2].preis,
-			_penalty:this.programmService.directsales[2].konventionalstrafe
+			_price:price,
+			_penalty:penalty
 		};
+		price = this.programmService.directsales[3].preis;
+		if(angular.isUndefined(price)){
+			price=0;
+		}
+		penalty = this.programmService.directsales[3].konventionalstrafe;
+		if(angular.isUndefined(penalty)){
+			penalty=0;
+		}
 		var p3 = {
 			_article: 3,
 			_quantity:this.programmService.directsales[3].menge,
-			_price:this.programmService.directsales[3].preis,
-			_penalty:this.programmService.directsales[3].konventionalstrafe
+			_price:price,
+			_penalty:penalty
 		};
 		
 		directSales.push(p1);

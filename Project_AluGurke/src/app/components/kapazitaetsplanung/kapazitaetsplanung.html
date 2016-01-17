@@ -10,6 +10,23 @@
             </li>
         </ol>
     </div>
+    <div class="col-lg-2">
+                <div class="row">
+                    <h3></h3>
+                </div>
+                <div class="row">
+                    <h3>{{'strategy_headline'|translate}}</h3>
+                </div>
+                <div class="row">
+                    <select style="width:150" ng-change="kpc.onChanged()" ng-model="kpc.bestellungBerechnenService.multiplikatorString" class="form-control">
+                        <option value="sehr sicher">{{'strategy_verySafe'|translate}}</option>
+                        <option value="sicher">{{'strategy_safe'|translate}}</option>
+                        <option value="normal">{{'strategy_normal'|translate}}</option>
+                        <option value="riskant">{{'strategy_risky'|translate}}</option>
+                        <option value="sehr riskant">{{'strategy_veryRisky'|translate}}</option>
+                    </select>
+                </div>
+            </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
@@ -32,7 +49,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="model in kpc.models">
+                            <tr ng-repeat="model in kpc.models" ng-class="{danger: kpc.zeileRot(model)}">
                                 <td>{{model.name.split("_")[0]}}</td>
                                 <td>{{model.arbeitsplatz.arbeitszeit}}</td>
                                 <td>{{model.zeitVerfuegung}}</td>

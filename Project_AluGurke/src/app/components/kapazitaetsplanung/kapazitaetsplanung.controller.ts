@@ -10,6 +10,7 @@ class KapazitaetsplanungController{
     bestellungBerechnenService:BestellungBerechnenService;
     ergebnis:Array<Arbeitsplatz>;
     settingsService:SettingsService;
+  
     constructor(KapazitaetsplanungService,dispositionService,bestellungBerechnenService,settingsService){
         this.models=new Array<KapazitaetModel>();
         this.ergebnis=new Array<Arbeitsplatz>();
@@ -36,9 +37,17 @@ class KapazitaetsplanungController{
         this.kapazitaetsplanungService.reset();
         toastr.success("Die Arbeitszeiten wurden zurückgesetzt");
     }
+    onChanged(){
+        this.bestellungBerechnenService.onSelected();       
+    }
    
 
-
+    zeileRot(model:KapazitaetModel):boolean{
+        if(model.arbeitsplatz.arbeitszeit > model.zeitVerfuegung){
+            return true;
+        }
+        return false;
+    }
 
 
 

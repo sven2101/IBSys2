@@ -1,10 +1,7 @@
-<!--<Style> red border for invalid inputs
-    input.ng-dirty.ng-invalid {
-        border: 1px solid red;
-    }
-</Style>
--->
 <Style>
+    input.ng-dirty.ng-invalid {
+        border: 2px solid red;
+    }
 input {
     width:100%;
     text-align:center;
@@ -112,20 +109,20 @@ input {
                                 <tr>
                                     <td width="10%">P1</td>
                                     <td width="30%"><input type="number" ng-model="pc.programmService.getDirectsalesPosition(1).menge"  ng-pattern="/^([0-9]*)$/"  min="0"></td>
-                                    <td width="30%"><input type="number" ng-model="pc.programmService.getDirectsalesPosition(1).preis"></td>
-                                    <td width="30%"><input type="number" ng-model="pc.programmService.getDirectsalesPosition(1).konventionalstrafe"></td>
+                                    <td width="30%"><input type="number" ng-model="pc.programmService.getDirectsalesPosition(1).preis" step="0.01" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"></td>
+                                    <td width="30%"><input type="number" ng-model="pc.programmService.getDirectsalesPosition(1).konventionalstrafe" step="0.01" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"></td>
                                 </tr>
                                 <tr>
                                     <td width="10%">P2</td>
                                     <td width="30%"><input type="number" ng-model="pc.programmService.getDirectsalesPosition(2).menge" ng-pattern="/^([0-9]*)$/"  min="0"></td>
-                                    <td width="30%"><input type="number" ng-model="pc.programmService.getDirectsalesPosition(2).preis"></td>
-                                    <td width="30%"><input type="number" ng-model="pc.programmService.getDirectsalesPosition(2).konventionalstrafe"></td>
+                                    <td width="30%"><input type="number" ng-model="pc.programmService.getDirectsalesPosition(2).preis" step="0.01" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"></td>
+                                    <td width="30%"><input type="number" ng-model="pc.programmService.getDirectsalesPosition(2).konventionalstrafe" step="0.01" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"></td>
                                 </tr>
                                 <tr>
                                     <td width="10%">P3</td>
                                     <td width="30%"><input type="number" ng-model="pc.programmService.getDirectsalesPosition(3).menge" ng-pattern="/^([0-9]*)$/"  min="0"></td>
-                                    <td width="30%"><input type="number" ng-model="pc.programmService.getDirectsalesPosition(3).preis"></td>
-                                    <td width="30%"><input type="number" ng-model="pc.programmService.getDirectsalesPosition(3).konventionalstrafe"></td>
+                                    <td width="30%"><input type="number" ng-model="pc.programmService.getDirectsalesPosition(3).preis" step="0.01" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"></td>
+                                    <td width="30%"><input type="number" ng-model="pc.programmService.getDirectsalesPosition(3).konventionalstrafe" step="0.01" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"></td>
                                 </tr>
                             </table>
                             </div>

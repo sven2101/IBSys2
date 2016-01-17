@@ -85,15 +85,16 @@ var AuftragService = (function () {
         this.auftraege = [];
         this.auftraegeExport = auftraege;
         for (var i = 0; i < this.auftraegeExport.length; i++) {
-            var y = this.map[this.auftraegeExport[i].erzeugnis_id + this.auftraegeExport[i].arbeitsplatz_id + this.auftraegeExport[i].anzahl];
-            if (y == undefined) {
-                this.auftraegeExport[i].prioritaet = 0;
+            var y = this.map[this.auftraegeExport[i].erzeugnis_id + "_" + this.auftraegeExport[i].arbeitsplatz_id + "_" + this.auftraegeExport[i].anzahl];
+            if (y == undefined && !this.auftraegeExport[i].bekannt) {
+                this.auftraegeExport[i].prioritaet = 1000 + i;
+                this.auftraegeExport[i].bekannt = true;
+                y = 1000 + i;
             }
             else {
                 this.auftraegeExport[i].prioritaet = y;
             }
         }
-        this.auftraegeExport = this.auftraegeExport.sort(function (a, b) { return (a.prioritaet - b.prioritaet); });
         this.auftraege = this.auftraege.concat(this.auftraegeAufMaschine);
         this.auftraege = this.auftraege.concat(this.auftraegeInWarteschlange);
         this.auftraege = this.auftraege.concat(auftraege);
