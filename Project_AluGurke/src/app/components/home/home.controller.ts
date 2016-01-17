@@ -7,24 +7,41 @@
 class HomeController {
     resource;
     allSimulationFiles;
-    selectedSimulationFile;
     hasSimulationFiles;
 
     fastOrders:number;
     normalOrders:number;
 
+    selectedPeriodStr;
+
     constructor(resourceService: ResourceService) {
         this.resource = resourceService.resource;
         this.hasSimulationFiles = true;
         this.saveSimulationFiles();
-        this.getSimulationFileByPeriod(1);
+    }
 
+    onPeriodChange(){
+        var simulationFile = this.getSelectedJSON();
+        this.chartWorkplace(this.getWorkingTimeOnMachine(simulationFile),this.getTimeOnWaitinglist(simulationFile));
+        this.chartIdleTimeCosts(this.getIdleTimeForWorkplace(simulationFile),this.getWageCost(simulationFile),this.getMachineCost(simulationFile))
+    }
+
+    getSelectedJSON(){
+        var period = parseInt(this.selectedPeriodStr, 10)
+        if (typeof this.allSimulationFiles !== "undefined" && this.allSimulationFiles.length >= period) {
+            return JSON.parse(this.allSimulationFiles[period - 1].datei);
+        }
+    }
+
+    getNumber(){
+       return new Array(this.getLatestPeriod());
     }
 
     getStockValue()
     {
-        if (typeof this.allSimulationFiles !== "undefined") {
-            var obj = JSON.parse(this.allSimulationFiles[this.allSimulationFiles.length - 1].datei);
+        var period = parseInt(this.selectedPeriodStr, 10)
+        if (typeof this.allSimulationFiles !== "undefined" && this.allSimulationFiles.length >= period) {
+            var obj = JSON.parse(this.allSimulationFiles[period - 1].datei);
             var number = Number(obj.results.warehousestock.totalstockvalue);
             return number;
         }
@@ -41,8 +58,9 @@ class HomeController {
 
     getStoragecosts()
     {
-        if (typeof this.allSimulationFiles !== "undefined") {
-            var obj = JSON.parse(this.allSimulationFiles[this.allSimulationFiles.length - 1].datei);
+        var period = parseInt(this.selectedPeriodStr, 10)
+        if (typeof this.allSimulationFiles !== "undefined" && this.allSimulationFiles.length >= period) {
+            var obj = JSON.parse(this.allSimulationFiles[period - 1].datei);
             var number = Number(JSON.stringify(obj.results.result.general.storagecosts._current).slice(0,-1).substr(1));
             return number;
         }
@@ -59,8 +77,9 @@ class HomeController {
 
     getProfitValue()
     {
-        if (typeof this.allSimulationFiles !== "undefined") {
-            var obj = JSON.parse(this.allSimulationFiles[this.allSimulationFiles.length - 1].datei);
+        var period = parseInt(this.selectedPeriodStr, 10)
+        if (typeof this.allSimulationFiles !== "undefined" && this.allSimulationFiles.length >= period) {
+            var obj = JSON.parse(this.allSimulationFiles[period - 1].datei);
             var number = Number(JSON.stringify(obj.results.result.summary.profit._current).slice(0, -1).substr(1));
             return number;
         }
@@ -159,10 +178,11 @@ class HomeController {
     }
 
     getNormalOrders(){
-        if (typeof this.allSimulationFiles !== "undefined") {
+        var period = parseInt(this.selectedPeriodStr, 10)
+        if (typeof this.allSimulationFiles !== "undefined" && this.allSimulationFiles.length >= period) {
             if(this.allSimulationFiles.length>0){
                 var ordersCount=0;
-                var obj = JSON.parse(this.allSimulationFiles[this.allSimulationFiles.length - 1].datei);
+                var obj = JSON.parse(this.allSimulationFiles[period - 1].datei);
                 var normalOrders = obj.results.inwardstockmovement.order;
                     if(!angular.isUndefined(normalOrders)) {
                     for (var i = 0; i < normalOrders.length; i++) {
@@ -190,10 +210,11 @@ class HomeController {
     }
 
     getFastOrders(){
-        if (typeof this.allSimulationFiles !== "undefined") {
+        var period = parseInt(this.selectedPeriodStr, 10)
+        if (typeof this.allSimulationFiles !== "undefined" && this.allSimulationFiles.length >= period) {
             if(this.allSimulationFiles.length>0){
                 var ordersCount=0;
-                var obj = JSON.parse(this.allSimulationFiles[this.allSimulationFiles.length - 1].datei);
+                var obj = JSON.parse(this.allSimulationFiles[period - 1].datei);
                 var fastOrders = obj.results.inwardstockmovement.order;
                 if(!angular.isUndefined(fastOrders)) {
                     for (var i = 0; i < fastOrders.length; i++) {
@@ -249,6 +270,7 @@ class HomeController {
                     vm.hasSimulationFiles = false;
                 }
                 else {
+                    vm.selectedPeriodStr = result.simulationFile[result.simulationFile.length - 1].periode.toString();
                     vm.hasSimulationFiles = true;
                     vm.allSimulationFiles = result.simulationFile;
                     vm.chartStockMovement(vm.getStockMovement(result.simulationFile));
@@ -258,6 +280,8 @@ class HomeController {
                     vm.chartSellingSource(vm.getNormalsales(result.simulationFile), vm.getDirectsale(result.simulationFile), vm.getMarketplacesale(result.simulationFile));
                     vm.chartSales(vm.getTotalProfit(result.simulationFile), vm.getCurrentProfit(result.simulationFile), vm.getAverageProfit(result.simulationFile));
                     vm.chartStoreCosts(vm.getTotalCosts(result.simulationFile), vm.getCurrentCosts(result.simulationFile), vm.getAverageCosts(result.simulationFile));
+                    vm.chartWorkplace(vm.getWorkingTimeOnMachine(JSON.parse(result.simulationFile[vm.selectedPeriodStr-1].datei)),vm.getTimeOnWaitinglist(JSON.parse(result.simulationFile[vm.selectedPeriodStr-1].datei)));
+                    vm.chartIdleTimeCosts(vm.getIdleTimeForWorkplace(JSON.parse(result.simulationFile[vm.selectedPeriodStr-1].datei)),vm.getWageCost(JSON.parse(result.simulationFile[vm.selectedPeriodStr-1].datei)),vm.getMachineCost(JSON.parse(result.simulationFile[vm.selectedPeriodStr-1].datei)));
                 }
             }
         });
@@ -268,7 +292,7 @@ class HomeController {
         this.resource.getSimulationFile({periode : periodeNum}, function(result, headers) {
             if (result.erg != '404' && result.erg != '502')
             {
-                vm.selectedSimulationFile=result.simulationFile;
+                return JSON.parse(result.simulationFile[0].datei);
             }
         });
     }
@@ -695,6 +719,109 @@ class HomeController {
         }
         return averageCosts;
     }
+    getWorkingTimeOnMachine(json)
+    {
+        var period = parseInt(this.selectedPeriodStr, 10)
+        var workingTime=[];
+
+        var obj = json;
+        var ordersInWork = obj.results.ordersinwork.workplace;
+        for (var i = 0; i < 15; i++) {
+            workingTime.push(0);
+        }
+        if(!angular.isUndefined(ordersInWork)) {
+            for (var i = 0; i < ordersInWork.length; i++) {
+                var id = Number(JSON.stringify(ordersInWork[i]._id).slice(0, -1).substr(1));
+                var timeneed = Number(JSON.stringify(ordersInWork[i]._timeneed).slice(0, -1).substr(1));
+                workingTime[(id - 1)] = timeneed;
+            }
+        }
+        return workingTime;
+    }
+
+    getTimeOnWaitinglist(json)
+    {
+        var period = parseInt(this.selectedPeriodStr, 10)
+        var waitinglistTime=[];
+
+        var obj = json;
+        var waitinglist = obj.results.waitinglistworkstations.workplace;
+
+        for(var i = 0; i < waitinglist.length;i++){
+            var id = Number(JSON.stringify(waitinglist[i]._id).slice(0,-1).substr(1));
+            var timeneed = Number(JSON.stringify(waitinglist[i]._timeneed).slice(0,-1).substr(1));
+            if(id == 6){
+                waitinglistTime.push(0);
+            }
+            waitinglistTime.push(timeneed);
+        }
+
+        return waitinglistTime;
+    }
+
+
+    getIdleTimeForWorkplace(json)
+    {
+        var period = parseInt(this.selectedPeriodStr, 10)
+        var idleTime=[];
+
+        var obj = json;
+        var idleTimeList = obj.results.idletimecosts.workplace;
+
+        for(var i = 0; i < idleTimeList.length;i++){
+            var id = Number(JSON.stringify(idleTimeList[i]._id).slice(0,-1).substr(1));
+            var idletime = Number(JSON.stringify(idleTimeList[i]._idletime).slice(0,-1).substr(1));
+            if(id == 6){
+                idleTime.push(0);
+            }
+            idleTime.push(idletime);
+        }
+
+        return idleTime;
+    }
+
+    getWageCost(json)
+    {
+        var period = parseInt(this.selectedPeriodStr, 10)
+        var idleCost=[];
+
+        var obj = json;
+        var idleCostList = obj.results.idletimecosts.workplace;
+
+        for(var i = 0; i < idleCostList.length;i++){
+            var id = Number(JSON.stringify(idleCostList[i]._id).slice(0,-1).substr(1));
+            var idletime = Number(JSON.stringify(idleCostList[i]._wageidletimecosts).slice(0,-1).substr(1));
+            if(id == 6){
+                idleCost.push(0);
+            }
+            idleCost.push(idletime);
+        }
+
+        return idleCost;
+    }
+
+    getMachineCost(json)
+    {
+        var period = parseInt(this.selectedPeriodStr, 10)
+        var idleCost=[];
+
+        var obj = json;
+        var idleCostList = obj.results.idletimecosts.workplace;
+
+        for(var i = 0; i < idleCostList.length;i++){
+            var id = Number(JSON.stringify(idleCostList[i]._id).slice(0,-1).substr(1));
+            var idletime = Number(JSON.stringify(idleCostList[i]._machineidletimecosts).slice(0,-1).substr(1));
+            if(id == 6){
+                idleCost.push(0);
+            }
+            idleCost.push(idletime);
+        }
+
+        return idleCost;
+    }
+
+
+
 
     chartStockMovement(data: Array<number>) {
 
@@ -1098,6 +1225,165 @@ class HomeController {
                 name: 'Durchschnittliche Kosten',
                 data: averageCosts
             }]
+        });
+
+    }
+    onWaitinglist
+    chartWorkplace(OnMachine: Array<number>,onWaitinglist: Array<number>){
+        var seriesOptions1: HighchartsLineChartSeriesOptions;
+        seriesOptions1 = {
+            name: 'In der Wartschlange',
+            type: 'column',
+            color:'red',
+            data: onWaitinglist,
+            stack:'male'
+        };
+
+        var seriesOptions2: HighchartsLineChartSeriesOptions;
+        seriesOptions2 = {
+            name: 'Auf der Maschine',
+            type: 'column',
+            color:'#ffcc00',
+            data: OnMachine,
+            stack:'male'
+        };
+        $('#workplace').highcharts({
+
+            chart: {
+                type: 'column'
+            },
+
+            title: {
+                text: ''
+            },
+
+            xAxis: {
+                categories: ['Arbeitsplatz 1', 'Arbeitsplatz 2', 'Arbeitsplatz 3', 'Arbeitsplatz 4', 'Arbeitsplatz 5','Arbeitsplatz 6', 'Arbeitsplatz 7', 'Arbeitsplatz 8', 'Arbeitsplatz 9', 'Arbeitsplatz 10','Arbeitsplatz 11', 'Arbeitsplatz 12', 'Arbeitsplatz 13', 'Arbeitsplatz 14', 'Arbeitsplatz 15']
+            },
+
+            yAxis: {
+                allowDecimals: false,
+                min: 0,
+                title: {
+                    text: ''
+                },
+                labels: {
+                    formatter: function () {
+                        return this.value+" min";
+                    },
+                    overflow: 'justify'
+                }
+            },
+
+            tooltip: {
+                shared:true,
+                valueSuffix:' min'
+            },
+
+            plotOptions: {
+                column: {
+                    stacking: 'normal'
+                }
+            },
+
+            series: [seriesOptions1,seriesOptions2]
+
+        });
+
+
+    }
+
+
+    chartIdleTimeCosts(idleTime: Array<number>,idleWageCost: Array<number>,idleMachineCost: Array<number>){
+
+        var seriesOptions1: HighchartsLineChartSeriesOptions;
+        seriesOptions1 = {
+            name: 'Leerzeit',
+            type: 'column',
+            data: idleTime,
+            color:'red',
+            tooltip: {
+                valueSuffix: ' min'
+            },
+            stack:'female'
+        };
+
+        var seriesOptions2: HighchartsLineChartSeriesOptions;
+        seriesOptions2 = {
+            name: 'Leerzeitlohnkosten',
+            type: 'column',
+            color:'#ffcc00',
+            data: idleWageCost,
+            yAxis: 1,
+            tooltip: {
+                valueSuffix: ' \u20AC'
+            },
+            stack:'male'
+        };
+
+        var seriesOptions3: HighchartsLineChartSeriesOptions;
+        seriesOptions3 = {
+            name: 'Leerzeitmaschinenkosten',
+            type: 'column',
+            color:'#303030',
+            data: idleMachineCost,
+            yAxis: 1,
+            tooltip: {
+                valueSuffix: ' \u20AC'
+            },
+            stack:'male'
+        };
+
+
+        $('#idleTimeCosts').highcharts({
+
+
+            chart: {
+                type: 'column'
+            },
+
+            title: {
+                text: ''
+            },
+
+            xAxis: {
+                categories: ['Arbeitsplatz 1', 'Arbeitsplatz 2', 'Arbeitsplatz 3', 'Arbeitsplatz 4', 'Arbeitsplatz 5','Arbeitsplatz 6', 'Arbeitsplatz 7', 'Arbeitsplatz 8', 'Arbeitsplatz 9', 'Arbeitsplatz 10','Arbeitsplatz 11', 'Arbeitsplatz 12', 'Arbeitsplatz 13', 'Arbeitsplatz 14', 'Arbeitsplatz 15']
+            },
+
+            yAxis: [{
+                min: 0,
+                title: {
+                    text: 'Leerzeit'
+                },
+                labels: {
+                    formatter: function () {
+                        return this.value+" min";
+                    },
+                    overflow: 'justify'
+                }
+            }, {
+                title: {
+                    text: 'Leerkosten'
+                },
+                labels: {
+                    formatter: function () {
+                        return this.value+" \u20AC";
+                    },
+                    overflow: 'justify'
+                },
+                opposite: true
+            }],
+            tooltip: {
+                shared:true
+            },
+
+            plotOptions: {
+                column: {
+                    stacking:"normal"
+                }
+            },
+
+            series: [seriesOptions1,seriesOptions2,seriesOptions3]
         });
 
     }

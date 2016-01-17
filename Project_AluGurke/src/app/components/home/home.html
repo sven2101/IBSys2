@@ -1,17 +1,34 @@
 <meta charset="utf-8">
 <div class="row wrapper border-bottom white-bg page-heading">
-	<div class="col-lg-10">
-		<h2>Dashboard</h2>
-		<ol class="breadcrumb">
-			<li>
-				<a href="/#/">Home</a>
-			</li>
-			<li class="active">
-				<strong>Dashboard</strong>
-			</li>
-		</ol>
+	<div class="col-lg-12">
+		<div class="row">
+			<div class="col-lg-10">
+				<h2>Dashboard</h2>
+				<ol class="breadcrumb">
+					<li>
+						<a href="/#/">Home</a>
+					</li>
+					<li class="active">
+						<strong>Dashboard</strong>
+					</li>
+				</ol>
+			</div>
+			<div class="col-lg-2" ng-if="mctrl.isLoggedIn && hc.hasSimulationFiles">
+				<div class="row">
+					<h3>{{'dashboard_choosePeriod'|translate}}</h3>
+				</div>
+				<div class="row">
+					<select style="width:200px;" ng-change="hc.onPeriodChange()" ng-model="hc.selectedPeriodStr" class="form-control">
+						<option value="{{$index+1}}" ng-repeat="i in hc.getNumber(number) track by $index">{{'dashboard_period'|translate}} {{$index+1}}</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<!-- /row -->
 	</div>
 </div>
+
+
 <div class="wrapper wrapper-content animated fadeInRight">
 	<div class="row" ng-if="!mctrl.isLoggedIn || mctrl.isLoggedIn && !hc.hasSimulationFiles">
 			<div class="col-lg-12">
@@ -168,7 +185,7 @@
 		<div class="col-lg-3">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
-					<span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.getLatestPeriod()}}</span>
+					<span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.selectedPeriodStr}}</span>
 					<h5>{{'dashboard_stockValue'|translate}}</h5>
 				</div>
 				<div class="ibox-content">
@@ -181,7 +198,7 @@
 		<div class="col-lg-3">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
-					<span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.getLatestPeriod()}}</span>
+					<span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.selectedPeriodStr}}</span>
 					<h5>Profit</h5>
 				</div>
 				<div class="ibox-content">
@@ -207,7 +224,7 @@
 		<div class="col-lg-6">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
-					<span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.getLatestPeriod()}}</span>
+					<span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.selectedPeriodStr}}</span>
 					<h5>{{'dashboard_currentOrders'|translate}}</h5>
 				</div>
 				<div class="ibox-content">
@@ -233,7 +250,7 @@
 		<div class="col-lg-3">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
-					<span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.getLatestPeriod()}}</span>
+					<span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.selectedPeriodStr}}</span>
 					<h5>{{'dashboard_storagecosts'|translate}}</h5>
 				</div>
 				<div class="ibox-content">
@@ -258,6 +275,30 @@
 		</div>
 	</div>
 	<div class="row" ng-show="mctrl.isLoggedIn && hc.hasSimulationFiles">
+		<div class="col-lg-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.selectedPeriodStr}}</span>
+					<h2>{{'dashboard_waitinglist'|translate}}</h2>
+				</div>
+				<div class="ibox-content">
+					<div id="workplace">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.selectedPeriodStr}}</span>
+					<h2>{{'dashboard_workplaceIdleTime'|translate}}</h2>
+				</div>
+				<div class="ibox-content">
+					<div id="idleTimeCosts">
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="col-lg-6">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
