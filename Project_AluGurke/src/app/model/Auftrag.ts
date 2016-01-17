@@ -10,6 +10,7 @@ class Auftrag{
     prioritaetString:string;
     prioritaetString2:string;
     zeilennummer:number;
+    bekannt:boolean;
     constructor(erzeugnis_id:number, anzahl:number, periode:number,arbeitsplatz_id:number=0) {
         this.erzeugnis_id = erzeugnis_id;
         this.anzahl = anzahl;
@@ -20,6 +21,7 @@ class Auftrag{
         let prio=["kritisch","hoch","normal"];
         this.prioritaetString=prio[this.prioritaet-1];
         this.zeilennummer=0;
+        this.bekannt=false;
     }
     setPriortaet(prio:string){
         if(prio==="normal"){

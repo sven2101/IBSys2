@@ -140,22 +140,54 @@ class FertigungsAuftraegeService {
                 this.models = this.models.concat(temp);
             }
             for (let i = 0; i < this.models.length; i++) {
-                this.models[i].auftrag.setPriortaet(this.models[i].auftrag.prioritaetString);
-                let liste = this.splitEvaluieren(this.models[i].split, this.models[i].auftrag.anzahl);
-                if (liste == null) {
-                    this.models[i].auftraege = [new Auftrag(this.models[i].auftrag.erzeugnis_id, this.models[i].auftrag.anzahl, this.models[i].auftrag.periode, this.models[i].auftrag.arbeitsplatz_id)];
+
+                if (this.models[i].split2 == this.models[i].split && Number(this.models[i].split2) == this.models[i].oldValue) {
+                    this.models[i].auftraege[0].anzahl == this.models[i].auftrag.anzahl;
                     continue;
                 }
 
+                let liste = this.splitEvaluieren(this.models[i].split, this.models[i].auftrag.anzahl);
+                if (liste == null) {
+                    if (this.models[i].auftraege.length > 1 && this.models[i].auftrag.anzahl != this.models[i].oldValue) {
+                        let summe = 0;
+                        for (let j = 0; j < this.models[i].auftraege.length; j++) {
+                            summe += this.models[i].auftraege[j].anzahl;
+                        }
+                        if (summe - this.models[i].auftrag.anzahl < 0) {
+                            this.models[i].auftraege[this.models[i].auftraege.length - 1].anzahl += this.models[i].auftrag.anzahl - summe;
+
+                            let split = this.models[i].split.split(",");
+                            split[split.length - 1] = this.models[i].auftraege[this.models[i].auftraege.length - 1].anzahl.toString();
+                            this.models[i].split = split.join(",");
+
+                        } else {
+                            if (this.models[i].auftraege[this.models[i].auftraege.length - 1].anzahl - (summe - this.models[i].auftrag.anzahl) > 0) {
+                                this.models[i].auftraege[this.models[i].auftraege.length - 1].anzahl -= (summe - this.models[i].auftrag.anzahl);
+
+                                let split = this.models[i].split.split(",");
+                                split[split.length - 1] = this.models[i].auftraege[this.models[i].auftraege.length - 1].anzahl.toString();
+                                this.models[i].split = split.join(",");
+                            }
+                        }
+
+                    } else {
+                        this.models[i].auftraege = [new Auftrag(this.models[i].auftrag.erzeugnis_id, this.models[i].auftrag.anzahl, this.models[i].auftrag.periode, this.models[i].auftrag.arbeitsplatz_id)];
+                    }
+                    continue;
+                }
+                if (this.models[i].split == this.models[i].split2) {
+                    continue;
+                }
                 this.models[i].auftraege = [];
                 for (let j = 0; j < liste.length; j++) {
                     let x = new Auftrag(this.models[i].auftrag.erzeugnis_id, liste[j], this.models[i].auftrag.periode, this.models[i].auftrag.arbeitsplatz_id);
                     x.prioritaet = this.models[i].auftrag.prioritaet;
                     x.prioritaetString = this.models[i].auftrag.prioritaetString;
                     this.models[i].auftraege.push(x);
-                    this.models[i].split2 = this.models[i].split;
-                }
 
+                }
+                this.models[i].split2 = this.models[i].split;
+                this.models[i].oldValue = this.models[i].auftrag.anzahl;
             }
         }
         this.auftraegeSetzten();
@@ -217,8 +249,7 @@ class FertigungsAuftraegeService {
             }
         }
         if (summe < anzahl) {
-            let x: Array<number> = new Array<number>();
-            x.push(anzahl);
+            //ergebnis.push(anzahl-summe);          
             return null;
         }
         return ergebnis;//.sort(function(a,b){return a-b;});
