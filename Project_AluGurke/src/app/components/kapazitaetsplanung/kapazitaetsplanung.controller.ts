@@ -38,7 +38,7 @@ class KapazitaetsplanungController{
         toastr.success("Die Arbeitszeiten wurden zurückgesetzt");
     }
     onChanged(){
-        this.bestellungBerechnenService.onSelected();       
+        this.kapazitaetsplanungService.onSelected();       
     }
    
 

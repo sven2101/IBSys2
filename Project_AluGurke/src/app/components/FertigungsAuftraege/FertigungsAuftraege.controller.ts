@@ -21,11 +21,12 @@ class FertigungsAuftraegeController {
         this.dispositionService=dispositionService;
         this.kapazitaetsplanungService=kapazitaetsplanungService;  
      
-        this.aendern();
+        
         this.models = this.fertigungsAuftraegeService.models;
         this.models.sort(function(a: FertigungsAuftraegeModel, b: FertigungsAuftraegeModel) { return (a.auftrag.arbeitsplatz_id - b.auftrag.arbeitsplatz_id) });
         this.tab = 1;
         this.auftragService.auftraegeExport =  this.auftragService.auftraegeExport.sort(function(a:Auftrag,b:Auftrag){return (a.prioritaet-b.prioritaet)});  
+        this.aendern();  
         this.onDrag();
     }
     oeffnen(id: number) {

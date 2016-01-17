@@ -142,7 +142,9 @@ class FertigungsAuftraegeService {
             for (let i = 0; i < this.models.length; i++) {
 
                 if (this.models[i].split2 == this.models[i].split && Number(this.models[i].split2) == this.models[i].oldValue) {
-                    this.models[i].auftraege[0].anzahl == this.models[i].auftrag.anzahl;
+      
+                    this.models[i].oldValue = this.models[i].auftrag.anzahl;
+                  
                     continue;
                 }
 
@@ -161,8 +163,8 @@ class FertigungsAuftraegeService {
                             this.models[i].split = split.join(",");
 
                         } else {
-                            if (this.models[i].auftraege[this.models[i].auftraege.length - 1].anzahl - (summe - this.models[i].auftrag.anzahl) > 0) {
-                                this.models[i].auftraege[this.models[i].auftraege.length - 1].anzahl -= (summe - this.models[i].auftrag.anzahl);
+                            if (summe - this.models[i].auftraege[this.models[i].auftraege.length - 1].anzahl<this.models[i].auftrag.anzahl) {                              
+                                this.models[i].auftraege[this.models[i].auftraege.length - 1].anzahl = this.models[i].auftrag.anzahl- (summe- this.models[i].auftraege[this.models[i].auftraege.length - 1].anzahl);
 
                                 let split = this.models[i].split.split(",");
                                 split[split.length - 1] = this.models[i].auftraege[this.models[i].auftraege.length - 1].anzahl.toString();
@@ -173,9 +175,13 @@ class FertigungsAuftraegeService {
                     } else {
                         this.models[i].auftraege = [new Auftrag(this.models[i].auftrag.erzeugnis_id, this.models[i].auftrag.anzahl, this.models[i].auftrag.periode, this.models[i].auftrag.arbeitsplatz_id)];
                     }
+                    this.models[i].split2 = this.models[i].split;
+                    this.models[i].oldValue = this.models[i].auftrag.anzahl;
                     continue;
                 }
                 if (this.models[i].split == this.models[i].split2) {
+                    this.models[i].split2 = this.models[i].split;
+                    this.models[i].oldValue = this.models[i].auftrag.anzahl;
                     continue;
                 }
                 this.models[i].auftraege = [];

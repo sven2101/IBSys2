@@ -12,7 +12,9 @@ class BestellungBerechnenService {
     //bestellverwaltungUtilService: BestellverwaltungUtilService;
     $rootScope;
     multiplikator: number;
+
     multiplikatorString: String;
+  
     aktuellePeriode;
 
     constructor(BestellService: BestellService, NewTeileService: NewTeileService, $rootScope/*, bestellverwaltungUtilService*/) {
@@ -22,7 +24,9 @@ class BestellungBerechnenService {
         this.$rootScope = $rootScope;
         this.aktuellePeriode = 1;
         this.multiplikator = 1;
+
         this.multiplikatorString = "sehr sicher";
+     
         this.$rootScope.$on('fileController.neueDatei', (event, dateiInhalt) => {
             this.onNeueDatei(dateiInhalt);
         });
@@ -89,8 +93,9 @@ class BestellungBerechnenService {
             case "sehr sicher": this.multiplikator = 1;
                 break;
         }
+       
     }
-
+    
     timeLineGenerieren(kTeilId: number, aktuellePeriode: number, multiplikator: number, verbrauch: Array<number>, timeinterval: number): Array<number> {
         let kTeil = this.newTeileService.getKaufTeil(kTeilId);
         let zugangBestellungen = this.zugangsBestellungenSuchen(kTeilId);

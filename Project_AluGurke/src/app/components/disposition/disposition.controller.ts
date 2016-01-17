@@ -46,7 +46,7 @@ class DispositionController{
     aendern(){
         this.dispositionService.aendern();
         this.kapazitaetsplanungService.aendern();
-        this.fertigungsAuftraegeService.onDispoAendern();
+        //this.fertigungsAuftraegeService.onDispoAendern();
     }
     tabOnClick(contentToShow: string): void {
 		for (var property in this.showTab) {
