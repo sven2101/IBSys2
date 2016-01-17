@@ -170,6 +170,8 @@ angular.module('app').config(function($translateProvider) {
         dashboard_stockCostMovement:'Lagerkostenentwicklung',
         dashboard_profitMovement:'Profitentwicklung',
         dashboard_idleTime:'Leerzeiten und Kosten',
+        dashboard_waitinglist:'Warteschlangen pro Arbeitsplatz',
+        dashboard_workplaceIdleTime:'Leerzeiten und Kosten pro Arbeitsplatz',
         dashboard_efficiency:'Auslastung, Liefertreue und Normalkapazit\u00E4t',
         dashboard_sellingWish:'Vertriebswunsch und Verkaufte Einheiten',
         dashboard_sales:'Einnahmen aus Verk\u00E4ufe',
@@ -205,6 +207,7 @@ angular.module('app').config(function($translateProvider) {
         dashboard_register:'Registriere dich noch heute auf SCManager.de',
         dashboard_registerBtn:'Registrieren',
         dashboard_loginBtn:'Anmelden',
+        dashboard_choosePeriod:'W\u00e4hle eine Periode:',
 
         //login
         login_welcome:'Willkommen bei SCManager.de',
@@ -395,6 +398,8 @@ angular.module('app').config(function($translateProvider) {
         dashboard_stockCostMovement:'Stock cost movement',
         dashboard_profitMovement:'Profit movement',
         dashboard_idleTime:'Idle time and costs',
+        dashboard_waitinglist:'Waitinglist per workplace',
+        dashboard_workplaceIdleTime:'Idle times and costs per workplace',
         dashboard_efficiency:'Capacity, delivery reliability and normal capacity',
         dashboard_sellingWish:'Sales wish and sold units',
         dashboard_sales:'Income from sales',
@@ -430,6 +435,7 @@ angular.module('app').config(function($translateProvider) {
         dashboard_register:'Register today on SCManager.de!',
         dashboard_registerBtn:'Register',
         dashboard_loginBtn:'Login',
+        dashboard_choosePeriod:'Choose a period:',
 
         //login
         login_welcome:'Welcome to SCManager.de',
