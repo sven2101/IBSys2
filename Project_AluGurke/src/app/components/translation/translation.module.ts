@@ -208,6 +208,7 @@ angular.module('app').config(function($translateProvider) {
         dashboard_registerBtn:'Registrieren',
         dashboard_loginBtn:'Anmelden',
         dashboard_choosePeriod:'W\u00e4hle eine Periode:',
+        dashboard_statistics:'Gesamtstatistiken',
 
         //login
         login_welcome:'Willkommen bei SCManager.de',
@@ -436,6 +437,7 @@ angular.module('app').config(function($translateProvider) {
         dashboard_registerBtn:'Register',
         dashboard_loginBtn:'Login',
         dashboard_choosePeriod:'Choose a period:',
+        dashboard_statistics:'Entire statistics',
 
         //login
         login_welcome:'Welcome to SCManager.de',

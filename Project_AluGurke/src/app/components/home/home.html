@@ -1,382 +1,390 @@
 <meta charset="utf-8">
 <div class="row wrapper border-bottom white-bg page-heading">
-	<div class="col-lg-12">
-		<div class="row">
-			<div class="col-lg-10">
-				<h2>Dashboard</h2>
-				<ol class="breadcrumb">
-					<li>
-						<a href="/#/">Home</a>
-					</li>
-					<li class="active">
-						<strong>Dashboard</strong>
-					</li>
-				</ol>
-			</div>
-			<div class="col-lg-2" ng-if="mctrl.isLoggedIn && hc.hasSimulationFiles">
-				<div class="row">
-					<h3>{{'dashboard_choosePeriod'|translate}}</h3>
-				</div>
-				<div class="row">
-					<select style="width:200px;" ng-change="hc.onPeriodChange()" ng-model="hc.selectedPeriodStr" class="form-control">
-						<option value="{{$index+1}}" ng-repeat="i in hc.getNumber(number) track by $index">{{'dashboard_period'|translate}} {{$index+1}}</option>
-					</select>
-				</div>
-			</div>
-		</div>
-		<!-- /row -->
-	</div>
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-10">
+                <h2>Dashboard</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="/#/">Home</a>
+                    </li>
+                    <li class="active">
+                        <strong>Dashboard</strong>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-2" ng-if="mctrl.isLoggedIn && hc.hasSimulationFiles">
+                <div class="row">
+                    <h3>{{'dashboard_choosePeriod'|translate}}</h3>
+                </div>
+                <div class="row">
+                    <select style="width:200px;" ng-change="hc.onPeriodChange()" ng-model="hc.selectedPeriodStr" class="form-control">
+                        <option value="{{$index+1}}" ng-repeat="i in hc.getNumber(number) track by $index">{{'dashboard_period'|translate}} {{$index+1}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
 </div>
 
 
 <div class="wrapper wrapper-content animated fadeInRight">
-	<div class="row" ng-if="!mctrl.isLoggedIn || mctrl.isLoggedIn && !hc.hasSimulationFiles">
-			<div class="col-lg-12">
-				<div class="ibox float-e-margins">
-					<div class="ibox-content">
-						<div class="text-center" ng-if="!mctrl.isLoggedIn">
-							<h1>{{'dashboard_welcome'|translate}}</h1>
-							<img alt="image" class="img-block" src="assets/img/logo.png" />
-						</div>
-						<div class="text-center" ng-if="mctrl.isLoggedIn && !hc.hasSimulationFile">
-							<h1>{{'dashboard_tyRegister'|translate}}</h1>
-							<img alt="image" class="img-block" src="assets/img/logo.png" />
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-8">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<h5>{{'dashboard_firstSteps'|translate}}</h5>
-					</div>
-					<div class="ibox-content" id="ibox-content">
+    <div class="row" ng-if="!mctrl.isLoggedIn || mctrl.isLoggedIn && !hc.hasSimulationFiles">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="text-center" ng-if="!mctrl.isLoggedIn">
+                        <h1>{{'dashboard_welcome'|translate}}</h1>
+                        <img alt="image" class="img-block" src="assets/img/logo.png" />
+                    </div>
+                    <div class="text-center" ng-if="mctrl.isLoggedIn && !hc.hasSimulationFile">
+                        <h1>{{'dashboard_tyRegister'|translate}}</h1>
+                        <img alt="image" class="img-block" src="assets/img/logo.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>{{'dashboard_firstSteps'|translate}}</h5>
+                </div>
+                <div class="ibox-content" id="ibox-content">
 
-						<div id="vertical-timeline" class="vertical-container dark-timeline center-orientation">
-							<div class="vertical-timeline-block">
-								<div class="vertical-timeline-icon navy-bg">
-									<i class="fa fa-file-text"></i>
-								</div>
+                    <div id="vertical-timeline" class="vertical-container dark-timeline center-orientation">
+                        <div class="vertical-timeline-block">
+                            <div class="vertical-timeline-icon navy-bg">
+                                <i class="fa fa-file-text"></i>
+                            </div>
 
-								<div class="vertical-timeline-content">
-									<h2>{{'dashboard_fileUpload'|translate}}</h2>
-									<p>{{'dashboard_fileText'|translate}}
-									</p>
-									<a href="/#/file" class="btn btn-sm btn-primary">{{'dashboard_goToFileMgmt'|translate}}</a>
-                                    <span class="vertical-date">
+                            <div class="vertical-timeline-content">
+                                <h2>{{'dashboard_fileUpload'|translate}}</h2>
+                                <p>{{'dashboard_fileText'|translate}}
+                                </p>
+                                <a href="/#/file" class="btn btn-sm btn-primary">{{'dashboard_goToFileMgmt'|translate}}</a>
+                                <span class="vertical-date">
                                         1.{{'dashboard_step'|translate}}
                                     </span>
-								</div>
-							</div>
+                            </div>
+                        </div>
 
-							<div class="vertical-timeline-block">
-								<div class="vertical-timeline-icon blue-bg">
-									<i class="fa fa-calculator"></i>
-								</div>
+                        <div class="vertical-timeline-block">
+                            <div class="vertical-timeline-icon blue-bg">
+                                <i class="fa fa-calculator"></i>
+                            </div>
 
-								<div class="vertical-timeline-content">
-									<h2>{{'dashboard_productionplan'|translate}}</h2>
-									<p> {{'dashboard_productionplanText'|translate}}</p>
-									<a href="/#/produktionsprogramm" class="btn btn-sm btn-success">{{'dashboard_goToProductionplan'|translate}}</a>
-                                    <span class="vertical-date">
+                            <div class="vertical-timeline-content">
+                                <h2>{{'dashboard_productionplan'|translate}}</h2>
+                                <p> {{'dashboard_productionplanText'|translate}}</p>
+                                <a href="/#/produktionsprogramm" class="btn btn-sm btn-success">{{'dashboard_goToProductionplan'|translate}}</a>
+                                <span class="vertical-date">
                                         2.{{'dashboard_step'|translate}}
                                     </span>
-								</div>
-							</div>
+                            </div>
+                        </div>
 
-							<div class="vertical-timeline-block">
-								<div class="vertical-timeline-icon lazur-bg">
-									<i class="fa fa-bicycle"></i>
-								</div>
+                        <div class="vertical-timeline-block">
+                            <div class="vertical-timeline-icon lazur-bg">
+                                <i class="fa fa-bicycle"></i>
+                            </div>
 
-								<div class="vertical-timeline-content">
-									<h2>{{'dashboard_disposition'|translate}}</h2>
-									<p>{{'dashboard_dispositionText'|translate}}</p>
-									<a href="/#/disposition" class="btn btn-sm btn-info">{{'dashboard_goToDisposition'|translate}}</a>
-									<span class="vertical-date">3.{{'dashboard_step'|translate}}</span>
-								</div>
-							</div>
+                            <div class="vertical-timeline-content">
+                                <h2>{{'dashboard_disposition'|translate}}</h2>
+                                <p>{{'dashboard_dispositionText'|translate}}</p>
+                                <a href="/#/disposition" class="btn btn-sm btn-info">{{'dashboard_goToDisposition'|translate}}</a>
+                                <span class="vertical-date">3.{{'dashboard_step'|translate}}</span>
+                            </div>
+                        </div>
 
-							<div class="vertical-timeline-block">
-								<div class="vertical-timeline-icon yellow-bg">
-									<i class="fa fa-shopping-cart"></i>
-								</div>
+                        <div class="vertical-timeline-block">
+                            <div class="vertical-timeline-icon yellow-bg">
+                                <i class="fa fa-shopping-cart"></i>
+                            </div>
 
-								<div class="vertical-timeline-content">
-									<h2>{{'dashboard_orderMgmt'|translate}}</h2>
-									<p>{{'dashboard_orderMgmtText'|translate}}</p>
-									<a href="/#/bestellverwaltung/kaufteildisposition" class="btn btn-sm btn-warning">{{'dashboard_goToOrderMgmt'|translate}}</a>
-									<span class="vertical-date">4.{{'dashboard_step'|translate}}</span>
-								</div>
-							</div>
+                            <div class="vertical-timeline-content">
+                                <h2>{{'dashboard_orderMgmt'|translate}}</h2>
+                                <p>{{'dashboard_orderMgmtText'|translate}}</p>
+                                <a href="/#/bestellverwaltung/kaufteildisposition" class="btn btn-sm btn-warning">{{'dashboard_goToOrderMgmt'|translate}}</a>
+                                <span class="vertical-date">4.{{'dashboard_step'|translate}}</span>
+                            </div>
+                        </div>
 
-							<div class="vertical-timeline-block">
-								<div class="vertical-timeline-icon lazur-bg">
-									<i class="fa fa-tasks"></i>
-								</div>
+                        <div class="vertical-timeline-block">
+                            <div class="vertical-timeline-icon lazur-bg">
+                                <i class="fa fa-tasks"></i>
+                            </div>
 
-								<div class="vertical-timeline-content">
-									<h2>{{'dashboard_capacity'|translate}}</h2>
-									<p>{{'dashboard_capacityText'|translate}}</p>
-									<a href="/#/kapazitaetsplanung" class="btn btn-sm btn-info">{{'dashboard_goToCapacity'|translate}}</a>
-									<span class="vertical-date">5.{{'dashboard_step'|translate}}</span>
-								</div>
-							</div>
+                            <div class="vertical-timeline-content">
+                                <h2>{{'dashboard_capacity'|translate}}</h2>
+                                <p>{{'dashboard_capacityText'|translate}}</p>
+                                <a href="/#/kapazitaetsplanung" class="btn btn-sm btn-info">{{'dashboard_goToCapacity'|translate}}</a>
+                                <span class="vertical-date">5.{{'dashboard_step'|translate}}</span>
+                            </div>
+                        </div>
 
-							<div class="vertical-timeline-block">
-								<div class="vertical-timeline-icon navy-bg">
-									<i class="fa fa-file-text"></i>
-								</div>
+                        <div class="vertical-timeline-block">
+                            <div class="vertical-timeline-icon navy-bg">
+                                <i class="fa fa-file-text"></i>
+                            </div>
 
-								<div class="vertical-timeline-content">
-									<h2>{{'dashboard_createFile'|translate}}</h2>
-									<p>{{'dashboard_createFileText'|translate}}</p>
-									<a href="/#/file" class="btn btn-sm btn-primary">{{'dashboard_goToFileMgmt'|translate}}</a>
-									<span class="vertical-date">6.{{'dashboard_step'|translate}}</span>
-								</div>
-							</div>
-						</div>
+                            <div class="vertical-timeline-content">
+                                <h2>{{'dashboard_createFile'|translate}}</h2>
+                                <p>{{'dashboard_createFileText'|translate}}</p>
+                                <a href="/#/file" class="btn btn-sm btn-primary">{{'dashboard_goToFileMgmt'|translate}}</a>
+                                <span class="vertical-date">6.{{'dashboard_step'|translate}}</span>
+                            </div>
+                        </div>
+                    </div>
 
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4" ng-if="!mctrl.isLoggedIn">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<h5>{{'dashboard_register'|translate}}</h5>
-					</div>
-					<div class="ibox-content">
-						<div class="text-center">
-							<a data-toggle="modal" class="btn btn-primary" href="/#/register">>> {{'dashboard_registerBtn'|translate}}</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4" ng-if="!mctrl.isLoggedIn">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<h5>{{'dashboard_login'|translate}}</h5>
-					</div>
-					<div class="ibox-content">
-						<div class="text-center">
-							<a data-toggle="modal" class="btn btn-primary" href="/#/login">>> {{'dashboard_loginBtn'|translate}}</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4" ng-if="mctrl.isLoggedIn && !hc.hasSimulationFiles">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<h5>{{'dashboard_loadFile'|translate}}</h5>
-					</div>
-					<div class="ibox-content">
-						<div class="text-center">
-							<th>{{'dashboard_loadFileText'|translate}}</th>
-						</div>
-						<br>
-						<div class="text-center">
-							<a data-toggle="modal" class="btn btn-primary" href="/#/file">{{'dashboard_loadFileButton'|translate}}</a>
-						</div>
-					</div>
-				</div>
-			</div>
-	</div>
-	<div class="row" ng-if="mctrl.isLoggedIn && hc.hasSimulationFiles">
-		<div class="col-lg-3">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.selectedPeriodStr}}</span>
-					<h5>{{'dashboard_stockValue'|translate}}</h5>
-				</div>
-				<div class="ibox-content">
-					<h1 class="no-margins">{{hc.getStockValue() | currency:'\u20AC'}}</h1>
-					<div  ng-if="hc.getPercentageStockChange()>=0" class="stat-percent font-bold text-navy">{{hc.getPercentageStockChange() | number:2}}%<i class="fa fa-level-up"></i></div>
-					<div  ng-if="hc.getPercentageStockChange()<0" class="stat-percent font-bold text-danger">{{hc.getPercentageStockChange() | number:2}}%<i class="fa fa-level-down"></i></div>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-3">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.selectedPeriodStr}}</span>
-					<h5>Profit</h5>
-				</div>
-				<div class="ibox-content">
-					<h1 class="no-margins">{{hc.getProfitValue() | currency:'\u20AC'}}</h1>
-					<div  ng-if="hc.getPercentageProfitChange()>=0" class="stat-percent font-bold text-navy">{{hc.getPercentageProfitChange() | number:2}}%<i class="fa fa-level-up"></i></div>
-					<div  ng-if="hc.getPercentageProfitChange()<0" class="stat-percent font-bold text-danger">{{hc.getPercentageProfitChange() | number:2}}%<i class="fa fa-level-down"></i></div>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-6">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<span class="label label-primary pull-right">{{'dashboard_periodsPerAnno'|translate}}</span>
-					<h5>{{'dashboard_storageFee'|translate}}</h5>
-				</div>
-				<div class="ibox-content">
-					<h1 class="no-margins">{{hc.getStorageFee()| number:2}}% p.a.</h1>
-					<div  ng-if="hc.getPercentageStorageFeeChange()>=0" class="stat-percent font-bold text-navy">{{hc.getPercentageStorageFeeChange() | number:2}}%<i class="fa fa-level-up"></i></div>
-					<div  ng-if="hc.getPercentageStorageFeeChange()<0" class="stat-percent font-bold text-danger">{{hc.getPercentageStorageFeeChange() | number:2}}%<i class="fa fa-level-down"></i></div>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-6">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.selectedPeriodStr}}</span>
-					<h5>{{'dashboard_currentOrders'|translate}}</h5>
-				</div>
-				<div class="ibox-content">
-					<ul class="stat-list m-t-lg">
-						<li>
-							<h2 class="no-margins">{{hc.getNormalOrders()}}</h2>
-							<small>{{'dashboard_standardPurchaseOrder'|translate}}</small>
-							<div class="progress progress-mini">
-								<div ng-style="{'width':hc.getNormalOrdersPercentage()+'%'}" class="progress-bar"></div>
-							</div>
-						</li>
-						<li>
-							<h2 class="no-margins ">{{hc.getFastOrders()}}</h2>
-							<small>{{'dashboard_rushOrder'|translate}}</small>
-							<div class="progress progress-mini">
-								<div ng-style="{'width':hc.getFastOrdersPercentage()+'%'}" class="progress-bar"></div>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-3">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.selectedPeriodStr}}</span>
-					<h5>{{'dashboard_storagecosts'|translate}}</h5>
-				</div>
-				<div class="ibox-content">
-					<h1 class="no-margins">{{hc.getStoragecosts() | currency:'\u20AC'}}</h1>
-					<div  ng-if="hc.getPercentageStoragecostsChange()>=0" class="stat-percent font-bold text-navy">{{hc.getPercentageStoragecostsChange() | number:2}}%<i class="fa fa-level-up"></i></div>
-					<div  ng-if="hc.getPercentageStoragecostsChange()<0" class="stat-percent font-bold text-danger">{{hc.getPercentageStoragecostsChange() | number:2}}%<i class="fa fa-level-down"></i></div>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-3">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<span class="label label-primary pull-right">{{'dashboard_allPeriods'|translate}}</span>
-					<h5>&#216 {{'dashboard_averageStorevalue'|translate}}</h5>
-				</div>
-				<div class="ibox-content">
-					<h1 class="no-margins">{{hc.getAverageStorevalue() | currency:'\u20AC'}}</h1>
-					<div  ng-if="hc.getPercentageAverageStockvalueChange()>=0" class="stat-percent font-bold text-navy">{{hc.getPercentageAverageStockvalueChange() | number:2}}%<i class="fa fa-level-up"></i></div>
-					<div  ng-if="hc.getPercentageAverageStockvalueChange()<0" class="stat-percent font-bold text-danger">{{hc.getPercentageAverageStockvalueChange() | number:2}}%<i class="fa fa-level-down"></i></div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row" ng-show="mctrl.isLoggedIn && hc.hasSimulationFiles">
-		<div class="col-lg-12">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.selectedPeriodStr}}</span>
-					<h2>{{'dashboard_waitinglist'|translate}}</h2>
-				</div>
-				<div class="ibox-content">
-					<div id="workplace">
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-12">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.selectedPeriodStr}}</span>
-					<h2>{{'dashboard_workplaceIdleTime'|translate}}</h2>
-				</div>
-				<div class="ibox-content">
-					<div id="idleTimeCosts">
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-6">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<h2>{{'dashboard_stockMovement'|translate}}</h2>
-				</div>
-				<div class="ibox-content">
-					<div id="stockMovement">
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-6">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<h2>{{'dashboard_stockCostMovement'|translate}}</h2>
-				</div>
-				<div class="ibox-content">
-					<div id="storeCosts">
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-12">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<h2>{{'dashboard_profitMovement'|translate}}</h2>
-				</div>
-				<div class="ibox-content">
-					<div id="sales">
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-6">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<h2>{{'dashboard_idleTime'|translate}}</h2>
-				</div>
-				<div class="ibox-content">
-					<div id="idle">
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-6">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<h2>{{'dashboard_efficiency'|translate}}</h2>
-				</div>
-				<div class="ibox-content">
-					<div id="effiency">
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-6">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<h2>{{'dashboard_sellingWish'|translate}}</h2>
-				</div>
-				<div class="ibox-content">
-					<div id="sellingUnit">
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-6">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<h2>{{'dashboard_sales'|translate}}</h2>
-				</div>
-				<div class="ibox-content">
-					<div id="sellingSource">
-					</div>
-				</div>
-			</div>
-		</div>
-</div>
-<!--row-->
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4" ng-if="!mctrl.isLoggedIn">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>{{'dashboard_register'|translate}}</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="text-center">
+                        <a data-toggle="modal" class="btn btn-primary" href="/#/register">>> {{'dashboard_registerBtn'|translate}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4" ng-if="!mctrl.isLoggedIn">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>{{'dashboard_login'|translate}}</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="text-center">
+                        <a data-toggle="modal" class="btn btn-primary" href="/#/login">>> {{'dashboard_loginBtn'|translate}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4" ng-if="mctrl.isLoggedIn && !hc.hasSimulationFiles">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>{{'dashboard_loadFile'|translate}}</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="text-center">
+                        <th>{{'dashboard_loadFileText'|translate}}</th>
+                    </div>
+                    <br>
+                    <div class="text-center">
+                        <a data-toggle="modal" class="btn btn-primary" href="/#/file">{{'dashboard_loadFileButton'|translate}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="mctrl.isLoggedIn && hc.hasSimulationFiles">        
+        <div class="col-lg-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.selectedPeriodStr}}</span>
+                    <h5>{{'dashboard_stockValue'|translate}}</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">{{hc.getStockValue() | currency:'\u20AC'}}</h1>
+                    <div ng-if="hc.getPercentageStockChange()>=0" class="stat-percent font-bold text-navy">{{hc.getPercentageStockChange() | number:2}}%<i class="fa fa-level-up"></i></div>
+                    <div ng-if="hc.getPercentageStockChange()<0" class="stat-percent font-bold text-danger">{{hc.getPercentageStockChange() | number:2}}%<i class="fa fa-level-down"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.selectedPeriodStr}}</span>
+                    <h5>Profit</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">{{hc.getProfitValue() | currency:'\u20AC'}}</h1>
+                    <div ng-if="hc.getPercentageProfitChange()>=0" class="stat-percent font-bold text-navy">{{hc.getPercentageProfitChange() | number:2}}%<i class="fa fa-level-up"></i></div>
+                    <div ng-if="hc.getPercentageProfitChange()<0" class="stat-percent font-bold text-danger">{{hc.getPercentageProfitChange() | number:2}}%<i class="fa fa-level-down"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">{{'dashboard_periodsPerAnno'|translate}}</span>
+                    <h5>{{'dashboard_storageFee'|translate}}</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">{{hc.getStorageFee()| number:2}}% p.a.</h1>
+                    <div ng-if="hc.getPercentageStorageFeeChange()>=0" class="stat-percent font-bold text-navy">{{hc.getPercentageStorageFeeChange() | number:2}}%<i class="fa fa-level-up"></i></div>
+                    <div ng-if="hc.getPercentageStorageFeeChange()<0" class="stat-percent font-bold text-danger">{{hc.getPercentageStorageFeeChange() | number:2}}%<i class="fa fa-level-down"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.selectedPeriodStr}}</span>
+                    <h5>{{'dashboard_currentOrders'|translate}}</h5>
+                </div>
+                <div class="ibox-content">
+                    <ul class="stat-list m-t-lg">
+                        <li>
+                            <h2 class="no-margins">{{hc.getNormalOrders()}}</h2>
+                            <small>{{'dashboard_standardPurchaseOrder'|translate}}</small>
+                            <div class="progress progress-mini">
+                                <div ng-style="{'width':hc.getNormalOrdersPercentage()+'%'}" class="progress-bar"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <h2 class="no-margins ">{{hc.getFastOrders()}}</h2>
+                            <small>{{'dashboard_rushOrder'|translate}}</small>
+                            <div class="progress progress-mini">
+                                <div ng-style="{'width':hc.getFastOrdersPercentage()+'%'}" class="progress-bar"></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.selectedPeriodStr}}</span>
+                    <h5>{{'dashboard_storagecosts'|translate}}</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">{{hc.getStoragecosts() | currency:'\u20AC'}}</h1>
+                    <div ng-if="hc.getPercentageStoragecostsChange()>=0" class="stat-percent font-bold text-navy">{{hc.getPercentageStoragecostsChange() | number:2}}%<i class="fa fa-level-up"></i></div>
+                    <div ng-if="hc.getPercentageStoragecostsChange()<0" class="stat-percent font-bold text-danger">{{hc.getPercentageStoragecostsChange() | number:2}}%<i class="fa fa-level-down"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">{{'dashboard_allPeriods'|translate}}</span>
+                    <h5>&#216 {{'dashboard_averageStorevalue'|translate}}</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">{{hc.getAverageStorevalue() | currency:'\u20AC'}}</h1>
+                    <div ng-if="hc.getPercentageAverageStockvalueChange()>=0" class="stat-percent font-bold text-navy">{{hc.getPercentageAverageStockvalueChange() | number:2}}%<i class="fa fa-level-up"></i></div>
+                    <div ng-if="hc.getPercentageAverageStockvalueChange()<0" class="stat-percent font-bold text-danger">{{hc.getPercentageAverageStockvalueChange() | number:2}}%<i class="fa fa-level-down"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-show="mctrl.isLoggedIn && hc.hasSimulationFiles">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.selectedPeriodStr}}</span>
+                    <h2>{{'dashboard_waitinglist'|translate}}</h2>
+                </div>
+                <div class="ibox-content">
+                    <div id="workplace">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">{{'dashboard_period'|translate}} {{hc.selectedPeriodStr}}</span>
+                    <h2>{{'dashboard_workplaceIdleTime'|translate}}</h2>
+                </div>
+                <div class="ibox-content">
+                    <div id="idleTimeCosts">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="text-center">
+                        <h1>{{'dashboard_statistics'|translate}}</h1>                        
+                    </div>                    
+                </div>
+            </div>
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h2>{{'dashboard_stockMovement'|translate}}</h2>
+                </div>
+                <div class="ibox-content">
+                    <div id="stockMovement">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h2>{{'dashboard_stockCostMovement'|translate}}</h2>
+                </div>
+                <div class="ibox-content">
+                    <div id="storeCosts">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h2>{{'dashboard_profitMovement'|translate}}</h2>
+                </div>
+                <div class="ibox-content">
+                    <div id="sales">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h2>{{'dashboard_idleTime'|translate}}</h2>
+                </div>
+                <div class="ibox-content">
+                    <div id="idle">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h2>{{'dashboard_efficiency'|translate}}</h2>
+                </div>
+                <div class="ibox-content">
+                    <div id="effiency">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h2>{{'dashboard_sellingWish'|translate}}</h2>
+                </div>
+                <div class="ibox-content">
+                    <div id="sellingUnit">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h2>{{'dashboard_sales'|translate}}</h2>
+                </div>
+                <div class="ibox-content">
+                    <div id="sellingSource">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--row-->
 </div>
 <!--Wrapper-->

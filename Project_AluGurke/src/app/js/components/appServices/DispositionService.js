@@ -30,11 +30,21 @@ var DispositionService = (function () {
         this.dispoP2rekursuiv(this.newBaumService.damenBaum);
         this.dispoP3rekursuiv(this.newBaumService.herrenBaum);
         this.altLastenVerteilen(this.models);
+        this.flag = false;
         this.aendern();
         $rootScope.$on('pc.programmaenderung', function (event) {
             _this.aendern();
         });
     }
+    DispositionService.prototype.changeFlagTrue = function () {
+        if (!this.flag) {
+            toastr.error("Die Priorisierung der Aufträge wurde zurückgesetzt");
+        }
+        this.flag = true;
+    };
+    DispositionService.prototype.changeFlagFalse = function () {
+        this.flag = false;
+    };
     DispositionService.prototype.dispoP1rekursuiv = function (wurzel, oberModel) {
         if (oberModel === void 0) { oberModel = null; }
         var x = new DispositionModel(this.filter(wurzel.teil_id), this.programmService.getProgrammposition(1), this.programmService.getDirectsalesPosition(1));

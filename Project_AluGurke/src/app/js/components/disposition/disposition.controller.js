@@ -23,6 +23,9 @@ var DispositionController = (function () {
         this.fertigungsAuftraegeService = fertigungsAuftraegeService;
         this.aendern();
     }
+    DispositionController.prototype.changeFlagTrue = function () {
+        this.dispositionService.changeFlagTrue();
+    };
     DispositionController.prototype.aendern = function () {
         this.dispositionService.aendern();
         this.kapazitaetsplanungService.aendern();

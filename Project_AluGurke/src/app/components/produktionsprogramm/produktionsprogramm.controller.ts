@@ -18,18 +18,21 @@ class ProduktionsprogrammController {
             function() {
                 return vm.programmService.produktionsprogramm[0].menge;
             }, function(newVal, oldVal) {
+                if(newVal!=oldVal)
                 $scope.$emit('pc.programmaenderung');
             });
         $scope.$watch(
             function() {
                 return vm.programmService.produktionsprogramm[4].menge;
             }, function(newVal, oldVal) {
+                  if(newVal!=oldVal)
                 $scope.$emit('pc.programmaenderung');
             });
         $scope.$watch(
             function() {
                 return vm.programmService.produktionsprogramm[8].menge;
             }, function(newVal, oldVal) {
+                  if(newVal!=oldVal)
                 $scope.$emit('pc.programmaenderung');
             });
 
@@ -37,18 +40,21 @@ class ProduktionsprogrammController {
             function() {
                 return vm.programmService.directsales[1].menge;
             }, function(newVal, oldVal) {
+                  if(newVal!=oldVal)
                 $scope.$emit('pc.programmaenderung');
             });
         $scope.$watch(
             function() {
                 return vm.programmService.directsales[2].menge;
             }, function(newVal, oldVal) {
+                  if(newVal!=oldVal)
                 $scope.$emit('pc.programmaenderung');
             });
         $scope.$watch(
             function() {
                 return vm.programmService.directsales[3].menge;
             }, function(newVal, oldVal) {
+                  if(newVal!=oldVal)
                 $scope.$emit('pc.programmaenderung');
             });
     }

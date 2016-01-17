@@ -1,5 +1,6 @@
 /// <reference path="../appServices/AuftragService.ts" />
 /// <reference path="../appServices/DispositionService.ts" />
+
 /// <reference path="../FertigungsAuftraege/FertigungsAuftraege.controller.ts" />
 /// <reference path="../../typeDefinitions/sweetalert.d.ts"/>
 /// <reference path="../../typeDefinitions/toastr.d.ts"/>
@@ -11,17 +12,31 @@ class FertigungsAuftraegeService {
     arbeitsplatzService: ArbeitsplatzService;
     dispositionService: DispositionService;
     models: Array<FertigungsAuftraegeModel>;
+    flag:boolean;
+    
     constructor(auftragService: AuftragService, arbeitsplatzService: ArbeitsplatzService, dispositionService: DispositionService, $rootScope) {
         this.auftragService = auftragService;
         this.arbeitsplatzService = arbeitsplatzService
         this.dispositionService = dispositionService
         this.dispositionService.aendern();
-
+        this.flag=false;
         this.aendern();
         $rootScope.$on('mainController.neueSprache', (event, language) => {
             this.onTranslate(language);
         });
     }
+    
+    changeFlagTrue(){
+        if(!this.flag){
+            toastr.error("Die Priorisierung der Aufträge wurde zurückgesetzt");
+        }
+        this.flag=true;
+        
+    }
+     changeFlagFalse(){
+        this.flag=false;
+    }
+    
     onTranslate(language: string) {
         let languageArray: Array<string> = ["kritisch", "hoch", "normal"];
         switch (language) {
@@ -141,14 +156,18 @@ class FertigungsAuftraegeService {
             }
             for (let i = 0; i < this.models.length; i++) {
 
-                if (this.models[i].split2 == this.models[i].split && Number(this.models[i].split2) == this.models[i].oldValue) {
-      
+                if (this.models[i].split2 == this.models[i].split && this.models[i].split2.indexOf(",")==-1) {
+                    
+                    this.models[i].split = this.models[i].auftrag.anzahl.toString();
+                    this.models[i].auftraege=[new Auftrag(this.models[i].auftrag.erzeugnis_id, this.models[i].auftrag.anzahl, this.models[i].auftrag.periode, this.models[i].auftrag.arbeitsplatz_id)];
                     this.models[i].oldValue = this.models[i].auftrag.anzahl;
-                  
+                    this.models[i].split2=this.models[i].split;
                     continue;
                 }
 
                 let liste = this.splitEvaluieren(this.models[i].split, this.models[i].auftrag.anzahl);
+                let xyz=false;
+                /*
                 if (liste == null) {
                     if (this.models[i].auftraege.length > 1 && this.models[i].auftrag.anzahl != this.models[i].oldValue) {
                         let summe = 0;
@@ -163,6 +182,7 @@ class FertigungsAuftraegeService {
                             this.models[i].split = split.join(",");
 
                         } else {
+                           
                             if (summe - this.models[i].auftraege[this.models[i].auftraege.length - 1].anzahl<this.models[i].auftrag.anzahl) {                              
                                 this.models[i].auftraege[this.models[i].auftraege.length - 1].anzahl = this.models[i].auftrag.anzahl- (summe- this.models[i].auftraege[this.models[i].auftraege.length - 1].anzahl);
 
@@ -170,20 +190,26 @@ class FertigungsAuftraegeService {
                                 split[split.length - 1] = this.models[i].auftraege[this.models[i].auftraege.length - 1].anzahl.toString();
                                 this.models[i].split = split.join(",");
                             }
+                           
+                            xyz=true;
                         }
 
                     } else {
                         this.models[i].auftraege = [new Auftrag(this.models[i].auftrag.erzeugnis_id, this.models[i].auftrag.anzahl, this.models[i].auftrag.periode, this.models[i].auftrag.arbeitsplatz_id)];
                     }
-                    this.models[i].split2 = this.models[i].split;
+                    if(xyz){
+                        this.models[i].split2 = this.models[i].split;
                     this.models[i].oldValue = this.models[i].auftrag.anzahl;
                     continue;
+                    }
                 }
+               
                 if (this.models[i].split == this.models[i].split2) {
                     this.models[i].split2 = this.models[i].split;
                     this.models[i].oldValue = this.models[i].auftrag.anzahl;
                     continue;
                 }
+                */
                 this.models[i].auftraege = [];
                 for (let j = 0; j < liste.length; j++) {
                     let x = new Auftrag(this.models[i].auftrag.erzeugnis_id, liste[j], this.models[i].auftrag.periode, this.models[i].auftrag.arbeitsplatz_id);
@@ -243,20 +269,23 @@ class FertigungsAuftraegeService {
             } else {
                 let x: Array<number> = new Array<number>();
                 x.push(anzahl);
-                return null;
+                return x;
             }
             if (summe > anzahl) {
-                if (anzahl >= 10) {
+               
                     toastr.error("Die Summe der Auftragspositionen ist größer als der eigentliche Auftrag", "Ungültige Eingabe");
-                }
+                
                 let x: Array<number> = new Array<number>();
                 x.push(anzahl);
-                return null;
+                
+                return x;
             }
         }
         if (summe < anzahl) {
-            //ergebnis.push(anzahl-summe);          
-            return null;
+            //ergebnis.push(anzahl-summe);  
+                let x: Array<number> = new Array<number>();
+                x.push(anzahl);     
+            return x;
         }
         return ergebnis;//.sort(function(a,b){return a-b;});
     }

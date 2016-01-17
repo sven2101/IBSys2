@@ -26,7 +26,7 @@ class DispositionService {
     settingsService: SettingsService;
     defaultWerte: Array<number>;
     map: { [key: number]: number; }
-
+    flag:boolean;
     scope;
 
     bestellungBerechnenService: BestellungBerechnenService;
@@ -50,11 +50,22 @@ class DispositionService {
         this.dispoP2rekursuiv(this.newBaumService.damenBaum);
         this.dispoP3rekursuiv(this.newBaumService.herrenBaum);
         this.altLastenVerteilen(this.models);
+         this.flag=false;
         this.aendern();
 
         $rootScope.$on('pc.programmaenderung', (event) => {
             this.aendern();
         });
+    }
+    changeFlagTrue(){
+        if(!this.flag){
+            toastr.error("Die Priorisierung der Aufträge wurde zurückgesetzt");
+        }
+        this.flag=true;
+        
+    }
+    changeFlagFalse(){
+        this.flag=false;
     }
     dispoP1rekursuiv(wurzel: NewTeilKnoten, oberModel: DispositionModel = null) {
         let x = new DispositionModel(this.filter(wurzel.teil_id), this.programmService.getProgrammposition(1), this.programmService.getDirectsalesPosition(1));
