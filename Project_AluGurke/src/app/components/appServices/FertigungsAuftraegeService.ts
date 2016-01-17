@@ -28,7 +28,7 @@ class FertigungsAuftraegeService {
     
     changeFlagTrue(){
         if(!this.flag){
-            toastr.error("Die Priorisierung der Aufträge wurde zurückgesetzt");
+            toastr.warning("Die Priorisierung der Aufträge wurde zurückgesetzt");
         }
         this.flag=true;
         
