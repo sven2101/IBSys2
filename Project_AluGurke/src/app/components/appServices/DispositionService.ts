@@ -52,7 +52,7 @@ class DispositionService {
         this.dispoP3rekursuiv(this.newBaumService.herrenBaum);
         this.altLastenVerteilen(this.models);
          this.flag=false;
-         this.flag=false;
+         this.flag=true;
         this.aendern();
 
         $rootScope.$on('pc.programmaenderung', (event) => {
