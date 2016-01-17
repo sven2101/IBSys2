@@ -26,6 +26,9 @@ var KapazitaetsplanungController = (function () {
         this.kapazitaetsplanungService.reset();
         toastr.success("Die Arbeitszeiten wurden zurückgesetzt");
     };
+    KapazitaetsplanungController.prototype.onChanged = function () {
+        this.bestellungBerechnenService.onSelected();
+    };
     KapazitaetsplanungController.prototype.zeileRot = function (model) {
         if (model.arbeitsplatz.arbeitszeit > model.zeitVerfuegung) {
             return true;
