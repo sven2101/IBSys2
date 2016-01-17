@@ -39,7 +39,7 @@ var DispositionService = (function () {
     }
     DispositionService.prototype.changeFlagTrue = function () {
         if (!this.flag) {
-            toastr.error("Die Priorisierung der Aufträge wurde zurückgesetzt");
+            toastr.warning("Die Priorisierung der Aufträge wurde zurückgesetzt");
         }
         this.flag = true;
         this.flag2 = true;
