@@ -48,6 +48,8 @@ var KapazitaetsplanungService = (function () {
             }
             else {
                 this.models[i].zeitVerfuegung = 0;
+                this.models[i].ueberstunden = 0;
+                this.models[i].anzahlSchichten = "1";
             }
         }
         this.ergebnis = this.mergeArbeitsplaetze();

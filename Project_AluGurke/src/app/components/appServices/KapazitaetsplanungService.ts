@@ -58,6 +58,8 @@ class KapazitaetsplanungService {
             }
             else {
                 this.models[i].zeitVerfuegung = 0;
+                this.models[i].ueberstunden = 0;
+                this.models[i].anzahlSchichten = "1";
             }
         }
         this.ergebnis = this.mergeArbeitsplaetze();
@@ -110,7 +112,7 @@ class KapazitaetsplanungService {
             zeit = zeit * (prozente + auftraege / 1000);
 
             if (model.arbeitsplatz.id === 5) {
-                model.zeitVerfuegung = 0;
+                model.zeitVerfuegung = 0;   
                 continue;
             }
 
