@@ -20,7 +20,7 @@ class FertigungsAuftraegeController {
         this.auftragService = auftragService;
         this.dispositionService = dispositionService;
         this.kapazitaetsplanungService = kapazitaetsplanungService;
-
+        this.dispositionService.aendern();
 
         this.models = this.fertigungsAuftraegeService.models;
         
@@ -52,7 +52,7 @@ class FertigungsAuftraegeController {
         if (this.dispositionService.flag || this.fertigungsAuftraegeService.flag||this.auftragService.auftraegeUltraExport.length==0) {
             this.auftragService.auftraegeUltraExport=[];
             for(let i=0;i<this.auftragService.auftraegeExport.length;i++){
-                this.auftragService.auftraegeUltraExport.push(new Auftrag(this.auftragService.auftraegeExport[i].erzeugnis_id,this.auftragService.auftraegeExport[i].anzahl,this.auftragService.auftraegeExport[i].periode));
+                this.auftragService.auftraegeUltraExport.push(new Auftrag(this.auftragService.auftraegeExport[i].erzeugnis_id,this.auftragService.auftraegeExport[i].anzahl,this.auftragService.auftraegeExport[i].periode,this.auftragService.auftraegeExport[i].arbeitsplatz_id));
             }            
         }
              

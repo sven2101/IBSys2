@@ -27,6 +27,7 @@ class DispositionService {
     defaultWerte: Array<number>;
     map: { [key: number]: number; }
     flag:boolean;
+    flag2:boolean;
     scope;
 
     bestellungBerechnenService: BestellungBerechnenService;
@@ -51,6 +52,7 @@ class DispositionService {
         this.dispoP3rekursuiv(this.newBaumService.herrenBaum);
         this.altLastenVerteilen(this.models);
          this.flag=false;
+         this.flag=false;
         this.aendern();
 
         $rootScope.$on('pc.programmaenderung', (event) => {
@@ -62,6 +64,7 @@ class DispositionService {
             toastr.error("Die Priorisierung der Aufträge wurde zurückgesetzt");
         }
         this.flag=true;
+        this.flag2=true;
         
     }
     changeFlagFalse(){

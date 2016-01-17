@@ -162,6 +162,7 @@ class FertigungsAuftraegeService {
                     this.models[i].auftraege=[new Auftrag(this.models[i].auftrag.erzeugnis_id, this.models[i].auftrag.anzahl, this.models[i].auftrag.periode, this.models[i].auftrag.arbeitsplatz_id)];
                     this.models[i].oldValue = this.models[i].auftrag.anzahl;
                     this.models[i].split2=this.models[i].split;
+                   
                     continue;
                 }
 

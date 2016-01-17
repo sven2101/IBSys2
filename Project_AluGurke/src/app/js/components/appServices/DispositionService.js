@@ -31,6 +31,7 @@ var DispositionService = (function () {
         this.dispoP3rekursuiv(this.newBaumService.herrenBaum);
         this.altLastenVerteilen(this.models);
         this.flag = false;
+        this.flag = false;
         this.aendern();
         $rootScope.$on('pc.programmaenderung', function (event) {
             _this.aendern();
@@ -41,6 +42,7 @@ var DispositionService = (function () {
             toastr.error("Die Priorisierung der Aufträge wurde zurückgesetzt");
         }
         this.flag = true;
+        this.flag2 = true;
     };
     DispositionService.prototype.changeFlagFalse = function () {
         this.flag = false;
