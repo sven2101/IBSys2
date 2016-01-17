@@ -12,11 +12,13 @@ var KapazitaetsplanungService = (function () {
         this.arbeitsplatzService = ArbeitsplatzService;
         this.auftragService = AuftragService;
         this.dispositionService = DispositionService;
-        this.bestellungBerechnenService = bestellungBerechnenService;
+        //this.bestellungBerechnenService=bestellungBerechnenService;
         this.ergebnis = new Array();
         this.models = new Array();
         this.models.push(new KapazitaetModel(new Arbeitsplatz(5, 0, 0, 0)));
         this.$rootScope = $rootScope;
+        this.multiplikator = 1;
+        this.multiplikatorString = "sehr sicher";
         this.$rootScope.$on('fileController.neueDatei', function (event, dateiInhalt) {
             _this.onNeueDatei(dateiInhalt);
         });
@@ -60,9 +62,28 @@ var KapazitaetsplanungService = (function () {
             x.zeitVerfuegung = 2400;
         }
     };
+    KapazitaetsplanungService.prototype.onSelected = function () {
+        switch (this.multiplikatorString) {
+            case "sehr riskant":
+                this.multiplikator = -1;
+                break;
+            case "riskant":
+                this.multiplikator = -0.5;
+                break;
+            case "normal":
+                this.multiplikator = 0;
+                break;
+            case "sicher":
+                this.multiplikator = 0.5;
+                break;
+            case "sehr sicher":
+                this.multiplikator = 1;
+                break;
+        }
+    };
     KapazitaetsplanungService.prototype.zeitSetzten = function () {
         var prozente = 0;
-        switch (this.bestellungBerechnenService.multiplikator) {
+        switch (this.multiplikator) {
             case -1:
                 prozente = 1;
                 break;

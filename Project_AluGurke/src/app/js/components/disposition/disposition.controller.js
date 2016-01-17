@@ -26,7 +26,7 @@ var DispositionController = (function () {
     DispositionController.prototype.aendern = function () {
         this.dispositionService.aendern();
         this.kapazitaetsplanungService.aendern();
-        this.fertigungsAuftraegeService.onDispoAendern();
+        //this.fertigungsAuftraegeService.onDispoAendern();
     };
     DispositionController.prototype.tabOnClick = function (contentToShow) {
         for (var property in this.showTab) {
