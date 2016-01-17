@@ -1,0 +1,78 @@
+Folie: Technologie
+Sie fragen sich bestimmt, welche Technologien und Frameworks wir eingesetzt haben, 
+deshalb verschaffe ich Ihnen jetzt einen kleinen Überblick...
+Folie: Architektur
+KOmmen wir als erstes zur Architektur. 
+- Anwendung auf Server bereitgestellt, erreichbar von jedem Internetfähigen gerät 
+- Somit verfügbar auf PC, Tablet und Smartphone
+Mean-Stack 1
+Was verbirgt sich auf dem Server und was ist der Mean stack?
+Der Mean stack besteht aus 4 Komponenten:
+-Einer Dokumentenbasierende Datenbank MongoDB
+-Express Ein Framework für die Restschnittstelle und Kommunikation zur DB
+-AngularJS Bekanntes Clientseitiges Javascript Framework von google, funktionaler teil des Stacks
+-NodeJS: Der Server für die bereitstellung einer Anwendung /kommunikation für anfragen
+Mean-Stack 2
+Wie funktioniert nun der Mean stack?
+Bei einer Datenbankabfrage:
+Client schickt anfrage an server, welche an mongdb über rest(express) weitergeleitet wird 
+antwort wird von datenbank über rest an server und zum client weitergeleitet
+
+Wichtig zu wissen: Funktionen, welche keine DB verbindung benötigen können clientseitig 
+ohne server(also auch offline verwendet werden, sofern anwendung einmal beim client gecached ist)
+
+Programmiersprachen
+Also Programmiersprache verwendeten wir type script,
+-TS ist ein superset von javascript, dies bedeutet, dass typscript in plain javascript also puren javascript compiliert wird
+-Außerdem besitzt ts eine starke typisierung das javascript benutzerfreundlicher macht
+und ähnlichkeiten zu bekannten programmiersprachen wie java und c# hat
+
+Entwicklertools:
+Für die Umsetzung des Projekts verwendetet wir 
+-GIT als versionierungssystem um gemeinsam zu entwickeln
+-Gulp als build mgmt tool zum schaffen einer Projektstruktur und auflösen von abängikeiten
+-NPM(Node package manager) um erweiterungen zu nutzen wie verschlüsselung (node modules)
+-Webstorm als Entwicklungsumgebung
+
+
+
+Live Demo:
+1. Akt
+Ich freu mich Ihnen jetzt unser Tool zu zeigen
+Dashboard ohne Login:
+- Durch eingabe von www.scmanager.de landen sie anfangs auf dem dashboard
+- Sie haben die möglichkeit sich anzumelden oder zu registrieren, dazu aber später mehr.
+- Als kleine hilfe bietet das dashboard die ersten schritte - hier sehen sie den normalen ablauf einer perioden planung
+- Nun geb ich das wort weiter an Marius. Er wird ihnen nun die Dateiverwaltuzng vorstellen
+
+2.Akt
+Dateiverwaltung
+nachdem die Periode geplant ist, könne sie hier ihre datei ersetllen und herunterladen und dem scsimulator weitergeben
+
+Übersetzung
+Ein weiteres Feature ist die übersetzung 
+- Zeigen auf dashboard
+- willkürliches klicken in material planning
+- willkürliches klicken in capacity planning
+Auf deutsch wieder zurück
+
+Login/Dashboard
+nun kommen wir zu den letzten features
+-Dem login und das dashboard im geschützten bereich
+-Auf dem Dashboard können sie die periode auswählen von der sie informationen wünschen
+-Man sieht z.B. den aktuellen Lagerwert, profit oder die Lagerkosten und wie sie sich 
+prozentual zur vorperiode verändert haben, also eine vollkommene überwachung ihrer Ergebnisse
+-Sehr interessant sind hier die verbleidende zeit für Produktionsaufträge an den Arbeitsplätzen in form von warteschlagngen und aufträge auf der maschine.
+-und die leerzeiten bzw. leerkosten pro arbeitslatz(unterteilt in lohnkosten und maschinenkosten)
+-Weitere grafiken wie die lagerentwicklung oder die Profitentwicklung haben sie ja schon in der präsi gesehen
+-Um nochmal auf unser ergebniss zurückzukommen, sehen sie hier was in periode 4 alles schief lief. Die auslastung fiel auf 22% und die leerkosten stiegen auf 13.000€
+-weiter unten sehen sie noch grafiken zu den verkäufen. Z.B. Soll/ist verkäufe und einnahmen aus verkäufen. In periode 5 sehen sie unsere direktverkäufe, welche nicht viele innahemn brachen
+,aber das lager gut abbauten(unter anderem konventionalstrafen erhalten)
+
+Schluss:
+Das war's auch schon mit unserer Anwendung. Im namen unserer gruppe möchte ich mich für ihre aufmerksam bedanken und ich hoffe, es hat ihnen gefallen
+
+
+
+
+
