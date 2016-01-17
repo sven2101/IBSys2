@@ -92,14 +92,15 @@ class HomeController {
     }
 
     getPercentageStockChange(){
+        var period = parseInt(this.selectedPeriodStr, 10)
         if (typeof this.allSimulationFiles !== "undefined") {
-            if(this.allSimulationFiles.length>1){
-                var obj = JSON.parse(this.allSimulationFiles[this.allSimulationFiles.length - 2].datei);
+            if(this.allSimulationFiles.length>1 && period>1){
+                var obj = JSON.parse(this.allSimulationFiles[period - 2].datei);
                 var lastStock = Number(obj.results.warehousestock.totalstockvalue);
                 var currentStock = this.getStockValue();
                 return ((currentStock/lastStock)-1)*100
             }
-            else if(this.allSimulationFiles.length==1){
+            else if(this.allSimulationFiles.length==1 || period ==1){
                 var currentStock = this.getStockValue();
                 return ((currentStock/291355)-1)*100
             }
@@ -109,9 +110,10 @@ class HomeController {
     }
 
     getPercentageProfitChange(){
+        var period = parseInt(this.selectedPeriodStr, 10)
         if (typeof this.allSimulationFiles !== "undefined") {
-            if(this.allSimulationFiles.length>1){
-                var obj = JSON.parse(this.allSimulationFiles[this.allSimulationFiles.length - 2].datei);
+            if(this.allSimulationFiles.length>1 && period >1){
+                var obj = JSON.parse(this.allSimulationFiles[period - 2].datei);
                 var lastProfit = Number(JSON.stringify(obj.results.result.summary.profit._current).slice(0, -1).substr(1));
                 var currentProfit = this.getProfitValue();
 
@@ -127,14 +129,15 @@ class HomeController {
     }
 
     getPercentageStoragecostsChange(){
+        var period = parseInt(this.selectedPeriodStr, 10)
         if (typeof this.allSimulationFiles !== "undefined") {
-            if(this.allSimulationFiles.length>1){
-                var obj = JSON.parse(this.allSimulationFiles[this.allSimulationFiles.length - 2].datei);
+            if(this.allSimulationFiles.length>1 && period>1){
+                var obj = JSON.parse(this.allSimulationFiles[period - 2].datei);
                 var lastStoragecosts = Number(JSON.stringify(obj.results.result.general.storagecosts._current).slice(0,-1).substr(1));
                 var currentStoragecosts = this.getStoragecosts();
                 return ((currentStoragecosts/lastStoragecosts)-1)*100
             }
-            else if(this.allSimulationFiles.length==1){
+            else if(this.allSimulationFiles.length==1 || period==1){
                 var currentStoragecosts = this.getStoragecosts();
                 return ((currentStoragecosts/7296.26)-1)*100
             }
