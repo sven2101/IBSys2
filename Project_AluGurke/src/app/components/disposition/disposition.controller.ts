@@ -43,6 +43,11 @@ class DispositionController{
         
         
     }
+     changeFlagTrue(){
+      
+         this.dispositionService.changeFlagTrue();
+     }
+    
     aendern(){
         this.dispositionService.aendern();
         this.kapazitaetsplanungService.aendern();

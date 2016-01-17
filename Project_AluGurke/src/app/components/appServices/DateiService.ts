@@ -4,6 +4,7 @@
 /// <reference path="../../model/Bestellung.ts" />
 /// <reference path="KapazitaetsplanungService.ts" />
 /// <reference path="AuftragService.ts" />
+/// <reference path="FertigungsAuftraegeService.ts" />
 
 
 class DateiService {
@@ -14,15 +15,20 @@ class DateiService {
 	kapazitaetsplanungService:KapazitaetsplanungService;
 	programmService: ProgrammService;
     bestellService:BestellService;
+    dispositionService:DispositionService;
+    fertigungsAuftraegeService:FertigungsAuftraegeService;
+    
 
 	constructor(bestellService: BestellService,auftragService:AuftragService,
-	kapazitaetsplanungService:KapazitaetsplanungService,programmService:ProgrammService) {
+	kapazitaetsplanungService:KapazitaetsplanungService,programmService:ProgrammService,dispositionService,fertigungsAuftraegeService) {
 		this.dateiErzeugt = false;
 		this.dateiName = "none";
         this.bestellService=bestellService;
 		this.auftragService=auftragService;
 		this.kapazitaetsplanungService=kapazitaetsplanungService;
 		this.programmService = programmService;
+        this.dispositionService=dispositionService;
+        this.fertigungsAuftraegeService=fertigungsAuftraegeService;
 	}
 
 	getInhalt() {
@@ -159,6 +165,9 @@ class DateiService {
 	getProductionList(){
 		let list=[];
 		let auftrageExport=this.auftragService.auftraegeExport;
+        if(!this.dispositionService.flag&&!this.fertigungsAuftraegeService.flag){
+            auftrageExport=this.auftragService.auftraegeUltraExport;
+        }
 		for(let i=0;i< auftrageExport.length;i++){
 			list.push({
 				_article:auftrageExport[i].erzeugnis_id,
@@ -183,5 +192,5 @@ class DateiService {
 	}
 }
 
-angular.module('app').factory('DateiService', ['BestellService','AuftragService','KapazitaetsplanungService','ProgrammService', 
-(BestellService,AuftragService,KapazitaetsplanungService,programmService) => new DateiService(BestellService,AuftragService,KapazitaetsplanungService,programmService)]);
+angular.module('app').factory('DateiService', ['BestellService','AuftragService','KapazitaetsplanungService','ProgrammService','DispositionService','FertigungsAuftraegeService', 
+(BestellService,AuftragService,KapazitaetsplanungService,programmService,DispositionService,FertigungsAuftraegeService) => new DateiService(BestellService,AuftragService,KapazitaetsplanungService,programmService,DispositionService,FertigungsAuftraegeService)]);

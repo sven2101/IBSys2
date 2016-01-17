@@ -27,7 +27,7 @@
                         <li class="active" ng-click="fac.tab=1">
                             <a data-toggle="tab" href="" aria-expanded="true">{{'productionOrders_split'|translate}}</a>
                         </li>
-                        <li ng-click="fac.tab=2;fac.onDrag()">
+                        <li ng-click="fac.tab=2;fac.onTabClick()">
                             <a data-toggle="tab" href="" aria-expanded="true">{{'productionOrders_prioritise'|translate}}</a>
                         </li>
                     </ul>
@@ -51,7 +51,7 @@
                                 <td style="cursor:pointer;" ng-click="fac.oeffnen(model.auftrag.erzeugnis_id)">{{model.auftrag.erzeugnis_id}}</td>
                                 <td style="cursor:pointer;" ng-click="fac.oeffnen(model.auftrag.erzeugnis_id)">{{model.auftrag.anzahl}}</td>                                
                                 <td>
-                                    <input  class="form-control" ng-model="model.split" ng-keyup="fac.aendern();" min="0">
+                                    <input  class="form-control" ng-model="model.split" ng-keyup="fac.changeFlagTrue();fac.aendern();" min="0">
                                 </td>
                                 <td style="cursor:pointer;" ng-click="fac.oeffnen(model.auftrag.erzeugnis_id)">
                                     <i class="fa fa-cog fa-2x" style="width:40px"></i>
@@ -93,7 +93,7 @@
                                 <th style="width:30%">{{'productionOrders_amount'|translate}}</th>
                             </thead>
                         </table>
-                        <ul style="margin-top:-21px" class="dd-list" ui-sortable ng-model="fac.auftragService.auftraegeExport" >                           
+                        <ul style="margin-top:-21px" class="dd-list" ui-sortable ng-model="fac.auftragService.auftraegeUltraExport" >                           
                         <li style="cursor:pointer;" class="dd-item"  ng-repeat="item in fac.getAE()" >
                             <table class="table table-hover">
                                 <tr ng-mouseleave="fac.onDrag()">
