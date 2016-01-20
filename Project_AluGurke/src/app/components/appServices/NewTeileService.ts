@@ -132,16 +132,14 @@ class NewTeileService {
         58:'Spoke (K)',
         59:'Welding wires (KDH)'
     }
-    $rootScope;
 
     constructor($rootScope) {
         this.erzeugeKaufTeile();
         this.erzeugeErzeignisse();
-        this.$rootScope = $rootScope;
-        this.$rootScope.$on('fileController.neueDatei', (event, dateiInhalt) => {
+        $rootScope.$on('fileController.neueDatei', (event, dateiInhalt) => {
             this.onNeueDatei(dateiInhalt);
         });
-        this.$rootScope.$on('mainController.neueSprache', (event, sprache) => {
+        $rootScope.$on('mainController.neueSprache', (event, sprache) => {
             this.onSprachWechsel(sprache);
         });
     }
@@ -173,15 +171,13 @@ class NewTeileService {
 
     onNeueDatei(dateiInhalt) {
         this.updateKaufTeile(dateiInhalt.results.warehousestock.article);
-        this.$rootScope.$broadcast('teileService.kaufTeile.updated');
         this.updateErzeugnisse(dateiInhalt.results.warehousestock.article);
-        this.$rootScope.$broadcast('teileService.erzeugnisse.updated');
     }
 
     updateKaufTeile(artikel) {
         for (var i = 0; i < this.alleKaufteile.length; i++) {
             for (var j = 0; j < artikel.length; j++) {
-                if (this.alleKaufteile[i].id == artikel[j]._id) {
+                if (this.alleKaufteile[i].id == Number(artikel[j]._id)) {
                     this.alleKaufteile[i].lagerMenge = Number(artikel[j]._amount);
                     this.alleKaufteile[i].teileWert = Number(artikel[j]._price);
                     this.alleKaufteile[i].teileWertNeu = Number(artikel[j]._price);
@@ -193,9 +189,9 @@ class NewTeileService {
     updateErzeugnisse(artikel) {
         for (var i = 0; i < this.alleErzeugnisse.length; i++) {
             for (var j = 0; j < artikel.length; j++) {
-                if (this.alleErzeugnisse[i].id == artikel[j]._id) {
-                    this.alleErzeugnisse[i].lagerMenge = artikel[j]._amount;
-                    this.alleErzeugnisse[i].teileWert = artikel[j]._price;
+                if (this.alleErzeugnisse[i].id == Number(artikel[j]._id)) {
+                    this.alleErzeugnisse[i].lagerMenge = Number(artikel[j]._amount);
+                    this.alleErzeugnisse[i].teileWert = Number(artikel[j]._price);
                 }
             }
         }
@@ -203,7 +199,7 @@ class NewTeileService {
 
     getErzeugnis(id: number) {
         for (var i = 0; i < this.alleErzeugnisse.length; i++) {
-            if (this.alleErzeugnisse[i].id === id) {
+            if (this.alleErzeugnisse[i].id === Number(id)) {
                 return this.alleErzeugnisse[i]
             }
         }
@@ -212,7 +208,7 @@ class NewTeileService {
 
     getKaufTeil(id: number) {
         for (var i = 0; i < this.alleKaufteile.length; i++) {
-            if (this.alleKaufteile[i].id == id) {
+            if (this.alleKaufteile[i].id === Number(id)) {
                 return this.alleKaufteile[i];
             }
         }

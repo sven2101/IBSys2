@@ -10,10 +10,24 @@ class ProgrammService {
     produktionsprogramm: Array<ProgrammPosition>;
     directsales:{[key:number]:DirectSalesPosition;}
 
-    constructor() {
+    constructor($rootScope) {
         this.directsales = {};
         this.erzeugeProgrammPositionen();
         this.erzeugeDirectsalesPosition();
+        
+        var vm:ProgrammService = this;
+        $rootScope.$watch(
+            function(){
+                return vm.produktionsprogramm;
+            },
+            function(newVal, oldVal){
+                
+                if(newVal!==oldVal){
+                    console.log("EVENT");
+                    $rootScope.$broadcast('pc.programmaenderung');
+                }
+            },true
+        );
     }
 
     erzeugeProgrammPositionen() {
@@ -76,4 +90,4 @@ class ProgrammService {
     }
 }
 
-angular.module('app').factory('ProgrammService', [() => new ProgrammService()]);
+angular.module('app').factory('ProgrammService', ['$rootScope',($rootScope) => new ProgrammService($rootScope)]);
