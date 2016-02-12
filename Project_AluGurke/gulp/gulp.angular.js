@@ -23,18 +23,17 @@ gulp.task('watch-angular', function () {
     });
 });
 
-var pathCompile = '';
+var filePathToCompile = '';
 
 gulp.task('watch-typescript', function () {
     watch(path.typescript.src, function (vinyl) {
-        console.log('WATCH_PATH: ' + vinyl.path);
-        pathCompile = vinyl.path;
+        filePathToCompile = vinyl.path;
         gulp.start('compile-ts-after-change');
     });
 });
 
 gulp.task('compile-ts-after-change',function(){
-    gulp.src(pathCompile)
+    gulp.src(filePathToCompile)
         .pipe(typescript())
         .pipe(gulp.dest(path.typescript.dst));
 });
