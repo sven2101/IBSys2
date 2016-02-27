@@ -1,13 +1,13 @@
 body
-  font-family: $font-stack
-  background-color: $nav-bg
+  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif
+  background-color: #2f4050
   font-size: 13px
   color: $text-color
   overflow-x: hidden
 
 
 
-html,body
+html, body
   height: 100%
 
 
@@ -29,9 +29,9 @@ body.boxed-layout #wrapper
   background-color: #2f4050
   max-width: $boxed-width
   margin: 0 auto
-  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75)
-  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75)
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75)
+  -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.75)
+  -moz-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.75)
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.75)
 
 
 .top-navigation.boxed-layout #wrapper,
@@ -68,8 +68,6 @@ a:hover, a:focus
   font-weight: 400
 
 
-
-
 .text-uppercase
   text-transform: uppercase
 
@@ -95,8 +93,8 @@ a:hover, a:focus
 
 
 video
-  width: 100%    !important
-  height: auto   !important
+  width: 100% !important
+  height: auto !important
 
 
 /* GALLERY */
@@ -116,6 +114,10 @@ video
   min-height: 300px
 
 
+.note-editor.fullscreen
+  z-index: 2050
+
+
 /* MODAL */
 .modal-content
   background-clip: padding-box
@@ -133,7 +135,6 @@ video
 
 .modal-body
   padding: 20px 30px 30px 30px
-
 
 
 .inmodal .modal-body
@@ -165,7 +166,6 @@ video
   margin-top: 0
 
 
-
 /* WRAPPERS */
 
 #wrapper
@@ -188,10 +188,10 @@ video
 
 
 @media (min-width: 768px)
-#page-wrapper
-  position: inherit
-  margin: 0 0 0 240px
-  min-height: 1000px
+  #page-wrapper
+    position: inherit
+    margin: 0 0 0 240px
+    min-height: 2002px
 
 
 
@@ -213,7 +213,6 @@ ul.unstyled, ol.unstyled
 .big-icon
   font-size: 160px !important
   color: #e5e6e7
-
 
 
 /* FOOTER */
@@ -267,14 +266,14 @@ body.fixed-sidebar.body-small.mini-navbar .footer.fixed
 
 
 body.body-small .footer.fixed
-  margin-left: 0px
+  margin-left: 0
 
 
 /* PANELS */
 
 .page-heading
   border-top: 0
-  padding: 0px 10px 20px 10px
+  padding: 0 10px 20px 10px
 
 
 .panel-heading h1, .panel-heading h2
@@ -351,7 +350,7 @@ body.body-small .footer.fixed
 
 
 .ui-tab .tab-content
-  padding: 20px 0px
+  padding: 20px 0
 
 
 /* GLOBAL  */
@@ -373,7 +372,7 @@ body.body-small .footer.fixed
 
 
 .ibox-content.text-box
-  padding-bottom: 0px
+  padding-bottom: 0
   padding-top: 15px
 
 
@@ -499,8 +498,10 @@ code
 .ibox.collapsed .ibox-content
   display: none
 
+
 .ibox.collapsed .fa.fa-chevron-up:before
   content: "\f078"
+
 
 .ibox.collapsed .fa.fa-chevron-down:before
   content: "\f077"
@@ -519,7 +520,7 @@ code
   border-color: $border-color
   border-image: none
   border-style: solid solid none
-  border-width: 3px 0px 0
+  border-width: 3px 0 0
   color: inherit
   margin-bottom: 0
   padding: 14px 15px 7px
@@ -534,7 +535,7 @@ code
   border-color: $border-color
   border-image: none
   border-style: solid solid none
-  border-width: 1px 0px
+  border-width: 1px 0
 
 
 .ibox-footer
@@ -734,7 +735,7 @@ table.table-mail tr td
 
 .progress-mini, .progress-mini .progress-bar
   height: 5px
-  margin-bottom: 0px
+  margin-bottom: 0
 
 
 .progress-bar-navy-light
@@ -817,9 +818,9 @@ table.table-mail tr td
 
 
 .img-shadow
-  -webkit-box-shadow: 0px 0px 3px 0px rgba(145,145,145,1)
-  -moz-box-shadow: 0px 0px 3px 0px rgba(145,145,145,1)
-  box-shadow: 0px 0px 3px 0px rgba(145,145,145,1)
+  -webkit-box-shadow: 0 0 3px 0 rgba(145, 145, 145, 1)
+  -moz-box-shadow: 0 0 3px 0 rgba(145, 145, 145, 1)
+  box-shadow: 0 0 3px 0 rgba(145, 145, 145, 1)
 
 
 /* For handle diferent bg color in AngularJS version */
@@ -831,7 +832,6 @@ table.table-mail tr td
 .dashboards\.dashboard_4_1 nav.navbar,
 .metrics nav.navbar, .metrics\.index nav.navbar,
 .dashboards\.dashboard_5 nav.navbar
-
   background: #fff
 
 
@@ -844,10 +844,7 @@ table.table-mail tr td
 .Inbox .navbar.navbar-static-top,
 .Metrics .navbar.navbar-static-top,
 .Dashboard_5 .navbar.navbar-static-top
-
   background: #fff
-
-
 
 
 a.close-canvas-menu
@@ -863,7 +860,6 @@ a.close-canvas-menu:hover
 
 
 /* FULL HEIGHT */
-
 
 .full-height
   height: 100%
@@ -1244,11 +1240,6 @@ a.close-canvas-menu:hover
   margin: 30px 0
 
 
-// Bootstrap issue in 3.3.0 with modal https://github.com/twbs/bootstrap/issues/9855
-// Fix
-body.modal-open
-  padding-right: inherit !important
-
 // Fullscreen functions
 
 .fullscreen-ibox-mode .animated
@@ -1283,9 +1274,12 @@ body.fullscreen-ibox-mode
 body.modal-open
   padding-right: inherit !important
 
+
 // Fix for modal backdrop with animate.css
 body.modal-open .animated
   animation-fill-mode: initial
+  z-index: inherit
+
 
 /* Show profile dropdown on fixed sidebar */
 body.mini-navbar.fixed-sidebar .profile-element, .block
@@ -1298,3 +1292,9 @@ body.mini-navbar.fixed-sidebar .nav-header
 
 body.mini-navbar.fixed-sidebar .logo-element
   display: none
+
+
+// Remove animation on fullscreen video
+
+.fullscreen-video .animated
+  animation: none

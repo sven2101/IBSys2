@@ -1,6 +1,9 @@
-FROM dockerfile/nodejs
+FROM node:0.12
 
-MAINTAINER Matthias Luebken, matthias@catalyst-zero.com
+# Install gem sass for  grunt-contrib-sass
+RUN apt-get update -qq && apt-get install -y build-essential
+RUN apt-get install -y ruby
+RUN gem install sass
 
 WORKDIR /home/mean
 
@@ -20,7 +23,7 @@ RUN bower install --config.interactive=false --allow-root
 # Make everything available for start
 ADD . /home/mean
 
-# currently only works for development
+# Set development environment as default
 ENV NODE_ENV development
 
 # Port 3000 for server

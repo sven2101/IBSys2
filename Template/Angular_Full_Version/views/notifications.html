@@ -51,7 +51,7 @@
                 </div>
                 <div class="ibox-content">
                     <div>
-                        <alert ng-repeat="alert in main.alerts" type="{{alert.type}}" close="main.closeAlert($index)">{{alert.msg}}</alert>
+                        <uib-alert ng-repeat="alert in main.alerts" type="{{alert.type}}" close="main.closeAlert($index)">{{alert.msg}}</uib-alert>
                         <button class='btn btn-white' ng-click="main.addAlert()">Add Alert</button>
                     </div>
                 </div>
@@ -71,18 +71,18 @@
                         <small>Background color more gentle.</small>
                     </h4>
                     <div class="tooltip-demo">
-                        <button type="button" class="btn btn-default" tooltip-placement="left" tooltip="On the Left!">Tooltip on left</button>
-                        <button type="button" class="btn btn-default" tooltip-placement="top" tooltip="On the Top!">Tooltip on top</button>
-                        <button type="button" class="btn btn-default" tooltip-placement="bottom" tooltip="On the Bottom!">Tooltip on bottom</button>
-                        <button type="button" class="btn btn-default" tooltip-placement="right" tooltip="On the Right!">Tooltip on right</button>
+                        <button type="button" class="btn btn-default" tooltip-placement="left" uib-tooltip="On the Left!">Tooltip on left</button>
+                        <button type="button" class="btn btn-default" tooltip-placement="top" uib-tooltip="On the Top!">Tooltip on top</button>
+                        <button type="button" class="btn btn-default" tooltip-placement="bottom" uib-tooltip="On the Bottom!">Tooltip on bottom</button>
+                        <button type="button" class="btn btn-default" tooltip-placement="right" uib-tooltip="On the Right!">Tooltip on right</button>
                     </div>
                     <br>
                     <h4>Clickable Popover Demo</h4>
                     <div class="tooltip-demo">
-                        <button popover-placement="left" popover="On the Left!" class="btn btn-primary">Popover on left</button>
-                        <button popover-placement="top" popover="On the Top!" class="btn btn-primary">Popover on top</button>
-                        <button popover-placement="bottom" popover="On the Bottom!" class="btn btn-primary">Popover on bottom</button>
-                        <button popover-placement="right" popover="On the Right!" class="btn btn-primary">Popover on right</button>
+                        <button popover-placement="left" uib-popover="On the Left!" class="btn btn-primary">Popover on left</button>
+                        <button popover-placement="top" uib-popover="On the Top!" class="btn btn-primary">Popover on top</button>
+                        <button popover-placement="bottom" uib-popover="On the Bottom!" class="btn btn-primary">Popover on bottom</button>
+                        <button popover-placement="right" uib-popover="On the Right!" class="btn btn-primary">Popover on right</button>
                     </div>
                 </div>
             </div>

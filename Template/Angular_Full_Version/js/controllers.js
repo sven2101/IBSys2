@@ -38,13 +38,19 @@
  *  - sweetAlertCtrl
  *  - selectCtrl
  *  - toastrCtrl
+ *  - loadingCtrl
+ *  - datatablesCtrl
+ *  - truncateCtrl
+ *  - touchspinCtrl
+ *  - tourCtrl
+ *  - jstreeCtrl
  *
  *
  */
 
 /**
  * MainCtrl - controller
- * Contains severals global data used in diferent view
+ * Contains several global data used in different view
  *
  */
 function MainCtrl() {
@@ -52,7 +58,7 @@ function MainCtrl() {
     /**
      * daterange - Used as initial model for data range picker in Advanced form view
      */
-    this.daterange = {startDate: null, endDate: null}
+    this.daterange = {startDate: null, endDate: null};
 
     /**
      * slideInterval - Interval for bootstrap Carousel, in milliseconds:
@@ -117,37 +123,6 @@ function MainCtrl() {
     ];
 
     /**
-     * persons - Data used in Tables view for Data Tables plugin
-     */
-    this.persons = [
-        {
-            id: '1',
-            firstName: 'Monica',
-            lastName: 'Smith'
-        },
-        {
-            id: '2',
-            firstName: 'Sandra',
-            lastName: 'Jackson'
-        },
-        {
-            id: '3',
-            firstName: 'John',
-            lastName: 'Underwood'
-        },
-        {
-            id: '4',
-            firstName: 'Chris',
-            lastName: 'Johnatan'
-        },
-        {
-            id: '5',
-            firstName: 'Kim',
-            lastName: 'Rosowski'
-        }
-    ];
-
-    /**
      * check's - Few variables for checkbox input used in iCheck plugin. Only for demo purpose
      */
     this.checkOne = true;
@@ -168,7 +143,7 @@ function MainCtrl() {
     this.bigTotalItems = 175;
     this.bigCurrentPage = 1;
     this.maxSize = 5;
-    this.singleModel = 1;
+    this.singleModel = false;
     this.radioModel = 'Middle';
     this.checkModel = {
         left: false,
@@ -1494,25 +1469,25 @@ function widgetFlotChart() {
  * modalDemoCtrl - Controller used to run modal view
  * used in Basic form view
  */
-function modalDemoCtrl($scope, $modal) {
+function modalDemoCtrl($scope, $uibModal) {
 
     $scope.open = function () {
 
-        var modalInstance = $modal.open({
+        var modalInstance = $uibModal.open({
             templateUrl: 'views/modal_example.html',
             controller: ModalInstanceCtrl
         });
     };
 
     $scope.open1 = function () {
-        var modalInstance = $modal.open({
+        var modalInstance = $uibModal.open({
             templateUrl: 'views/modal_example1.html',
             controller: ModalInstanceCtrl
         });
     };
 
     $scope.open2 = function () {
-        var modalInstance = $modal.open({
+        var modalInstance = $uibModal.open({
             templateUrl: 'views/modal_example2.html',
             controller: ModalInstanceCtrl,
             windowClass: "animated fadeIn"
@@ -1520,7 +1495,7 @@ function modalDemoCtrl($scope, $modal) {
     };
 
     $scope.open3 = function (size) {
-        var modalInstance = $modal.open({
+        var modalInstance = $uibModal.open({
             templateUrl: 'views/modal_example3.html',
             size: size,
             controller: ModalInstanceCtrl
@@ -1528,7 +1503,7 @@ function modalDemoCtrl($scope, $modal) {
     };
 
     $scope.open4 = function () {
-        var modalInstance = $modal.open({
+        var modalInstance = $uibModal.open({
             templateUrl: 'views/modal_example2.html',
             controller: ModalInstanceCtrl,
             windowClass: "animated flipInY"
@@ -1536,14 +1511,14 @@ function modalDemoCtrl($scope, $modal) {
     };
 };
 
-function ModalInstanceCtrl ($scope, $modalInstance) {
+function ModalInstanceCtrl ($scope, $uibModalInstance) {
 
     $scope.ok = function () {
-        $modalInstance.close();
+        $uibModalInstance.close();
     };
 
     $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
+        $uibModalInstance.dismiss('cancel');
     };
 
 
@@ -2175,6 +2150,7 @@ function notifyCtrl($scope, notify) {
 function translateCtrl($translate, $scope) {
     $scope.changeLanguage = function (langKey) {
         $translate.use(langKey);
+        $scope.language = langKey;
     };
 }
 
@@ -2792,6 +2768,575 @@ function toastrCtrl($scope, toaster){
     };
 
 }
+
+function loadingCtrl($scope, $timeout){
+
+
+    $scope.runLoading = function() {
+        // start loading
+        $scope.loading = true;
+
+        $timeout(function(){
+            // Simulate some service
+            $scope.loading = false;
+        },2000)
+    };
+
+
+    // Demo purpose actions
+    $scope.runLoading1 = function () {
+        // start loading
+        $scope.loading1 = true;
+
+        $timeout(function () {
+            // Simulate some service
+            $scope.loading1 = false;
+        }, 2000)
+    };
+    $scope.runLoading2 = function () {
+        // start loading
+        $scope.loading2 = true;
+
+        $timeout(function () {
+            // Simulate some service
+            $scope.loading2 = false;
+        }, 2000)
+    };
+    $scope.runLoading3 = function () {
+        // start loading
+        $scope.loading3 = true;
+
+        $timeout(function () {
+            // Simulate some service
+            $scope.loading3 = false;
+        }, 2000)
+    };
+    $scope.runLoading4 = function () {
+        // start loading
+        $scope.loading4 = true;
+
+        $timeout(function () {
+            // Simulate some service
+            $scope.loading4 = false;
+        }, 2000)
+    };
+    $scope.runLoading5 = function () {
+        // start loading
+        $scope.loading5 = true;
+
+        $timeout(function () {
+            // Simulate some service
+            $scope.loading5 = false;
+        }, 2000)
+    };
+    $scope.runLoading6 = function () {
+        // start loading
+        $scope.loading6 = true;
+
+        $timeout(function () {
+            // Simulate some service
+            $scope.loading6 = false;
+        }, 2000)
+    };
+    $scope.runLoading7 = function () {
+        // start loading
+        $scope.loading7 = true;
+
+        $timeout(function () {
+            // Simulate some service
+            $scope.loading7 = false;
+        }, 2000)
+    };
+    $scope.runLoading8 = function () {
+        // start loading
+        $scope.loading8 = true;
+
+        $timeout(function () {
+            // Simulate some service
+            $scope.loading8 = false;
+        }, 2000)
+    };
+    $scope.runLoading9 = function () {
+        // start loading
+        $scope.loading9 = true;
+
+        $timeout(function () {
+            // Simulate some service
+            $scope.loading9 = false;
+        }, 2000)
+    };
+    $scope.runLoading10 = function () {
+        // start loading
+        $scope.loading10 = true;
+
+        $timeout(function () {
+            // Simulate some service
+            $scope.loading10 = false;
+        }, 2000)
+    };
+    $scope.runLoading11 = function () {
+        // start loading
+        $timeout(function() {
+            $scope.loading11 = 0.1;
+        }, 500);
+        $timeout(function() {
+            $scope.loading11 += 0.2;
+        }, 1000);
+        $timeout(function() {
+            $scope.loading11 += 0.3;
+        }, 1500);
+        $timeout(function() {
+            $scope.loading11 = false;
+        }, 2000);
+
+    };
+    $scope.runLoading12 = function () {
+        // start loading
+        $timeout(function() {
+            $scope.loading12 = 0.1;
+        }, 500);
+        $timeout(function() {
+            $scope.loading12 += 0.2;
+        }, 1000);
+        $timeout(function() {
+            $scope.loading12 += 0.3;
+        }, 1500);
+        $timeout(function() {
+            $scope.loading12 = false;
+        }, 2000);
+
+    };
+
+    $scope.runLoadingDemo = function() {
+        // start loading
+        $scope.loadingDemo = true;
+
+        $timeout(function(){
+            // Simulate some service
+            $scope.loadingDemo = false;
+        },2000)
+    };
+
+
+}
+
+
+function datatablesCtrl($scope,DTOptionsBuilder){
+
+    $scope.dtOptions = DTOptionsBuilder.newOptions()
+        .withDOM('<"html5buttons"B>lTfgitp')
+        .withButtons([
+            {extend: 'copy'},
+            {extend: 'csv'},
+            {extend: 'excel', title: 'ExampleFile'},
+            {extend: 'pdf', title: 'ExampleFile'},
+
+            {extend: 'print',
+                customize: function (win){
+                    $(win.document.body).addClass('white-bg');
+                    $(win.document.body).css('font-size', '10px');
+
+                    $(win.document.body).find('table')
+                        .addClass('compact')
+                        .css('font-size', 'inherit');
+                }
+            }
+        ]);
+
+    /**
+     * persons - Data used in Tables view for Data Tables plugin
+     */
+    $scope.persons = [
+        {
+            id: '1',
+            firstName: 'Monica',
+            lastName: 'Smith'
+        },
+        {
+            id: '2',
+            firstName: 'Sandra',
+            lastName: 'Jackson'
+        },
+        {
+            id: '3',
+            firstName: 'John',
+            lastName: 'Underwood'
+        },
+        {
+            id: '4',
+            firstName: 'Chris',
+            lastName: 'Johnatan'
+        },
+        {
+            id: '5',
+            firstName: 'Kim',
+            lastName: 'Rosowski'
+        }
+    ];
+
+}
+
+function truncateCtrl($scope){
+
+    $scope.truncateOptions = {
+        watch: 'window'
+    };
+
+    $scope.truncateOptions2 = {
+        watch: 'window',
+        ellipsis: ' ///...'
+    };
+
+    $scope.truncateOptions3 = {
+        watch: 'window',
+        wrap: 'letter'
+    }
+
+}
+
+function touchspinCtrl($scope) {
+
+    $scope.inputteresxcs = 55;
+    $scope.spinOption1 = {
+        min: 0,
+        max: 100,
+        step: 0.1,
+        decimals: 2,
+        boostat: 5,
+        maxboostedstep: 10,
+    };
+
+    $scope.spinOption2 = {
+        verticalbuttons: true
+    }
+
+    $scope.spinOption3 = {
+        postfix: '%'
+    }
+
+    $scope.spinOption4 = {
+        postfix: "a button",
+        postfix_extraclass: "btn btn-default"
+    }
+
+}
+
+function tourCtrl($scope){
+
+    $scope.preparebody = function(tour){
+        $('body').addClass('tour-open')
+    };
+
+    $scope.clearbody = function(tour){
+        $('body').removeClass('tour-close')
+    }
+
+}
+
+function jstreeCtrl($scope) {
+
+    $scope.treeConfig = {
+        'plugins' : [ 'types', 'dnd' ],
+        'types' : {
+            'default' : {
+                'icon' : 'fa fa-folder'
+            },
+            'html' : {
+                'icon' : 'fa fa-file-code-o'
+            },
+            'svg' : {
+                'icon' : 'fa fa-file-picture-o'
+            },
+            'css' : {
+                'icon' : 'fa fa-file-code-o'
+            },
+            'img' : {
+                'icon' : 'fa fa-file-image-o'
+            },
+            'js' : {
+                'icon' : 'fa fa-file-text-o'
+            }
+
+        }
+    };
+
+    $scope.treeData = [
+        {
+            "id": "ajson1",
+            "parent": "#",
+            "text": "Admin theme",
+            "state": {
+                "opened": true
+            },
+            "__uiNodeId": 1
+        }, {
+            "id": "ajson2",
+            "parent": "ajson1",
+            "text": "css",
+            "state": {
+                "opened": true
+            },
+            "__uiNodeId": 2
+        }, {
+            "id": "ajson3",
+            "parent": "ajson2",
+            "text": "animate.css",
+            "state": {
+                "opened": true
+            },
+            "type": "css",
+            "__uiNodeId": 3
+        },
+        {
+            "id": "ajson4",
+            "parent": "ajson2",
+            "text": "bootstrap.css",
+            "state": {
+                "opened": true
+            },
+            "type": "css",
+            "__uiNodeId": 4
+        },
+        {
+            "id": "ajson5",
+            "parent": "ajson2",
+            "text": "style.css",
+            "state": {
+                "opened": true
+            },
+            "type": "css",
+            "__uiNodeId": 5
+        },
+        {
+            "id": "ajson6",
+            "parent": "ajson1",
+            "text": "fonts",
+            "state": {
+                "opened": false
+            },
+            "__uiNodeId": 6
+        },
+        {
+            "id": "ajson9",
+            "parent": "ajson6",
+            "text": "glyphicons-halflings-regular.eot",
+            "state": {
+                "opened": true
+            },
+            "type":"img",
+            "__uiNodeId": 9
+        },
+        {
+            "id": "ajson10",
+            "parent": "ajson6",
+            "text": "glyphicons-halflings-regular.svg",
+            "state": {
+                "opened": true
+            },
+            "type":"svg",
+            "__uiNodeId": 10
+        },
+        {
+            "id": "ajson11",
+            "parent": "ajson6",
+            "text": "glyphicons-halflings-regular.ttf",
+            "state": {
+                "opened": true
+            },
+            "type":"img",
+            "__uiNodeId": 11
+        },
+        {
+            "id": "ajson12",
+            "parent": "ajson6",
+            "text": "glyphicons-halflings-regular.woff",
+            "state": {
+                "opened": true
+            },
+            "type":"img",
+            "__uiNodeId": 12
+        },
+        {
+            "id": "ajson7",
+            "parent": "ajson1",
+            "text": "img",
+            "state": {
+                "opened": true
+            },
+            "__uiNodeId": 7
+        },
+        {
+            "id": "ajson13",
+            "parent": "ajson7",
+            "text": "profile_small.jpg",
+            "state": {
+                "opened": true
+            },
+            "type": "img",
+            "__uiNodeId": 13
+        },
+        {
+            "id": "ajson14",
+            "parent": "ajson7",
+            "text": "angular_logo.png",
+            "state": {
+                "opened": true
+            },
+            "type": "img",
+            "__uiNodeId": 14
+        },
+        {
+            "id": "ajson15",
+            "parent": "ajson7",
+            "text": "html_logo.png",
+            "state": {
+                "opened": true
+            },
+            "li_attr": {"class": "text-navy"},
+            "type": "img",
+            "__uiNodeId": 15
+        },
+        {
+            "id": "ajson16",
+            "parent": "ajson7",
+            "text": "mvc_logo.png",
+            "state": {
+                "opened": true
+            },
+            "li_attr": {"class": "text-navy"},
+            "type": "img",
+            "__uiNodeId": 16
+        },
+        {
+            "id": "ajson8",
+            "parent": "ajson1",
+            "text": "js",
+            "state": {
+                "opened": true
+            },
+            "__uiNodeId": 8
+        },
+        {
+            "id": "ajson17",
+            "parent": "ajson8",
+            "text": "inspinia.js",
+            "state": {
+                "opened": true
+            },
+            "type":"js",
+            "__uiNodeId": 17
+        },
+        {
+            "id": "ajson18",
+            "parent": "ajson8",
+            "text": "bootstrap.js",
+            "state": {
+                "opened": true
+            },
+            "type":"js",
+            "__uiNodeId": 18
+        },
+        {
+            "id": "ajson19",
+            "parent": "ajson8",
+            "text": "jquery-2.1.1.js",
+            "state": {
+                "opened": true
+            },
+            "type":"js",
+            "__uiNodeId": 19
+        },
+        {
+            "id": "ajson20",
+            "parent": "ajson8",
+            "text": "jquery-ui.custom.min.js",
+            "state": {
+                "opened": true
+            },
+            "type":"js",
+            "__uiNodeId":20
+        },
+        {
+            "id": "ajson21",
+            "parent": "ajson1",
+            "text": "affix.html",
+            "type":"html",
+            "__uiNodeId":21
+        },
+        {
+            "id": "ajson22",
+            "parent": "ajson1",
+            "text": "dashboard.html",
+            "type":"html",
+            "__uiNodeId":22
+        },
+        {
+            "id": "ajson23",
+            "parent": "ajson1",
+            "text": "buttons.html",
+            "type":"html",
+            "__uiNodeId":23
+        },
+        {
+            "id": "ajson24",
+            "parent": "ajson1",
+            "text": "calendar.html",
+            "type":"html",
+            "__uiNodeId":24
+        },
+        {
+            "id": "ajson25",
+            "parent": "ajson1",
+            "text": "contacts.html",
+            "type":"html",
+            "__uiNodeId":25
+        },
+        {
+            "id": "ajson26",
+            "parent": "ajson1",
+            "text": "css_animation.html",
+            "type":"html",
+            "__uiNodeId":26
+        },
+        {
+            "id": "ajson27",
+            "parent": "ajson1",
+            "text": "flot_chart.html",
+            "type":"html",
+            "__uiNodeId":27
+        },
+        {
+            "id": "ajson28",
+            "parent": "ajson1",
+            "text": "google_maps.html",
+            "type":"html",
+            "__uiNodeId":28
+        },
+        {
+            "id": "ajson29",
+            "parent": "ajson1",
+            "text": "icons.html",
+            "type":"html",
+            "__uiNodeId":29
+        },
+        {
+            "id": "ajson30",
+            "parent": "ajson1",
+            "text": "invoice.html",
+            "type":"html",
+            "__uiNodeId":30
+        },
+        {
+            "id": "ajson31",
+            "parent": "ajson1",
+            "text": "login.html",
+            "type":"html",
+            "__uiNodeId":31
+        }
+    ]
+
+}
+
 /**
  *
  * Pass all functions into module
@@ -2829,5 +3374,11 @@ angular
     .controller('metricsCtrl', metricsCtrl)
     .controller('sweetAlertCtrl', sweetAlertCtrl)
     .controller('selectCtrl', selectCtrl)
-    .controller('toastrCtrl', toastrCtrl);
+    .controller('toastrCtrl', toastrCtrl)
+    .controller('loadingCtrl', loadingCtrl)
+    .controller('datatablesCtrl', datatablesCtrl)
+    .controller('truncateCtrl', truncateCtrl)
+    .controller('touchspinCtrl', touchspinCtrl)
+    .controller('tourCtrl', tourCtrl)
+    .controller('jstreeCtrl', jstreeCtrl);
 

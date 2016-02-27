@@ -55,9 +55,9 @@
                 <small>
 
                     <strong>Documentation created:</strong> 10/05/2015<br/>
-                    <strong>Latest update:</strong> 20/08/2015<br/>
+                    <strong>Latest update:</strong> 24/02/2016<br/>
                     <strong>By:</strong> WebAppLayers Team<br/>
-                    <strong>Theme version:</strong> 2.3<br/>
+                    <strong>Theme version:</strong> 2.5<br/>
 
                 </small>
                 <br/>
@@ -97,6 +97,7 @@
                 <ul>
                     <li><a href="#fixed_sidebar">Fixed sidebar</a></li>
                     <li><a href="#fixed_navbar">Fixed navbar</a></li>
+                    <li><a href="#fixed_navbar2">Fixed navbar2</a></li>
                     <li><a href="#fixed_footer">Fixed footer</a></li>
                     <li><a href="#layout_2">Layout 2</a></li>
                     <li><a href="#off_canvas_menu">Off canvas menu</a></li>
@@ -104,6 +105,8 @@
                 </ul>
             </li>
             <li><a href="#seed_project">Seed Project</a></li>
+            <li><a href="#change_log">Change log 2.4 > 2.5</a></li>
+            <li><a href="#change_log">Change log 2.3 > 2.4</a></li>
             <li><a href="#change_log">Change log 2.2 > 2.3</a></li>
             <li><a href="#change_log">Change log 2.1 > 2.2</a></li>
             <li><a href="#contact">Contacts</a></li>
@@ -409,6 +412,32 @@ Router.route('/dashboard4l', function () {
 
 </pre>
 
+
+    <a name="fixed_navbar2" class="anchor"></a>
+    <h4>Fixed navbar 2</h4>
+
+    <p>
+        Fixed navbar 2 is a top navbar that is sticked on screen and it's width is the same as the width of wrapper
+
+    </p>
+    <p>
+        In <strong>client->views->common->top-navbar.js</strong> file you can see a comment // FIXED TOP NAVBAR OPTION.<br/>
+        To add fixed navbar 2 you just need to uncomment this code and replace with new one:
+    </p>
+
+<pre class="prettyprint linenums">
+
+     $('body').addClass('fixed-nav').addClass('fixed-nav-basic');
+     $(".navbar-static-top").removeClass('navbar-static-top').addClass('navbar-fixed-top');
+
+</pre>
+
+    <p>
+        Fixed navbar 2 works only on primary layout
+
+    </p>
+
+
 <a name="fixed_footer" class="anchor"></a>
 <h4>Fixed footer</h4>
 
@@ -561,6 +590,87 @@ $('body').addClass('skin-1');
 
 
 <a name="change_log" class="anchor"></a>
+
+
+    <h3>Change log 2.4 -> 2.5</h3>
+
+    <div class="alert alert-info">
+        2.5 version fully focused on update AngularJS projects.
+        <strong>New features and views will be added to separate 2.6 version.</strong>
+    </div>
+
+    <h3>Change log 2.3 -> 2.4</h3>
+
+    <ul>
+
+        <strong>New view files</strong>
+        <li> pages/graphs/c3charts.html </li>
+        <li> pages/ecommerce/shopingCart.html </li>
+        <li> pages/forms/markdown.html </li>
+        <li> pages/miscellaneous/clipboard.html </li>
+        <li> pages/miscellaneous/i18support.html </li>
+        <li> pages/miscellaneous/loadingButtons.html </li>
+        <li> pages/miscellaneous/tour.html </li>
+        <li> pages/miscellaneous/truncate.html </li>
+        <li> pages/uielements/resizeablePanels.html </li>
+
+        <hr>
+        <strong>Changed views files</strong>
+        <li> views/common/navigation.html - add new menu elements for new views</li>
+        <li> views/miscellaneous/agileBoard.html (js) - add example code for serialize list</li>
+        <li> views/forms/formAdvanced.html (js) - add new Touch spin control</li>
+        <li> views/landing/landing.js - update page-scroll click event to close menu on select in mobile</li>
+        <li> views/tables/table_data_tables.html (js) - replace old swf buttons with new button plugin (update datatables library)</li>
+        <li> views/uielements/video.js (js) - add script for handle full screen video option</li>
+
+        <hr>
+        <strong>New Inspinia js files</strong>
+        <li> public/locales/en.json</li>
+        <li> public/locales/es.json</li>
+
+        <hr>
+        <strong>Changed Inspinia js files</strong>
+        <li> main.js.js - update mainLayout function </li>
+        <li> top-navbar.js - update topNavbar event </li>
+
+        <hr>
+        <strong>Updates</strong>
+        <li> bootstrap - update to 3.3.6 </li>
+        <li> dataTables - create on compact datatables generate in official builder: https://datatables.net/download/index </li>
+        <li> pace - update to 1.0.2 </li>
+
+        <hr>
+        <strong>New plugins</strong>
+        <li> plugins/c3 (with css files)</li>
+        <li> plugins/bootstrap-markdow (with css files)</li>
+        <li> plugins/d3 </li>
+        <li> plugins/clipboard </li>
+        <li> plugins/dotdotdot </li>
+        <li> plugins/i18next </li>
+        <li> plugins/ladda (with css files)</li>
+        <li> plugins/touchspin (with css files)</li>
+        <li> plugins/bootstrapTour (with css files)</li>
+
+        <hr>
+        <strong>New images</strong>
+        <li> imb/flags- Set of flags images</li>
+
+
+        <hr>
+        <strong>CSS/LESS/SCSS/SASS</strong>
+        <li> Add styles for new pages </li>
+        <li> Fix buttons shadow on Chrome </li>
+        <li> Fix dropdown text colour on md-skin </li>
+        <li> Fix pace.js on fixed navbar option </li>
+        <li> Fix few glitch animation effect </li>
+        <li> Improve nav-tabs on mobile devices </li>
+        <li> Fix second level menu on md-skin </li>
+        <li> Improve RTL mode </li>
+        <li> Add new fixed navbar option </li>
+        <li> Ipmore print mode </li>
+
+    </ul>
+
 
     <h3>Change log 2.2 -> 2.3</h3>
 

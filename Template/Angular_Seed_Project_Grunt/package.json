@@ -1,6 +1,6 @@
 {
   "name": "INSPINIA",
-  "version": "2.3.0",
+  "version": "2.5.0",
   "description": "INSPINIA - Responsive Admin Theme",
   "dependencies": {
     "grunt": "^0.4.5"

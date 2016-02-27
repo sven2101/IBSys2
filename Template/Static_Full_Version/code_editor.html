@@ -64,6 +64,7 @@
                         <li><a href="graph_rickshaw.html">Rickshaw Charts</a></li>
                         <li><a href="graph_chartjs.html">Chart.js</a></li>
                         <li><a href="graph_chartist.html">Chartist</a></li>
+                        <li><a href="c3.html">c3 charts</a></li>
                         <li><a href="graph_peity.html">Peity Charts</a></li>
                         <li><a href="graph_sparkline.html">Sparkline Charts</a></li>
                     </ul>
@@ -91,6 +92,7 @@
                         <li><a href="form_wizard.html">Wizard</a></li>
                         <li><a href="form_file_upload.html">File Upload</a></li>
                         <li><a href="form_editors.html">Text Editor</a></li>
+                        <li><a href="form_markdown.html">Markdown</a></li>
                     </ul>
                 </li>
                 <li>
@@ -140,18 +142,23 @@
                         <li><a href="agile_board.html">Agile board</a></li>
                         <li><a href="timeline_2.html">Timeline v.2</a></li>
                         <li><a href="diff.html">Diff</a></li>
+                        <li><a href="i18support.html">i18 support</a></li>
                         <li><a href="sweetalert.html">Sweet alert</a></li>
                         <li><a href="idle_timer.html">Idle timer</a></li>
+                        <li><a href="truncate.html">Truncate</a></li>
                         <li><a href="spinners.html">Spinners</a></li>
                         <li><a href="tinycon.html">Live favicon</a></li>
                         <li><a href="google_maps.html">Google maps</a></li>
                         <li class="active"><a href="code_editor.html">Code editor</a></li>
                         <li><a href="modal_window.html">Modal window</a></li>
+                        <li><a href="clipboard.html">Clipboard</a></li>
                         <li><a href="forum_main.html">Forum view</a></li>
                         <li><a href="validation.html">Validation</a></li>
                         <li><a href="tree_view.html">Tree view</a></li>
+                        <li><a href="loading_buttons.html">Loading buttons</a></li>
                         <li><a href="chat_view.html">Chat view</a></li>
                         <li><a href="masonry.html">Masonry</a></li>
+                        <li><a href="tour.html">Tour</a></li>
                     </ul>
                 </li>
                 <li>
@@ -159,7 +166,7 @@
                     <ul class="nav nav-second-level collapse">
                         <li><a href="typography.html">Typography</a></li>
                         <li><a href="icons.html">Icons</a></li>
-                        <li><a href="draggable_panels.html">Draggable Panels</a></li>
+                        <li><a href="draggable_panels.html">Draggable Panels</a></li> <li><a href="resizeable_panels.html">Resizeable Panels</a></li>
                         <li><a href="buttons.html">Buttons</a></li>
                         <li><a href="video.html">Video</a></li>
                         <li><a href="tabs_panels.html">Panels</a></li>
@@ -188,6 +195,7 @@
                         <li><a href="ecommerce_product_list.html">Products list</a></li>
                         <li><a href="ecommerce_product.html">Product edit</a></li>
                         <li><a href="ecommerce_product_detail.html">Product detail</a></li>
+                        <li><a href="ecommerce-cart.html">Cart</a></li>
                         <li><a href="ecommerce-orders.html">Orders</a></li>
                         <li><a href="ecommerce_payments.html">Credit Card form</a></li>
                     </ul>
@@ -398,15 +406,15 @@
     // Code goes here
 
     // For demo purpose - animation css script
-    function animationHover(element, animation){
+    function animationHover(element, animation)
         element = $(element);
         element.hover(
-                function() {
+                function()
                     element.addClass('animated ' + animation);
                 },
-                function(){
+                function()
                     //wait for animation to finish before removing classes
-                    window.setTimeout( function(){
+                    window.setTimeout( function()
                         element.removeClass('animated ' + animation);
                     }, 2000);
                 });
@@ -430,20 +438,20 @@
 <textarea id="code2">
     var SpeechApp = angular.module('SpeechApp', []);
 
-    function VoiceCtrl($scope) {
+    function VoiceCtrl($scope)
 
         $scope.said='...';
 
-        $scope.helloWorld = function() {
+        $scope.helloWorld = function()
             $scope.said = "Hello world!";
         }
 
-        $scope.commands = {
-            'hello (world)': function() {
+        $scope.commands =
+            'hello (world)': function()
                 if (typeof console !== "undefined") console.log('hello world!')
                 $scope.$apply($scope.helloWorld);
             },
-            'hey': function() {
+            'hey': function()
                 if (typeof console !== "undefined") console.log('hey!')
                 $scope.$apply($scope.helloWorld);
             }

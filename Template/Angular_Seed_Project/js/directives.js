@@ -130,14 +130,14 @@ function minimalizaSidebar($timeout) {
                     // For smoothly turn on menu
                     setTimeout(
                         function () {
-                            $('#side-menu').fadeIn(500);
-                        }, 100);
+                            $('#side-menu').fadeIn(400);
+                        }, 200);
                 } else if ($('body').hasClass('fixed-sidebar')){
                     $('#side-menu').hide();
                     setTimeout(
                         function () {
-                            $('#side-menu').fadeIn(500);
-                        }, 300);
+                            $('#side-menu').fadeIn(400);
+                        }, 100);
                 } else {
                     // Remove all inline style from jquery fadeIn function to reset menu state
                     $('#side-menu').removeAttr('style');

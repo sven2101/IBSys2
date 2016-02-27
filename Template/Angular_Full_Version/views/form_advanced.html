@@ -403,6 +403,45 @@
         </div>
     </div>
 </div>
+    <div class="row" ng-controller="touchspinCtrl">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>TouchSpin <small>http://www.virtuosoft.eu/code/bootstrap-touchspin/</small></h5>
+                </div>
+                <div class="ibox-content">
+                    <p>
+                        A mobile and touch friendly input spinner component for Bootstrap 3. It supports the mousewheel and the up/down keys.
+                    </p>
+
+                    <div class="row">
+                        <div class="col-md-4">
+
+                            <p class="font-bold">
+                                Basic example with empty value
+                            </p>
+
+                            <input id="demo1" type="text"  name="demo1" touch-spin spin-options="spinOption1" ng-model="inputteresxcs">
+                        </div>
+                        <div class="col-md-4">
+                            <p class="font-bold">
+                                Example with postfix
+                            </p>
+                            <input id="demo3" type="text"  name="demo1" touch-spin spin-options="spinOption3" ng-model="inputteresxcs">
+                        </div>
+                        <div class="col-md-4">
+
+                            <p class="font-bold">
+                                Example with vertical button alignment:
+                            </p>
+                            <input id="demo2" type="text"  name="demo1" touch-spin spin-options="spinOption2" ng-model="inputteresxcs">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row" data-ng-controller="selectCtrl">
         <div class="col-lg-12">
@@ -510,7 +549,7 @@
             <label class="font-noraml">Simple date input format</label>
 
             <div class="input-group date">
-                <input type="datetime" class="form-control" date-time ng-model="sampleDate" view="date" auto-close="true">
+                <input type="datetime" class="form-control" date-time ng-model="sampleDate" view="date" auto-close="true" min-view="date" format="YYYY-MM-DD">
                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
             </div>
         </div>
@@ -546,16 +585,17 @@
         <div class="form-group" id="data_5">
             <label class="font-noraml">Range select</label>
 
-            <div class="dropdown" dropdown>
-                <a class="dropdown-toggle btn btn-primary btn-sm" dropdown-toggle>
+            <div uib-dropdown>
+                <a class="btn btn-primary btn-sm" uib-dropdown-toggle>
                     Select range
                 </a>
+                <div>
                 <span>
-                    Selected date: {{(a|date)}} - {{(b|date)}}
+                    Selected date: <br/> {{(a|date)}} - {{(b|date)}}
                 </span>
-
-                <div class="dropdown-menu" ng-click="$event.preventDefault();$event.stopPropagation()">
-                    <div date-range start="a" end="b"></div>
+                </div>
+                <div uib-dropdown-menu="" ng-click="$event.preventDefault();$event.stopPropagation()">
+                    <div date-range start="a" end="b" auto-close="true"></div>
                 </div>
             </div>
         </div>
@@ -595,7 +635,7 @@
                 A JavaScript widget for choosing date ranges.
                 Designed to work with the Bootstrap CSS framework.
             </p>
-            <input date-range-picker class="form-control date-picker" type="text" ng-model="app.daterange" />
+            <input date-range-picker class="form-control date-picker" type="text" ng-model="main.daterange" />
             <p class="m-t-md">https://github.com/fragaria/angular-daterangepicker</p>
 
         </div>

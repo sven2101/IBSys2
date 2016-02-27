@@ -55,9 +55,9 @@
                 <small>
 
                     <strong>Documentation created:</strong> 02/09/2014<br/>
-                    <strong>Latest update:</strong> 20/08/2015<br/>
+                    <strong>Latest update:</strong> 24/02/2016<br/>
                     <strong>By:</strong> WebAppLayers Team<br/>
-                    <strong>Theme version:</strong> 2.3<br/>
+                    <strong>Theme version:</strong> 2.5<br/>
 
                 </small>
                 <br/>
@@ -71,6 +71,15 @@
             <div class="col-md-6">
                 <img src="img/preview.png" alt="screen" class="img-responsive"/>
 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="alert alert-danger">
+                    Please note that since Inspinia 2.5 we upgrade all Angular project to Angular 1.5 as well as all UI Bootstrap library to 1.1.2.
+                    This update required to change all prefixes in UI Bootstrap - if you will update your exisitng project full migration path you can find here: https://github.com/angular-ui/bootstrap/wiki/Migration-guide-for-prefixes.
+                    All current version are prepared with new prefixes.
+                </div>
             </div>
         </div>
 
@@ -97,6 +106,7 @@
                 <ul>
                     <li><a href="#fixed_sidebar">Fixed sidebar</a></li>
                     <li><a href="#fixed_navbar">Fixed navbar</a></li>
+                    <li><a href="#fixed_navbar2">Fixed navbar v.2</a></li>
                     <li><a href="#fixed_footer">Fixed footer</a></li>
                     <li><a href="#rtl_support">RTL support</a></li>
                     <li><a href="#layout_2">Layout 2</a></li>
@@ -109,6 +119,8 @@
             <li><a href="#grunt">Grunt Seed Project</a></li>
             <li><a href="#gulp">Gulp Seed Project</a></li>
             <li><a href="#meanjs">MEANJS Seed Project</a></li>
+            <li><a href="#change_log">Change log v.2.4 -> v.2.5</a></li>
+            <li><a href="#change_log">Change log v.2.3 -> v.2.4</a></li>
             <li><a href="#change_log">Change log v.2.2 -> v.2.3</a></li>
             <li><a href="#change_log">Change log v.2.0/2.1 -> v.2.2</a></li>
             <li><a href="#change_log">Change log v.2.0 -> v.2.1</a></li>
@@ -157,21 +169,15 @@
     ├── <strong>img/</strong>
     ├── <strong>js/</strong>
     ├── <strong>views/</strong>
-    ├── 404.html
-    ├── 500.html
     ├── index.html
-    ├── forgot_password.html
-    ├── lockscreen.html
-    ├── login.html
-    ├── login_two_columns.html
-    ├── register.html </code></pre>
+    ├── favicon.ico </code></pre>
         </div>
 
         <div><pre class="prettyprint linenums">
 <code>js/
     ├── <strong>angular/</strong>
     ├── <strong>angular-translate/</strong>
-    ├── <strong>font-bootstrap/</strong>
+    ├── <strong>bootstrap/</strong>
     ├── <strong>jquery/</strong>
     ├── <strong>plugins/</strong>
     ├── <strong>ui-router/</strong>
@@ -213,6 +219,7 @@
 
     &lt;meta charset="utf-8"&gt;
     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
 
     &lt;!-- Page title set in pageTitle directive --&gt;
     &lt;title page-title&gt;&lt;/title&gt;
@@ -336,7 +343,7 @@
 &lt;script src="js/plugins/oclazyload/dist/ocLazyLoad.min.js"&gt;&lt;/script&gt;
 &lt;script src="js/angular-translate/angular-translate.min.js"&gt;&lt;/script&gt;
 &lt;script src="js/ui-router/angular-ui-router.min.js"&gt;&lt;/script&gt;
-&lt;script src="js/bootstrap/ui-bootstrap-tpls-0.12.0.min.js"&gt;&lt;/script&gt;
+&lt;script src="js/bootstrap/ui-bootstrap-tpls-1.1.2.min.js"&gt;&lt;/script&gt;
 
 &lt;!--
  You need to include this script on any page that has a Google Map.
@@ -549,6 +556,42 @@ function sideNavigation($timeout) {
 &lt;nav class="navbar navbar-fixed-top" role="navigation"&gt;
 
 </pre>
+
+    <a name="fixed_navbar2" class="anchor"></a>
+    <h4>Fixed navbar 2</h4>
+
+    <p>
+        Fixed navbar 2 is a top navbar that is sticked on screen and it's width is the same as the width of wrapper
+
+    </p>
+    <p>
+        To add fixed sidebar you  need to add .fixed-nav class and .fixed-nav-basic class to body.
+    </p>
+
+<pre class="prettyprint linenums">
+
+    &lt;body ng-controller="MainCtrl as main" class="fixed-nav fixed-nav-basic"&gt;
+
+</pre>
+
+    <p>
+        Next we will need to change navbar from static to fixed. To do this go to views/common/topnavbar.html file and change .navbar-static-top class to navbar-fixed-top
+
+    </p>
+
+
+<pre class="prettyprint linenums">
+
+&lt;nav class="navbar navbar-fixed-top" role="navigation"&gt;
+
+</pre>
+
+
+    <p>
+        Fixed navbar 2 works only on primary layout
+
+    </p>
+
 
 <a name="fixed_footer" class="anchor"></a>
 <h4>Fixed footer</h4>
@@ -888,7 +931,6 @@ bower install
 
 <p>
     In bower.js file there are specify needed resources for Seed Project.
-    As your project will grow you will need to add new resources. Look at the full version of bower file in <code>bower_all_dependencies.json</code> to get resources that you need.
 </p>
 
 
@@ -896,7 +938,7 @@ bower install
 <a name="meanjs" class="anchor"></a>
 <h3>Angular Seed Project MEANJS</h3>
 
-<p> It is an application skeleton for a typical AngularJS with MEANJS (http://meanjs.org/).
+<p> It is an application skeleton for a typical AngularJS with MEANJS (http://meanjs.org/) - Version 0.4.2.
     You can use it to quickly bootstrap your angular webapp projects. It has all necessary resources/files.
 </p>
 <p>
@@ -942,7 +984,6 @@ bower install
 </pre>
 <p>
     In bower.js file there are specify needed resources for Seed Project.
-    As your project will grow you will need to add new resources. Look at the full version of bower file in <code>bower_all_dependencies.json</code> to get resources that you need.
 </p>
 <p><strong>As this is only a theme to MEANJS we will not copy and put here full docs from MEANJS. Please go to MEANJS doc to get more info
     how to use it <a href="http://meanjs.org/docs.html">http://meanjs.org/docs.html</a> </strong></p>
@@ -950,6 +991,160 @@ bower install
 
 
 <a name="change_log" class="anchor"></a>
+
+    <h3>Change log 2.4 -> 2.5</h3>
+
+    <div class="alert alert-danger">
+        Please note that since Inspinia 2.5 we upgrade all Angular project to Angular 1.5 as well as all UI Bootstrap library to 1.1.2.
+        This update required to change all prefixes in UI Bootstrap - if you will update your exisitng project full migration path you can find here: https://github.com/angular-ui/bootstrap/wiki/Migration-guide-for-prefixes.
+        All current version are prepared with new prefixes.
+    </div>
+
+    <ul>
+
+        <strong>New view files</strong>
+
+        <li> <i>no new files</i></li>
+
+        <hr>
+        <strong>Changed views files</strong>
+        <h4> All changes for migration to new UI Bootstrap prefixes</h4>
+        <li> views/badges_labels.html </li>
+        <li> views/buttons.html </li>
+        <li> views/carousel.html </li>
+        <li> views/draggable.html </li>
+        <li> views/ecommerce_payments.html </li>
+        <li> views/ecommerce_product.html </li>
+        <li> views/faq.html </li>
+        <li> views/form_advanced.html </li>
+        <li> views/form_basic.html </li>
+        <li> views/form_file_upload.html </li>
+        <li> views/landing.html </li>
+        <li> views/markdown.html </li>
+        <li> views/notifications.html </li>
+        <li> views/profile_2.html </li>
+        <li> views/project_detail.html </li>
+        <li> views/social_feed.html </li>
+        <li> views/tabs.html </li>
+        <li> views/tabs_panels.html </li>
+        <li> views/tour.html </li>
+        <li> index.html </li>
+        <li> views/common/navigation.html</li>
+        <li> views/common/footer.html</li>
+        <li> views/common/ibox_tools.html</li>
+        <li> views/common/ibox_tools_full_screen.html</li>
+        <li> views/common/navigation_full_height.html</li>
+        <li> views/common/navigation_off_canvas.html</li>
+        <li> views/common/top_navigation.html</li>
+        <li> views/common/topnavbar.html</li>
+
+        <hr>
+        <strong>New Inspinia js files</strong>
+        <li> <span class="text-muted">No new files</span> </li>
+
+        <hr>
+        <strong>Changed Inspinia js files</strong>
+        <li> config.js - add new files for updated plugins</li>
+        <li> controllers.js - update prefixes for Modal controller</li>
+        <li> directives.js - update dropzone and vectormap directive  </li>
+        <li> inspinia.js - update window resize event </li>
+
+        <hr>
+        <strong>Updates</strong>
+        <li> js/angular - update to 1.5</li>
+        <li> js/bootstrap - UI Bootstrap to 1.1.2</li>
+        <li> js/plugins/ui-select</li>
+        <li> js/plugins/chosen</li>
+        <li> js/plugins/dropzone</li>
+        <li> js/plugins/ui-sortable</li>
+
+        <hr>
+        <strong>New plugins</strong>
+        <li> <i>no new plugins</i></li>
+
+        <hr>
+        <strong>New images</strong>
+        <li> <i>no new images</i></li>
+
+    </ul>
+
+
+    <h3>Change log 2.3 -> 2.4</h3>
+
+    <ul>
+
+        <strong>New view files</strong>
+
+        <li> views/c3charts.html </li>
+        <li> views/clipboard.html </li>
+        <li> views/ecommerce_cart.html </li>
+        <li> views/i18support.html </li>
+        <li> views/markdow.html </li>
+        <li> views/loading_buttons.html </li>
+        <li> views/tour.html </li>
+        <li> views/truncate.html </li>
+        <li> views/tree_view.html </li>
+
+        <hr>
+        <strong>Changed views files</strong>
+        <li> views/common/navigation.html - add new menu elements for new views</li>
+
+        <li> views/agile_board.html - add example code for serialize list</li>
+        <li> views/form_advanced.html - add new Touch spin control</li>
+        <li> views/landing.html - update page-scroll click event to close menu on select in mobile</li>
+        <li> views/table_data_tables.html - replace old swf buttons with new button plugin (update datatables library) </li>
+        <li> views/video.html - add script for handle full screen video option</li>
+        <li> views/index.html - add angular-sanitize link</li>
+        <li> views/index.html - add angular-sanitize link</li>
+
+        <hr>
+        <strong>New Inspinia js files</strong>
+        <li> <span class="text-muted">No new files</span> </li>
+
+        <hr>
+        <strong>Changed Inspinia js files</strong>
+        <li> config.js - Add new states </li>
+        <li> controllers.js - Add three new controllers (loadingCtrl, datatablesCtrl, truncateCtrl, touchspinCtrl, tourCtrl, jstreeCtrl).  </li>
+        <li> directives.js - Add two new directives (resizeable, markdownEditor, touchSpin, truncate)  </li>
+        <li> inspinia.js - update fix_height function </li>
+
+        <hr>
+        <strong>Updates</strong>
+        <li> js/bootstrap - update to 3.3.6 </li>
+        <li> js/plugins/dataTables</li>
+        <li> js/plugins/datepicker</li>
+        <li> js/plugins/pace</li>
+
+        <hr>
+        <strong>New plugins</strong>
+        <li> js/plugins/touchspin</li>
+        <li> js/plugins/jsTree</li>
+        <li> js/plugins/ladda</li>
+        <li> js/plugins/c3</li>
+        <li> js/plugins/d3</li>
+        <li> js/plugins/clipboard</li>
+        <li> js/plugins/dotdotdot</li>
+        <li> js/plugins/bootstrap-tour</li>
+
+        <hr>
+        <strong>New images</strong>
+        <li> imb/flags- Set of flags images</li>
+
+        <hr>
+        <strong>CSS/LESS/SCSS/SASS</strong>
+        <li> Add styles for new pages </li>
+        <li> Fix buttons shadow on Chrome </li>
+        <li> Fix dropdown text colour on md-skin </li>
+        <li> Fix pace.js on fixed navbar option </li>
+        <li> Fix few glitch animation effect </li>
+        <li> Improve nav-tabs on mobile devices </li>
+        <li> Fix second level menu on md-skin </li>
+        <li> Improve RTL mode </li>
+        <li> Add new fixed navbar option </li>
+        <li> Ipmore print mode </li>
+
+    </ul>
+
 
     <h3>Change log 2.2 -> 2.3</h3>
 

@@ -614,7 +614,13 @@
                 scrollTop: $(link.attr('href')).offset().top - 50
             }, 500);
             event.preventDefault();
+            if($('body').hasClass('body-small')) {
+                $('#navbar').collapse('toggle');
+            }
         });
+
+        // Activate WOW.js plugin for animation on scrol
+        new WOW().init();
     });
 
     var cbpAnimatedHeader = (function() {

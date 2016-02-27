@@ -79,23 +79,23 @@
                 <div class="ibox-content">
                     <h5>Basic ProgressBars</h5>
 
-                    <progressbar value="15" ></progressbar>
-                    <progressbar value="55" type="warning"></progressbar>
-                    <progressbar value="68" type="success"></progressbar>
+                    <uib-progressbar value="15" ></uib-progressbar>
+                    <uib-progressbar value="55" type="warning"></uib-progressbar>
+                    <uib-progressbar value="68" type="success"></uib-progressbar>
 
                     <h5>Striped Progressbars</h5>
 
-                    <progressbar value="40" type="warning" class="progress-striped"></progressbar>
+                    <uib-progressbar value="40" type="warning" class="progress-striped"></uib-progressbar>
 
                     <h5>Active Progressbars</h5>
 
-                    <progressbar value="40" type="danger" class="progress-striped active"></progressbar>
+                    <uib-progressbar value="40" type="danger" class="progress-striped active"></uib-progressbar>
 
                     <h5>Stacked Progressbars</h5>
                     <button class="btn btn-sm btn-sm btn-white" type="button" ng-click="main.randomStacked()">Randomize</button>
-                    <progress><bar ng-repeat="bar in main.stacked track by $index" value="bar.value" type="{{bar.type}}">
+                    <uib-progress><uib-bar ng-repeat="bar in main.stacked track by $index" value="bar.value" type="{{bar.type}}">
                         <span ng-hide="bar.value < 3">{{bar.value}}%</span>
-                    </bar></progress>
+                    </uib-bar></uib-progress>
 
                 </div>
             </div>

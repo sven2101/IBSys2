@@ -24,6 +24,10 @@
  *  - fitHeight
  *  - iboxToolsFullScreen
  *  - slimScroll
+ *  - truncate
+ *  - touchSpin
+ *  - markdownEditor
+ *  - resizeable
  *
  */
 
@@ -180,14 +184,14 @@ function minimalizaSidebar($timeout) {
                     // For smoothly turn on menu
                     setTimeout(
                         function () {
-                            $('#side-menu').fadeIn(500);
-                        }, 100);
+                            $('#side-menu').fadeIn(400);
+                        }, 200);
                 } else if ($('body').hasClass('fixed-sidebar')){
                     $('#side-menu').hide();
                     setTimeout(
                         function () {
-                            $('#side-menu').fadeIn(500);
-                        }, 300);
+                            $('#side-menu').fadeIn(400);
+                        }, 100);
                 } else {
                     // Remove all inline style from jquery fadeIn function to reset menu state
                     $('#side-menu').removeAttr('style');
@@ -220,7 +224,7 @@ function vectorMap() {
             myMapData: '=',
         },
         link: function (scope, element, attrs) {
-            element.vectorMap({
+            var map = element.vectorMap({
                 map: 'world_mill_en',
                 backgroundColor: "transparent",
                 regionStyle: {
@@ -241,6 +245,12 @@ function vectorMap() {
                         }
                     ]
                 },
+            });
+            var destroyMap = function(){
+                element.remove();
+            };
+            scope.$on('$destroy', function() {
+                destroyMap();
             });
         }
     }
@@ -327,27 +337,49 @@ function ionRangeSlider() {
  * dropZone - Directive for Drag and drop zone file upload plugin
  */
 function dropZone() {
-    return function(scope, element, attrs) {
-        element.dropzone({
-            url: "/upload",
-            maxFilesize: 100,
-            paramName: "uploadfile",
-            maxThumbnailFilesize: 5,
-            init: function() {
-                scope.files.push({file: 'added'});
-                this.on('success', function(file, json) {
-                });
-                this.on('addedfile', function(file) {
-                    scope.$apply(function(){
-                        alert(file);
-                        scope.files.push({file: 'added'});
+    return {
+        restrict: 'C',
+        link: function(scope, element, attrs) {
+
+            var config = {
+                url: 'http://localhost:8080/upload',
+                maxFilesize: 100,
+                paramName: "uploadfile",
+                maxThumbnailFilesize: 10,
+                parallelUploads: 1,
+                autoProcessQueue: false
+            };
+
+            var eventHandlers = {
+                'addedfile': function(file) {
+                    scope.file = file;
+                    if (this.files[1]!=null) {
+                        this.removeFile(this.files[0]);
+                    }
+                    scope.$apply(function() {
+                        scope.fileAdded = true;
                     });
-                });
-                this.on('drop', function(file) {
-                    alert('file');
-                });
+                },
+
+                'success': function (file, response) {
+                }
+
+            };
+
+            dropzone = new Dropzone(element[0], config);
+
+            angular.forEach(eventHandlers, function(handler, event) {
+                dropzone.on(event, handler);
+            });
+
+            scope.processDropzone = function() {
+                dropzone.processQueue();
+            };
+
+            scope.resetDropzone = function() {
+                dropzone.removeAllFiles();
             }
-        });
+        }
     }
 }
 
@@ -476,6 +508,63 @@ function fitHeight(){
 }
 
 /**
+ * truncate - Directive for truncate string
+ */
+function truncate($timeout){
+    return {
+        restrict: 'A',
+        scope: {
+            truncateOptions: '='
+        },
+        link: function(scope, element) {
+            $timeout(function(){
+                element.dotdotdot(scope.truncateOptions);
+
+            });
+        }
+    };
+}
+
+
+/**
+ * touchSpin - Directive for Bootstrap TouchSpin
+ */
+function touchSpin() {
+    return {
+        restrict: 'A',
+        scope: {
+            spinOptions: '='
+        },
+        link: function (scope, element, attrs) {
+            scope.$watch(scope.spinOptions, function(){
+                render();
+            });
+            var render = function () {
+                $(element).TouchSpin(scope.spinOptions);
+            };
+        }
+    }
+};
+
+/**
+ * markdownEditor - Directive for Bootstrap Markdown
+ */
+function markdownEditor() {
+    return {
+        restrict: "A",
+        require:  'ngModel',
+        link:     function (scope, element, attrs, ngModel) {
+            $(element).markdown({
+                savable:false,
+                onChange: function(e){
+                    ngModel.$setViewValue(e.getContent());
+                }
+            });
+        }
+    }
+};
+
+/**
  *
  * Pass all functions into module
  */
@@ -499,4 +588,7 @@ angular
     .directive('landingScrollspy', landingScrollspy)
     .directive('fitHeight', fitHeight)
     .directive('iboxToolsFullScreen', iboxToolsFullScreen)
-    .directive('slimScroll', slimScroll);
+    .directive('slimScroll', slimScroll)
+    .directive('truncate', truncate)
+    .directive('touchSpin', touchSpin)
+    .directive('markdownEditor', markdownEditor)

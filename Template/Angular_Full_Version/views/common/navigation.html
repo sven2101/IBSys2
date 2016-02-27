@@ -3,9 +3,9 @@
         <ul side-navigation class="nav metismenu" id="side-menu">
             <li class="nav-header">
 
-                <div class="dropdown profile-element" dropdown>
+                <div class="profile-element" uib-dropdown>
                     <img alt="image" class="img-circle" src="img/profile_small.jpg"/>
-                    <a class="dropdown-toggle" dropdown-toggle href>
+                    <a uib-dropdown-toggle href>
                             <span class="clear">
                                 <span class="block m-t-xs">
                                     <strong class="font-bold">David Williams</strong>
@@ -13,12 +13,12 @@
                                 <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>
                             </span>
                     </a>
-                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a ui-sref="profile">Profile</a></li>
-                        <li><a ui-sref="contacts">Contacts</a></li>
-                        <li><a ui-sref="inbox">Mailbox</a></li>
+                    <ul uib-dropdown-menu class="animated fadeInRight m-t-xs">
+                        <li><a ui-sref="app.profile">Profile</a></li>
+                        <li><a ui-sref="app.contacts">Contacts</a></li>
+                        <li><a ui-sref="mailbox.inbox">Mailbox</a></li>
                         <li class="divider"></li>
-                        <li><a href="../login.html">Logout</a></li>
+                        <li><a ui-sref="login">Logout</a></li>
                     </ul>
                 </div>
                 <div class="logo-element">
@@ -44,6 +44,7 @@
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('charts')}">
                     <li ui-sref-active="active"><a ui-sref="charts.flot_chart">Flot Charts</a></li>
                     <li ui-sref-active="active"><a ui-sref="charts.rickshaw_chart">Rickshaw Charts</a></li>
+                    <li ui-sref-active="active"><a ui-sref="charts.c3charts">c3 charts</a></li>
                     <li ui-sref-active="active"><a ui-sref="charts.chartjs_chart">Chart.js</a></li>
                     <li ui-sref-active="active"><a ui-sref="charts.chartist_chart">Chartist</a></li>
                     <li ui-sref-active="active"><a ui-sref="charts.peity_chart">Peity Charts</a></li>
@@ -73,6 +74,7 @@
                     <li ui-sref-active="active"><a ui-sref="forms.wizard.step_one">Wizard</a></li>
                     <li ui-sref-active="active"><a ui-sref="forms.file_upload">File Upload</a></li>
                     <li ui-sref-active="active"><a ui-sref="forms.text_editor">Text Editor</a></li>
+                    <li ui-sref-active="active"><a ui-sref="forms.markdown">Markdown</a></li>
                 </ul>
             </li>
             <li ng-class="{active: $state.includes('app')}">
@@ -121,18 +123,24 @@
                     <li ui-sref-active="active"><a ui-sref="miscellaneous.agile_board">Agile board</a></li>
                     <li ui-sref-active="active"><a ui-sref="miscellaneous.timeline_2">Timeline v.2</a></li>
                     <li ui-sref-active="active"><a ui-sref="miscellaneous.diff">Diff</a></li>
+                    <li ui-sref-active="active"><a ui-sref="miscellaneous.i18support">i18support</a></li>
                     <li ui-sref-active="active"><a ui-sref="miscellaneous.sweet_alert">Sweet alert</a></li>
                     <li ui-sref-active="active"><a ui-sref="miscellaneous.idle_timer">Idle timer</a></li>
+                    <li ui-sref-active="active"><a ui-sref="miscellaneous.truncate">Truncate</a></li>
                     <li ui-sref-active="active"><a ui-sref="miscellaneous.spinners">Spinners</a></li>
                     <li ui-sref-active="active"><a ui-sref="miscellaneous.live_favicon">Live favicon</a></li>
                     <li ui-sref-active="active"><a ui-sref="miscellaneous.google_maps">Google maps</a></li>
                     <li ui-sref-active="active"><a ui-sref="miscellaneous.code_editor">Code editor</a></li>
+                    <li ui-sref-active="active"><a ui-sref="miscellaneous.modal_window">Modal window</a></li>
+                    <li ui-sref-active="active"><a ui-sref="miscellaneous.clipboard">Clipboard</a></li>
                     <li ui-sref-active="active"><a ui-sref="miscellaneous.forum_view">Forum view</a></li>
                     <li ui-sref-active="active"><a ui-sref="miscellaneous.validation">Validation</a></li>
-                    <li ui-sref-active="active"><a ui-sref="miscellaneous.modal_window">Modal window</a></li>
+                    <li ui-sref-active="active"><a ui-sref="miscellaneous.tree_view">Tree view</a></li>
+                    <li ui-sref-active="active"><a ui-sref="miscellaneous.loading_buttons">Loading buttons</a></li>
                     <li ui-sref-active="active"><a ui-sref="miscellaneous.chat_view">Chat view</a></li>
                     <li ui-sref-active="active"><a ui-sref="miscellaneous.masonry">Masonry</a></li>
                     <li ui-sref-active="active"><a ui-sref="miscellaneous.toastr">Toastr notification</a></li>
+                    <li ui-sref-active="active"><a ui-sref="miscellaneous.tour">Tour</a></li>
                 </ul>
             </li>
             <li ng-class="{active: $state.includes('ui')}">
@@ -168,6 +176,7 @@
                     <li ui-sref-active="active"><a ui-sref="commerce.product_list">Products list</a></li>
                     <li ui-sref-active="active"><a ui-sref="commerce.product">Product edit</a></li>
                     <li ui-sref-active="active"><a ui-sref="commerce.product_details">Product detail</a></li>
+                    <li ui-sref-active="active"><a ui-sref="commerce.cart">Cart</a></li>
                     <li ui-sref-active="active"><a ui-sref="commerce.orders">Orders</a></li>
                     <li ui-sref-active="active"><a ui-sref="commerce.payments">Credit Card form</a></li>
                 </ul>

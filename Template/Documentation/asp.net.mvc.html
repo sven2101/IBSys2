@@ -44,16 +44,16 @@
             <div class="col-md-6">
                 <img src="img/mvc_logo.png" alt="mvc_logo" style="width: 200px">
 
-                <h2>Inspinia ASP.NET MVC5</h2>
+                <h2>Inspinia ASP.NET MVC5 (MVC6 beta)</h2>
 
                 <p>Thank you for purchasing INSPINIA admin theme. If you have any questions about the template, please feel free to contact us via email: <a href="mailto:support@webapplayers.com">support@webapplayers.com</a>.<br/>
                     Thanks very much!</p>
                 <small>
 
                     <strong>Documentation created:</strong> 10/12/2014<br/>
-                    <strong>Latest update:</strong> 20/08/2015<br/>
+                    <strong>Latest update:</strong> 24/02/2016<br/>
                     <strong>By:</strong> WebAppLayers Team<br/>
-                    <strong>Theme version:</strong> 2.3<br/>
+                    <strong>Theme version:</strong> 2.5<br/>
 
                 </small>
                 <br/>
@@ -86,12 +86,14 @@
         <ul>
 
             <li><a href="#documentation">About documentation</a></li>
+            <li><a href="#mvc6">MVC6 Introduction</a></li>
             <li><a href="#folder_structure">Technology and structure</a></li>
             <li><a href="#layout_structure">Layout structure</a></li>
             <li><a href="#options">Options</a>
                 <ul>
                     <li><a href="#fixed_sidebar">Fixed sidebar</a></li>
                     <li><a href="#fixed_navbar">Fixed navbar</a></li>
+                    <li><a href="#fixed_navbar2">Fixed navbar2</a></li>
                     <li><a href="#fixed_footer">Fixed footer</a></li>
                     <li><a href="#rtl_support">RTL support</a></li>
                     <li><a href="#layout_2">Layout 2</a></li>
@@ -102,6 +104,8 @@
             </li>
             <li><a href="#scaffolding">CodeTemplates and Scaffolding</a></li>
             <li><a href="#seed_project">Seed Project</a></li>
+            <li><a href="#change_log">Change log v.2.4 -> v.2.5</a></li>
+            <li><a href="#change_log">Change log v.2.3 -> v.2.4</a></li>
             <li><a href="#change_log">Change log v.2.2 -> v.2.3</a></li>
             <li><a href="#change_log">Change log v.2.0/2.1 -> v.2.2</a></li>
             <li><a href="#change_log">Change log v.2.0 -> v.2.1</a></li>
@@ -202,7 +206,32 @@
         <a target="_blank" href="img/page_mvc.png"><img class="img-responsive" src="img/page_mvc.png" alt="page structure"></a>
     </div>
 </div>
-<div class="row">
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <a name="mvc6" class="anchor"></a>
+
+            <h3>MVC6 Introduction</h3>
+            <p>
+                Please note that Inspinia ASP.NET MVC6 is beta version. Once ASP.NET 5 will be released official then we will provide required changes and publish final version.
+
+            </p>
+            <div class="alert alert-danger">
+                To run new MVC6 project you need to have installed ASP.NET 5 RC - https://get.asp.net/
+            </div>
+            <p>
+                Full documentation for new project will be released once final version will be finished. File structure are the same as the MVC5.
+                Please note that new MVC6 not use bundle system. In This project we use Gulp for compile SCSS style files and minify js files.
+                Additional new project use bower to download most of the plugins. Those plugins are stored in wwwrooot/lib_bower. If some of the plugins
+                don't have
+                bower package or we use changed version then this plugins are stored in wwwroot/lib folder.
+            </p>
+        </div>
+    </div>
+
+
+            <div class="row">
 <div class="col-lg-12">
 <a name="layout_structure" class="anchor"></a>
 
@@ -711,6 +740,41 @@
 </pre>
 
 
+    <a name="fixed_navbar2" class="anchor"></a>
+    <h4>Fixed navbar 2</h4>
+
+    <p>
+        Fixed navbar 2 is a top navbar that is sticked on screen and it's width is the same as the width of wrapper
+
+    </p>
+    <p>
+        To add fixed sidebar you  need to add .fixed-nav class and .fixed-nav-basic class to body.
+    </p>
+
+<pre class="prettyprint linenums">
+
+    &lt;body class="fixed-nav fixed-nav-basic"&gt;
+
+</pre>
+
+    <p>
+        Next we will need to change navbar from static to fixed in Shared/_TopNavbar.cshtml file. Change .navbar-static-top class to navbar-fixed-top
+
+    </p>
+
+
+<pre class="prettyprint linenums">
+
+&lt;nav class="navbar navbar-fixed-top" role="navigation"&gt;
+
+</pre>
+
+
+    <p>
+        Fixed navbar 2 works only on primary layout
+
+    </p>
+
 <a name="fixed_footer" class="anchor"></a>
 <h4>Fixed footer</h4>
 
@@ -934,6 +998,93 @@
 
 
 <a name="change_log" class="anchor"></a>
+
+
+    <h3>Change log 2.4 -> 2.5</h3>
+
+    <div class="alert alert-info">
+        2.5 version fully focused on update AngularJS projects.
+        <strong>New features and views will be added to separate 2.6 version.</strong>
+    </div>
+
+    <h3>Change log 2.3 -> 2.4</h3>
+
+    <ul>
+
+        <strong>New view files</strong>
+        <li> Views/Graphs/C3charts.cshtml</li>
+        <li> Views/Ecommerce/Cart.cshtml</li>
+        <li> Views/UIElements/ResizeablePanels.cshtml</li>
+        <li> Views/Forms/Markdown.cshtml</li>
+        <li> Views/Miscellaneous/Clipboard.cshtml</li>
+        <li> Views/Miscellaneous/I18support.cshtml</li>
+        <li> Views/Miscellaneous/LoadingButtons.cshtml</li>
+        <li> Views/Miscellaneous/Tour.cshtml</li>
+        <li> Views/Miscellaneous/Truncate.cshtml</li>
+
+
+        <hr>
+        <strong>Changed views files</strong>
+        <li> Views/Shared/_Navigation.cshtml - add new menu elements for new views</li>
+        <li> Miscellaneous/AgileBoard.cshtml - add example code for serialize list</li>
+        <li> Forms/Advanced.cshtml - add new Touch spin control</li>
+        <li> Landing/Index.cshtml - update page-scroll click event to close menu on select in mobile</li>
+        <li> Shared/_SkinConfig.cshtml - add new option for fixed nav bar</li>
+        <li> Tables/DataTables.cshtml - replace old swf buttons with new button plugin (update datatables library)</li>
+        <li> UIElements/Video.cshtml - add script for handle full screen video option</li>
+
+        <hr>
+        <strong>New Inspinia js files</strong>
+        <li> locales/en.json</li>
+        <li> locales/es.json</li>
+
+        <hr>
+        <strong>Changed Inspinia js files</strong>
+        <li> inspinia.js - update fix_height function </li>
+        <li> inspinia.js - update SmoothlyMenu function </li>
+
+        <hr>
+        <strong>Updates</strong>
+        <li> plugins/bootstrap - update to 3.3.6 </li>
+        <li> plugins/dataTables - create on compact datatables generate in official builder: https://datatables.net/download/index </li>
+        <li> plugins/pace - update to 1.0.2 </li>
+
+        <hr>
+        <strong>New plugins</strong>
+        <li> plugins/c3 (with css files)</li>
+        <li> plugins/bootstrap-markdow (with css files)</li>
+        <li> plugins/d3 </li>
+        <li> plugins/clipboard </li>
+        <li> plugins/dotdotdot </li>
+        <li> plugins/i18next </li>
+        <li> plugins/ladda (with css files)</li>
+        <li> plugins/touchspin (with css files)</li>
+        <li> plugins/bootstrapTour (with css files)</li>
+
+        <hr>
+        <strong>New images</strong>
+        <li> Images/flags- Set of flags images</li>
+
+        <hr>
+        <strong>Updates Bundle</strong>
+        <li> App_start/BundleConfig.cs - Add bundle for new plugins</li>
+
+        <hr>
+        <strong>CSS/LESS/SCSS/SASS</strong>
+        <li> Add styles for new pages </li>
+        <li> Fix buttons shadow on Chrome </li>
+        <li> Fix dropdown text colour on md-skin </li>
+        <li> Fix pace.js on fixed navbar option </li>
+        <li> Fix few glitch animation effect </li>
+        <li> Improve nav-tabs on mobile devices </li>
+        <li> Fix second level menu on md-skin </li>
+        <li> Improve RTL mode </li>
+        <li> Add new fixed navbar option </li>
+        <li> Ipmore print mode </li>
+
+    </ul>
+
+    <h3>Change log 2.0/2.1 -> 2.2</h3>
 
     <h3>Change log 2.2 -> 2.3</h3>
 

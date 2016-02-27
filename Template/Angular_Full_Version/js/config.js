@@ -63,9 +63,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             files: [ 'js/plugins/flot/jquery.flot.js', 'js/plugins/flot/jquery.flot.time.js', 'js/plugins/flot/jquery.flot.tooltip.min.js', 'js/plugins/flot/jquery.flot.spline.js', 'js/plugins/flot/jquery.flot.resize.js', 'js/plugins/flot/jquery.flot.pie.js', 'js/plugins/flot/curvedLines.js', 'js/plugins/flot/angular-flot.js', ]
                         },
                         {
+                            serie: true,
                             files: ['js/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js', 'js/plugins/jvectormap/jquery-jvectormap-2.0.2.css']
                         },
                         {
+                            serie: true,
                             files: ['js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js']
                         },
                         {
@@ -281,6 +283,26 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 }
             }
         })
+        .state('charts.c3charts', {
+            url: "/c3charts",
+            templateUrl: "views/c3charts.html",
+            data: { pageTitle: 'c3charts' },
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['css/plugins/c3/c3.min.css', 'js/plugins/d3/d3.min.js', 'js/plugins/c3/c3.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'gridshore.c3js.chart',
+                            files: ['js/plugins/c3/c3-angular.min.js']
+                        }
+                    ]);
+                }
+            }
+        })
         .state('mailbox', {
             abstract: true,
             url: "/mailbox",
@@ -344,9 +366,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             files: ['css/plugins/iCheck/custom.css','js/plugins/iCheck/icheck.min.js']
                         },
                         {
+                            serie: true,
                             files: ['js/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js', 'js/plugins/jvectormap/jquery-jvectormap-2.0.2.css']
                         },
                         {
+                            serie: true,
                             files: ['js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js']
                         },
                         {
@@ -398,6 +422,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
                         {
+                            files: ['js/plugins/moment/moment.min.js']
+                        },
+                        {
                             name: 'ui.knob',
                             files: ['js/plugins/jsKnob/jquery.knob.js','js/plugins/jsKnob/angular-knob.js']
                         },
@@ -437,7 +464,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                         },
                         {
                             serie: true,
-                            files: ['js/plugins/moment/moment.min.js', 'js/plugins/daterangepicker/daterangepicker.js', 'css/plugins/daterangepicker/daterangepicker-bs3.css']
+                            files: ['js/plugins/daterangepicker/daterangepicker.js', 'css/plugins/daterangepicker/daterangepicker-bs3.css']
                         },
                         {
                             name: 'daterangepicker',
@@ -449,6 +476,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                         {
                             name: 'ui.select',
                             files: ['js/plugins/ui-select/select.min.js', 'css/plugins/ui-select/select.min.css']
+                        },
+                        {
+                            files: ['css/plugins/touchspin/jquery.bootstrap-touchspin.min.css', 'js/plugins/touchspin/jquery.bootstrap-touchspin.min.js']
                         }
 
                     ]);
@@ -509,6 +539,21 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                         {
                             name: 'summernote',
                             files: ['css/plugins/summernote/summernote.css','css/plugins/summernote/summernote-bs3.css','js/plugins/summernote/summernote.min.js','js/plugins/summernote/angular-summernote.min.js']
+                        }
+                    ]);
+                }
+            }
+        })
+        .state('forms.markdown', {
+            url: "/markdown",
+            templateUrl: "views/markdown.html",
+            data: { pageTitle: 'Markdown' },
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/bootstrap-markdown/bootstrap-markdown.js','js/plugins/bootstrap-markdown/markdown.js','css/plugins/bootstrap-markdown/bootstrap-markdown.min.css']
                         }
                     ]);
                 }
@@ -974,6 +1019,107 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 }
             }
         })
+        .state('miscellaneous.i18support', {
+            url: "/i18support",
+            templateUrl: "views/i18support.html",
+            data: { pageTitle: 'i18support' },
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                        }
+                    ]);
+                }
+            }
+        })
+        .state('miscellaneous.truncate', {
+            url: "/truncate",
+            templateUrl: "views/truncate.html",
+            data: { pageTitle: 'Truncate' },
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['js/plugins/dotdotdot/jquery.dotdotdot.min.js']
+                        }
+                    ]);
+                }
+            }
+        })
+        .state('miscellaneous.clipboard', {
+            url: "/clipboard",
+            templateUrl: "views/clipboard.html",
+            data: { pageTitle: 'Clipboard' },
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['js/plugins/ngclipboard/clipboard.min.js']
+                        },
+                        {
+                            name: 'ngclipboard',
+                            files: ['js/plugins/ngclipboard/ngclipboard.min.js']
+                        }
+                    ]);
+                }
+            }
+        })
+        .state('miscellaneous.loading_buttons', {
+            url: "/loading_buttons",
+            templateUrl: "views/loading_buttons.html",
+            data: { pageTitle: 'Loading buttons' },
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            name: 'angular-ladda',
+                            files: ['js/plugins/ladda/spin.min.js', 'js/plugins/ladda/ladda.min.js', 'css/plugins/ladda/ladda-themeless.min.css','js/plugins/ladda/angular-ladda.min.js']
+                        }
+                    ]);
+                }
+            }
+        })
+        .state('miscellaneous.tour', {
+            url: "/tour",
+            templateUrl: "views/tour.html",
+            data: { pageTitle: 'Tour' },
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            insertBefore: '#loadBefore',
+                            files: ['js/plugins/bootstrap-tour/bootstrap-tour.min.js', 'css/plugins/bootstrap-tour/bootstrap-tour.min.css']
+                        },
+                        {
+                            name: 'bm.bsTour',
+                            files: ['js/plugins/angular-bootstrap-tour/angular-bootstrap-tour.min.js']
+                        }
+                    ]);
+                }
+            }
+        })
+        .state('miscellaneous.tree_view', {
+            url: "/tree_view",
+            templateUrl: "views/tree_view.html",
+            data: { pageTitle: 'Tree view' },
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['css/plugins/jsTree/style.min.css','js/plugins/jsTree/jstree.min.js']
+                        },
+                        {
+                            name: 'ngJsTree',
+                            files: ['js/plugins/jsTree/ngJsTree.min.js']
+                        }
+                    ]);
+                }
+            }
+        })
         .state('tables', {
             abstract: true,
             url: "/tables",
@@ -1006,15 +1152,17 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                     return $ocLazyLoad.load([
                         {
                             serie: true,
-                            files: ['js/plugins/dataTables/jquery.dataTables.js','css/plugins/dataTables/dataTables.bootstrap.css']
+                            files: ['js/plugins/dataTables/datatables.min.js','css/plugins/dataTables/datatables.min.css']
                         },
                         {
                             serie: true,
-                            files: ['js/plugins/dataTables/dataTables.bootstrap.js']
-                        },
-                        {
                             name: 'datatables',
                             files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
                         }
                     ]);
                 }
@@ -1132,6 +1280,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             templateUrl: "views/ecommerce_payments.html",
             data: { pageTitle: 'E-commerce payments' }
         })
+        .state('commerce.cart', {
+            url: "/cart",
+            templateUrl: "views/ecommerce_cart.html",
+            data: { pageTitle: 'Shopping cart' }
+        })
         .state('gallery', {
             abstract: true,
             url: "/gallery",
@@ -1199,7 +1352,16 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
         .state('landing', {
             url: "/landing",
             templateUrl: "views/landing.html",
-            data: { pageTitle: 'Landing page', specialClass: 'landing-page' }
+            data: { pageTitle: 'Landing page', specialClass: 'landing-page' },
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['js/plugins/wow/wow.min.js']
+                        }
+                    ]);
+                }
+            }
         })
         .state('outlook', {
             url: "/outlook",
