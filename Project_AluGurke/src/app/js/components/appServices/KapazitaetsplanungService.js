@@ -7,19 +7,17 @@
 /// <reference path="../kapazitaetsplanung/kapazitaetsplanung.controller.ts" />
 /// <reference path="../../typeDefinitions/toastr.d.ts"/>
 var KapazitaetsplanungService = (function () {
-    function KapazitaetsplanungService($rootScope, ArbeitsplatzService, AuftragService, DispositionService, bestellungBerechnenService) {
+    function KapazitaetsplanungService($rootScope, ArbeitsplatzService, AuftragService, DispositionService) {
         var _this = this;
         this.arbeitsplatzService = ArbeitsplatzService;
         this.auftragService = AuftragService;
         this.dispositionService = DispositionService;
-        //this.bestellungBerechnenService=bestellungBerechnenService;
         this.ergebnis = new Array();
         this.models = new Array();
         this.models.push(new KapazitaetModel(new Arbeitsplatz(5, 0, 0, 0)));
-        this.$rootScope = $rootScope;
         this.multiplikator = 1;
         this.multiplikatorString = "sehr sicher";
-        this.$rootScope.$on('fileController.neueDatei', function (event, dateiInhalt) {
+        $rootScope.$on('fileController.neueDatei', function (event, dateiInhalt) {
             _this.onNeueDatei(dateiInhalt);
         });
         this.dispositionService.aendern();
@@ -215,4 +213,4 @@ var KapazitaetsplanungService = (function () {
     };
     return KapazitaetsplanungService;
 })();
-angular.module('app').factory('KapazitaetsplanungService', ['$rootScope', "ArbeitsplatzService", "AuftragService", "DispositionService", "BestellungBerechnenService", function ($rootScope, ArbeitsplatzService, AuftragService, DispositionService, BestellungBerechnenService) { return new KapazitaetsplanungService($rootScope, ArbeitsplatzService, AuftragService, DispositionService, BestellungBerechnenService); }]);
+angular.module('app').factory('KapazitaetsplanungService', ['$rootScope', "ArbeitsplatzService", "AuftragService", "DispositionService", function ($rootScope, ArbeitsplatzService, AuftragService, DispositionService, BestellungBerechnenService) { return new KapazitaetsplanungService($rootScope, ArbeitsplatzService, AuftragService, DispositionService); }]);

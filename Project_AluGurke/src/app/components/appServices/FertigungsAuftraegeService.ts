@@ -19,7 +19,7 @@ class FertigungsAuftraegeService {
         this.arbeitsplatzService = arbeitsplatzService
         this.dispositionService = dispositionService
         this.dispositionService.aendern();
-        this.flag=false;
+        this.flag=true;
         this.aendern();
         $rootScope.$on('mainController.neueSprache', (event, language) => {
             this.onTranslate(language);
@@ -27,10 +27,11 @@ class FertigungsAuftraegeService {
     }
     
     changeFlagTrue(){
-        if(!this.flag){
+        if(!this.flag&&!this.dispositionService.flag){            
             toastr.warning("Die Priorisierung der Aufträge wurde zurückgesetzt");
         }
         this.flag=true;
+        this.dispositionService.flag=true;
         
     }
      changeFlagFalse(){

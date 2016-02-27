@@ -9,14 +9,9 @@ Mean-Stack 1
 Was verbirgt sich auf dem Server und was ist der Mean stack?
 Der Mean stack besteht aus 4 Komponenten:
 -Einer Dokumentenbasierende Datenbank MongoDB
--Express Ein Framework für die Restschnittstelle und Kommunikation zur DB
+-Express Ein Framework für die Rest
 -AngularJS Bekanntes Clientseitiges Javascript Framework von google, funktionaler teil des Stacks
 -NodeJS: Der Server für die bereitstellung einer Anwendung /kommunikation für anfragen
-Mean-Stack 2
-Wie funktioniert nun der Mean stack?
-Bei einer Datenbankabfrage:
-Client schickt anfrage an server, welche an mongdb über rest(express) weitergeleitet wird 
-antwort wird von datenbank über rest an server und zum client weitergeleitet
 
 Wichtig zu wissen: Funktionen, welche keine DB verbindung benötigen können clientseitig 
 ohne server(also auch offline verwendet werden, sofern anwendung einmal beim client gecached ist)

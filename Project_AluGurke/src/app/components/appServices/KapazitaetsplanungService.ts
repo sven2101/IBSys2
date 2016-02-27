@@ -13,22 +13,18 @@ class KapazitaetsplanungService {
     auftragService: AuftragService
     ergebnis: Array<Arbeitsplatz>;
     models: Array<KapazitaetModel>;
-    bestellungBerechnenService: BestellungBerechnenService
-    $rootScope;
     multiplikatorString: String;
     multiplikator: number;
-    constructor($rootScope, ArbeitsplatzService: ArbeitsplatzService, AuftragService: AuftragService, DispositionService: DispositionService, bestellungBerechnenService) {
+    constructor($rootScope, ArbeitsplatzService: ArbeitsplatzService, AuftragService: AuftragService, DispositionService: DispositionService) {
         this.arbeitsplatzService = ArbeitsplatzService;
         this.auftragService = AuftragService;
         this.dispositionService = DispositionService;
-        //this.bestellungBerechnenService=bestellungBerechnenService;
         this.ergebnis = new Array<Arbeitsplatz>();
         this.models = new Array<KapazitaetModel>();
         this.models.push(new KapazitaetModel(new Arbeitsplatz(5, 0, 0, 0)));
-        this.$rootScope = $rootScope;
         this.multiplikator = 1;
         this.multiplikatorString = "sehr sicher";
-        this.$rootScope.$on('fileController.neueDatei', (event, dateiInhalt) => {
+        $rootScope.$on('fileController.neueDatei', (event, dateiInhalt) => {
             this.onNeueDatei(dateiInhalt);
         });
         this.dispositionService.aendern();
@@ -219,4 +215,4 @@ class KapazitaetsplanungService {
     }
 }
 
-angular.module('app').factory('KapazitaetsplanungService', ['$rootScope', "ArbeitsplatzService", "AuftragService", "DispositionService", "BestellungBerechnenService", ($rootScope, ArbeitsplatzService, AuftragService, DispositionService, BestellungBerechnenService) => new KapazitaetsplanungService($rootScope, ArbeitsplatzService, AuftragService, DispositionService, BestellungBerechnenService)]);
+angular.module('app').factory('KapazitaetsplanungService', ['$rootScope', "ArbeitsplatzService", "AuftragService", "DispositionService", ($rootScope, ArbeitsplatzService, AuftragService, DispositionService, BestellungBerechnenService) => new KapazitaetsplanungService($rootScope, ArbeitsplatzService, AuftragService, DispositionService)]);
