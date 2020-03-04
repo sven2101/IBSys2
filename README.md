@@ -4,15 +4,15 @@ Integrierte Betriebliche Systeme – Entwicklung einer Webanwendung zur Produkti
 
 
 ## Beschreibung
-Die Webanwendung soll im Rahmen eines Planspiels die logistische Aufgaben der  Planung einer Produktion über mehrere Perioden (eine Periode = 1 Woche = 5 Tage = 40 Stunden = 2400 Minuten) bereitstellen. 
-Dabei gilt es folgenden Anforderungen zu erfüllen:
+Die Webanwendung soll im Rahmen eines Planspiels die logistischen Aufgaben der Planung einer Produktion über mehrere Perioden (eine Periode = 1 Woche = 5 Tage = 40 Stunden = 2400 Minuten) bereitstellen. 
+Dabei gilt es folgende Anforderungen zu erfüllen:
 
 * Treffen von Vertriebsentscheidungen d.h. Annahme oder Ablehnung von Verkaufsaufträgen
 * Disposition der Eigenfertigprodukte und Kaufteile
 * Durchführung des strategischen und operativen Einkaufs
 * Planung der Produktionskapazitäten
 
-Die Webanwendung enthält folgenden Komponenten:
+Die Webanwendung enthält folgende Komponenten:
 
 * Dashboard zur Übersicht
 * Dateiverwaltung zum einspeisen von Daten
