@@ -33,6 +33,6 @@ MEAN-Stack
 * MongoDB als Datenbank
 
 ## Live-Betrieb
-
-Die entwicklte Webanwendung wurde in das bestehende Planspiel für weitere Vorlesungen integriert und ist somit für alle Endgeräte wie Computer, Tablet und Smartphone erreichbar, sofern eine Internetverbindung vorhanden ist. Den Supply Chain Manager erreichen Sie unter www.http://www.scsimulator.de/ unter dem Reiter SCManager in Ihrem Browser. Empfohlen werden die Browser Google Chrome oder Mozilla Firefox. Durch Aufruf der Webseite landen Sie auf dem Dashboard.
+![dashboard](Photos/dashboard.png)
+Die entwicklte Webanwendung wurde in das bestehende Planspiel für weitere Vorlesungen integriert und ist somit für alle Endgeräte wie Computer, Tablet und Smartphone erreichbar, sofern eine Internetverbindung vorhanden ist. Den Supply Chain Manager erreichen Sie unter http://www.scsimulator.de/ unter dem Reiter SCManager in Ihrem Browser. Empfohlen werden die Browser Google Chrome oder Mozilla Firefox. Durch Aufruf der Webseite landen Sie auf dem Dashboard.
 
